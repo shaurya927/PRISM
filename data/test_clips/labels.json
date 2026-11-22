@@ -1,0 +1,81 @@
+{
+  "clips": [
+    {
+      "clip": "day_clear_white.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable."
+    },
+    {
+      "clip": "night_partial_white.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9."
+    },
+    {
+      "clip": "camB_white.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible."
+    },
+    {
+      "clip": "day_black_suv.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV)."
+    },
+    {
+      "clip": "day_blue_twoline.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate."
+    },
+    {
+      "clip": "unregistered_white.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match."
+    }
+  ],
+  "crosscam_pairs": [
+    {
+      "clip_a": "night_partial_white.mp4",
+      "clip_b": "camB_white.mp4",
+      "registry_id": "REG-0001"
+    }
+  ]
+}
