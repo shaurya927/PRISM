@@ -323,7 +323,25 @@ Clips (42): status as designed 83.3%, committed-char error 0.8%, recovery 83.6%,
 
 Everything is in `prism/config.py`. Environment overrides: `PRISM_DEVICE=cpu|cuda`,
 `PRISM_OCR_BACKEND=parseq|fast_plate_ocr`, `PRISM_NARRATIVE=template|ollama`,
-`PRISM_REID_ENCODER=clip|osnet|resnet`, `PRISM_RUNS_DIR`, `PRISM_WEIGHTS_DIR`.
+`PRISM_REID_ENCODER=clip|osnet|resnet`, `PRISM_RUNS_DIR`, `PRISM_WEIGHTS_DIR`, `PRISM_REGISTRY_PATH`.
+
+**Using a real registry.** The bundled `data/registry.json` is 500 synthetic records, so a real plate such as
+`KA02MN1826` gets `NO CONFIDENT MATCH` with "this vehicle is not in the loaded registry". PRISM has no access to
+VAHAN or any government database; that needs authorisation from MoRTH / NIC. To match real vehicles, export
+the records you are authorised to use into the same JSON fields (`registry_id`, `plate`, `color`,
+`body_type`, `make`, `model`, `owner_region`) and start the server with `PRISM_REGISTRY_PATH=path\to\file.json`.
+
+**One vehicle, one track.** ByteTrack sometimes gives one vehicle several IDs (a second box on the same car,
+or a new ID after an occlusion). `prism/track_merge.py` folds them into one track when their plates agree on
+at least 6 known characters with no conflict, both are plate-length (8+ characters), they are the same class
+group (two-wheelers never merge with cars), and their boxes never appear apart in the same frame. The card
+then shows "merged tracker IDs …". Plate frames are ranked by plate width × `min(1, sharpness / 1000)`, so
+clear close-ups are kept over small far crops whose Laplacian variance is inflated by noise.
+
+**Make/model outside the registry.** OpenCLIP also scores 27 common makes that are not in the synthetic
+registry (Volvo, BMW, Mercedes-Benz, Audi, Skoda, MG and others; `EXTRA_CLIP_MODELS`), so an unlisted car is no
+longer forced onto the nearest registry model. Those labels never add score. Below 0.40 confidence the UI shows
+"not recognised" rather than naming the closest guess.
 
 | Missing | Behaviour |
 |---|---|

@@ -42,6 +42,8 @@ from prism.narrative import summarize
 from prism.registry import load_registry
 from prism.reid import implied_speed_kmh, link_tracks, make_encoder
 from prism.runtime import gpu_name, resolve_device
+from prism.stages.plate_detect import plate_quality
+from prism.track_merge import find_merge_groups
 from prism.schemas import (
     AttributeValue,
     Attributes,
@@ -165,6 +167,56 @@ def _write(path: Path, img: np.ndarray, custody: CustodyLog, kind: str) -> str:
     return custody.record(path, kind)
 
 
+def _merge_tracks(keep: int, others: list[int], agree: int, tracks: dict, plates: dict,
+                  results: dict[int, TrackResult], cfg: PrismConfig) -> None:
+    """Fold `others` into track `keep`: union of detections, plate samples, vehicle crops and reads,
+    then fuse again. A frame seen by two of the tracks is counted once (the sharper read)."""
+    members = [keep, *others]
+    obs = {}
+    for tid in members:
+        for o in tracks[tid].observations:
+            if o.frame_idx not in obs or o.conf > obs[o.frame_idx].conf:
+                obs[o.frame_idx] = o
+    tracks[keep].observations = [obs[f] for f in sorted(obs)]
+
+    samples = {}
+    for tid in members:
+        for s in plates[tid].samples:
+            if s.frame_idx not in samples or s.sharpness > samples[s.frame_idx].sharpness:
+                samples[s.frame_idx] = s
+    # Same rule as Stage 2 for any single track: the vehicle keeps its top_k best plate frames.
+    # Otherwise many distant frames from one tracker ID outvote the clear close-ups of another.
+    best = sorted(samples.values(), key=lambda s: -plate_quality(s.raw.image.shape[1], s.sharpness, cfg.plate))
+    best = best[: cfg.plate.top_k_frames]
+    kept_frames = {s.frame_idx for s in best}
+    plates[keep].samples = sorted(best, key=lambda s: s.frame_idx)
+    crops = sorted((v for tid in members for v in plates[tid].vehicle_crops), key=lambda v: -v.sharpness)
+    plates[keep].vehicle_crops = crops[: cfg.attributes.n_crops]
+
+    reads: dict[str, FrameRead] = {}
+    for tid in members:
+        for fr in results[tid].frames:
+            if fr.frame_idx not in kept_frames:
+                continue
+            if fr.read_id not in reads or fr.sharpness > reads[fr.read_id].sharpness:
+                reads[fr.read_id] = fr
+    frames = sorted(reads.values(), key=lambda f: (f.frame_idx, f.source != "raw"))
+    tr = tracks[keep]
+    results[keep] = results[keep].model_copy(update={
+        "yolo_class": tr.cls,
+        "first_seen_sec": tr.first_seen,
+        "last_seen_sec": tr.last_seen,
+        "n_detections": len(tr.observations),
+        "frames": frames,
+        "fused": fuse_frame_reads(frames, cfg.fusion),
+        "merged_track_ids": sorted(others),
+        "merge_note": (f"Tracker IDs {', '.join(map(str, sorted(others)))} were the same vehicle: their plates agree on "
+                       f"{agree} known characters with no conflict, and their boxes never appear apart in the same frame."),
+    })
+    for tid in others:
+        results.pop(tid, None)
+
+
 def analyze_clip(
     video_path: Path,
     out_dir: Path,
@@ -253,22 +305,39 @@ def analyze_clip(
             frames=frames, fused=fused, attributes=Attributes(color=unk, body_type=unk, yolo_class=tr.cls),
         )
         progress("ocr", (n + 1) / max(1, len(order)))
+
+    # ---------------------------------------------------------------- one vehicle, one track
+    groups = find_merge_groups(
+        plates={tid: results[tid].fused.text for tid in order},
+        classes={tid: tracks[tid].cls for tid in order},
+        boxes={tid: {o.frame_idx: o.bbox for o in tracks[tid].observations} for tid in order},
+        sizes={tid: len(tracks[tid].observations) for tid in order},
+        tcfg=cfg.track, mcfg=cfg.match,
+    )
+    for keep, others, agree in groups:
+        _merge_tracks(keep, others, agree, tracks, plates, results, cfg)
+    merged_away = {t for _, others, _ in groups for t in others}
+    order = [tid for tid in order if tid not in merged_away]
     progress("ocr", 1.0)
     timings["ocr" + sfx] = round(time.perf_counter() - t, 2)
 
     # ---------------------------------------------------------------- visual aid (after Stage 3)
     sr = hub.super_res()
     if sr.available:
-        for tid in order:
-            for s in plates[tid].samples:
-                p = write_sr_artifact(sr, s.raw.image, out_dir, tid, s.frame_idx)
-                if p is None:
-                    continue
-                url = custody.record(p, "super_res_visual_aid_not_evidence")
-                for fr in results[tid].frames:
-                    if fr.frame_idx == s.frame_idx and fr.source == "raw":
-                        fr.sr_url = url
-            results[tid].sr_available = True
+        try:
+            for tid in order:
+                for s in plates[tid].samples:
+                    p = write_sr_artifact(sr, s.raw.image, out_dir, tid, s.frame_idx)
+                    if p is None:
+                        continue
+                    url = custody.record(p, "super_res_visual_aid_not_evidence")
+                    for fr in results[tid].frames:
+                        if fr.frame_idx == s.frame_idx and fr.source == "raw":
+                            fr.sr_url = url
+                results[tid].sr_available = True
+        except Exception as exc:  # a visual aid must never fail the case; OCR has already run
+            log.warning("super-resolution failed (%s); visual aid skipped for this clip", exc)
+            warnings.append(f"Super-resolution preview skipped ({exc.__class__.__name__}); results are unaffected.")
 
     # ---------------------------------------------------------------- Stage 4
     t = time.perf_counter()

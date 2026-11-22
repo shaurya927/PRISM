@@ -21,7 +21,9 @@ SEED = 42
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR_DIR = ROOT / "vendor"
 DATA_DIR = ROOT / "data"
-REGISTRY_PATH = DATA_DIR / "registry.json"
+# The bundled registry is 500 synthetic records. Point PRISM_REGISTRY_PATH at an authorised
+# registry export (same JSON fields as data/registry.json) to match against real vehicles.
+REGISTRY_PATH = Path(os.environ.get("PRISM_REGISTRY_PATH", DATA_DIR / "registry.json"))
 TEST_CLIPS_DIR = DATA_DIR / "test_clips"
 RUNS_DIR = Path(os.environ.get("PRISM_RUNS_DIR", ROOT / "runs"))
 REPORTS_DIR = ROOT / "reports"
@@ -76,6 +78,40 @@ VEHICLE_MODELS: tuple[tuple[str, str, str, str], ...] = (
 )
 
 
+# Makes/models common on Indian roads that are NOT in the synthetic registry. They are only in the
+# OpenCLIP prompt bank, so a Volvo is not forced onto the closest registry model. They can never
+# earn the make/model bonus, because no registry record has them.
+EXTRA_CLIP_MODELS: tuple[tuple[str, str, str, str], ...] = (
+    ("Volvo", "XC60", "SUV", "SUV"),
+    ("Volvo", "XC90", "SUV", "SUV"),
+    ("Volvo", "S90", "car", "sedan"),
+    ("BMW", "3 Series", "car", "sedan"),
+    ("BMW", "5 Series", "car", "sedan"),
+    ("BMW", "X1", "SUV", "SUV"),
+    ("BMW", "X5", "SUV", "SUV"),
+    ("Mercedes-Benz", "C-Class", "car", "sedan"),
+    ("Mercedes-Benz", "E-Class", "car", "sedan"),
+    ("Mercedes-Benz", "GLC", "SUV", "SUV"),
+    ("Audi", "A4", "car", "sedan"),
+    ("Audi", "A6", "car", "sedan"),
+    ("Audi", "Q5", "SUV", "SUV"),
+    ("Skoda", "Slavia", "car", "sedan"),
+    ("Skoda", "Kushaq", "SUV", "compact SUV"),
+    ("Volkswagen", "Virtus", "car", "sedan"),
+    ("Volkswagen", "Taigun", "SUV", "compact SUV"),
+    ("MG", "Hector", "SUV", "SUV"),
+    ("Jeep", "Compass", "SUV", "SUV"),
+    ("Kia", "Sonet", "SUV", "compact SUV"),
+    ("Toyota", "Camry", "car", "sedan"),
+    ("Honda", "Amaze", "car", "sedan"),
+    ("Renault", "Kwid", "car", "hatchback"),
+    ("Nissan", "Magnite", "SUV", "compact SUV"),
+    ("TVS", "Apache", "two-wheeler", "motorcycle"),
+    ("Yamaha", "FZ", "two-wheeler", "motorcycle"),
+    ("Suzuki", "Access", "two-wheeler", "scooter"),
+)
+
+
 @dataclass(frozen=True)
 class IngestConfig:
     low_light_brightness: float = 60.0      # median frame brightness (0-255) below this = low light
@@ -97,6 +133,12 @@ class TrackConfig:
     frame_stride_cpu: int = 2               # process every 2nd frame on CPU
     frame_stride_gpu: int = 1
     imgsz: int = 640
+    # ByteTrack can give one vehicle several IDs (a second box on the same car, or a new ID after
+    # an occlusion). Tracks of the same clip are merged when their fused plates agree on at least
+    # this many known characters with no conflict (prism.track_merge). 0 disables merging.
+    merge_min_plate_agree: int = 6
+    merge_min_plate_len: int = 8            # both plates must look like full plates, not a sign or sticker
+    merge_min_box_overlap: float = 0.5      # in shared frames, intersection / smaller box must reach this
 
 
 @dataclass(frozen=True)
@@ -104,6 +146,10 @@ class PlateConfig:
     detector_model: str = "yolo-v9-t-384-license-plate-end2end"
     det_conf: float = 0.35
     min_sharpness: float = 45.0             # Laplacian variance
+    # Frames are ranked by plate width x min(1, sharpness / ref). Laplacian variance alone is higher
+    # for small, distant crops (noise and downscaling add edges), so it kept far frames over clear
+    # close-ups. Above `ref` a crop counts as sharp and its pixel width decides.
+    quality_sharpness_ref: float = 1000.0
     min_width_px: int = 30
     top_k_frames: int = 12
     two_line_aspect: float = 2.2            # width/height below this = two-line plate

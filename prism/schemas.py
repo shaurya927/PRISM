@@ -201,6 +201,9 @@ class TrackResult(BaseModel):
     match: Optional[MatchResult] = None
     advisor: Optional[AdvisorNote] = None
     sr_available: bool = False
+    # Other tracker IDs of the same vehicle, folded into this track by prism.track_merge.
+    merged_track_ids: list[int] = Field(default_factory=list)
+    merge_note: Optional[str] = None
 
 
 class ClipMeta(BaseModel):

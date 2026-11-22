@@ -18,10 +18,19 @@ log = logging.getLogger("prism.runtime")
 def resolve_device(pref: str = "auto") -> str:
     """'cuda' if requested/available, else 'cpu'."""
     try:
+        import time
+
         import torch
 
-        if pref in ("auto", "cuda") and torch.cuda.is_available():
-            return "cuda"
+        if pref in ("auto", "cuda"):
+            # A CUDA build can report no device for a moment while the driver is still releasing a
+            # GPU held by a process that just exited; the device is chosen once per server, so retry.
+            tries = 3 if torch.backends.cuda.is_built() else 1
+            for i in range(tries):
+                if torch.cuda.is_available():
+                    return "cuda"
+                if i < tries - 1:
+                    time.sleep(1.0)
     except ImportError:
         pass
     if pref == "cuda":

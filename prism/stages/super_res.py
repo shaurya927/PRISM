@@ -100,6 +100,9 @@ class SuperResolver:
             self.reason = "vendor/lpsr-lacd not present"
         elif not weights.exists():
             self.reason = f"checkpoint not found at {weights}"
+        elif device != "cuda":
+            # vendor/lpsr-lacd builds a layer with .cuda() inside forward(), so it cannot run on CPU.
+            self.reason = "needs a CUDA GPU (the vendor model calls .cuda() inside forward)"
         if self.reason:
             log.warning("Super-resolution not installed (%s); visual aid disabled", self.reason)
             return

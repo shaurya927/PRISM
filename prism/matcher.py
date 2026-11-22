@@ -313,7 +313,7 @@ def match(
         if K
         else f"no known characters: all {len(registry)} registry plates fit"
     )
-    status, explanation, gap = decide_status(top, K, tau, cfg, plate, color)
+    status, explanation, gap = decide_status(top, K, tau, cfg, plate, color, spec=spec, n_registry=len(registry))
     return MatchResult(
         status=status,
         threshold_used=tau,
@@ -335,6 +335,8 @@ def decide_status(
     cfg: MatchConfig,
     plate: str,
     color: Optional[AttributeValue],
+    spec: Optional[int] = None,
+    n_registry: int = 0,
 ) -> tuple[MatchStatus, str, Optional[float]]:
     if not top:
         return MatchStatus.NO_CONFIDENT_MATCH, "The registry is empty, so there is nothing to match.", None
@@ -349,6 +351,13 @@ def decide_status(
     gap = round(best.score - rivals[0].score, 4) if rivals else None
     if best.score < tau or K < cfg.min_known_for_match:
         parts = []
+        # Only for plate-length reads (Indian plates are 8-10 characters); a 6-letter read is
+        # usually a shop sign or sticker, not a plate missing from the registry.
+        if K >= cfg.min_known_for_match and spec == 0 and len(plate) >= 8:
+            parts.append(
+                f"No registry plate fits the known characters of '{plate}': this vehicle is not in the loaded "
+                f"registry ({n_registry} records), so PRISM cannot name its owner record."
+            )
         if best.score < tau:
             parts.append(
                 f"Best candidate {best.registry_id} scored {best.score:.2f}, below the {tau:.2f} threshold."
@@ -365,9 +374,10 @@ def decide_status(
         else:
             max_plate = wp * coverage_factor(K, cfg)
             pos_txt = _fmt_positions(known_pos)
+            lead = (f"All {K} plate characters were read" if K == len(plate)
+                    else f"Only {K} plate character{'s' if K != 1 else ''} {'were' if K != 1 else 'was'} readable")
             parts.append(
-                f"Only {K} plate character{'s' if K != 1 else ''} {'were' if K != 1 else 'was'} readable "
-                f"({pos_txt}), so plate evidence counts for at most {max_plate:.2f}"
+                f"{lead} ({pos_txt}), so plate evidence counts for at most {max_plate:.2f}"
                 + (
                     f", and at least {cfg.min_known_for_match} known characters are needed for a match."
                     if K < cfg.min_known_for_match

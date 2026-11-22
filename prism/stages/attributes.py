@@ -22,7 +22,7 @@ from typing import Optional, Sequence
 import cv2
 import numpy as np
 
-from prism.config import BODY_TYPES, COLORS, VEHICLE_MODELS, WEIGHTS_DIR, AttributeConfig
+from prism.config import BODY_TYPES, COLORS, EXTRA_CLIP_MODELS, VEHICLE_MODELS, WEIGHTS_DIR, AttributeConfig
 from prism.schemas import Attributes, AttributeValue
 
 log = logging.getLogger("prism.attributes")
@@ -87,8 +87,12 @@ class AttributeExtractor:
         self.color_prompts = [[t.format(c) for t in COLOR_TEMPLATES] for c in self.colors]
         self.body_sub = list(BODY_PROMPTS)
         self.body_prompts = [list(BODY_PROMPTS[k][1]) for k in self.body_sub]
-        self.mm = [(make_model_label(mk, md), body) for mk, md, body, _ in VEHICLE_MODELS]
-        self.mm_labels = [f"{mk} {md}" for mk, md, _, _ in VEHICLE_MODELS]
+        # Registry models plus common makes that are not in the registry, so an unlisted car
+        # (e.g. a Volvo) is not forced onto the closest registry model.
+        bank = list(VEHICLE_MODELS) + [m for m in EXTRA_CLIP_MODELS if m not in VEHICLE_MODELS]
+        self.mm = [(make_model_label(mk, md), body) for mk, md, body, _ in bank]
+        self.mm_labels = [f"{mk} {md}" for mk, md, _, _ in bank]
+        self.mm_in_registry = [i < len(VEHICLE_MODELS) for i in range(len(bank))]
         self.mm_prompts = [[t.format(lbl) for t in MAKE_MODEL_TEMPLATES] for lbl, _ in self.mm]
 
     # ------------------------------------------------------------------ embeddings
@@ -170,4 +174,6 @@ class AttributeExtractor:
             if mask.sum() > 0:
                 mm_probs = mm_probs * mask
         make_model = self._value(self.mm_labels, mm_probs, "clip (body-type constrained)")
+        if not make_model.uncertain and not self.mm_in_registry[self.mm_labels.index(make_model.value)]:
+            make_model.source = "clip (body-type constrained); not a registry model, adds nothing to the score"
         return Attributes(color=color, body_type=body, make_model=make_model, yolo_class=yolo_class)

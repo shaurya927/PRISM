@@ -74,6 +74,11 @@ class TrackPlates:
 
 
 # --------------------------------------------------------------------------- image helpers
+def plate_quality(width_px: int, sharpness: float, cfg: PlateConfig) -> float:
+    """Rank key for plate frames: pixels across the plate, discounted only when the crop is blurry."""
+    return float(width_px) * min(1.0, sharpness / cfg.quality_sharpness_ref)
+
+
 def laplacian_sharpness(img: np.ndarray) -> float:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
     return float(cv2.Laplacian(gray, cv2.CV_64F).var())
@@ -226,7 +231,7 @@ def collect_plate_samples(
                     two_line=is_two_line(plate, cfg),
                 )
                 ph = plate_heaps[tid]
-                entry = (s, next(counter), sample)
+                entry = (plate_quality(plate.shape[1], s, cfg), next(counter), sample)
                 (heapq.heappush if len(ph) < cfg.top_k_frames else heapq.heappushpop)(ph, entry)
             if progress:
                 progress(min(1.0, idx / max(1, last)))

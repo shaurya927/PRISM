@@ -61,13 +61,22 @@ export function PlateText({ fused, size = "text-2xl" }) {
 export function AttrChip({ label, attr }) {
   if (!attr) return null;
   const unsure = attr.uncertain;
+  const isModel = /model/i.test(label);
+  const offRegistry = !unsure && /not a registry model/.test(attr.source || "");
+  // An uncertain make/model is not named: naming the closest of 57 labels reads like a claim.
+  const text = unsure ? (isModel ? "not recognised" : `uncertain (${attr.top2?.[0]?.[0] ?? "?"})`) : attr.value;
+  const tip = [
+    attr.top2?.length ? `closest: ${attr.top2.map(([l, p]) => `${l} ${fmt2(p)}`).join(", ")}` : null,
+    offRegistry ? "not a registry model, so it adds nothing to the score" : null,
+  ].filter(Boolean).join(" · ");
   return (
     <span
       className={`chip ${unsure ? "bg-slate-100 text-slate-500 border border-dashed border-slate-300" : "bg-indigo-50 text-indigo-800"}`}
-      title={attr.top2?.map(([l, p]) => `${l} ${fmt2(p)}`).join(", ")}
+      title={tip}
     >
-      <span className="opacity-60">{label}</span> {unsure ? `uncertain (${attr.top2?.[0]?.[0] ?? "?"})` : attr.value}
-      <span className="opacity-60">{fmt2(attr.confidence)}</span>
+      <span className="opacity-60">{label}</span> {text}
+      {!(unsure && isModel) && <span className="opacity-60">{fmt2(attr.confidence)}</span>}
+      {offRegistry && <span className="opacity-60">· not in registry</span>}
     </span>
   );
 }

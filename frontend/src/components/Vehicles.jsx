@@ -25,11 +25,16 @@ export default function Vehicles({ tracks, selected, onSelect, primaryId, label 
               <div className="flex flex-wrap gap-1">
                 <AttrChip label="colour" attr={t.attributes.color} />
                 <AttrChip label="body" attr={t.attributes.body_type} />
-                {t.attributes.make_model && !t.attributes.make_model.uncertain && <AttrChip label="model" attr={t.attributes.make_model} />}
+                {t.attributes.make_model && <AttrChip label="model" attr={t.attributes.make_model} />}
               </div>
               <div className="text-xs text-slate-500">
                 seen {ts(t.first_seen_sec)}–{ts(t.last_seen_sec)} · {t.frames.length} plate reads · YOLO {t.yolo_class}
               </div>
+              {t.merged_track_ids?.length > 0 && (
+                <div className="text-xs text-blue-700" title={t.merge_note || ""}>
+                  merged tracker IDs {t.merged_track_ids.join(", ")} (same plate)
+                </div>
+              )}
             </div>
           </button>
         ))}
