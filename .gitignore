@@ -1,0 +1,24 @@
+# Pre-cloned research repos (see docs/proposed_solution.md §14)
+vendor/
+
+# Model weights and generated outputs
+*.pt
+*.pth
+*.onnx
+artifacts/
+reports/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+~$*
