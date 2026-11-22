@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from prism.config import PrismConfig, config_hash, with_overrides
+from prism import custody
 from prism.custody import CustodyLog, sha256_file, vendor_commits
 from prism.report import evidence_strip_png, html_to_pdf, render_html, write_report
 from prism.reid import body_compatible, implied_speed_kmh, link_tracks, plate_compatible
@@ -32,6 +33,15 @@ def test_config_hash_changes_with_thresholds():
 def test_vendor_commits_reported():
     c = vendor_commits()
     assert set(c) == {"fast-alpr", "parseq", "lpsr-lacd", "vehicle-reidentification"}
+
+
+def test_prism_commit_falls_back_to_env_without_git(monkeypatch, tmp_path):
+    # Docker images ship without .git; the build passes the commit in PRISM_GIT_COMMIT.
+    monkeypatch.setattr(custody, "ROOT", tmp_path)
+    monkeypatch.setenv("PRISM_GIT_COMMIT", "abc1234")
+    assert custody.prism_commit() == "abc1234"
+    monkeypatch.delenv("PRISM_GIT_COMMIT")
+    assert custody.prism_commit() is None
 
 
 # ------------------------------------------------------------------ report

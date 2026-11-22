@@ -1,0 +1,25 @@
+# CPU:  docker compose up --build
+# GPU:  docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build
+# Then open http://127.0.0.1:8000 (website) and http://127.0.0.1:8000/app (investigator).
+name: prism
+
+services:
+  prism:
+    build:
+      context: .
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cpu
+    image: prism:local
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      PRISM_DEVICE: auto
+      PRISM_PREFETCH_WEIGHTS: "1"
+    volumes:
+      - prism-weights:/app/weights
+      - prism-runs:/app/runs
+    restart: unless-stopped
+
+volumes:
+  prism-weights:
+  prism-runs:

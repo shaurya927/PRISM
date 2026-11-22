@@ -1,5 +1,7 @@
 # PRISM: Plate Recovery & Identification from Surveillance Media
 
+[![CI/CD](https://github.com/shaurya927/PRISM/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/shaurya927/PRISM/actions/workflows/ci-cd.yml)
+
 Hackasol 5.0 · Track 2 (AIML) · **AIML-01** Vehicle Identification and Traceability from CCTV Footage.
 
 Upload blurry CCTV footage and, optionally, the part of the plate you already know. PRISM returns a ranked
@@ -60,6 +62,35 @@ On Linux/macOS use `.venv/bin/python` and forward slashes.
 .venv\Scripts\python.exe scripts\evaluate.py --clips --degraded # OCR benchmark, ablation, tau sweep, clip metrics
 .venv\Scripts\python.exe scripts\batch_report.py               # one PDF/HTML report per clip + reports/index.html
 ```
+
+### Docker
+
+```bash
+docker compose up --build                                                    # CPU
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build    # NVIDIA GPU (needs the NVIDIA Container Toolkit)
+docker run -p 8000:8000 -v prism-weights:/app/weights ghcr.io/shaurya927/prism:latest   # prebuilt CPU image from CI
+```
+
+The image builds the frontend, installs CPU PyTorch (or CUDA 12.8 with `--build-arg TORCH_INDEX=...cu128`),
+Chromium for PDF reports, and `vendor/fast-alpr`, `vendor/parseq` and `vendor/vehicle-reidentification` at
+the pinned commits. `vendor/lpsr-lacd` has no licence file, so it is left out and super-resolution shows
+"not installed"; results are identical without it. Model weights are not baked in: Compose sets
+`PRISM_PREFETCH_WEIGHTS=1`, which downloads them into the `prism-weights` volume on first start (a few
+minutes, once). Jobs are kept in the `prism-runs` volume. The container runs as a non-root user and has a
+`/health` health check.
+
+### CI/CD
+
+`.github/workflows/ci-cd.yml` runs on every push and pull request:
+
+| Job | What it checks |
+|---|---|
+| Python tests | `pytest` on Ubuntu with CPU PyTorch and Chromium (PDF path exercised) |
+| Frontend build | `npm ci` + `npm run build`; the `dist/` folder is uploaded as an artifact |
+| Docker image | Builds the image, starts it, checks `/health` (registry loaded, commit recorded, vendor repos present), `/`, `/app`, `/api/config` and `/reports/`, then runs `pytest` inside the container |
+
+On pushes to `main` and `v*` tags, the tested image is published to `ghcr.io/shaurya927/prism`
+(`latest`, `sha-<commit>`, and the version for tags).
 
 ---
 

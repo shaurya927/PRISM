@@ -1,0 +1,17 @@
+# NVIDIA GPU override. Needs the NVIDIA Container Toolkit (or Docker Desktop with WSL2 GPU support).
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build
+services:
+  prism:
+    build:
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cu128
+    image: prism:local-gpu
+    environment:
+      PRISM_DEVICE: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

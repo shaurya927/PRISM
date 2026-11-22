@@ -4,6 +4,7 @@ and git commits of PRISM and every vendor repo."""
 from __future__ import annotations
 
 import hashlib
+import os
 import subprocess
 import threading
 from importlib import metadata
@@ -70,6 +71,11 @@ def git_commit(repo: Path) -> Optional[str]:
     return _read_git_head(repo)
 
 
+def prism_commit() -> Optional[str]:
+    """PRISM's own commit. Docker images have no .git, so the build passes it in PRISM_GIT_COMMIT."""
+    return git_commit(ROOT) or os.environ.get("PRISM_GIT_COMMIT") or None
+
+
 def vendor_commits(vendor_dir: Path = VENDOR_DIR) -> dict[str, str]:
     return {name: (git_commit(vendor_dir / name) or "not present") for name in VENDOR_REPOS}
 
@@ -123,7 +129,7 @@ def build_custody(
         models={"prism": PRISM_VERSION, **models},
         packages=package_versions(),
         vendor_commits=vendor_commits(),
-        prism_commit=git_commit(ROOT),
+        prism_commit=prism_commit(),
         config_hash=config_hash(cfg),
         config=config_dict(cfg),
         artifacts=artifacts,

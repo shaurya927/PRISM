@@ -52,7 +52,7 @@ from prism.config import (  # noqa: E402
     config_hash,
     load_config,
 )
-from prism.custody import package_versions, vendor_commits  # noqa: E402
+from prism.custody import package_versions, prism_commit, vendor_commits  # noqa: E402
 from prism.pipeline import STAGES, get_hub, hint_only_search, rescore_case, run_crosscam, run_pipeline  # noqa: E402
 from prism.registry import load_registry  # noqa: E402
 from prism.report import write_report  # noqa: E402
@@ -198,6 +198,7 @@ def health() -> dict:
         "registry_size": registry_size,
         "config_hash": config_hash(CFG),
         "thresholds": {"tau": CFG.match.tau, "char_conf": CFG.ocr.char_conf, "min_sharpness": CFG.plate.min_sharpness},
+        "prism_commit": prism_commit(),
         "vendor_commits": vendor_commits(),
         "packages": package_versions(("torch", "ultralytics", "open_clip_torch", "fast-alpr", "fastapi")),
         "stages": list(STAGES),
