@@ -1,0 +1,2606 @@
+{
+ "day_clear_white": {
+  "clip": "day_clear_white.mp4",
+  "mode": "clip",
+  "best": "/media/day_clear_white_best.jpg",
+  "plates": [
+   "/media/day_clear_white_plate0.png",
+   "/media/day_clear_white_plate1.png",
+   "/media/day_clear_white_plate2.png"
+  ],
+  "fused": "CG04MX4821",
+  "status": "MATCHED",
+  "explanation": "REG-0001 (CG04MX4821) scored 0.80, above the 0.55 threshold, with 10 known plate characters. Higher-scoring REG-0004 contradict a confidently read plate character and are ranked below it.",
+  "top": [
+   {
+    "id": "REG-0001",
+    "plate": "CG04MX4821",
+    "score": 0.8,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Colour mismatch: video grey, registry white"
+    ]
+   },
+   {
+    "id": "REG-0004",
+    "plate": "CG04MX4827",
+    "score": 0.835,
+    "color": "silver",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 10: video shows '1', registry has '7'"
+    ]
+   },
+   {
+    "id": "REG-0002",
+    "plate": "CG04MX4851",
+    "score": 0.735,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 9: video shows '2', registry has '5'",
+     "Colour mismatch: video grey, registry white"
+    ]
+   }
+  ],
+  "advisor": null,
+  "color": "grey",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX4821` across 24 plate reads [F5, F5c, F8]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.80 with 10 of 10 known characters matching [REG-0001]. Vehicle track 2 (white SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0005, scored 0.35 [REG-0005].",
+  "clip_sha256": "e013364c015a154d1f6270f72775ab8ca26db8cb73bab7945002a204b409854d",
+  "reports": {
+   "html": "/reports/day_clear_white/PRISM_report_3208b7f6489f.html",
+   "pdf": "/reports/day_clear_white/PRISM_report_3208b7f6489f.pdf"
+  },
+  "strip": "/media/day_clear_white_strip.png"
+ },
+ "night_partial_white": {
+  "clip": "night_partial_white.mp4",
+  "mode": "clip",
+  "best": "/media/night_partial_white_best.jpg",
+  "plates": [
+   "/media/night_partial_white_plate0.png",
+   "/media/night_partial_white_plate1.png",
+   "/media/night_partial_white_plate2.png"
+  ],
+  "fused": "CG04MX48?1",
+  "status": "AMBIGUOUS",
+  "explanation": "REG-0001 (0.90) and REG-0002 (0.90) are within 0.05 of each other, so PRISM cannot separate them. See the advisor note.",
+  "top": [
+   {
+    "id": "REG-0001",
+    "plate": "CG04MX4821",
+    "score": 0.9,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Colour mismatch: video grey, registry white"
+    ]
+   },
+   {
+    "id": "REG-0002",
+    "plate": "CG04MX4851",
+    "score": 0.9,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Colour mismatch: video grey, registry white"
+    ]
+   },
+   {
+    "id": "REG-0004",
+    "plate": "CG04MX4827",
+    "score": 0.8667,
+    "color": "silver",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 10: video shows '1', registry has '7'"
+    ]
+   }
+  ],
+  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",
+  "color": "grey",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F8, F8c, F10]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 13 came closest to reading position 9 (`8` at 0.69) and is a lead only [F13, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0077, scored 0.25 [REG-0077].",
+  "clip_sha256": "b6b818544d7712ecbf20d182855148c0a1d238450d53e1b985b25ee854572085",
+  "reports": {
+   "html": "/reports/night_partial_white/PRISM_report_77dfa5837b25.html",
+   "pdf": "/reports/night_partial_white/PRISM_report_77dfa5837b25.pdf"
+  },
+  "strip": "/media/night_partial_white_strip.png",
+  "evidence": [
+   {
+    "id": "F8",
+    "frame": 8,
+    "sharpness": 3609.4,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.99,
+      false
+     ],
+     [
+      "G",
+      0.979,
+      false
+     ],
+     [
+      "0",
+      0.981,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.944,
+      false
+     ],
+     [
+      "X",
+      0.962,
+      false
+     ],
+     [
+      "4",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.924,
+      false
+     ],
+     [
+      "8",
+      0.575,
+      false
+     ],
+     [
+      "1",
+      0.747,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F8c",
+    "frame": 8,
+    "sharpness": 3609.4,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.979,
+      false
+     ],
+     [
+      "G",
+      0.882,
+      false
+     ],
+     [
+      "0",
+      0.965,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.884,
+      false
+     ],
+     [
+      "X",
+      0.969,
+      false
+     ],
+     [
+      "4",
+      0.996,
+      false
+     ],
+     [
+      "3",
+      0.493,
+      false
+     ],
+     [
+      "8",
+      0.813,
+      false
+     ],
+     [
+      "1",
+      0.577,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F10",
+    "frame": 10,
+    "sharpness": 3031.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.987,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.998,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.895,
+      false
+     ],
+     [
+      "8",
+      0.54,
+      false
+     ],
+     [
+      "1",
+      0.984,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F10c",
+    "frame": 10,
+    "sharpness": 3031.5,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.993,
+      false
+     ],
+     [
+      "0",
+      0.987,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.992,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "3",
+      0.812,
+      false
+     ],
+     [
+      "0",
+      0.487,
+      false
+     ],
+     [
+      "1",
+      0.976,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F13",
+    "frame": 13,
+    "sharpness": 3126.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.971,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.986,
+      false
+     ],
+     [
+      "8",
+      0.7,
+      false
+     ],
+     [
+      "1",
+      0.958,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F13c",
+    "frame": 13,
+    "sharpness": 3126.5,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.99,
+      false
+     ],
+     [
+      "G",
+      0.997,
+      false
+     ],
+     [
+      "0",
+      0.962,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.998,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.957,
+      false
+     ],
+     [
+      "8",
+      0.823,
+      false
+     ],
+     [
+      "1",
+      0.918,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F15",
+    "frame": 15,
+    "sharpness": 3364.6,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.988,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.998,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.98,
+      false
+     ],
+     [
+      "8",
+      0.764,
+      false
+     ],
+     [
+      "1",
+      0.963,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F15c",
+    "frame": 15,
+    "sharpness": 3364.6,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.993,
+      false
+     ],
+     [
+      "G",
+      0.995,
+      false
+     ],
+     [
+      "0",
+      0.988,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.842,
+      false
+     ],
+     [
+      "8",
+      0.901,
+      false
+     ],
+     [
+      "1",
+      0.932,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F18",
+    "frame": 18,
+    "sharpness": 3543.2,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.313,
+      false
+     ],
+     [
+      "1",
+      0.979,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F18c",
+    "frame": 18,
+    "sharpness": 3543.2,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.997,
+      false
+     ],
+     [
+      "0",
+      0.991,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.995,
+      false
+     ],
+     [
+      "8",
+      0.584,
+      false
+     ],
+     [
+      "1",
+      0.982,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F20",
+    "frame": 20,
+    "sharpness": 4395.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.991,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      1.0,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.996,
+      false
+     ],
+     [
+      "0",
+      0.535,
+      false
+     ],
+     [
+      "1",
+      0.993,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F20c",
+    "frame": 20,
+    "sharpness": 4395.5,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.992,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      1.0,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.995,
+      false
+     ],
+     [
+      "8",
+      0.44,
+      false
+     ],
+     [
+      "1",
+      0.992,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F23",
+    "frame": 23,
+    "sharpness": 3629.1,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.99,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.993,
+      false
+     ],
+     [
+      "8",
+      0.68,
+      false
+     ],
+     [
+      "1",
+      0.968,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F23c",
+    "frame": 23,
+    "sharpness": 3629.1,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.995,
+      false
+     ],
+     [
+      "0",
+      0.99,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.977,
+      false
+     ],
+     [
+      "8",
+      0.859,
+      false
+     ],
+     [
+      "1",
+      0.969,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F25",
+    "frame": 25,
+    "sharpness": 3017.4,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.994,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.99,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.989,
+      false
+     ],
+     [
+      "8",
+      0.696,
+      false
+     ],
+     [
+      "1",
+      0.992,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F25c",
+    "frame": 25,
+    "sharpness": 3017.4,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.993,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.976,
+      false
+     ],
+     [
+      "8",
+      0.781,
+      false
+     ],
+     [
+      "1",
+      0.992,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F30",
+    "frame": 30,
+    "sharpness": 3252.9,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.991,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.923,
+      false
+     ],
+     [
+      "8",
+      0.559,
+      false
+     ],
+     [
+      "1",
+      0.992,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F30c",
+    "frame": 30,
+    "sharpness": 3252.9,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.994,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "3",
+      0.514,
+      false
+     ],
+     [
+      "8",
+      0.659,
+      false
+     ],
+     [
+      "1",
+      0.315,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F35",
+    "frame": 35,
+    "sharpness": 3688.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      1.0,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.996,
+      false
+     ],
+     [
+      "8",
+      0.353,
+      false
+     ],
+     [
+      "1",
+      0.994,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F35c",
+    "frame": 35,
+    "sharpness": 3688.5,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.994,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.99,
+      false
+     ],
+     [
+      "8",
+      0.473,
+      false
+     ],
+     [
+      "1",
+      0.993,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F45",
+    "frame": 45,
+    "sharpness": 3251.2,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.991,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.995,
+      false
+     ],
+     [
+      "M",
+      0.303,
+      false
+     ],
+     [
+      "1",
+      0.914,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F45c",
+    "frame": 45,
+    "sharpness": 3251.2,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      1.0,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.995,
+      false
+     ],
+     [
+      "8",
+      0.567,
+      false
+     ],
+     [
+      "1",
+      0.99,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F66",
+    "frame": 66,
+    "sharpness": 2764.1,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.992,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.996,
+      false
+     ],
+     [
+      "0",
+      0.3,
+      false
+     ],
+     [
+      "1",
+      0.851,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F66c",
+    "frame": 66,
+    "sharpness": 2764.1,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.997,
+      false
+     ],
+     [
+      "0",
+      0.991,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.995,
+      false
+     ],
+     [
+      "0",
+      0.4,
+      false
+     ],
+     [
+      "1",
+      0.985,
+      false
+     ]
+    ]
+   }
+  ],
+  "fusion_sweep": [
+   {
+    "tau": 0.5,
+    "text": "CG04MX4881",
+    "kept": 229,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 43.4338,
+      "share": 0.939,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 21.0022,
+      "total": 22.073,
+      "share": 0.951,
+      "note": null
+     },
+     {
+      "char": "1",
+      "weight": 43.2812,
+      "total": 43.2812,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.55,
+    "text": "CG04MX4881",
+    "kept": 226,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 19.9216,
+      "total": 19.9216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "1",
+      "weight": 43.2812,
+      "total": 43.2812,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.6,
+    "text": "CG04MX4881",
+    "kept": 221,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 15.3512,
+      "total": 15.3512,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "1",
+      "weight": 42.1274,
+      "total": 42.1274,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.65,
+    "text": "CG04MX4881",
+    "kept": 221,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 15.3512,
+      "total": 15.3512,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "1",
+      "weight": 42.1274,
+      "total": 42.1274,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.7,
+    "text": "CG04MX48?1",
+    "kept": 217,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 9.8812,
+      "total": 9.8812,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 6 of 24 reads (25% < 40%)"
+     },
+     {
+      "char": "1",
+      "weight": 42.1274,
+      "total": 42.1274,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.75,
+    "text": "CG04MX48?1",
+    "kept": 216,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 9.8812,
+      "total": 9.8812,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 6 of 24 reads (25% < 40%)"
+     },
+     {
+      "char": "1",
+      "weight": 40.6342,
+      "total": 40.6342,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.8,
+    "text": "CG04MX48?1",
+    "kept": 214,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 40.7826,
+      "total": 42.4064,
+      "share": 0.962,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 6.7912,
+      "total": 6.7912,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 4 of 24 reads (17% < 40%)"
+     },
+     {
+      "char": "1",
+      "weight": 40.6342,
+      "total": 40.6342,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.85,
+    "text": "CG04MX48?1",
+    "kept": 210,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 47.6216,
+      "total": 47.6216,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 47.6032,
+      "total": 47.6032,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 39.0986,
+      "total": 39.0986,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 3.519,
+      "total": 3.519,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 2 of 24 reads (8% < 40%)"
+     },
+     {
+      "char": "1",
+      "weight": 40.6342,
+      "total": 40.6342,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.9,
+    "text": "CG04MX48?1",
+    "kept": 205,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 45.8566,
+      "total": 45.8566,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 45.8352,
+      "total": 45.8352,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 37.3076,
+      "total": 37.3076,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 1.8014,
+      "total": 1.8014,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 1 of 24 reads (4% < 40%)"
+     },
+     {
+      "char": "1",
+      "weight": 38.9332,
+      "total": 38.9332,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   },
+   {
+    "tau": 0.95,
+    "text": "CG04MX48?1",
+    "kept": 198,
+    "total": 239,
+    "positions": [
+     {
+      "char": "C",
+      "weight": 47.7342,
+      "total": 47.7342,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "G",
+      "weight": 45.8566,
+      "total": 45.8566,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "0",
+      "weight": 47.3972,
+      "total": 47.3972,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 47.9672,
+      "total": 47.9672,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "M",
+      "weight": 43.9476,
+      "total": 43.9476,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "X",
+      "weight": 47.8144,
+      "total": 47.8144,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "4",
+      "weight": 45.9318,
+      "total": 45.9318,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "8",
+      "weight": 33.6126,
+      "total": 33.6126,
+      "share": 1.0,
+      "note": null
+     },
+     {
+      "char": "?",
+      "weight": 0.0,
+      "total": 0.0,
+      "share": 0.0,
+      "note": "no frame read this position with confidence"
+     },
+     {
+      "char": "1",
+      "weight": 33.4058,
+      "total": 33.4058,
+      "share": 1.0,
+      "note": null
+     }
+    ]
+   }
+  ]
+ },
+ "camB_white": {
+  "clip": "camB_white.mp4",
+  "mode": "clip",
+  "best": "/media/camB_white_best.jpg",
+  "plates": [
+   "/media/camB_white_plate0.png",
+   "/media/camB_white_plate1.png",
+   "/media/camB_white_plate2.png"
+  ],
+  "fused": "?G04MX4821",
+  "status": "MATCHED",
+  "explanation": "REG-0001 (CG04MX4821) scored 0.90, above the 0.55 threshold, with 9 known plate characters. Higher-scoring REG-0004 contradict a confidently read plate character and are ranked below it.",
+  "top": [
+   {
+    "id": "REG-0001",
+    "plate": "CG04MX4821",
+    "score": 0.9,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": []
+   },
+   {
+    "id": "REG-0004",
+    "plate": "CG04MX4827",
+    "score": 0.9278,
+    "color": "silver",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 10: video shows '1', registry has '7'"
+    ]
+   },
+   {
+    "id": "REG-0002",
+    "plate": "CG04MX4851",
+    "score": 0.8278,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 9: video shows '2', registry has '5'"
+    ]
+   }
+  ],
+  "advisor": null,
+  "color": "silver",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (silver car, seen 00:00.0-00:06.0) showed the plate `?G04MX4821` across 24 plate reads [F5, F5c, F8]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.90 with 9 of 9 known characters matching [REG-0001]. Position 1 was never read with confidence [POS-1]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0001, scored 0.20 [REG-0001].",
+  "clip_sha256": "3eb607dda3be03bff1bc81c3723189bf8a303ad6e6885e391a90d262523e7223",
+  "reports": {
+   "html": "/reports/camB_white/PRISM_report_be1bdce1b035.html",
+   "pdf": "/reports/camB_white/PRISM_report_be1bdce1b035.pdf"
+  },
+  "strip": "/media/camB_white_strip.png"
+ },
+ "day_black_suv": {
+  "clip": "day_black_suv.mp4",
+  "mode": "clip",
+  "best": "/media/day_black_suv_best.jpg",
+  "plates": [
+   "/media/day_black_suv_plate0.png",
+   "/media/day_black_suv_plate1.png",
+   "/media/day_black_suv_plate2.png"
+  ],
+  "fused": "MH12DE5678",
+  "status": "MATCHED",
+  "explanation": "REG-0010 (MH12DE5678) scored 0.85, above the 0.55 threshold, with 10 known plate characters. Higher-scoring REG-0014 contradict a confidently read plate character and are ranked below it.",
+  "top": [
+   {
+    "id": "REG-0010",
+    "plate": "MH12DE5678",
+    "score": 0.85,
+    "color": "black",
+    "body": "SUV",
+    "model": "Toyota Innova",
+    "mismatches": [
+     "Body type mismatch: video car, registry SUV"
+    ]
+   },
+   {
+    "id": "REG-0014",
+    "plate": "MH14DE5678",
+    "score": 0.935,
+    "color": "black",
+    "body": "car",
+    "model": "Honda City",
+    "mismatches": [
+     "Mismatch at position 4: video shows '2', registry has '4'"
+    ]
+   },
+   {
+    "id": "REG-0011",
+    "plate": "MH12DE5670",
+    "score": 0.785,
+    "color": "black",
+    "body": "SUV",
+    "model": "Toyota Innova",
+    "mismatches": [
+     "Mismatch at position 10: video shows '8', registry has '0'",
+     "Body type mismatch: video car, registry SUV"
+    ]
+   }
+  ],
+  "advisor": null,
+  "color": "black",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (black car, seen 00:00.0-00:06.0) showed the plate `MH12DE5678` across 20 plate reads [F5, F18, F23]. The best registry candidate is REG-0010, `MH12DE5678`, scoring 0.85 with 10 of 10 known characters matching [REG-0010].",
+  "clip_sha256": "cb20dbbefa9a983ff9e7cc865e13c7df54895134acbbbaf00becb6af4e570338",
+  "reports": {
+   "html": "/reports/day_black_suv/PRISM_report_a86d7cc1357c.html",
+   "pdf": "/reports/day_black_suv/PRISM_report_a86d7cc1357c.pdf"
+  },
+  "strip": "/media/day_black_suv_strip.png"
+ },
+ "day_blue_twoline": {
+  "clip": "day_blue_twoline.mp4",
+  "mode": "clip",
+  "best": "/media/day_blue_twoline_best.jpg",
+  "plates": [
+   "/media/day_blue_twoline_plate0.png",
+   "/media/day_blue_twoline_plate1.png",
+   "/media/day_blue_twoline_plate2.png"
+  ],
+  "fused": "KA05MN2023",
+  "status": "MATCHED",
+  "explanation": "REG-0020 (KA05MN2023) scored 1.00, above the 0.55 threshold, with 10 known plate characters.",
+  "top": [
+   {
+    "id": "REG-0020",
+    "plate": "KA05MN2023",
+    "score": 1.0,
+    "color": "blue",
+    "body": "car",
+    "model": "Maruti Suzuki Alto",
+    "mismatches": []
+   },
+   {
+    "id": "REG-0021",
+    "plate": "KA05MN2028",
+    "score": 0.985,
+    "color": "blue",
+    "body": "car",
+    "model": "Maruti Suzuki Alto",
+    "mismatches": [
+     "Mismatch at position 10: video shows '3', registry has '8'"
+    ]
+   },
+   {
+    "id": "REG-0022",
+    "plate": "KA05MM2023",
+    "score": 0.935,
+    "color": "blue",
+    "body": "car",
+    "model": "Maruti Suzuki WagonR",
+    "mismatches": [
+     "Mismatch at position 6: video shows 'N', registry has 'M'"
+    ]
+   }
+  ],
+  "advisor": null,
+  "color": "blue",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (blue car, seen 00:00.0-00:06.0) showed the plate `KA05MN2023` across 17 plate reads [F3, F8, F10]. The best registry candidate is REG-0020, `KA05MN2023`, scoring 1.00 with 10 of 10 known characters matching [REG-0020].",
+  "clip_sha256": "2659e9178bc4cf1b3b8fe76363c7d82c46a63f0981884df0d88fcfdfbe1224f3",
+  "reports": {
+   "html": "/reports/day_blue_twoline/PRISM_report_eabc39421fa1.html",
+   "pdf": "/reports/day_blue_twoline/PRISM_report_eabc39421fa1.pdf"
+  },
+  "strip": "/media/day_blue_twoline_strip.png"
+ },
+ "unregistered_white": {
+  "clip": "unregistered_white.mp4",
+  "mode": "clip",
+  "best": "/media/unregistered_white_best.jpg",
+  "plates": [
+   "/media/unregistered_white_plate0.png",
+   "/media/unregistered_white_plate1.png",
+   "/media/unregistered_white_plate2.png"
+  ],
+  "fused": "MH14XY0042",
+  "status": "NO CONFIDENT MATCH",
+  "explanation": "Best candidate REG-0443 scored 0.64, but it contradicts a confidently read plate character (Mismatch at position 4: video shows '4', registry has '2'; Mismatch at position 6: video shows 'Y', registry has 'F'; Mismatch at position 8: video shows '0', registry has '1'; Mismatch at position 10: video shows '2', registry has '6'). PRISM will not call a vehicle a match when the video clearly shows a different character. No shortlisted candidate is free of plate contradictions, so the true vehicle may not be in the registry.",
+  "top": [
+   {
+    "id": "REG-0443",
+    "plate": "MH12XF0146",
+    "score": 0.64,
+    "color": "grey",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 4: video shows '4', registry has '2'",
+     "Mismatch at position 6: video shows 'Y', registry has 'F'",
+     "Mismatch at position 8: video shows '0', registry has '1'",
+     "Mismatch at position 10: video shows '2', registry has '6'"
+    ]
+   },
+   {
+    "id": "REG-0298",
+    "plate": "MH14YS0991",
+    "score": 0.575,
+    "color": "white",
+    "body": "car",
+    "model": "Tata Tiago",
+    "mismatches": [
+     "Mismatch at position 5: video shows 'X', registry has 'Y'",
+     "Mismatch at position 6: video shows 'Y', registry has 'S'",
+     "Mismatch at position 8: video shows '0', registry has '9'",
+     "Mismatch at position 9: video shows '4', registry has '9'",
+     "Mismatch at position 10: video shows '2', registry has '1'"
+    ]
+   },
+   {
+    "id": "REG-0054",
+    "plate": "MH04H2171",
+    "score": 0.545,
+    "color": "silver",
+    "body": "car",
+    "model": "Maruti Suzuki Dzire",
+    "mismatches": [
+     "Mismatch at position 3: video shows '1', registry has '0'",
+     "Mismatch at position 5: video shows 'X', registry has 'H'",
+     "Mismatch at position 6: video shows 'Y', registry has '2'",
+     "Mismatch at position 7: video shows '0', registry has '1'",
+     "Mismatch at position 8: video shows '0', registry has '7'",
+     "Mismatch at position 9: video shows '4', registry has '1'",
+     "Mismatch at position 10: video shows '2', registry has '(nothing)'"
+    ]
+   }
+  ],
+  "advisor": "Every plate position was read, so the candidates are separated by colour, body type or OCR mix-ups rather than by an unknown position. They differ on: Mismatch at position 4: video shows '4', registry has '2'; Mismatch at position 6: video shows 'Y', registry has 'F'; Mismatch at position 8: video shows '0', registry has '1'. Check the attribute chips and the confusable characters by eye.",
+  "color": "silver",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (silver car, seen 00:00.0-00:06.0) showed the plate `MH14XY0042` across 24 plate reads [F10, F13, F13c]. No registry entry cleared the 0.55 threshold; the best, REG-0443, scored 0.64 [REG-0443]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0001, scored 0.20 [REG-0001].",
+  "clip_sha256": "9e3a028e32227c8cb5bca86ade53c27a72e532f309ac167aae98e5a8605e2dc4",
+  "reports": {
+   "html": "/reports/unregistered_white/PRISM_report_5eb42550bfc8.html",
+   "pdf": "/reports/unregistered_white/PRISM_report_5eb42550bfc8.pdf"
+  },
+  "strip": "/media/unregistered_white_strip.png"
+ },
+ "crosscam_night_partial_white__camB_white": {
+  "clip": "night_partial_white.mp4",
+  "mode": "crosscam",
+  "best": "/media/crosscam_night_partial_white__camB_white_best.jpg",
+  "plates": [
+   "/media/crosscam_night_partial_white__camB_white_plate0.png",
+   "/media/crosscam_night_partial_white__camB_white_plate1.png",
+   "/media/crosscam_night_partial_white__camB_white_plate2.png"
+  ],
+  "fused": "CG04MX48?1",
+  "status": "AMBIGUOUS",
+  "explanation": "REG-0001 (0.90) and REG-0002 (0.90) are within 0.05 of each other, so PRISM cannot separate them. See the advisor note.",
+  "top": [
+   {
+    "id": "REG-0001",
+    "plate": "CG04MX4821",
+    "score": 0.9,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Colour mismatch: video grey, registry white"
+    ]
+   },
+   {
+    "id": "REG-0002",
+    "plate": "CG04MX4851",
+    "score": 0.9,
+    "color": "white",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Colour mismatch: video grey, registry white"
+    ]
+   },
+   {
+    "id": "REG-0004",
+    "plate": "CG04MX4827",
+    "score": 0.8667,
+    "color": "silver",
+    "body": "car",
+    "model": "Hyundai Verna",
+    "mismatches": [
+     "Mismatch at position 10: video shows '1', registry has '7'"
+    ]
+   }
+  ],
+  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",
+  "color": "grey",
+  "body": "car",
+  "reads": 24,
+  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F8, F8c, F10]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 13 came closest to reading position 9 (`8` at 0.69) and is a lead only [F13, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0077, scored 0.25 [REG-0077]. Track 1 in clip A and track 1 in clip B look like the same vehicle (similarity 0.91); combining both cameras gives `CG04MX4821` and REG-0001 at 0.90 [T1, REG-0001].",
+  "clip_sha256": "b6b818544d7712ecbf20d182855148c0a1d238450d53e1b985b25ee854572085",
+  "reports": {
+   "html": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_f5c3cc3ca772.html",
+   "pdf": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_f5c3cc3ca772.pdf"
+  },
+  "strip": "/media/crosscam_night_partial_white__camB_white_strip.png",
+  "crosscam": {
+   "similarity": 0.9135,
+   "a": "CG04MX48?1",
+   "b": "?G04MX4821",
+   "combined": "CG04MX4821",
+   "before": "AMBIGUOUS",
+   "after": "MATCHED",
+   "best_b": "/media/crosscam_night_partial_white__camB_white_b_best.jpg"
+  }
+ }
+}

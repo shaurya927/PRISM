@@ -37,10 +37,11 @@ cd frontend; npm install; npm run build; cd ..
 .venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Open <http://127.0.0.1:8000>. On Linux/macOS use `.venv/bin/python` and forward slashes.
+Open <http://127.0.0.1:8000> for the project website and <http://127.0.0.1:8000/app> for the investigator app.
+On Linux/macOS use `.venv/bin/python` and forward slashes.
 
 **Frontend dev mode** (hot reload): run the API as above, then `cd frontend && npm run dev` and open
-<http://localhost:5173> (Vite proxies `/api`, `/artifacts` and `/health` to port 8000).
+<http://localhost:5173> (Vite proxies `/api`, `/artifacts`, `/reports` and `/health` to port 8000).
 
 ### Command line
 
@@ -97,7 +98,7 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 | `prism/report.py` + `templates/report.html.j2` | Self-contained HTML report, evidence-strip image, Playwright PDF with HTML fallback |
 | `prism/pipeline.py` | `run_pipeline`, `run_crosscam`, `rescore_case`, `hint_only_search` |
 | `backend/app/main.py` | FastAPI: jobs, rescore, search, crosscam, report, artifacts, health, static UI |
-| `frontend/` | React + Vite + Tailwind investigator app |
+| `frontend/` | React + Vite + Tailwind investigator app (`/app`) and project website (`/`, `src/site/`) |
 | `data/generate_registry.py` | 500 synthetic records with decoys |
 | `scripts/` | Demo clips, degradation, evaluation, batch reports, weight download |
 
@@ -153,6 +154,21 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 
 The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which reruns only Stage 5.
 
+## Project website
+
+The same build serves a project website at `/` (the investigator app lives at `/app`):
+landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails, Docs and About.
+It uses React Router, framer-motion and Lenis smooth scrolling (masked line reveals, clip-path image reveals,
+scroll-scrubbed text, a scroll-driven cross-camera story, page curtains) with Geist fonts. Layout and motion
+are inspired by melon.studio; no code, images or text were taken from it.
+
+Every image and number on the site is real PRISM output. `scripts/build_site_media.py` copies crops and
+evidence strips from the batch-report runs into `frontend/public/media/`, writes
+`frontend/src/site/data/cases.json` and `evaluation.json`, and re-runs the real masking + fusion code on the
+night clip's 24 reads at τ_char 0.50–0.95 for the interactive fusion demo. Re-run it after
+`scripts/batch_report.py` or `scripts/evaluate.py`, then `npm run build`. Report links on the site are served
+from `reports/` by `GET /reports/{path}` (`.html`, `.pdf`, `.png` only).
+
 ## API
 
 | Method | Path | Purpose |
@@ -164,7 +180,9 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 | POST | `/api/crosscam` | multipart `file_a`, `file_b`, optional `hint`, `threshold`, `distance_km`, `gap_s` |
 | GET | `/api/report/{job_id}?format=pdf\|html` | forensic report |
 | GET | `/artifacts/{path}` | saved crops (path-traversal safe) |
+| GET | `/reports/{path}` | pre-built batch reports for the website (`.html`/`.pdf`/`.png`, path-traversal safe) |
 | GET | `/health` | device, GPU, models, registry size, config hash, vendor commits |
+| GET | `/api/docs` | interactive OpenAPI docs (moved from `/docs`, which is the website's Docs page) |
 
 ## Data
 

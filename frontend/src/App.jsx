@@ -142,7 +142,7 @@ export default function App() {
   const goNew = () => { setJobId(null); setTab("vehicles"); };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-100 text-slate-800">
       <header className="bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           <button onClick={goNew} className="flex items-center gap-2">
@@ -151,6 +151,7 @@ export default function App() {
             <span className="hidden md:inline text-xs text-slate-400">Plate Recovery &amp; Identification from Surveillance Media</span>
           </button>
           <div className="ml-auto flex items-center gap-2">
+            <a href="/" className="text-xs text-slate-400 hover:text-white mr-2">← Project site</a>
             {health && <span className="text-xs text-slate-400">registry {health.registry_size} · OCR {health.ocr_backend} · v{health.prism_version}</span>}
             <DeviceBadge health={health} />
             {jobId && <button className="btn bg-slate-700 hover:bg-slate-600 text-white" onClick={goNew}>+ New case</button>}

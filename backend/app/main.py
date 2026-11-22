@@ -10,8 +10,9 @@ Endpoints
   POST /api/crosscam                two clips -> cross-camera job
   GET  /api/report/{job_id}         ?format=pdf|html
   GET  /artifacts/{path}            saved crops
+  GET  /reports/{path}              pre-built batch reports (.html/.pdf/.png) linked from the website
   GET  /health                      device, models, versions
-  GET  /                            built React app (frontend/dist)
+  GET  /                            project website; /app is the investigator (frontend/dist)
 
 Run:  python -m uvicorn backend.app.main:app --port 8000
 """
@@ -44,6 +45,7 @@ from prism.config import (  # noqa: E402
     FRONTEND_DIST,
     PRISM_VERSION,
     REGISTRY_PATH,
+    REPORTS_DIR,
     RUNS_DIR,
     VEHICLE_MODELS,
     config_dict,
@@ -65,7 +67,9 @@ RUNS_DIR.mkdir(parents=True, exist_ok=True)
 ALLOWED_EXT = {".mp4", ".avi", ".mov", ".mkv", ".m4v", ".webm"}
 MAX_UPLOAD_BYTES = 1024 * 1024 * 1024  # 1 GB
 
-app = FastAPI(title="PRISM", version=PRISM_VERSION, description="Plate Recovery & Identification from Surveillance Media")
+# OpenAPI docs live under /api so the website can use /docs.
+app = FastAPI(title="PRISM", version=PRISM_VERSION, description="Plate Recovery & Identification from Surveillance Media",
+              docs_url="/api/docs", redoc_url=None, openapi_url="/api/openapi.json")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -325,12 +329,22 @@ def artifact(path: str):
     return FileResponse(p)
 
 
+@app.get("/reports/{path:path}", include_in_schema=False)
+def batch_report_file(path: str):
+    """Pre-built batch reports (scripts/batch_report.py), linked from the project website."""
+    root = REPORTS_DIR.resolve()
+    p = (REPORTS_DIR / path).resolve()
+    if not p.is_relative_to(root) or not p.is_file() or p.suffix.lower() not in {".html", ".pdf", ".png"}:
+        raise HTTPException(404, "not found")
+    return FileResponse(p)
+
+
 if FRONTEND_DIST.exists():
     app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets")
 
     @app.get("/{full_path:path}", include_in_schema=False)
     def spa(full_path: str):
-        if full_path.startswith(("api/", "artifacts/", "health")):
+        if full_path.startswith(("api/", "artifacts/", "reports/", "health")):
             raise HTTPException(404, "not found")
         f = (FRONTEND_DIST / full_path).resolve()
         if full_path and f.is_file() and f.is_relative_to(FRONTEND_DIST.resolve()):
