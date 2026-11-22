@@ -152,7 +152,9 @@ def test_pipeline_never_feeds_sr_to_ocr(tmp_path, monkeypatch):
 
 def test_super_res_disables_cleanly_without_weights(tmp_path):
     sr = super_res.SuperResolver(PrismConfig().super_res, "cpu", weights=tmp_path / "missing.pth")
-    assert not sr.available and "not found" in sr.reason
+    # Without vendor/lpsr-lacd (fresh clone, CI, Docker image) it disables before checking weights.
+    assert not sr.available
+    assert "not found" in sr.reason or "vendor/lpsr-lacd not present" in sr.reason
     assert sr.upscale(np.zeros((16, 48, 3), np.uint8)) is None
     assert super_res.write_sr_artifact(sr, np.zeros((16, 48, 3), np.uint8), tmp_path, 1, 2) is None
 
