@@ -42,7 +42,7 @@ export default function HowItWorks() {
           ].map(([t, f, d], i) => (
             <Reveal key={t} delay={i * 0.08} className="panel p-6">
               <div className="tag">{t}</div>
-              <div className="mono text-[15px] mt-4 text-amber leading-relaxed">{f}</div>
+              <div className="mono text-[15px] mt-4 text-accent leading-relaxed">{f}</div>
               <p className="text-muted text-[15px] mt-4 leading-relaxed">{d}</p>
             </Reveal>
           ))}

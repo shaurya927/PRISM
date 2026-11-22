@@ -56,7 +56,7 @@ export default function Evaluation() {
                 {[["Top-1", b.top1], ["Top-5", b.top5], ["Characters recovered", b.recovery_rate], ["Committed error (lower is better)", b.committed_char_error, true]].map(([k, v, bad], i) => (
                   <div key={k}>
                     <div className="flex justify-between text-[14px] mb-2"><span className="text-muted">{k}</span><span className="tabular-nums">{pct(v)}</span></div>
-                    <Bar value={v} color={bad ? "var(--red)" : name === E.ocr_winner ? "var(--amber)" : "var(--ink)"} delay={i * 0.08} />
+                    <Bar value={v} color={bad ? "var(--red)" : name === E.ocr_winner ? "var(--accent)" : "var(--ink)"} delay={i * 0.08} />
                   </div>
                 ))}
               </div>
@@ -76,8 +76,8 @@ export default function Evaluation() {
             if (!a) return null;
             return (
               <Reveal key={k} delay={i * 0.06} className="grid md:grid-cols-[18rem_1fr_6rem] items-center gap-4">
-                <span className={`text-[18px] tracking-[-0.02em] ${k === "full" ? "text-amber" : ""}`}>{label}</span>
-                <Bar value={a.committed_char_error} max={0.2} color={k === "full" ? "var(--amber)" : "var(--ink)"} delay={i * 0.08} />
+                <span className={`text-[18px] tracking-[-0.02em] ${k === "full" ? "text-accent" : ""}`}>{label}</span>
+                <Bar value={a.committed_char_error} max={0.2} color={k === "full" ? "var(--accent)" : "var(--ink)"} delay={i * 0.08} />
                 <span className="tabular-nums text-right text-[20px]">{pct(a.committed_char_error)}</span>
               </Reveal>
             );
@@ -125,7 +125,7 @@ export default function Evaluation() {
             [pct(s.false_match_rate), `Clips where another vehicle still cleared τ once the true vehicle was removed from the registry (${E.clips.filter((c) => c.false_match).length} of ${E.clips.length}). All are night-clip versions, where the decoy differs from the true car only at the digit no frame could read.`],
           ].map(([v, d], i) => (
             <Reveal key={i} delay={i * 0.08} className="border-t rule pt-5">
-              <div className="text-[clamp(2.5rem,5vw,4.5rem)] leading-none tracking-[-0.06em] font-medium text-amber">{v}</div>
+              <div className="text-[clamp(2.5rem,5vw,4.5rem)] leading-none tracking-[-0.06em] font-medium text-accent">{v}</div>
               <p className="text-muted text-[15px] mt-4 leading-relaxed">{d}</p>
             </Reveal>
           ))}

@@ -66,7 +66,7 @@ function ScrubWord({ children, progress, range }) {
   const opacity = useTransform(progress, range, [0.14, 1]);
   const amber = children.includes("?");
   return (
-    <motion.span style={{ opacity }} className={amber ? "text-amber" : ""}>
+    <motion.span style={{ opacity }} className={amber ? "text-accent" : ""}>
       {children}{" "}
     </motion.span>
   );
@@ -206,7 +206,7 @@ export function ScrambleText({ text, className = "", delay = 0, duration = 1.2 }
   return (
     <span ref={ref} className={className} aria-label={text}>
       {out.split("").map((c, i) => (
-        <span key={i} className={c === "?" ? "text-amber" : ""}>{c}</span>
+        <span key={i} className={c === "?" ? "text-accent" : ""}>{c}</span>
       ))}
     </span>
   );

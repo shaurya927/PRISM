@@ -11,7 +11,7 @@ function RichText({ text }) {
   return (
     <>
       {parts.map((p, i) => {
-        if (p.startsWith("`")) return <span key={i} className="mono text-amber">{p.slice(1, -1)}</span>;
+        if (p.startsWith("`")) return <span key={i} className="mono text-accent">{p.slice(1, -1)}</span>;
         if (/^\[[A-Z0-9, -]+\]$/.test(p)) return <sup key={i} className="mono text-[0.55em] text-muted ml-0.5">{p}</sup>;
         return <React.Fragment key={i}>{p}</React.Fragment>;
       })}
@@ -100,7 +100,7 @@ export default function CaseDetail() {
                       <span className="text-[24px] tabular-nums tracking-[-0.03em]">{t.score.toFixed(2)}</span>
                     </div>
                     <div className="mt-3 text-[18px]"><Plate text={t.plate} /></div>
-                    <div className="mt-4"><Bar value={t.score} max={maxScore} color={i === 0 ? "var(--amber)" : "var(--ink)"} delay={i * 0.1} /></div>
+                    <div className="mt-4"><Bar value={t.score} max={maxScore} color={i === 0 ? "var(--accent)" : "var(--ink)"} delay={i * 0.1} /></div>
                     <div className="flex flex-wrap gap-2 mt-4">
                       <span className="chip">{t.color}</span>
                       <span className="chip">{t.body}</span>
@@ -120,8 +120,8 @@ export default function CaseDetail() {
         <div className="md:col-span-8 space-y-10">
           {c.explanation && <Reveal><p className="text-[clamp(1.4rem,2.6vw,2.25rem)] leading-[1.2] tracking-[-0.03em]">{c.explanation}</p></Reveal>}
           {c.advisor && (
-            <Reveal className="panel p-6 md:p-8 border-[rgb(245_165_36_/_0.35)]">
-              <div className="tag text-amber">Next-best-evidence advisor</div>
+            <Reveal className="panel p-6 md:p-8 border-[var(--red)]">
+              <div className="tag text-accent">Next-best-evidence advisor</div>
               <p className="text-[18px] leading-relaxed mt-3"><RichText text={c.advisor} /></p>
             </Reveal>
           )}

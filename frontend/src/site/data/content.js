@@ -153,6 +153,33 @@ export const MARQUEE = [
   "Unknown stays ?",
 ];
 
+// Feature scroll cards on the landing page. `look` picks the card artwork in pages/Landing.jsx.
+export const FEATURES = [
+  { id: "fusion", title: "Multi-frame fusion", kind: "24 reads, one plate", to: "/how-it-works", look: "fusion" },
+  { id: "unknown", title: "Unknown stays ?", kind: "No character is guessed", to: "/guardrails", look: "unknown" },
+  { id: "shortlist", title: "Ranked, explained shortlist", kind: "Investigator app", to: "/app", look: "shortlist", cursor: "Open" },
+  { id: "evidence", title: "Every read, inspectable", kind: "Evidence strip and frames", to: "/app", look: "evidence", cursor: "Open" },
+  { id: "crosscam", title: "Two cameras, one car", kind: "Cross-camera re-identification", to: "/cases/crosscam_night_partial_white__camB_white", look: "crosscam" },
+  { id: "night", title: "Built for night footage", kind: "Low-light weighting", to: "/cases/night_partial_white", look: "night" },
+  { id: "report", title: "Forensic PDF report", kind: "Chain of custody", href: "/reports/night_partial_white/PRISM_report_77dfa5837b25.pdf", look: "report", cursor: "PDF" },
+];
+
+export const BUILT_ON = [
+  { name: "YOLO11", role: "Vehicle detection", url: "https://github.com/ultralytics/ultralytics", lit: "#ffffff", on: "#0f0000" },
+  { name: "ByteTrack", role: "Tracking", url: "https://github.com/ifzhang/ByteTrack", lit: "#45e0ea", on: "#0f0000" },
+  { name: "fast-alpr", role: "Plate detector", url: "https://github.com/ankandrew/fast-alpr", lit: "#ff0000", on: "#ffffff" },
+  { name: "PARSeq", role: "OCR, per-character confidence", url: "https://github.com/baudm/parseq", lit: "#ffb3b3", on: "#0f0000" },
+  { name: "OpenCLIP", role: "Colour, body, Re-ID", url: "https://github.com/mlfoundations/open_clip", lit: "#1497ac", on: "#ffffff" },
+  { name: "lpsr-lacd", role: "Super-resolution, visual aid only", url: "https://github.com/valfride/lpsr-lacd", lit: "#e5524a", on: "#ffffff" },
+  { name: "FastAPI", role: "API", url: "https://fastapi.tiangolo.com", lit: "#f6efed", on: "#0f0000" },
+];
+
+export const QUOTES = [
+  { id: "night_partial_white", field: "advisor", who: "Next-best-evidence advisor", role: "night_partial_white.mp4" },
+  { id: "unregistered_white", field: "explanation", who: "Match explanation", role: "unregistered_white.mp4" },
+  { id: "day_clear_white", field: "summary", who: "Evidence-checked summary", role: "day_clear_white.mp4" },
+];
+
 export const STATUS_INFO = {
   MATCHED: "Top score ≥ τ, at least 3 known characters, and a gap of at least 0.05 to the runner-up.",
   AMBIGUOUS: "Two candidates are too close to separate. PRISM names the position and frame that would decide it.",

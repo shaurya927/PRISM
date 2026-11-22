@@ -84,8 +84,8 @@ export function CaseCard({ c, tall = false }) {
     <Link to={`/cases/${c.id}`} className="case-card block group" data-cursor="View">
       <div className={`card-media ${tall ? "aspect-[4/5]" : "aspect-[4/3]"}`}>
         <ImageReveal src={c.best} alt={c.title} className="absolute inset-0 zoom" />
-        <div className="absolute left-4 top-4 flex gap-2"><StatusChip status={c.status} className="backdrop-blur bg-black/40" /></div>
-        <div className="absolute right-4 bottom-4 text-[22px] backdrop-blur bg-black/40 rounded-lg px-2 py-1">
+        <div className="absolute left-4 top-4 flex gap-2"><StatusChip status={c.status} className="backdrop-blur bg-black/50" /></div>
+        <div className="absolute right-4 bottom-4 text-[22px] backdrop-blur bg-black/50 rounded-lg px-2 py-1">
           <Plate text={c.fused} />
         </div>
       </div>
@@ -209,10 +209,12 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
           initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.6, ease: EASE_REVEAL }} />
         <motion.path d={path("false_match_rate")} fill="none" stroke="var(--red)" strokeWidth="2"
           initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.6, ease: EASE_REVEAL, delay: 0.2 }} />
-        <motion.line x1={X(nearest.tau)} x2={X(nearest.tau)} y1={P.t} y2={H - P.b} stroke="var(--amber)" strokeWidth="1.5"
-          animate={{ x1: X(nearest.tau), x2: X(nearest.tau) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
-        <motion.circle r="5" fill="var(--ink)" animate={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
-        <motion.circle r="5" fill="var(--red)" animate={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+        <motion.line y1={P.t} y2={H - P.b} stroke="var(--accent)" strokeWidth="1.5"
+          initial={{ x1: X(nearest.tau), x2: X(nearest.tau) }} animate={{ x1: X(nearest.tau), x2: X(nearest.tau) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+        <motion.circle r="5" fill="var(--ink)" initial={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }}
+          animate={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+        <motion.circle r="5" fill="var(--red)" initial={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }}
+          animate={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
       </svg>
       {onTau && (
         <div className="mt-6" style={{ paddingLeft: `${(P.l / W) * 100}%`, paddingRight: `${(P.r / W) * 100}%` }}>
@@ -234,7 +236,7 @@ export function Stat({ k, v, accent, bad }) {
   return (
     <div className="border-t rule pt-3">
       <div className="tag">{k}</div>
-      <div className={`text-[28px] md:text-[36px] tracking-[-0.04em] font-medium mt-1 ${accent ? "text-amber" : bad ? "text-bad" : ""}`}>{v}</div>
+      <div className={`text-[28px] md:text-[36px] tracking-[-0.04em] font-medium mt-1 ${accent ? "text-accent" : bad ? "text-bad" : ""}`}>{v}</div>
     </div>
   );
 }
@@ -261,7 +263,7 @@ export function BigCTA() {
         <SplitLines as="h2" lines={["Open a case.", "Upload a clip."]} className="display-2 md:col-span-8" />
         <div className="md:col-span-4 flex md:justify-end">
           <Magnetic strength={0.4}>
-            <a href="/app" className="grid place-items-center w-44 h-44 md:w-56 md:h-56 rounded-full bg-[var(--amber)] text-[var(--black)] text-[18px] font-medium tracking-[-0.02em] hover:scale-105 transition-transform duration-500">
+            <a href="/app" className="grid place-items-center w-44 h-44 md:w-56 md:h-56 rounded-full bg-[var(--accent)] text-[var(--black)] text-[18px] font-medium tracking-[-0.02em] hover:scale-105 transition-transform duration-500">
               <span className="flex items-center gap-2">Open app <Arrow /></span>
             </a>
           </Magnetic>

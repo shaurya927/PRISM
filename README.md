@@ -158,9 +158,20 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 
 The same build serves a project website at `/` (the investigator app lives at `/app`):
 landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails, Docs and About.
-It uses React Router, framer-motion and Lenis smooth scrolling (masked line reveals, clip-path image reveals,
-scroll-scrubbed text, a scroll-driven cross-camera story, page curtains) with Geist fonts. Layout and motion
-are inspired by melon.studio; no code, images or text were taken from it.
+It uses React Router, framer-motion, Lenis smooth scrolling and a small WebGL shader, with Geist fonts.
+The colour palette, type scale and easings follow melon.studio's public design tokens (`#0f0000` black,
+`#f6efed` paper, pure red, `#ffb3b3` pink, `#45e0ea → #1497ac` wordmark gradient); layout and motion are
+recreated in our own code, and no code, images or text were taken from melon.studio.
+
+Effects: loader with a filling mark and counter; a red-and-black sheet page transition; a WebGL liquid hero
+that bends and glows around the pointer; a full-width split wordmark whose letters rise toward the pointer and
+drift apart on scroll; centred 16:9 feature cards that scale in, tilt toward the pointer, skew with scroll speed
+and keep their caption pinned beside them; a trailing cursor ring that grows over links and shows "View"/"Open"
+labels; words that fill red from the pointer; list rows whose red fill enters from the side the pointer came in;
+cells that light up; magnetic buttons; scroll-scrubbed text; a scroll-driven cross-camera story.
+
+`scripts/build_site_shots.py` (server running) uploads a demo clip through the API and saves real screenshots
+of the investigator app and a report page for the feature cards.
 
 Every image and number on the site is real PRISM output. `scripts/build_site_media.py` copies crops and
 evidence strips from the batch-report runs into `frontend/public/media/`, writes

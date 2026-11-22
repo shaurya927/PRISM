@@ -26,7 +26,7 @@ export function FusionDemo() {
             <span className="tag">Fused plate · {night.evidence?.length ?? night.reads} reads</span>
             <span className={`chip ${wrong ? "chip--bad" : "chip--ok"}`}>{wrong ? `${wrong} wrong character` : `${unknown} unknown · 0 wrong`}</span>
           </div>
-          <div className="mt-8 text-[clamp(1.25rem,4.6vw,3.75rem)]">
+          <div className="mt-8 text-[clamp(1.2rem,3.4vw,3.1rem)]">
             <Plate text={cur.text} truth={TRUE_NIGHT_PLATE} onCell={setPos} active={pos} />
           </div>
           <div className="mt-4 text-[clamp(1rem,2vw,1.4rem)] opacity-40">
@@ -37,7 +37,7 @@ export function FusionDemo() {
           <div className="mt-10">
             <div className="flex items-baseline justify-between">
               <span className="label-mono">Character confidence threshold τ_char</span>
-              <span className="text-[28px] font-medium tracking-[-0.04em] text-amber tabular-nums">{cur.tau.toFixed(2)}</span>
+              <span className="text-[28px] font-medium tracking-[-0.04em] text-accent tabular-nums">{cur.tau.toFixed(2)}</span>
             </div>
             <input type="range" className="rng mt-4" min="0.5" max="0.95" step="0.05" value={tau}
               onChange={(e) => setTau(parseFloat(e.target.value))} aria-label="Character confidence threshold" />
@@ -49,7 +49,7 @@ export function FusionDemo() {
         <motion.p key={wrong ? "w" : "ok"} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-[22px] md:text-[28px] leading-[1.15] tracking-[-0.03em]">
           {wrong
             ? <>At {cur.tau.toFixed(2)} the half-hidden <span className="text-ok">2</span> is fused as <span className="text-bad">8</span>. A lenient reader commits a wrong digit, and now the true car contradicts the read.</>
-            : <>At {cur.tau.toFixed(2)} the hidden digit stays <span className="text-amber">?</span>. Nothing wrong is committed, so the two look-alike registry cars stay tied and PRISM reports AMBIGUOUS.</>}
+            : <>At {cur.tau.toFixed(2)} the hidden digit stays <span className="text-accent">?</span>. Nothing wrong is committed, so the two look-alike registry cars stay tied and PRISM reports AMBIGUOUS.</>}
         </motion.p>
         <div className="grid grid-cols-2 gap-4">
           <div className="border-t rule pt-3"><div className="tag">Characters kept</div><div className="text-[30px] font-medium tracking-[-0.04em] tabular-nums">{cur.kept}<span className="text-muted text-[18px]">/{cur.total}</span></div></div>
