@@ -47,7 +47,7 @@ export function EvidenceStrip({ fused }) {
                 const disagree = p.char !== "?" && c.char !== p.char;
                 return (
                   <td key={p.index} className={`w-10 h-7 border border-white text-center font-mono font-bold ${disagree ? "text-red-700" : "text-slate-900"}`}
-                    style={{ background: `rgba(37, 99, 235, ${0.08 + 0.55 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
+                    style={{ background: `rgba(20, 151, 172, ${0.1 + 0.7 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
                     {c.char}
                   </td>
                 );
@@ -57,7 +57,7 @@ export function EvidenceStrip({ fused }) {
         </tbody>
       </table>
       <p className="text-xs text-slate-500 mt-2">
-        Darker blue = more weight (confidence × sharpness). Amber cells were read below 0.70 and carry no weight. A position is
+        Brighter teal = more weight (confidence × sharpness). Pink cells were read below 0.70 and carry no weight. A position is
         accepted only if its winner has evidence ≥ 0.9 <i>and</i> at least 60% of all votes; otherwise it stays <span className="text-amber-500 font-bold">?</span>.
       </p>
     </div>

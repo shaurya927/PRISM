@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { api } from "./api.js";
+import { useNetActive } from "./net.js";
+import { Cursor, WaveCanvas } from "./site/fx.jsx";
 import NewCase, { HintInput } from "./components/NewCase.jsx";
 import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
@@ -9,34 +12,90 @@ import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
 import { StatusChip, fmt2 } from "./components/common.jsx";
 
+const EASE = [0.18, 0.66, 0.18, 1];
+
 function DeviceBadge({ health }) {
-  if (!health) return <span className="chip bg-slate-200 text-slate-600">API offline</span>;
+  if (health === undefined) return <span className="chip">checking…</span>;
+  if (!health) return <span className="chip chip--bad">API offline</span>;
   const gpu = health.device === "cuda";
   return (
-    <span className={`chip ${gpu ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800"}`} title={health.gpu || "CPU inference"}>
+    <span className={`chip ${gpu ? "chip--ok" : "chip--warn"}`} title={health.gpu || "CPU inference"}>
       {gpu ? `GPU · ${health.gpu || "CUDA"}` : "CPU"}
     </span>
+  );
+}
+
+function Header({ health, jobId, onNew }) {
+  return (
+    <header className="app-top">
+      <button onClick={onNew} className="topbar__logo" aria-label="New case">
+        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        prism
+      </button>
+      <span className="app-top__crumb label-mono hidden sm:inline">/ investigator</span>
+      <nav className="app-top__nav ml-6">
+        <a href="/" className="f-u">project site</a>
+        <a href="/how-it-works" className="f-u">how it works</a>
+        <a href="/guardrails" className="f-u">guardrails</a>
+        <a href="/api/docs" target="_blank" rel="noreferrer" className="f-u">api ↗</a>
+      </nav>
+      <div className="ml-auto flex items-center gap-4">
+        {health && (
+          <span className="app-top__status label-mono">
+            <span className="dot dot--live" />registry {health.registry_size} · OCR {health.ocr_backend} · v{health.prism_version}
+          </span>
+        )}
+        <DeviceBadge health={health} />
+        <AnimatePresence>
+          {jobId && (
+            <motion.button key="new" className="btn-pill btn-pill--red !h-10 !px-5" onClick={onNew}
+              initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }}>
+              + New case
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
+    </header>
+  );
+}
+
+function Hero({ health }) {
+  return (
+    <div className="app-hero">
+      <WaveCanvas />
+      <div className="app-hero__in">
+        <h1 className="app-hero__h">
+          <span className="mask-line"><motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE }}>Open a case.</motion.span></span>
+        </h1>
+        <motion.p className="label-mono text-right hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
+          {health ? <>Running on {health.gpu || health.device}<br />τ {health.thresholds?.tau} · τ_char {health.thresholds?.char_conf}</> : "Connecting to the PRISM API…"}
+        </motion.p>
+      </div>
+    </div>
   );
 }
 
 function CaseList({ jobs, current, onOpen, onDelete }) {
   if (!jobs.length) return null;
   return (
-    <div className="card p-3 max-w-4xl mx-auto mt-6">
-      <div className="label mb-2">Previous cases</div>
-      <div className="divide-y divide-slate-100">
+    <motion.div className="card p-5 md:p-6 max-w-4xl mx-auto mt-6" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}>
+      <div className="flex items-baseline justify-between mb-3">
+        <div className="label">Previous cases</div>
+        <div className="label-mono">{jobs.length}</div>
+      </div>
+      <div className="hlist">
         {jobs.slice(0, 12).map((j) => (
-          <div key={j.job_id} className={`flex items-center gap-3 py-1.5 text-sm ${current === j.job_id ? "font-semibold" : ""}`}>
-            <button className="font-mono text-blue-700 hover:underline" onClick={() => onOpen(j.job_id)}>{j.job_id}</button>
+          <div key={j.job_id} className={`hlist__row flex items-center gap-3 py-2.5 text-sm ${current === j.job_id ? "font-semibold" : ""}`}>
+            <button className="font-mono text-blue-700 f-u" data-cursor="open" onClick={() => onOpen(j.job_id)}>{j.job_id}</button>
             <span className="text-slate-500">{j.kind}</span>
             <span className="truncate">{j.clip || ""}</span>
-            <span className="ml-auto text-xs text-slate-400">{j.created_at?.replace("T", " ").slice(0, 19)}</span>
-            <span className={`chip ${j.status === "done" ? "bg-green-100 text-green-800" : j.status === "error" ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-800"}`}>{j.status}</span>
-            <button className="text-xs text-slate-400 hover:text-red-600" title="Delete case and its crops" onClick={() => onDelete(j.job_id)}>✕</button>
+            <span className="ml-auto label-mono hidden sm:inline">{j.created_at?.replace("T", " ").slice(0, 19)}</span>
+            <span className={`chip ${j.status === "done" ? "chip--ok" : j.status === "error" ? "chip--bad" : "chip--warn"}`}>{j.status}</span>
+            <button className="text-xs text-slate-400 hover:text-red-600 transition-colors" title="Delete case and its crops" onClick={() => onDelete(j.job_id)}>✕</button>
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -80,7 +139,8 @@ const TABS = [
 ];
 
 export default function App() {
-  const [health, setHealth] = useState(null);
+  const [health, setHealth] = useState(undefined);
+  const netActive = useNetActive();
   const [jobs, setJobs] = useState([]);
   const [jobId, setJobId] = useState(() => new URLSearchParams(location.search).get("job"));
   const [job, setJob] = useState(null);
@@ -141,26 +201,24 @@ export default function App() {
   const track = result?.tracks.find((t) => t.track_id === trackId);
   const goNew = () => { setJobId(null); setTab("vehicles"); };
 
-  return (
-    <div className="min-h-screen bg-slate-100 text-slate-800">
-      <header className="bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-          <button onClick={goNew} className="flex items-center gap-2">
-            <span className="text-2xl">◭</span>
-            <span className="font-bold tracking-wide">PRISM</span>
-            <span className="hidden md:inline text-xs text-slate-400">Plate Recovery &amp; Identification from Surveillance Media</span>
-          </button>
-          <div className="ml-auto flex items-center gap-2">
-            <a href="/" className="text-xs text-slate-400 hover:text-white mr-2">← Project site</a>
-            {health && <span className="text-xs text-slate-400">registry {health.registry_size} · OCR {health.ocr_backend} · v{health.prism_version}</span>}
-            <DeviceBadge health={health} />
-            {jobId && <button className="btn bg-slate-700 hover:bg-slate-600 text-white" onClick={goNew}>+ New case</button>}
-          </div>
-        </div>
-      </header>
+  const analysing = job && (job.status === "queued" || job.status === "running");
 
-      <main className="max-w-7xl mx-auto px-4 py-6 space-y-4">
-        {err && <div className="bg-red-50 border border-red-200 text-red-700 rounded p-2 text-sm">{err}</div>}
+  return (
+    <div className="site app min-h-screen">
+      <Cursor />
+      <div className="grain" aria-hidden />
+      <AnimatePresence>
+        {(netActive || busy || analysing) && (
+          <motion.div key="net" className="netbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <span className="netbar__run" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Header health={health} jobId={jobId} onNew={goNew} />
+      {!jobId && <Hero health={health} />}
+
+      <main className="app-main max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-5">
+        {err && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm">{err}</div>}
         {!jobId && (
           <>
             <NewCase
@@ -173,12 +231,19 @@ export default function App() {
           </>
         )}
 
+        {jobId && !job && !err && (
+          <div className="max-w-5xl mx-auto py-24">
+            <div className="label-mono mb-3">opening case {jobId}</div>
+            <div className="upbar"><span className="indet" /></div>
+          </div>
+        )}
+
         {jobId && job && (job.status === "queued" || job.status === "running" || job.status === "error") && <Progress job={job} />}
 
         {jobId && result && (
-          <>
-            <div className="flex flex-wrap items-center gap-3">
-              <h2 className="text-lg font-bold">
+          <motion.div className="space-y-5" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <h2 className="text-[clamp(1.75rem,3vw,2.75rem)] leading-none mr-2">
                 {result.mode === "hint-only" ? "Hint-only search" : result.clip?.name}
                 {result.crosscam && <span className="text-slate-500 font-normal"> + {result.crosscam.clip_b?.name}</span>}
               </h2>
@@ -188,9 +253,12 @@ export default function App() {
               {result.warnings?.map((w, i) => <span key={i} className="chip bg-amber-100 text-amber-800">{w}</span>)}
             </div>
             <ResultControls result={result} onRescore={rescore} busy={busy} />
-            <div className="flex border-b border-slate-300 bg-white rounded-t-lg px-2 overflow-x-auto">
+            <div className="flex items-center border-b border-slate-300 px-1 overflow-x-auto">
               {TABS.filter(([k]) => !(result.mode === "hint-only" && (k === "evidence" || k === "vehicles" || k === "crosscam"))).map(([k, l]) => (
-                <button key={k} className={`tab ${tab === k ? "tab-active" : ""}`} onClick={() => setTab(k)}>{l}{k === "crosscam" && result.crosscam ? ` (${result.crosscam.pairs.filter((p) => p.same_vehicle).length})` : ""}</button>
+                <button key={k} className={`tab relative !border-transparent ${tab === k ? "tab-active" : ""}`} onClick={() => setTab(k)}>
+                  {l}{k === "crosscam" && result.crosscam ? ` (${result.crosscam.pairs.filter((p) => p.same_vehicle).length})` : ""}
+                  {tab === k && <motion.span layoutId="tab-line" className="absolute left-2 right-2 -bottom-px h-[2px] bg-[var(--red)]" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
+                </button>
               ))}
               {result.tracks.length > 1 && (tab === "evidence" || tab === "shortlist") && (
                 <select className="ml-auto my-1 input w-auto" value={trackId ?? ""} onChange={(e) => setTrackId(parseInt(e.target.value, 10))}>
@@ -206,7 +274,7 @@ export default function App() {
               {tab === "summary" && <Summary caseResult={result} jobId={jobId} />}
               {tab === "crosscam" && <CrossCam caseResult={result} />}
             </div>
-          </>
+          </motion.div>
         )}
       </main>
     </div>

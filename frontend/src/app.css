@@ -1,0 +1,201 @@
+/* Investigator app (/app) in the project-site theme.
+   The app root carries both `site` (palette, type, cursor, chips from site.css) and `app`.
+   The components were written with Tailwind's light slate/blue palette; the rules below remap
+   those utilities to the site palette so every panel follows the same theme.
+   Meaning is kept: blue = interactive / investigator-supplied, green = accepted / matched,
+   amber = unknown / uncertain, red = rejected / conflict. */
+
+.app {
+  --panel: rgb(255 255 255 / .035);
+  --panel-2: rgb(255 255 255 / .06);
+  --panel-3: rgb(255 255 255 / .1);
+  --muted-3: rgb(255 255 255 / .42);
+  --cyan-t: color-mix(in srgb, var(--cyan) 13%, transparent);
+  --cyan-b: color-mix(in srgb, var(--cyan) 45%, transparent);
+  --pink-t: color-mix(in srgb, var(--pink) 13%, transparent);
+  --pink-b: color-mix(in srgb, var(--pink) 45%, transparent);
+  --bad-t: color-mix(in srgb, var(--red-3) 15%, transparent);
+  --bad-b: color-mix(in srgb, var(--red-3) 50%, transparent);
+  --teal-t: color-mix(in srgb, var(--teal) 22%, transparent);
+  --cyan-soft: color-mix(in srgb, var(--cyan) 70%, white);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.app ::-webkit-scrollbar { width: 10px; height: 10px; }
+.app ::-webkit-scrollbar-thumb { background: rgb(255 255 255 / .14); border-radius: 10px; border: 2px solid var(--black); }
+.app ::-webkit-scrollbar-track { background: transparent; }
+.app h2 { font-weight: 400; letter-spacing: -0.03em; }
+.app h3 { font-weight: 500; letter-spacing: -0.02em; }
+.app img { border-radius: 4px; }
+
+/* ---------------------------------------------------------------- components */
+.app .card { background: var(--panel); border: 1px solid var(--rule); border-radius: 16px; box-shadow: none;
+  backdrop-filter: blur(6px); transition: border-color .4s var(--ease-under); }
+.app .card:hover { border-color: var(--rule-2); }
+.app .label { font: 500 11px/1.35 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.app .chip { height: auto; min-height: 24px; padding: 3px 10px; white-space: nowrap; }
+.app .input { background: rgb(255 255 255 / .04); border: 1px solid var(--rule-2); border-radius: 10px; color: var(--ink);
+  padding: 8px 12px; transition: border-color .3s, box-shadow .3s; }
+.app .input::placeholder { color: var(--muted-3); }
+.app .input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgb(255 0 0 / .18); }
+.app select.input option { background: #1a0606; color: var(--ink); }
+.app .tab { font-size: 15px; color: var(--muted); border-bottom: 2px solid transparent; padding: 12px 14px; transition: color .3s, border-color .3s; white-space: nowrap; }
+.app .tab:hover { color: var(--ink); }
+.app .tab-active { color: var(--ink); border-color: var(--red); }
+
+/* buttons: same colour sweep as the site's pills */
+.app .btn { position: relative; isolation: isolate; overflow: clip; height: 40px; padding: 0 18px; border-radius: 999px;
+  font: 450 14px/1 var(--font); letter-spacing: -0.005em; transition: color .4s var(--ease-under), opacity .3s; }
+.app .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform: translateY(101%);
+  transition: transform .55s var(--ease-under); }
+.app .btn:not(:disabled):hover::before { transform: none; }
+.app .btn-primary { background: var(--red); color: var(--ink); }
+.app .btn-primary::before { background: var(--ink); }
+.app .btn-primary:not(:disabled):hover { background: var(--red); color: var(--black); }
+.app .btn-ghost { background: transparent; color: var(--ink); border: 0; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .5); }
+.app .btn-ghost::before { background: var(--ink); }
+.app .btn-ghost:not(:disabled):hover { background: transparent; color: var(--black); }
+.app .btn:disabled { opacity: .35; }
+
+/* range sliders */
+.app input[type=range] { -webkit-appearance: none; appearance: none; height: 2px; background: var(--rule-2); border-radius: 2px; margin: 14px 0 10px; }
+.app input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--red);
+  cursor: grab; box-shadow: 0 0 0 6px rgb(255 0 0 / .18); transition: box-shadow .3s; }
+.app input[type=range]:active::-webkit-slider-thumb { cursor: grabbing; box-shadow: 0 0 0 10px rgb(255 0 0 / .22); }
+.app input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border: 0; border-radius: 50%; background: var(--red); cursor: grab; }
+.app input[type=checkbox] { accent-color: var(--red); }
+
+/* ---------------------------------------------------------------- utility remap */
+/* neutrals */
+.app .bg-white, .app .bg-slate-50 { background-color: var(--panel); }
+.app .bg-slate-100 { background-color: var(--panel-2); }
+.app .bg-slate-200 { background-color: var(--panel-3); }
+.app .bg-slate-700 { background-color: rgb(255 255 255 / .12); }
+.app .bg-slate-900 { background-color: #070000; }
+.app .hover\:bg-slate-50:hover, .app .hover\:bg-slate-100:hover { background-color: rgb(255 255 255 / .07); }
+.app .hover\:bg-slate-600:hover { background-color: rgb(255 255 255 / .18); }
+.app .text-slate-900, .app .text-slate-800, .app .text-slate-700 { color: var(--ink); }
+.app .text-slate-600 { color: var(--muted-2); }
+.app .text-slate-500 { color: var(--muted); }
+.app .text-slate-400 { color: var(--muted-3); }
+.app .text-slate-300 { color: rgb(255 255 255 / .28); }
+.app .hover\:text-white:hover { color: var(--ink); }
+.app .border-slate-100, .app .border-slate-200 { border-color: var(--rule); }
+.app .border-slate-300 { border-color: var(--rule-2); }
+.app .border-white { border-color: var(--black); }
+.app .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: var(--rule); }
+
+/* interactive / investigator-supplied */
+.app .bg-blue-50 { background-color: var(--cyan-t); }
+.app .bg-blue-100 { background-color: color-mix(in srgb, var(--cyan) 18%, transparent); }
+.app .bg-blue-500, .app .bg-blue-600 { background-color: var(--red); color: var(--ink); }
+.app .text-blue-600, .app .text-blue-700, .app .text-blue-800 { color: var(--cyan); }
+.app .border-blue-400 { border-color: var(--cyan-b); }
+.app .border-blue-500, .app .border-blue-600 { border-color: var(--red); }
+.app .ring-blue-500 { --tw-ring-color: var(--red); }
+.app .accent-blue-600 { accent-color: var(--red); }
+
+/* accepted / matched */
+.app .bg-green-50, .app .bg-green-100 { background-color: var(--cyan-t); }
+.app .bg-green-500, .app .bg-green-600, .app .bg-emerald-500 { background-color: var(--cyan); }
+.app .bg-green-600.text-white, .app .bg-green-500.text-white { color: var(--black); }
+.app .text-green-800 { color: var(--cyan); }
+.app .border-green-300 { border-color: var(--cyan-b); }
+.app .ring-green-500 { --tw-ring-color: var(--cyan); }
+
+/* unknown / uncertain */
+.app .bg-amber-50, .app .bg-amber-100, .app .bg-yellow-100 { background-color: var(--pink-t); }
+.app .bg-amber-400, .app .bg-amber-500 { background-color: var(--pink); }
+.app .text-amber-500, .app .text-amber-600, .app .text-amber-800, .app .text-yellow-800 { color: var(--pink); }
+.app .border-amber-300, .app .border-amber-400 { border-color: var(--pink-b); }
+
+/* rejected / conflict */
+.app .bg-red-50, .app .bg-red-100 { background-color: var(--bad-t); }
+.app .text-red-600, .app .text-red-700, .app .text-red-800, .app .hover\:text-red-600:hover { color: var(--red-3); }
+.app .border-red-200, .app .border-red-300 { border-color: var(--bad-b); }
+
+/* secondary accents (attributes, re-ID, low light) */
+.app .bg-indigo-50, .app .bg-purple-50, .app .bg-violet-100 { background-color: var(--teal-t); }
+.app .bg-indigo-900 { background-color: var(--teal); }
+.app .bg-violet-500 { background-color: var(--teal); }
+.app .text-indigo-800, .app .text-purple-700, .app .text-purple-800, .app .text-violet-800 { color: var(--cyan-soft); }
+.app .border-purple-300, .app .border-purple-400 { border-color: color-mix(in srgb, var(--teal) 70%, transparent); }
+
+/* ---------------------------------------------------------------- shell */
+.app .app-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 22px; height: 68px;
+  padding: 0 var(--gutter); background: rgb(15 0 0 / .72); backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
+.app .app-top .topbar__logo { font-size: 26px; }
+.app .app-top__crumb { color: var(--muted); }
+.app .app-top__nav { display: none; gap: 26px; font-size: 15px; }
+.app .app-top__nav .f-u { --u-y: -4px; }
+@media (min-width: 1024px) { .app .app-top__nav { display: flex; } }
+.app .app-top__status { display: none; }
+@media (min-width: 1180px) { .app .app-top__status { display: inline-flex; align-items: center; } }
+
+.app .app-hero { position: relative; isolation: isolate; overflow: clip; height: 300px; margin-bottom: -120px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); }
+.app .app-hero__in { position: absolute; left: var(--gutter); right: var(--gutter); top: 44px; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.app .app-hero__h { font-weight: 300; font-size: clamp(2.6rem, 5.4vw, 5.25rem); line-height: .92; letter-spacing: -0.05em; }
+.app .app-main { position: relative; z-index: 3; }
+
+/* thin network/activity bar under the header */
+.app .netbar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; pointer-events: none; overflow: clip; }
+.app .netbar__run { position: absolute; top: 0; bottom: 0; width: 38%; background: linear-gradient(90deg, transparent, var(--red), var(--pink), transparent);
+  animation: netbar 1.15s var(--ease-appear) infinite; }
+@keyframes netbar { from { transform: translateX(-100%); } to { transform: translateX(270%); } }
+
+/* ---------------------------------------------------------------- analysis loader */
+.app .aload { position: relative; overflow: clip; border-radius: 20px; border: 1px solid var(--rule); background: rgb(15 0 0 / .85); isolation: isolate; }
+.app .aload__wave { position: absolute; inset: 0; z-index: -1; opacity: .55;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%); mask-image: linear-gradient(to bottom, #000, transparent 75%); }
+.app .aload__count { font: 400 clamp(64px, 10vw, 148px)/.8 var(--font-mono); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; display: flex; align-items: flex-start; }
+.app .aload__pct { font-size: .26em; opacity: .55; margin: .06em 0 0 .2em; letter-spacing: 0; line-height: 1; }
+.app .aload__stage { font-weight: 300; font-size: clamp(1.75rem, 3.2vw, 2.9rem); line-height: 1; letter-spacing: -0.04em; }
+
+/* segmented bar: one segment per pipeline stage */
+.app .segbar { position: relative; display: flex; gap: 5px; height: 14px; cursor: pointer; }
+.app .segbar::after { content: ""; position: absolute; inset: -18px 0; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(120px 40px at var(--mx, 50%) 50%, rgb(255 179 179 / .22), transparent 70%); }
+.app .segbar:hover::after { opacity: 1; }
+.app .seg { position: relative; flex: 1; border-radius: 3px; background: rgb(255 255 255 / .08); overflow: clip; transition: transform .35s var(--ease-under), background .3s; }
+.app .seg:hover, .app .seg.is-sel { transform: scaleY(1.45); background: rgb(255 255 255 / .14); }
+.app .seg__fill { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; }
+.app .seg.is-done .seg__fill { background: var(--red); }
+.app .seg.is-active .seg__fill { background: repeating-linear-gradient(-45deg, var(--red) 0 10px, #ff4d4d 10px 20px); background-size: 28px 100%;
+  animation: stripes .7s linear infinite; box-shadow: 0 0 18px rgb(255 0 0 / .55); }
+@keyframes stripes { to { background-position: 28px 0; } }
+.app .seg__tip { position: absolute; bottom: calc(100% + 14px); transform: translateX(-50%); white-space: nowrap; pointer-events: none;
+  font: 500 11px/1 var(--font-mono); padding: 7px 10px; border-radius: 999px; background: var(--ink); color: var(--black); }
+.app .indet { position: absolute; inset: 0; overflow: clip; border-radius: 3px; }
+.app .indet::before { content: ""; position: absolute; inset: 0; width: 30%; background: linear-gradient(90deg, transparent, rgb(255 0 0 / .8), transparent);
+  animation: netbar 1.4s var(--ease-appear) infinite; }
+
+/* plate scanner: every cell stays ? while the beam passes */
+.app .scan { position: relative; display: inline-flex; gap: 6px; padding: 10px 12px; border-radius: 12px; background: rgb(255 255 255 / .04); border: 1px solid var(--rule); overflow: clip; }
+.app .scan__cell { display: grid; place-items: center; width: 30px; height: 40px; border-radius: 6px; font: 500 20px/1 var(--font-mono);
+  background: rgb(255 255 255 / .06); color: var(--muted-2); animation: cellglow 2.4s var(--ease-under) infinite; animation-delay: calc(var(--i) * 0.12s); }
+@keyframes cellglow { 0%, 70%, 100% { background: rgb(255 255 255 / .06); color: var(--muted-2); } 12% { background: var(--red); color: var(--ink); } }
+.app .scan__beam { position: absolute; top: 0; bottom: 0; width: 46px; left: 0; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(255 179 179 / .35), transparent); animation: beam 2.4s var(--ease-under) infinite; }
+@keyframes beam { from { transform: translateX(-60px); } 60%, to { transform: translateX(var(--scan-w, 420px)); } }
+.app .scan.is-paused .scan__cell, .app .scan.is-paused .scan__beam { animation-play-state: paused; }
+
+/* stage list */
+.app .stg { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 14px; padding: 13px 4px; border-top: 1px solid var(--rule);
+  cursor: pointer; transition: padding .45s var(--ease-under), color .3s, background .3s; color: var(--muted); }
+.app .stg:hover, .app .stg.is-sel { padding-left: 14px; color: var(--ink); background: rgb(255 255 255 / .025); }
+.app .stg.is-done { color: var(--muted-2); }
+.app .stg.is-active { color: var(--ink); }
+.app .stg__i { font: 500 12px/1 var(--font-mono); color: var(--muted-3); }
+.app .stg__name { font-size: 17px; letter-spacing: -0.015em; }
+.app .stg__model { font: 500 11px/1.3 var(--font-mono); color: var(--muted-3); margin-top: 3px; }
+.app .stg__v { font: 500 13px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.app .stg__ok { color: var(--cyan); }
+
+/* upload bar */
+.app .upbar { position: relative; height: 4px; border-radius: 4px; background: rgb(255 255 255 / .1); overflow: clip; }
+.app .upbar__fill { position: absolute; inset: 0; background: linear-gradient(90deg, var(--red), var(--pink)); transform-origin: 0 50%; transition: transform .25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .app .scan__cell, .app .scan__beam, .app .seg.is-active .seg__fill, .app .netbar__run, .app .indet::before { animation: none; }
+}

@@ -5,6 +5,7 @@ import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "./index.css";
 import "./site/site.css";
+import "./app.css";
 import SiteLayout from "./site/Layout.jsx";
 import Landing from "./site/pages/Landing.jsx";
 import HowItWorks from "./site/pages/HowItWorks.jsx";
@@ -19,6 +20,22 @@ import NotFound from "./site/pages/NotFound.jsx";
 // The investigator app is loaded only when /app is opened.
 const InvestigatorApp = lazy(() => import("./App.jsx"));
 
+/** Shown while the investigator bundle loads: same mark and red bar as the site loader. */
+function AppLoading() {
+  return (
+    <div className="site app min-h-screen grid place-items-center">
+      <div className="w-[min(420px,80vw)]">
+        <div className="topbar__logo">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+          prism
+        </div>
+        <div className="label-mono mt-6 mb-3">loading investigator</div>
+        <div className="upbar"><span className="indet" /></div>
+      </div>
+    </div>
+  );
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -26,7 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route
           path="/app/*"
           element={
-            <Suspense fallback={<div className="min-h-screen bg-slate-100" />}>
+            <Suspense fallback={<AppLoading />}>
               <InvestigatorApp />
             </Suspense>
           }

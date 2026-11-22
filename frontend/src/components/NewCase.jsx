@@ -1,5 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { api } from "../api.js";
+
+/** Real upload progress from the browser: bytes sent, percentage and throughput. */
+function UploadBar({ up }) {
+  if (!up) return null;
+  const frac = up.total ? up.loaded / up.total : 0;
+  const secs = Math.max(0.001, (up.at - up.t0) / 1000);
+  const mbps = up.loaded / 1e6 / secs;
+  const done = frac >= 1;
+  return (
+    <div className="mt-1">
+      <div className="flex justify-between label-mono mb-2">
+        <span>{done ? "Upload complete · starting analysis…" : `Uploading ${up.name}`}</span>
+        <span>{(up.loaded / 1e6).toFixed(1)} / {(up.total / 1e6).toFixed(1)} MB · {Math.round(frac * 100)}%{!done && secs > 0.3 ? ` · ${mbps.toFixed(1)} MB/s` : ""}</span>
+      </div>
+      <div className="upbar">
+        <div className="upbar__fill" style={{ transform: `scaleX(${frac})` }} />
+        {done && <span className="indet" />}
+      </div>
+    </div>
+  );
+}
 
 function DropZone({ label, file, onFile }) {
   const [over, setOver] = useState(false);
@@ -8,12 +30,16 @@ function DropZone({ label, file, onFile }) {
       onDragOver={(e) => { e.preventDefault(); setOver(true); }}
       onDragLeave={() => setOver(false)}
       onDrop={(e) => { e.preventDefault(); setOver(false); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); }}
-      className={`flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 cursor-pointer text-center transition ${over ? "border-blue-500 bg-blue-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
+      data-cursor={file ? "change" : "drop"}
+      className={`group flex flex-col items-center justify-center border border-dashed rounded-2xl p-8 cursor-pointer text-center transition-colors duration-300 ${over ? "border-[var(--red)] bg-[rgb(255_0_0/.08)]" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
     >
       <input type="file" accept="video/*,.mp4,.avi,.mov,.mkv" className="hidden" onChange={(e) => e.target.files[0] && onFile(e.target.files[0])} />
-      <div className="text-3xl">🎞</div>
-      <div className="font-medium mt-1">{label}</div>
-      <div className="text-xs text-slate-500 mt-1">{file ? `${file.name} · ${(file.size / 1e6).toFixed(1)} MB` : "Drag a CCTV clip here or click to choose"}</div>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden
+        className={`transition-transform duration-500 group-hover:-translate-y-1 ${file ? "text-green-800" : over ? "text-red-700" : "text-slate-500"}`}>
+        <rect x="3" y="5" width="13" height="14" rx="2" /><path d="M16 10l5-3v10l-5-3z" />
+      </svg>
+      <div className="mt-3 text-[19px] font-light tracking-[-0.02em]">{label}</div>
+      <div className="label-mono mt-1">{file ? `${file.name} · ${(file.size / 1e6).toFixed(1)} MB` : "Drag a CCTV clip here or click to choose"}</div>
     </label>
   );
 }
@@ -81,28 +107,39 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
     return hint.replace(/\?/g, "").length > 0;
   }, [mode, fileA, fileB, hint]);
 
+  const [up, setUp] = useState(null);
+  const t0 = useRef(0);
+
   async function start() {
     setBusy(true);
     setErr("");
+    t0.current = performance.now();
+    const name = mode === "crosscam" ? `${fileA?.name} + ${fileB?.name}` : fileA?.name;
+    const onProgress = (loaded, total) => setUp({ name, loaded, total, t0: t0.current, at: performance.now() });
     try {
-      if (mode === "single") onStarted((await api.createJob({ file: fileA, hint, threshold })).job_id);
+      if (mode === "single") onStarted((await api.createJob({ file: fileA, hint, threshold, onProgress })).job_id);
       else if (mode === "crosscam")
-        onStarted((await api.createCrosscam({ fileA, fileB, hint, threshold, distanceKm: parseFloat(distanceKm) || null, gapS: parseFloat(gapS) || null })).job_id);
+        onStarted((await api.createCrosscam({ fileA, fileB, hint, threshold, distanceKm: parseFloat(distanceKm) || null, gapS: parseFloat(gapS) || null, onProgress })).job_id);
       else onSearchResult(await api.search({ hint, color: color || null, body_type: body || null, make_model: mm || null, threshold, low_light: lowLight }));
     } catch (e) {
       setErr(String(e.message || e));
+      setUp(null);
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <div className="max-w-4xl mx-auto card p-6 space-y-5">
+    <motion.div className="max-w-4xl mx-auto card p-6 md:p-8 space-y-6" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: [0.18, 0.66, 0.18, 1], delay: 0.1 }}>
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">New case</h2>
-        <div className="flex rounded-md border border-slate-300 overflow-hidden text-sm">
+        <h2 className="text-[30px] leading-none">New case</h2>
+        <div className="relative flex rounded-full border border-slate-300 p-1 text-sm">
           {[["single", "Single clip"], ["crosscam", "Two cameras"], ["search", "Hint-only search"]].map(([k, l]) => (
-            <button key={k} onClick={() => setMode(k)} className={`px-3 py-1.5 ${mode === k ? "bg-blue-600 text-white" : "bg-white hover:bg-slate-50"}`}>{l}</button>
+            <button key={k} onClick={() => setMode(k)} className={`relative px-4 py-1.5 rounded-full transition-colors duration-300 ${mode === k ? "text-white" : "text-slate-500 hover:text-white"}`}>
+              {mode === k && <motion.span layoutId="mode-pill" className="absolute inset-0 rounded-full bg-[var(--red)]" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+              <span className="relative">{l}</span>
+            </button>
           ))}
         </div>
       </div>
@@ -147,12 +184,14 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
       </div>
 
       {err && <div className="bg-red-50 text-red-700 border border-red-200 rounded p-2 text-sm">{err}</div>}
-      <div className="flex items-center gap-3">
-        <button className="btn-primary" disabled={!canStart || busy} onClick={start}>
-          {busy ? "Starting…" : mode === "search" ? "Search registry" : "Analyse footage"}
+      <div className="flex flex-wrap items-center gap-4">
+        <button className="btn-primary !h-12 !px-6 !text-[15px]" disabled={!canStart || busy} onClick={start}>
+          {busy ? (mode === "search" ? "Searching…" : "Uploading…") : mode === "search" ? "Search registry" : "Analyse footage"}
+          <span aria-hidden>↗</span>
         </button>
-        <span className="text-xs text-slate-500">All models run locally; footage never leaves this machine.</span>
+        <span className="label-mono">All models run locally; footage never leaves this machine.</span>
       </div>
-    </div>
+      {busy && mode !== "search" && <UploadBar up={up} />}
+    </motion.div>
   );
 }
