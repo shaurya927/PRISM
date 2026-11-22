@@ -1,0 +1,5002 @@
+[
+  {
+    "registry_id": "REG-0001",
+    "plate": "CG04MX4821",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0002",
+    "plate": "CG04MX4851",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0003",
+    "plate": "CG04MX4621",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0004",
+    "plate": "CG04MX4827",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0005",
+    "plate": "CG04HX4821",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0006",
+    "plate": "CG04NX4821",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0007",
+    "plate": "KA03DY4013",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0008",
+    "plate": "MH01HT0489",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0009",
+    "plate": "KA19RV8929",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0010",
+    "plate": "MH12DE5678",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0011",
+    "plate": "MH12DE5670",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0012",
+    "plate": "MH12DF5678",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0013",
+    "plate": "MH12DE5878",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0014",
+    "plate": "MH14DE5678",
+    "color": "black",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0015",
+    "plate": "KA05GL5575",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0016",
+    "plate": "DL5CR9892",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 5, DL"
+  },
+  {
+    "registry_id": "REG-0017",
+    "plate": "CG15VG4804",
+    "color": "blue",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0018",
+    "plate": "DL14CD1308",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 14, DL"
+  },
+  {
+    "registry_id": "REG-0019",
+    "plate": "CG07ZY5821",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0020",
+    "plate": "KA05MN2023",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0021",
+    "plate": "KA05MN2028",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0022",
+    "plate": "KA05MM2023",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0023",
+    "plate": "KA03MN2023",
+    "color": "green",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0024",
+    "plate": "KA05MN2073",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0025",
+    "plate": "MH02NJ4011",
+    "color": "orange",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0026",
+    "plate": "CG04BL5314",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0027",
+    "plate": "CG13EJ8180",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0028",
+    "plate": "CG13MH9578",
+    "color": "orange",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0029",
+    "plate": "CG04XF0772",
+    "color": "red",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0030",
+    "plate": "DL3CAB1234",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "New Delhi, DL"
+  },
+  {
+    "registry_id": "REG-0031",
+    "plate": "22BH1234AA",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Bharat series (Raipur, CG)"
+  },
+  {
+    "registry_id": "REG-0032",
+    "plate": "MH12UA9764",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0033",
+    "plate": "DL2CPF5574",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0034",
+    "plate": "25BH2928X",
+    "color": "white",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0035",
+    "plate": "CG15W2647",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0036",
+    "plate": "DL4CH5039",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 4, DL"
+  },
+  {
+    "registry_id": "REG-0037",
+    "plate": "KA51EY1134",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0038",
+    "plate": "MH12UZ9939",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0039",
+    "plate": "MH12H8480",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0040",
+    "plate": "CG04Z3609",
+    "color": "black",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0041",
+    "plate": "DL9CJ1161",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 9, DL"
+  },
+  {
+    "registry_id": "REG-0042",
+    "plate": "KA51HS9356",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0043",
+    "plate": "KA19RB5805",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0044",
+    "plate": "CG04GG5560",
+    "color": "red",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0045",
+    "plate": "CG04UD4093",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0046",
+    "plate": "22BH3873SS",
+    "color": "orange",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bharat series (Pune, MH)"
+  },
+  {
+    "registry_id": "REG-0047",
+    "plate": "MH04KP6397",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0048",
+    "plate": "KA03KG7974",
+    "color": "green",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0049",
+    "plate": "CG04V5139",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0050",
+    "plate": "CG04CW8321",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0051",
+    "plate": "CG07W9334",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0052",
+    "plate": "MH02HJ4273",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0053",
+    "plate": "MH01WV1189",
+    "color": "orange",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0054",
+    "plate": "MH04H2171",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0055",
+    "plate": "KA01YD8667",
+    "color": "green",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0056",
+    "plate": "DL3CKW9065",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0057",
+    "plate": "MH01X4115",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0058",
+    "plate": "MH31FR2144",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0059",
+    "plate": "CG15M2443",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0060",
+    "plate": "CG04GY5975",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0061",
+    "plate": "DL10CH6659",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 10, DL"
+  },
+  {
+    "registry_id": "REG-0062",
+    "plate": "DL3PPY0407",
+    "color": "orange",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0063",
+    "plate": "CG13S1772",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0064",
+    "plate": "MH02Y3729",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0065",
+    "plate": "23BH4574YU",
+    "color": "green",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0066",
+    "plate": "CG04W4350",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0067",
+    "plate": "MH01VG8380",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0068",
+    "plate": "MH31MP8822",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0069",
+    "plate": "KA05YP2042",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0070",
+    "plate": "CG13WV6889",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0071",
+    "plate": "MH12RR3444",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0072",
+    "plate": "DL11CK2781",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 11, DL"
+  },
+  {
+    "registry_id": "REG-0073",
+    "plate": "CG10GE3849",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0074",
+    "plate": "KA19XV1194",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0075",
+    "plate": "MH31D2418",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0076",
+    "plate": "MH02R9133",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0077",
+    "plate": "23BH9756WT",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0078",
+    "plate": "KA19HX7778",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0079",
+    "plate": "KA19Z4500",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0080",
+    "plate": "DL3CH1321",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0081",
+    "plate": "CG10PB6679",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0082",
+    "plate": "KA51SA0321",
+    "color": "green",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0083",
+    "plate": "DL9CS6866",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 9, DL"
+  },
+  {
+    "registry_id": "REG-0084",
+    "plate": "MH31RE6625",
+    "color": "orange",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0085",
+    "plate": "KA01ER0445",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0086",
+    "plate": "CG10JP5356",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0087",
+    "plate": "KA05XC0854",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0088",
+    "plate": "21BH3267H",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bharat series (Pune, MH)"
+  },
+  {
+    "registry_id": "REG-0089",
+    "plate": "MH04WW4199",
+    "color": "yellow",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0090",
+    "plate": "25BH1772K",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bharat series (Durg, CG)"
+  },
+  {
+    "registry_id": "REG-0091",
+    "plate": "21BH3250D",
+    "color": "blue",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0092",
+    "plate": "DL13SM9273",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0093",
+    "plate": "MH01SD5591",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0094",
+    "plate": "KA03WU7136",
+    "color": "red",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0095",
+    "plate": "KA03J5281",
+    "color": "brown",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0096",
+    "plate": "KA05S6210",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0097",
+    "plate": "MH04WZ4233",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0098",
+    "plate": "22BH1403SU",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Bharat series (Pune, MH)"
+  },
+  {
+    "registry_id": "REG-0099",
+    "plate": "MH01HN0283",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0100",
+    "plate": "MH04UL8699",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0101",
+    "plate": "CG07DU1977",
+    "color": "yellow",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0102",
+    "plate": "CG10DG7934",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0103",
+    "plate": "CG07BB8752",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0104",
+    "plate": "KA01V8043",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0105",
+    "plate": "CG10DC0842",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0106",
+    "plate": "CG10H9222",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0107",
+    "plate": "KA51RR3698",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0108",
+    "plate": "MH14G0987",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0109",
+    "plate": "CG15F2848",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0110",
+    "plate": "MH02ZK0535",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0111",
+    "plate": "CG15PD4335",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0112",
+    "plate": "DL1CK1170",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0113",
+    "plate": "MH31ZN7680",
+    "color": "brown",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0114",
+    "plate": "MH01LW9799",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0115",
+    "plate": "25BH4416F",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0116",
+    "plate": "CG13CS9591",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0117",
+    "plate": "DL7CKY5404",
+    "color": "green",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0118",
+    "plate": "CG10LD1443",
+    "color": "yellow",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0119",
+    "plate": "DL11CPB0019",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 11, DL"
+  },
+  {
+    "registry_id": "REG-0120",
+    "plate": "KA03UE0846",
+    "color": "green",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0121",
+    "plate": "MH31ZF0473",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0122",
+    "plate": "CG13X1859",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0123",
+    "plate": "CG13SH4480",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0124",
+    "plate": "22BH8328J",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0125",
+    "plate": "DL12SVV4635",
+    "color": "orange",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 12, DL"
+  },
+  {
+    "registry_id": "REG-0126",
+    "plate": "MH04UU7936",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0127",
+    "plate": "25BH3913HP",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bharat series (Raipur, CG)"
+  },
+  {
+    "registry_id": "REG-0128",
+    "plate": "MH12E2493",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0129",
+    "plate": "DL2CAE7214",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0130",
+    "plate": "CG10XC4343",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0131",
+    "plate": "MH31UB5189",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0132",
+    "plate": "24BH1481X",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0133",
+    "plate": "CG04BK0475",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0134",
+    "plate": "MH31FF9273",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0135",
+    "plate": "MH02RX9555",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0136",
+    "plate": "DL5CC7623",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 5, DL"
+  },
+  {
+    "registry_id": "REG-0137",
+    "plate": "KA05KG6952",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0138",
+    "plate": "CG10ZK9371",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0139",
+    "plate": "CG04KH9273",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0140",
+    "plate": "KA01K2241",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0141",
+    "plate": "KA05PF1477",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0142",
+    "plate": "MH02SK4466",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0143",
+    "plate": "MH02YY1234",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0144",
+    "plate": "CG04UD6465",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0145",
+    "plate": "KA01SA6087",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0146",
+    "plate": "21BH3627ZK",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0147",
+    "plate": "MH01H8072",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0148",
+    "plate": "MH12PX8851",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0149",
+    "plate": "21BH4584GR",
+    "color": "yellow",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0150",
+    "plate": "25BH6019BN",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0151",
+    "plate": "CG15B3476",
+    "color": "red",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0152",
+    "plate": "DL2CV3363",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0153",
+    "plate": "DL1SEE9765",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0154",
+    "plate": "KA03M0423",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0155",
+    "plate": "CG04PT4348",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0156",
+    "plate": "DL10CR8409",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 10, DL"
+  },
+  {
+    "registry_id": "REG-0157",
+    "plate": "KA05XA8544",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0158",
+    "plate": "MH12CC1769",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0159",
+    "plate": "CG15NW9591",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0160",
+    "plate": "MH31PR1875",
+    "color": "brown",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0161",
+    "plate": "MH04LY1558",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0162",
+    "plate": "CG04DM1399",
+    "color": "white",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0163",
+    "plate": "23BH9203P",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0164",
+    "plate": "DL5LMD0843",
+    "color": "red",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 5, DL"
+  },
+  {
+    "registry_id": "REG-0165",
+    "plate": "CG10DJ1774",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0166",
+    "plate": "21BH9122AF",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0167",
+    "plate": "MH02CE2973",
+    "color": "red",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0168",
+    "plate": "KA19RL3525",
+    "color": "white",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0169",
+    "plate": "DL10CB9300",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 10, DL"
+  },
+  {
+    "registry_id": "REG-0170",
+    "plate": "KA19SW4459",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0171",
+    "plate": "CG04YY7044",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0172",
+    "plate": "CG15A6476",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0173",
+    "plate": "DL6LA4743",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0174",
+    "plate": "MH14CN3771",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0175",
+    "plate": "MH04VN1276",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0176",
+    "plate": "MH02ZM5322",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0177",
+    "plate": "MH14N6561",
+    "color": "silver",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0178",
+    "plate": "MH01T2755",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0179",
+    "plate": "MH02E2420",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0180",
+    "plate": "DL3CRV1235",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0181",
+    "plate": "KA05RC5296",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0182",
+    "plate": "CG10K0921",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0183",
+    "plate": "DL11CW1258",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 11, DL"
+  },
+  {
+    "registry_id": "REG-0184",
+    "plate": "24BH0673L",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Durg, CG)"
+  },
+  {
+    "registry_id": "REG-0185",
+    "plate": "MH31T5627",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0186",
+    "plate": "25BH8587M",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0187",
+    "plate": "KA05L0858",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0188",
+    "plate": "CG07CV9875",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0189",
+    "plate": "22BH6422K",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Bharat series (Durg, CG)"
+  },
+  {
+    "registry_id": "REG-0190",
+    "plate": "KA01TM8625",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0191",
+    "plate": "MH02EE7968",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0192",
+    "plate": "MH31Y8844",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0193",
+    "plate": "KA03ZW2528",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0194",
+    "plate": "CG07WK5969",
+    "color": "red",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0195",
+    "plate": "MH12MY5071",
+    "color": "brown",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0196",
+    "plate": "DL9PFG6257",
+    "color": "orange",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Delhi zone 9, DL"
+  },
+  {
+    "registry_id": "REG-0197",
+    "plate": "CG10Z7874",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0198",
+    "plate": "CG10TE2627",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0199",
+    "plate": "DL1CBN5728",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0200",
+    "plate": "MH04Z0462",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0201",
+    "plate": "CG07RW7741",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0202",
+    "plate": "CG15DK2450",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0203",
+    "plate": "MH01S7490",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0204",
+    "plate": "KA05AW2353",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0205",
+    "plate": "KA51CT1403",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0206",
+    "plate": "KA19X6398",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0207",
+    "plate": "MH04YX1107",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0208",
+    "plate": "MH04XF0727",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0209",
+    "plate": "KA01BK2210",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0210",
+    "plate": "MH14US5081",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0211",
+    "plate": "CG10DM0784",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0212",
+    "plate": "DL6CS6335",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0213",
+    "plate": "CG13P1354",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0214",
+    "plate": "CG04YK1681",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0215",
+    "plate": "CG10BM7273",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0216",
+    "plate": "21BH0940MT",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0217",
+    "plate": "DL1LC7180",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0218",
+    "plate": "MH01YR9294",
+    "color": "green",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0219",
+    "plate": "KA05LX8675",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0220",
+    "plate": "KA51UD8177",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0221",
+    "plate": "CG13DE4679",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0222",
+    "plate": "MH31YM1439",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0223",
+    "plate": "DL12CM2581",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Nexon",
+    "body_style": "compact SUV",
+    "owner_region": "Delhi zone 12, DL"
+  },
+  {
+    "registry_id": "REG-0224",
+    "plate": "DL13CAM3879",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0225",
+    "plate": "CG04NZ1413",
+    "color": "black",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0226",
+    "plate": "MH01LX9420",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0227",
+    "plate": "MH31EP9033",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0228",
+    "plate": "MH02LZ4983",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0229",
+    "plate": "DL4LEX4106",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 4, DL"
+  },
+  {
+    "registry_id": "REG-0230",
+    "plate": "KA51FY9697",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0231",
+    "plate": "DL1RC9235",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0232",
+    "plate": "CG15WX3454",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0233",
+    "plate": "KA19YN4950",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0234",
+    "plate": "CG13GL6810",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0235",
+    "plate": "KA19MT5659",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0236",
+    "plate": "CG07DB7367",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0237",
+    "plate": "CG10GF2617",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0238",
+    "plate": "DL1CN8149",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0239",
+    "plate": "KA01SW0798",
+    "color": "white",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0240",
+    "plate": "CG04EJ0134",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0241",
+    "plate": "CG15MU0839",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0242",
+    "plate": "DL14CE4583",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 14, DL"
+  },
+  {
+    "registry_id": "REG-0243",
+    "plate": "KA03WT5991",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0244",
+    "plate": "CG13EW5457",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0245",
+    "plate": "CG15TT4903",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0246",
+    "plate": "MH04YD0273",
+    "color": "yellow",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0247",
+    "plate": "DL10CJX0437",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 10, DL"
+  },
+  {
+    "registry_id": "REG-0248",
+    "plate": "CG15FT0842",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0249",
+    "plate": "CG04G3969",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0250",
+    "plate": "MH12BZ3341",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0251",
+    "plate": "25BH7838LF",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0252",
+    "plate": "KA51GH4332",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0253",
+    "plate": "DL12CLS3397",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 12, DL"
+  },
+  {
+    "registry_id": "REG-0254",
+    "plate": "CG15NM9396",
+    "color": "green",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0255",
+    "plate": "CG10XJ1295",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0256",
+    "plate": "CG10DW9209",
+    "color": "red",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0257",
+    "plate": "KA03BD8701",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0258",
+    "plate": "KA01PX2253",
+    "color": "brown",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0259",
+    "plate": "KA05XB4707",
+    "color": "black",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0260",
+    "plate": "MH02FB0612",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0261",
+    "plate": "CG04K4743",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0262",
+    "plate": "CG15ET8902",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0263",
+    "plate": "MH31ZF7519",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0264",
+    "plate": "KA03PT3165",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0265",
+    "plate": "CG13HA2304",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0266",
+    "plate": "25BH4948J",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0267",
+    "plate": "MH12ZD2617",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0268",
+    "plate": "KA03ER3591",
+    "color": "blue",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0269",
+    "plate": "KA51HY7715",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0270",
+    "plate": "MH31CV8654",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0271",
+    "plate": "CG07LT8793",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0272",
+    "plate": "MH12R8362",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0273",
+    "plate": "CG10N7576",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0274",
+    "plate": "KA19ZC0743",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0275",
+    "plate": "21BH7735PF",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Pune, MH)"
+  },
+  {
+    "registry_id": "REG-0276",
+    "plate": "MH12NC6267",
+    "color": "blue",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0277",
+    "plate": "CG04UN5698",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0278",
+    "plate": "DL5SYU0373",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 5, DL"
+  },
+  {
+    "registry_id": "REG-0279",
+    "plate": "CG07GD5672",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0280",
+    "plate": "DL4SC0257",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 4, DL"
+  },
+  {
+    "registry_id": "REG-0281",
+    "plate": "CG13HU0725",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0282",
+    "plate": "CG07VW4740",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0283",
+    "plate": "MH31PK2348",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0284",
+    "plate": "DL11CUS2870",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Delhi zone 11, DL"
+  },
+  {
+    "registry_id": "REG-0285",
+    "plate": "DL12CPE5223",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 12, DL"
+  },
+  {
+    "registry_id": "REG-0286",
+    "plate": "MH04RB3693",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0287",
+    "plate": "MH02XC4178",
+    "color": "white",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0288",
+    "plate": "MH01NY3121",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0289",
+    "plate": "CG15SG9627",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0290",
+    "plate": "CG04HZ3114",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0291",
+    "plate": "KA19UX4638",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0292",
+    "plate": "DL2CLG7636",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0293",
+    "plate": "DL1CUV2391",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0294",
+    "plate": "CG13SU3769",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0295",
+    "plate": "DL12SRF8006",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 12, DL"
+  },
+  {
+    "registry_id": "REG-0296",
+    "plate": "KA03T8001",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0297",
+    "plate": "DL3SC6757",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0298",
+    "plate": "MH14YS0991",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0299",
+    "plate": "CG10AT8674",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0300",
+    "plate": "CG15HG1579",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0301",
+    "plate": "CG04NR6503",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0302",
+    "plate": "CG04N1321",
+    "color": "red",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0303",
+    "plate": "KA01PX2808",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0304",
+    "plate": "DL4CZ0698",
+    "color": "brown",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Delhi zone 4, DL"
+  },
+  {
+    "registry_id": "REG-0305",
+    "plate": "25BH4594F",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0306",
+    "plate": "DL2CFV6526",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0307",
+    "plate": "KA05EZ8857",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0308",
+    "plate": "CG07L7162",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0309",
+    "plate": "MH01RS5348",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0310",
+    "plate": "MH31CW9599",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0311",
+    "plate": "CG13NL2527",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0312",
+    "plate": "MH01CF4420",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0313",
+    "plate": "MH01UC0431",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0314",
+    "plate": "CG13U6780",
+    "color": "silver",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0315",
+    "plate": "KA03KJ2778",
+    "color": "red",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0316",
+    "plate": "CG13M4912",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0317",
+    "plate": "KA19E3204",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0318",
+    "plate": "DL13LRL6225",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0319",
+    "plate": "CG15SL5254",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0320",
+    "plate": "CG15LN8045",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0321",
+    "plate": "CG07YU9239",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0322",
+    "plate": "MH31P4774",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0323",
+    "plate": "CG13CR2526",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0324",
+    "plate": "MH14M6854",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0325",
+    "plate": "KA01YY1393",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0326",
+    "plate": "KA05DA6548",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0327",
+    "plate": "KA03MN9425",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0328",
+    "plate": "CG13K0403",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0329",
+    "plate": "DL6LLR2322",
+    "color": "blue",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0330",
+    "plate": "MH31LC7179",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0331",
+    "plate": "CG04HT5621",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0332",
+    "plate": "MH02XF7571",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0333",
+    "plate": "CG13NA3233",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0334",
+    "plate": "KA03LG8797",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0335",
+    "plate": "MH14WN5135",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0336",
+    "plate": "KA51Y4874",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0337",
+    "plate": "CG07PW6117",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0338",
+    "plate": "MH31UF8805",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0339",
+    "plate": "DL14CAS0879",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 14, DL"
+  },
+  {
+    "registry_id": "REG-0340",
+    "plate": "MH12PZ8110",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0341",
+    "plate": "KA05J3614",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0342",
+    "plate": "KA51V8116",
+    "color": "white",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0343",
+    "plate": "MH31UG0682",
+    "color": "orange",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0344",
+    "plate": "CG13MC0529",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0345",
+    "plate": "CG10FW9633",
+    "color": "white",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0346",
+    "plate": "DL6CWU9341",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0347",
+    "plate": "CG15E4381",
+    "color": "yellow",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0348",
+    "plate": "22BH2079E",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0349",
+    "plate": "MH31XP9461",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0350",
+    "plate": "MH31RS4559",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0351",
+    "plate": "KA05U7512",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0352",
+    "plate": "MH04UV5290",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0353",
+    "plate": "DL1SX0794",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0354",
+    "plate": "24BH2589AP",
+    "color": "orange",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Bharat series (Pune, MH)"
+  },
+  {
+    "registry_id": "REG-0355",
+    "plate": "CG04JC4490",
+    "color": "green",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0356",
+    "plate": "CG07XC5006",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0357",
+    "plate": "CG07AA9727",
+    "color": "black",
+    "body_type": "car",
+    "make": "Honda",
+    "model": "City",
+    "body_style": "sedan",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0358",
+    "plate": "KA01NC7827",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0359",
+    "plate": "MH02EX4903",
+    "color": "orange",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0360",
+    "plate": "KA19GX2689",
+    "color": "red",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0361",
+    "plate": "DL2RD1421",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Delhi zone 2, DL"
+  },
+  {
+    "registry_id": "REG-0362",
+    "plate": "MH02XC2291",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0363",
+    "plate": "KA05TW0440",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0364",
+    "plate": "KA19DH3922",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0365",
+    "plate": "DL6CEN0198",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "XUV700",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0366",
+    "plate": "MH12A2831",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Tata",
+    "model": "Punch",
+    "body_style": "micro SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0367",
+    "plate": "CG13XZ0991",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0368",
+    "plate": "MH14JC8792",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0369",
+    "plate": "25BH2546NV",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Bharat series (Nagpur, MH)"
+  },
+  {
+    "registry_id": "REG-0370",
+    "plate": "CG07H7168",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0371",
+    "plate": "KA05DA0902",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0372",
+    "plate": "MH14FM5681",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0373",
+    "plate": "KA01PJ1935",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0374",
+    "plate": "MH04S8369",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0375",
+    "plate": "CG15H1686",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0376",
+    "plate": "CG10EF7730",
+    "color": "green",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0377",
+    "plate": "DL4SHP6871",
+    "color": "silver",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 4, DL"
+  },
+  {
+    "registry_id": "REG-0378",
+    "plate": "KA51F1957",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0379",
+    "plate": "24BH1130KL",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Bharat series (Raipur, CG)"
+  },
+  {
+    "registry_id": "REG-0380",
+    "plate": "CG15RM4980",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0381",
+    "plate": "DL13CE8955",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0382",
+    "plate": "MH04Y0158",
+    "color": "silver",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0383",
+    "plate": "CG07SB8681",
+    "color": "yellow",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0384",
+    "plate": "CG15ZM3793",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0385",
+    "plate": "CG13V2188",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0386",
+    "plate": "CG10ZL4277",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0387",
+    "plate": "25BH2231E",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Raipur, CG)"
+  },
+  {
+    "registry_id": "REG-0388",
+    "plate": "CG07KR5871",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0389",
+    "plate": "DL14CG4985",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 14, DL"
+  },
+  {
+    "registry_id": "REG-0390",
+    "plate": "KA19Y5829",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0391",
+    "plate": "CG13DR6626",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0392",
+    "plate": "CG07NM3642",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0393",
+    "plate": "KA01C4241",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0394",
+    "plate": "CG04R5433",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Kia",
+    "model": "Seltos",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0395",
+    "plate": "DL8RN6472",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Delhi zone 8, DL"
+  },
+  {
+    "registry_id": "REG-0396",
+    "plate": "23BH4506EB",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bharat series (Durg, CG)"
+  },
+  {
+    "registry_id": "REG-0397",
+    "plate": "MH12C9023",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0398",
+    "plate": "KA03N8615",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0399",
+    "plate": "DL10CNJ5637",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 10, DL"
+  },
+  {
+    "registry_id": "REG-0400",
+    "plate": "CG04TM4603",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0401",
+    "plate": "CG10H3952",
+    "color": "blue",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0402",
+    "plate": "MH02VL2847",
+    "color": "orange",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0403",
+    "plate": "CG15VG5762",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0404",
+    "plate": "MH12C2877",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0405",
+    "plate": "MH04EL0012",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0406",
+    "plate": "CG15DT2421",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0407",
+    "plate": "KA51L6482",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0408",
+    "plate": "KA19FZ7158",
+    "color": "yellow",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0409",
+    "plate": "DL11SN3658",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 11, DL"
+  },
+  {
+    "registry_id": "REG-0410",
+    "plate": "CG15VB0030",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0411",
+    "plate": "KA19LC1706",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0412",
+    "plate": "KA05AJ1454",
+    "color": "white",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0413",
+    "plate": "CG04N1771",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0414",
+    "plate": "DL7CUN8079",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0415",
+    "plate": "KA03CB3696",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Thar",
+    "body_style": "off-roader",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0416",
+    "plate": "CG13CU2788",
+    "color": "green",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0417",
+    "plate": "KA01XF7910",
+    "color": "blue",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0418",
+    "plate": "CG07ZU3368",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0419",
+    "plate": "KA03B4873",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru East, KA"
+  },
+  {
+    "registry_id": "REG-0420",
+    "plate": "CG04CK5912",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0421",
+    "plate": "CG07XK0422",
+    "color": "orange",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0422",
+    "plate": "MH12YJ6513",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Brezza",
+    "body_style": "compact SUV",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0423",
+    "plate": "MH04RB6250",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Thane, MH"
+  },
+  {
+    "registry_id": "REG-0424",
+    "plate": "DL1CZ9245",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0425",
+    "plate": "DL13CU6783",
+    "color": "white",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0426",
+    "plate": "MH31VH8774",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0427",
+    "plate": "MH14DR8468",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0428",
+    "plate": "DL1PCY2068",
+    "color": "red",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0429",
+    "plate": "DL6PC4226",
+    "color": "red",
+    "body_type": "bus",
+    "make": "Tata",
+    "model": "Starbus",
+    "body_style": "bus",
+    "owner_region": "Delhi zone 6, DL"
+  },
+  {
+    "registry_id": "REG-0430",
+    "plate": "DL8CZ8515",
+    "color": "black",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 8, DL"
+  },
+  {
+    "registry_id": "REG-0431",
+    "plate": "CG07D2452",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0432",
+    "plate": "DL7CNX5634",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0433",
+    "plate": "CG07BN6603",
+    "color": "brown",
+    "body_type": "SUV",
+    "make": "Maruti Suzuki",
+    "model": "Ertiga",
+    "body_style": "MPV",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0434",
+    "plate": "CG10AL7786",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0435",
+    "plate": "DL14CE1610",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 14, DL"
+  },
+  {
+    "registry_id": "REG-0436",
+    "plate": "CG15G6829",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0437",
+    "plate": "KA05T8463",
+    "color": "yellow",
+    "body_type": "auto-rickshaw",
+    "make": "Bajaj",
+    "model": "RE auto-rickshaw",
+    "body_style": "three-wheeler",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0438",
+    "plate": "MH14F8590",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0439",
+    "plate": "CG04ZG7479",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0440",
+    "plate": "MH31H2030",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0441",
+    "plate": "25BH7776MF",
+    "color": "red",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0442",
+    "plate": "CG07HX0814",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0443",
+    "plate": "MH12XF0146",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Pune, MH"
+  },
+  {
+    "registry_id": "REG-0444",
+    "plate": "KA05NM5005",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0445",
+    "plate": "KA51A6507",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0446",
+    "plate": "KA51KY9729",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0447",
+    "plate": "KA05GE4537",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0448",
+    "plate": "DL7CYE9831",
+    "color": "red",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0449",
+    "plate": "CG13BV6858",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0450",
+    "plate": "MH31YM3644",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Venue",
+    "body_style": "compact SUV",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0451",
+    "plate": "CG13JU1600",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0452",
+    "plate": "KA05KP3642",
+    "color": "red",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0453",
+    "plate": "KA01BX7599",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0454",
+    "plate": "MH14Y3188",
+    "color": "yellow",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0455",
+    "plate": "DL3CL2471",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0456",
+    "plate": "CG04LX2955",
+    "color": "orange",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Bolero",
+    "body_style": "SUV",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0457",
+    "plate": "CG07VF4482",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0458",
+    "plate": "CG13PS7106",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0459",
+    "plate": "KA05AY0231",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0460",
+    "plate": "KA05DN5642",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0461",
+    "plate": "DL5CTW4886",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 5, DL"
+  },
+  {
+    "registry_id": "REG-0462",
+    "plate": "24BH5616GF",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Bharat series (New Delhi, DL)"
+  },
+  {
+    "registry_id": "REG-0463",
+    "plate": "CG15DM0360",
+    "color": "black",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0464",
+    "plate": "DL13SW4191",
+    "color": "orange",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0465",
+    "plate": "CG13ND1898",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0466",
+    "plate": "CG10YD0153",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Hyundai",
+    "model": "Creta",
+    "body_style": "SUV",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0467",
+    "plate": "MH14K1719",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Pimpri-Chinchwad, MH"
+  },
+  {
+    "registry_id": "REG-0468",
+    "plate": "KA51MZ4309",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Dzire",
+    "body_style": "sedan",
+    "owner_region": "Electronic City, KA"
+  },
+  {
+    "registry_id": "REG-0469",
+    "plate": "MH31LH3403",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0470",
+    "plate": "DL3ST8096",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 3, DL"
+  },
+  {
+    "registry_id": "REG-0471",
+    "plate": "KA05RB7484",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0472",
+    "plate": "DL13CPD5902",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 13, DL"
+  },
+  {
+    "registry_id": "REG-0473",
+    "plate": "CG07MR2268",
+    "color": "green",
+    "body_type": "two-wheeler",
+    "make": "Honda",
+    "model": "Activa",
+    "body_style": "scooter",
+    "owner_region": "Durg, CG"
+  },
+  {
+    "registry_id": "REG-0474",
+    "plate": "MH02N5616",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Baleno",
+    "body_style": "hatchback",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0475",
+    "plate": "KA19DE7836",
+    "color": "black",
+    "body_type": "SUV",
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "body_style": "SUV",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0476",
+    "plate": "CG13FW9679",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Alto",
+    "body_style": "hatchback",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0477",
+    "plate": "DL8CDP2141",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 8, DL"
+  },
+  {
+    "registry_id": "REG-0478",
+    "plate": "CG15YL8599",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0479",
+    "plate": "CG13YY4073",
+    "color": "grey",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Raigarh, CG"
+  },
+  {
+    "registry_id": "REG-0480",
+    "plate": "DL1CT0895",
+    "color": "blue",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Delhi zone 1, DL"
+  },
+  {
+    "registry_id": "REG-0481",
+    "plate": "CG10LJ8056",
+    "color": "black",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0482",
+    "plate": "MH01RV3851",
+    "color": "silver",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Mumbai Central, MH"
+  },
+  {
+    "registry_id": "REG-0483",
+    "plate": "MH31D8149",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "body_style": "motorcycle",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0484",
+    "plate": "CG15TU1490",
+    "color": "white",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0485",
+    "plate": "MH02LU0890",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mumbai West, MH"
+  },
+  {
+    "registry_id": "REG-0486",
+    "plate": "KA01Y7415",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0487",
+    "plate": "MH31B6126",
+    "color": "brown",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "WagonR",
+    "body_style": "hatchback",
+    "owner_region": "Nagpur, MH"
+  },
+  {
+    "registry_id": "REG-0488",
+    "plate": "KA01WG6705",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Bengaluru Central, KA"
+  },
+  {
+    "registry_id": "REG-0489",
+    "plate": "CG10P3123",
+    "color": "orange",
+    "body_type": "truck",
+    "make": "Tata",
+    "model": "Ace",
+    "body_style": "mini truck",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0490",
+    "plate": "KA19SA7382",
+    "color": "grey",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Mangaluru, KA"
+  },
+  {
+    "registry_id": "REG-0491",
+    "plate": "DL9CZ7913",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "Verna",
+    "body_style": "sedan",
+    "owner_region": "Delhi zone 9, DL"
+  },
+  {
+    "registry_id": "REG-0492",
+    "plate": "CG15TN9840",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Hero",
+    "model": "Splendor",
+    "body_style": "motorcycle",
+    "owner_region": "Ambikapur, CG"
+  },
+  {
+    "registry_id": "REG-0493",
+    "plate": "DL7CKR4483",
+    "color": "blue",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Fortuner",
+    "body_style": "SUV",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0494",
+    "plate": "CG10GG8976",
+    "color": "black",
+    "body_type": "car",
+    "make": "Tata",
+    "model": "Tiago",
+    "body_style": "hatchback",
+    "owner_region": "Bilaspur, CG"
+  },
+  {
+    "registry_id": "REG-0495",
+    "plate": "22BH2174ZD",
+    "color": "grey",
+    "body_type": "car",
+    "make": "Hyundai",
+    "model": "i20",
+    "body_style": "hatchback",
+    "owner_region": "Bharat series (Bengaluru, KA)"
+  },
+  {
+    "registry_id": "REG-0496",
+    "plate": "KA05AT8748",
+    "color": "white",
+    "body_type": "SUV",
+    "make": "Toyota",
+    "model": "Innova",
+    "body_style": "MPV",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0497",
+    "plate": "KA05KY3276",
+    "color": "white",
+    "body_type": "car",
+    "make": "Maruti Suzuki",
+    "model": "Swift",
+    "body_style": "hatchback",
+    "owner_region": "Bengaluru South, KA"
+  },
+  {
+    "registry_id": "REG-0498",
+    "plate": "CG04RD8867",
+    "color": "blue",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Raipur, CG"
+  },
+  {
+    "registry_id": "REG-0499",
+    "plate": "DL7ST9196",
+    "color": "white",
+    "body_type": "two-wheeler",
+    "make": "TVS",
+    "model": "Jupiter",
+    "body_style": "scooter",
+    "owner_region": "Delhi zone 7, DL"
+  },
+  {
+    "registry_id": "REG-0500",
+    "plate": "KA19PY0770",
+    "color": "red",
+    "body_type": "two-wheeler",
+    "make": "Bajaj",
+    "model": "Pulsar",
+    "body_style": "motorcycle",
+    "owner_region": "Mangaluru, KA"
+  }
+]

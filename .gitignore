@@ -1,24 +1,40 @@
-# Pre-cloned research repos (see docs/proposed_solution.md §14)
+# Pre-cloned research repos (see docs/proposed_solution.md §14) - read-only, cloned locally
 vendor/
 
 # Model weights and generated outputs
 *.pt
 *.pth
 *.onnx
+weights/
 artifacts/
-reports/
+runs/
+.scratch/
+*.log
+# reports/ is tracked on purpose: the per-clip analysis reports are a hackathon deliverable.
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
+.pytest_cache/
+.hypothesis/
 
 # Node
 node_modules/
 dist/
 
+# Local copies of documents already kept under docs/
+/proposed_solution.md
+/Hackasol_5.0_Problem_Statement.pdf
+/Hackasol 5.0 AIML-01 Master Blueprint.pdf
+
+# Other tools' local caches
+.opencode/
+
 # OS / editor
 .DS_Store
 Thumbs.db
 ~$*
+.vscode/
+.idea/
