@@ -1,0 +1,5211 @@
+{
+  "case_id": "3208b7f6489f",
+  "created_at": "2026-11-22T21:45:10+05:30",
+  "prism_version": "1.0.0",
+  "mode": "clip",
+  "clip": {
+    "name": "day_clear_white.mp4",
+    "sha256": "e013364c015a154d1f6270f72775ab8ca26db8cb73bab7945002a204b409854d",
+    "width": 1280,
+    "height": 720,
+    "fps": 25.0,
+    "frame_count": 150,
+    "duration_sec": 6.0,
+    "median_brightness": 115.71,
+    "low_light": false
+  },
+  "hint": null,
+  "threshold": 0.55,
+  "device": "cuda",
+  "ocr_backend": "parseq:parseq",
+  "tracks": [
+    {
+      "track_id": 1,
+      "clip_role": "A",
+      "yolo_class": "car",
+      "first_seen_sec": 0.0,
+      "last_seen_sec": 5.96,
+      "n_detections": 150,
+      "best_crop_url": "/artifacts/3208b7f6489f/track1_best.jpg",
+      "frames": [
+        {
+          "read_id": "F5",
+          "frame_idx": 5,
+          "timestamp_sec": 0.2,
+          "sharpness": 7847.31,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04??4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9815,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9223,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9642,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9971,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "M",
+              "conf": 0.5441,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "X",
+              "conf": 0.6106,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.8869,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9942,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.8446,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            557,
+            256,
+            653,
+            290
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f5_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f5_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f5_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f5_sr.png"
+        },
+        {
+          "read_id": "F5c",
+          "frame_idx": 5,
+          "timestamp_sec": 0.2,
+          "sharpness": 7847.31,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "C?04?X4?21",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9671,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "G",
+              "conf": 0.602,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.8924,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9958,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "M",
+              "conf": 0.6347,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9546,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9976,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "8",
+              "conf": 0.3782,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9867,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.7688,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            557,
+            256,
+            653,
+            290
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f5_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f5_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f5_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F8",
+          "frame_idx": 8,
+          "timestamp_sec": 0.32,
+          "sharpness": 9640.01,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9764,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9577,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9724,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9941,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8174,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9445,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9719,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9944,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.8256,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            559,
+            263,
+            657,
+            298
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f8_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f8_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f8_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f8_sr.png"
+        },
+        {
+          "read_id": "F8c",
+          "frame_idx": 8,
+          "timestamp_sec": 0.32,
+          "sharpness": 9640.01,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.92,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.8218,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.7952,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9955,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9117,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9815,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9928,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9244,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9962,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.7099,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            559,
+            263,
+            657,
+            298
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f8_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f8_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f8_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F10",
+          "frame_idx": 10,
+          "timestamp_sec": 0.4,
+          "sharpness": 7202.4,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9867,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9858,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9658,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9946,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9836,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9697,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9906,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9912,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            560,
+            266,
+            660,
+            302
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f10_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f10_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f10_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f10_sr.png"
+        },
+        {
+          "read_id": "F10c",
+          "frame_idx": 10,
+          "timestamp_sec": 0.4,
+          "sharpness": 7202.4,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9891,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.975,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.8828,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9972,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9742,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9872,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9858,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.993,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            560,
+            266,
+            660,
+            302
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f10_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f10_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f10_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F20",
+          "frame_idx": 20,
+          "timestamp_sec": 0.8,
+          "sharpness": 7893.46,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9816,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9477,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9504,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9968,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9249,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9375,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9734,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9978,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9526,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            284,
+            674,
+            322
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f20_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f20_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f20_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f20_sr.png"
+        },
+        {
+          "read_id": "F20c",
+          "frame_idx": 20,
+          "timestamp_sec": 0.8,
+          "sharpness": 7893.46,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "C?04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9042,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "G",
+              "conf": 0.5017,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9111,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9967,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9067,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.981,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9971,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.8467,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9979,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9515,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            284,
+            674,
+            322
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f20_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f20_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f20_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F23",
+          "frame_idx": 23,
+          "timestamp_sec": 0.92,
+          "sharpness": 7234.64,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9846,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9899,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9704,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9966,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9764,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9757,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9912,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9981,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9894,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            568,
+            290,
+            679,
+            331
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f23_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f23_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f23_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f23_sr.png"
+        },
+        {
+          "read_id": "F23c",
+          "frame_idx": 23,
+          "timestamp_sec": 0.92,
+          "sharpness": 7234.64,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.978,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.973,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9505,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9926,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9917,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9932,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9898,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            568,
+            290,
+            679,
+            331
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f23_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f23_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f23_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F30",
+          "frame_idx": 30,
+          "timestamp_sec": 1.2,
+          "sharpness": 8812.7,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9934,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9939,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9692,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9959,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9872,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9923,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9941,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9989,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9864,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            571,
+            303,
+            688,
+            345
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f30_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f30_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f30_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f30_sr.png"
+        },
+        {
+          "read_id": "F30c",
+          "frame_idx": 30,
+          "timestamp_sec": 1.2,
+          "sharpness": 8812.7,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9935,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9869,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9429,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.998,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9838,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9949,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9952,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9863,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            571,
+            303,
+            688,
+            345
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f30_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f30_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f30_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F33",
+          "frame_idx": 33,
+          "timestamp_sec": 1.32,
+          "sharpness": 8021.33,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9793,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9869,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9599,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9919,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9471,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9299,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9796,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9983,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9762,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            572,
+            310,
+            692,
+            352
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f33_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f33_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f33_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f33_sr.png"
+        },
+        {
+          "read_id": "F33c",
+          "frame_idx": 33,
+          "timestamp_sec": 1.32,
+          "sharpness": 8021.33,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9477,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9237,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9257,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9946,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9402,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9753,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9804,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9853,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            572,
+            310,
+            692,
+            352
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f33_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f33_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f33_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F35",
+          "frame_idx": 35,
+          "timestamp_sec": 1.4,
+          "sharpness": 8111.84,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9955,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9977,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9881,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9989,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9957,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            574,
+            313,
+            695,
+            356
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f35_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f35_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f35_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f35_sr.png"
+        },
+        {
+          "read_id": "F35c",
+          "frame_idx": 35,
+          "timestamp_sec": 1.4,
+          "sharpness": 8111.84,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9953,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9953,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9882,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9987,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9955,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            574,
+            313,
+            695,
+            356
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f35_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f35_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f35_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F45",
+          "frame_idx": 45,
+          "timestamp_sec": 1.8,
+          "sharpness": 9727.27,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9947,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9977,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9898,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9954,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            578,
+            331,
+            708,
+            377
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f45_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f45_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f45_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f45_sr.png"
+        },
+        {
+          "read_id": "F45c",
+          "frame_idx": 45,
+          "timestamp_sec": 1.8,
+          "sharpness": 9727.27,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9945,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.996,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9905,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9989,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9951,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            578,
+            331,
+            708,
+            377
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f45_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f45_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f45_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F51",
+          "frame_idx": 51,
+          "timestamp_sec": 2.04,
+          "sharpness": 7867.09,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9958,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9968,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9911,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9975,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            582,
+            342,
+            715,
+            389
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f51_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f51_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f51_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f51_sr.png"
+        },
+        {
+          "read_id": "F51c",
+          "frame_idx": 51,
+          "timestamp_sec": 2.04,
+          "sharpness": 7867.09,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9964,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9934,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9928,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9998,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9971,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            582,
+            342,
+            715,
+            389
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f51_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f51_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f51_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F58",
+          "frame_idx": 58,
+          "timestamp_sec": 2.32,
+          "sharpness": 7764.69,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9949,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9981,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.99,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9971,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            354,
+            723,
+            404
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f58_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f58_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f58_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f58_sr.png"
+        },
+        {
+          "read_id": "F58c",
+          "frame_idx": 58,
+          "timestamp_sec": 2.32,
+          "sharpness": 7764.69,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9941,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9962,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9898,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9969,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            354,
+            723,
+            404
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f58_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f58_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f58_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F61",
+          "frame_idx": 61,
+          "timestamp_sec": 2.44,
+          "sharpness": 7082.61,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9952,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9983,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9898,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9991,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9998,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.997,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            361,
+            726,
+            411
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f61_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f61_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f61_veh.jpg",
+          "sr_url": "/artifacts/3208b7f6489f/track1_f61_sr.png"
+        },
+        {
+          "read_id": "F61c",
+          "frame_idx": 61,
+          "timestamp_sec": 2.44,
+          "sharpness": 7082.61,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "CG04MX4821",
+          "masked_text": "CG04MX4821",
+          "chars": [
+            {
+              "char": "C",
+              "raw_char": "C",
+              "conf": 0.9961,
+              "reason": null
+            },
+            {
+              "char": "G",
+              "raw_char": "G",
+              "conf": 0.9978,
+              "reason": null
+            },
+            {
+              "char": "0",
+              "raw_char": "0",
+              "conf": 0.9917,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "X",
+              "raw_char": "X",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "4",
+              "raw_char": "4",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9973,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            361,
+            726,
+            411
+          ],
+          "plate_crop_url": "/artifacts/3208b7f6489f/track1_f61_plate.png",
+          "plate_clahe_url": "/artifacts/3208b7f6489f/track1_f61_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/3208b7f6489f/track1_f61_veh.jpg",
+          "sr_url": null
+        }
+      ],
+      "fused": {
+        "text": "CG04MX4821",
+        "video_text": "CG04MX4821",
+        "length": 10,
+        "reference_read": "F61c",
+        "n_reads": 24,
+        "positions": [
+          {
+            "index": 0,
+            "char": "C",
+            "confidence": 1.0,
+            "weight": 47.0712,
+            "total_weight": 47.0712,
+            "source": "video",
+            "votes": {
+              "C": 47.0712
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9815,
+                "weight": 1.963
+              },
+              {
+                "read_id": "F5c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9671,
+                "weight": 1.9342
+              },
+              {
+                "read_id": "F8",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9764,
+                "weight": 1.9528
+              },
+              {
+                "read_id": "F8c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.92,
+                "weight": 1.84
+              },
+              {
+                "read_id": "F10",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9867,
+                "weight": 1.9734
+              },
+              {
+                "read_id": "F10c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9891,
+                "weight": 1.9782
+              },
+              {
+                "read_id": "F20",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9816,
+                "weight": 1.9632
+              },
+              {
+                "read_id": "F20c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9042,
+                "weight": 1.8084
+              },
+              {
+                "read_id": "F23",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9846,
+                "weight": 1.9692
+              },
+              {
+                "read_id": "F23c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.978,
+                "weight": 1.956
+              },
+              {
+                "read_id": "F30",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9934,
+                "weight": 1.9868
+              },
+              {
+                "read_id": "F30c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9935,
+                "weight": 1.987
+              },
+              {
+                "read_id": "F33",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9793,
+                "weight": 1.9586
+              },
+              {
+                "read_id": "F33c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9477,
+                "weight": 1.8954
+              },
+              {
+                "read_id": "F35",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9955,
+                "weight": 1.991
+              },
+              {
+                "read_id": "F35c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9953,
+                "weight": 1.9906
+              },
+              {
+                "read_id": "F45",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9947,
+                "weight": 1.9894
+              },
+              {
+                "read_id": "F45c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9945,
+                "weight": 1.989
+              },
+              {
+                "read_id": "F51",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9958,
+                "weight": 1.9916
+              },
+              {
+                "read_id": "F51c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9964,
+                "weight": 1.9928
+              },
+              {
+                "read_id": "F58",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9949,
+                "weight": 1.9898
+              },
+              {
+                "read_id": "F58c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9941,
+                "weight": 1.9882
+              },
+              {
+                "read_id": "F61",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9952,
+                "weight": 1.9904
+              },
+              {
+                "read_id": "F61c",
+                "char": "C",
+                "raw_char": "C",
+                "raw_conf": 0.9961,
+                "weight": 1.9922
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 1,
+            "char": "G",
+            "confidence": 1.0,
+            "weight": 42.8638,
+            "total_weight": 42.8638,
+            "source": "video",
+            "votes": {
+              "G": 42.8638
+            },
+            "supporting": [
+              "F5",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9223,
+                "weight": 1.8446
+              },
+              {
+                "read_id": "F5c",
+                "char": "?",
+                "raw_char": "G",
+                "raw_conf": 0.602,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F8",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9577,
+                "weight": 1.9154
+              },
+              {
+                "read_id": "F8c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.8218,
+                "weight": 1.6436
+              },
+              {
+                "read_id": "F10",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9858,
+                "weight": 1.9716
+              },
+              {
+                "read_id": "F10c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.975,
+                "weight": 1.95
+              },
+              {
+                "read_id": "F20",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9477,
+                "weight": 1.8954
+              },
+              {
+                "read_id": "F20c",
+                "char": "?",
+                "raw_char": "G",
+                "raw_conf": 0.5017,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F23",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9899,
+                "weight": 1.9798
+              },
+              {
+                "read_id": "F23c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.973,
+                "weight": 1.946
+              },
+              {
+                "read_id": "F30",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9939,
+                "weight": 1.9878
+              },
+              {
+                "read_id": "F30c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9869,
+                "weight": 1.9738
+              },
+              {
+                "read_id": "F33",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9869,
+                "weight": 1.9738
+              },
+              {
+                "read_id": "F33c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9237,
+                "weight": 1.8474
+              },
+              {
+                "read_id": "F35",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9977,
+                "weight": 1.9954
+              },
+              {
+                "read_id": "F35c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9953,
+                "weight": 1.9906
+              },
+              {
+                "read_id": "F45",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9977,
+                "weight": 1.9954
+              },
+              {
+                "read_id": "F45c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.996,
+                "weight": 1.992
+              },
+              {
+                "read_id": "F51",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9968,
+                "weight": 1.9936
+              },
+              {
+                "read_id": "F51c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9934,
+                "weight": 1.9868
+              },
+              {
+                "read_id": "F58",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9981,
+                "weight": 1.9962
+              },
+              {
+                "read_id": "F58c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9962,
+                "weight": 1.9924
+              },
+              {
+                "read_id": "F61",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9983,
+                "weight": 1.9966
+              },
+              {
+                "read_id": "F61c",
+                "char": "G",
+                "raw_char": "G",
+                "raw_conf": 0.9978,
+                "weight": 1.9956
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 2,
+            "char": "0",
+            "confidence": 1.0,
+            "weight": 45.9094,
+            "total_weight": 45.9094,
+            "source": "video",
+            "votes": {
+              "0": 45.9094
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9642,
+                "weight": 1.9284
+              },
+              {
+                "read_id": "F5c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.8924,
+                "weight": 1.7848
+              },
+              {
+                "read_id": "F8",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9724,
+                "weight": 1.9448
+              },
+              {
+                "read_id": "F8c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.7952,
+                "weight": 1.5904
+              },
+              {
+                "read_id": "F10",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9658,
+                "weight": 1.9316
+              },
+              {
+                "read_id": "F10c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.8828,
+                "weight": 1.7656
+              },
+              {
+                "read_id": "F20",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9504,
+                "weight": 1.9008
+              },
+              {
+                "read_id": "F20c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9111,
+                "weight": 1.8222
+              },
+              {
+                "read_id": "F23",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9704,
+                "weight": 1.9408
+              },
+              {
+                "read_id": "F23c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9505,
+                "weight": 1.901
+              },
+              {
+                "read_id": "F30",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9692,
+                "weight": 1.9384
+              },
+              {
+                "read_id": "F30c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9429,
+                "weight": 1.8858
+              },
+              {
+                "read_id": "F33",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9599,
+                "weight": 1.9198
+              },
+              {
+                "read_id": "F33c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9257,
+                "weight": 1.8514
+              },
+              {
+                "read_id": "F35",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9881,
+                "weight": 1.9762
+              },
+              {
+                "read_id": "F35c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9882,
+                "weight": 1.9764
+              },
+              {
+                "read_id": "F45",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9898,
+                "weight": 1.9796
+              },
+              {
+                "read_id": "F45c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9905,
+                "weight": 1.981
+              },
+              {
+                "read_id": "F51",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9911,
+                "weight": 1.9822
+              },
+              {
+                "read_id": "F51c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9928,
+                "weight": 1.9856
+              },
+              {
+                "read_id": "F58",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.99,
+                "weight": 1.98
+              },
+              {
+                "read_id": "F58c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9898,
+                "weight": 1.9796
+              },
+              {
+                "read_id": "F61",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9898,
+                "weight": 1.9796
+              },
+              {
+                "read_id": "F61c",
+                "char": "0",
+                "raw_char": "0",
+                "raw_conf": 0.9917,
+                "weight": 1.9834
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 3,
+            "char": "4",
+            "confidence": 1.0,
+            "weight": 47.8666,
+            "total_weight": 47.8666,
+            "source": "video",
+            "votes": {
+              "4": 47.8666
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F5c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9958,
+                "weight": 1.9916
+              },
+              {
+                "read_id": "F8",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9941,
+                "weight": 1.9882
+              },
+              {
+                "read_id": "F8c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9955,
+                "weight": 1.991
+              },
+              {
+                "read_id": "F10",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9946,
+                "weight": 1.9892
+              },
+              {
+                "read_id": "F10c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9972,
+                "weight": 1.9944
+              },
+              {
+                "read_id": "F20",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9968,
+                "weight": 1.9936
+              },
+              {
+                "read_id": "F20c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9967,
+                "weight": 1.9934
+              },
+              {
+                "read_id": "F23",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9966,
+                "weight": 1.9932
+              },
+              {
+                "read_id": "F23c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9959,
+                "weight": 1.9918
+              },
+              {
+                "read_id": "F30c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.998,
+                "weight": 1.996
+              },
+              {
+                "read_id": "F33",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9919,
+                "weight": 1.9838
+              },
+              {
+                "read_id": "F33c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9946,
+                "weight": 1.9892
+              },
+              {
+                "read_id": "F35",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              },
+              {
+                "read_id": "F35c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F45",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F45c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F51",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F51c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F58",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F58c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F61",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F61c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 4,
+            "char": "M",
+            "confidence": 1.0,
+            "weight": 42.6724,
+            "total_weight": 42.6724,
+            "source": "video",
+            "votes": {
+              "M": 42.6724
+            },
+            "supporting": [
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "?",
+                "raw_char": "M",
+                "raw_conf": 0.5441,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5c",
+                "char": "?",
+                "raw_char": "M",
+                "raw_conf": 0.6347,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F8",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8174,
+                "weight": 1.6348
+              },
+              {
+                "read_id": "F8c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9117,
+                "weight": 1.8234
+              },
+              {
+                "read_id": "F10",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9836,
+                "weight": 1.9672
+              },
+              {
+                "read_id": "F10c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9742,
+                "weight": 1.9484
+              },
+              {
+                "read_id": "F20",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9249,
+                "weight": 1.8498
+              },
+              {
+                "read_id": "F20c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9067,
+                "weight": 1.8134
+              },
+              {
+                "read_id": "F23",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9764,
+                "weight": 1.9528
+              },
+              {
+                "read_id": "F23c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9926,
+                "weight": 1.9852
+              },
+              {
+                "read_id": "F30",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9872,
+                "weight": 1.9744
+              },
+              {
+                "read_id": "F30c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9838,
+                "weight": 1.9676
+              },
+              {
+                "read_id": "F33",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9471,
+                "weight": 1.8942
+              },
+              {
+                "read_id": "F33c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9402,
+                "weight": 1.8804
+              },
+              {
+                "read_id": "F35",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9989,
+                "weight": 1.9978
+              },
+              {
+                "read_id": "F35c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              },
+              {
+                "read_id": "F45",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F45c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F51",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F51c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F58",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F58c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F61",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F61c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 5,
+            "char": "X",
+            "confidence": 1.0,
+            "weight": 45.2118,
+            "total_weight": 45.2118,
+            "source": "video",
+            "votes": {
+              "X": 45.2118
+            },
+            "supporting": [
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "?",
+                "raw_char": "X",
+                "raw_conf": 0.6106,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9546,
+                "weight": 1.9092
+              },
+              {
+                "read_id": "F8",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9445,
+                "weight": 1.889
+              },
+              {
+                "read_id": "F8c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9815,
+                "weight": 1.963
+              },
+              {
+                "read_id": "F10",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9697,
+                "weight": 1.9394
+              },
+              {
+                "read_id": "F10c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9872,
+                "weight": 1.9744
+              },
+              {
+                "read_id": "F20",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9375,
+                "weight": 1.875
+              },
+              {
+                "read_id": "F20c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.981,
+                "weight": 1.962
+              },
+              {
+                "read_id": "F23",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9757,
+                "weight": 1.9514
+              },
+              {
+                "read_id": "F23c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9917,
+                "weight": 1.9834
+              },
+              {
+                "read_id": "F30",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9923,
+                "weight": 1.9846
+              },
+              {
+                "read_id": "F30c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9949,
+                "weight": 1.9898
+              },
+              {
+                "read_id": "F33",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9299,
+                "weight": 1.8598
+              },
+              {
+                "read_id": "F33c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9753,
+                "weight": 1.9506
+              },
+              {
+                "read_id": "F35",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F35c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9987,
+                "weight": 1.9974
+              },
+              {
+                "read_id": "F45",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F45c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              },
+              {
+                "read_id": "F51",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F51c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F58",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F58c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F61",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F61c",
+                "char": "X",
+                "raw_char": "X",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 6,
+            "char": "4",
+            "confidence": 1.0,
+            "weight": 47.943,
+            "total_weight": 47.943,
+            "source": "video",
+            "votes": {
+              "4": 47.943
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F5c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9976,
+                "weight": 1.9952
+              },
+              {
+                "read_id": "F8",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F8c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9928,
+                "weight": 1.9856
+              },
+              {
+                "read_id": "F10",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F10c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F20",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F20c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F23",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F23c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F30",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F33",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F33c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F35",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F35c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F45",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F45c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F51",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F51c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F58",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F58c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F61",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F61c",
+                "char": "4",
+                "raw_char": "4",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 7,
+            "char": "8",
+            "confidence": 1.0,
+            "weight": 45.0094,
+            "total_weight": 45.0094,
+            "source": "video",
+            "votes": {
+              "8": 45.0094
+            },
+            "supporting": [
+              "F5",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.8869,
+                "weight": 1.7738
+              },
+              {
+                "read_id": "F5c",
+                "char": "?",
+                "raw_char": "8",
+                "raw_conf": 0.3782,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F8",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9719,
+                "weight": 1.9438
+              },
+              {
+                "read_id": "F8c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9244,
+                "weight": 1.8488
+              },
+              {
+                "read_id": "F10",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9906,
+                "weight": 1.9812
+              },
+              {
+                "read_id": "F10c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9858,
+                "weight": 1.9716
+              },
+              {
+                "read_id": "F20",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9734,
+                "weight": 1.9468
+              },
+              {
+                "read_id": "F20c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.8467,
+                "weight": 1.6934
+              },
+              {
+                "read_id": "F23",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9912,
+                "weight": 1.9824
+              },
+              {
+                "read_id": "F23c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9932,
+                "weight": 1.9864
+              },
+              {
+                "read_id": "F30",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9941,
+                "weight": 1.9882
+              },
+              {
+                "read_id": "F30c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9952,
+                "weight": 1.9904
+              },
+              {
+                "read_id": "F33",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9796,
+                "weight": 1.9592
+              },
+              {
+                "read_id": "F33c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9804,
+                "weight": 1.9608
+              },
+              {
+                "read_id": "F35",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F35c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F45",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F45c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9989,
+                "weight": 1.9978
+              },
+              {
+                "read_id": "F51",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F51c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F58",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F58c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F61",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F61c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 8,
+            "char": "2",
+            "confidence": 1.0,
+            "weight": 47.908,
+            "total_weight": 47.908,
+            "source": "video",
+            "votes": {
+              "2": 47.908
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9942,
+                "weight": 1.9884
+              },
+              {
+                "read_id": "F5c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9867,
+                "weight": 1.9734
+              },
+              {
+                "read_id": "F8",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9944,
+                "weight": 1.9888
+              },
+              {
+                "read_id": "F8c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9962,
+                "weight": 1.9924
+              },
+              {
+                "read_id": "F10",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F10c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F20",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9978,
+                "weight": 1.9956
+              },
+              {
+                "read_id": "F20c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9979,
+                "weight": 1.9958
+              },
+              {
+                "read_id": "F23",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9981,
+                "weight": 1.9962
+              },
+              {
+                "read_id": "F23c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              },
+              {
+                "read_id": "F30",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9989,
+                "weight": 1.9978
+              },
+              {
+                "read_id": "F30c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9991,
+                "weight": 1.9982
+              },
+              {
+                "read_id": "F33",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9983,
+                "weight": 1.9966
+              },
+              {
+                "read_id": "F33c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F35",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F35c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F45",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F45c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F51",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F51c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9998,
+                "weight": 1.9996
+              },
+              {
+                "read_id": "F58",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F58c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F61",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9998,
+                "weight": 1.9996
+              },
+              {
+                "read_id": "F61c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 9,
+            "char": "1",
+            "confidence": 1.0,
+            "weight": 45.8304,
+            "total_weight": 45.8304,
+            "source": "video",
+            "votes": {
+              "1": 45.8304
+            },
+            "supporting": [
+              "F5",
+              "F5c",
+              "F8",
+              "F8c",
+              "F10",
+              "F10c",
+              "F20",
+              "F20c",
+              "F23",
+              "F23c",
+              "F30",
+              "F30c",
+              "F33",
+              "F33c",
+              "F35",
+              "F35c",
+              "F45",
+              "F45c",
+              "F51",
+              "F51c",
+              "F58",
+              "F58c",
+              "F61",
+              "F61c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F5",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.8446,
+                "weight": 1.6892
+              },
+              {
+                "read_id": "F5c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.7688,
+                "weight": 1.5376
+              },
+              {
+                "read_id": "F8",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.8256,
+                "weight": 1.6512
+              },
+              {
+                "read_id": "F8c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.7099,
+                "weight": 1.4198
+              },
+              {
+                "read_id": "F10",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9912,
+                "weight": 1.9824
+              },
+              {
+                "read_id": "F10c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.993,
+                "weight": 1.986
+              },
+              {
+                "read_id": "F20",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9526,
+                "weight": 1.9052
+              },
+              {
+                "read_id": "F20c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9515,
+                "weight": 1.903
+              },
+              {
+                "read_id": "F23",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9894,
+                "weight": 1.9788
+              },
+              {
+                "read_id": "F23c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9898,
+                "weight": 1.9796
+              },
+              {
+                "read_id": "F30",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9864,
+                "weight": 1.9728
+              },
+              {
+                "read_id": "F30c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9863,
+                "weight": 1.9726
+              },
+              {
+                "read_id": "F33",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9762,
+                "weight": 1.9524
+              },
+              {
+                "read_id": "F33c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9853,
+                "weight": 1.9706
+              },
+              {
+                "read_id": "F35",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9957,
+                "weight": 1.9914
+              },
+              {
+                "read_id": "F35c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9955,
+                "weight": 1.991
+              },
+              {
+                "read_id": "F45",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9954,
+                "weight": 1.9908
+              },
+              {
+                "read_id": "F45c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9951,
+                "weight": 1.9902
+              },
+              {
+                "read_id": "F51",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9975,
+                "weight": 1.995
+              },
+              {
+                "read_id": "F51c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F58",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F58c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9969,
+                "weight": 1.9938
+              },
+              {
+                "read_id": "F61",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.997,
+                "weight": 1.994
+              },
+              {
+                "read_id": "F61c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9973,
+                "weight": 1.9946
+              }
+            ],
+            "note": null
+          }
+        ],
+        "hint": null,
+        "hint_conflicts": [],
+        "format_conflicts": [],
+        "excluded_reads": []
+      },
+      "attributes": {
+        "color": {
+          "value": "grey",
+          "confidence": 0.5513,
+          "uncertain": false,
+          "top2": [
+            [
+              "grey",
+              0.5513
+            ],
+            [
+              "silver",
+              0.3275
+            ]
+          ],
+          "source": "clip"
+        },
+        "body_type": {
+          "value": "car",
+          "confidence": 0.7805,
+          "uncertain": false,
+          "top2": [
+            [
+              "car",
+              0.7805
+            ],
+            [
+              "SUV",
+              0.2193
+            ]
+          ],
+          "source": "clip+yolo(car)"
+        },
+        "make_model": {
+          "value": "Maruti Suzuki Baleno",
+          "confidence": 0.4607,
+          "uncertain": false,
+          "top2": [
+            [
+              "Maruti Suzuki Baleno",
+              0.4607
+            ],
+            [
+              "Honda City",
+              0.11
+            ]
+          ],
+          "source": "clip (body-type constrained)"
+        },
+        "yolo_class": "car"
+      },
+      "match": {
+        "status": "MATCHED",
+        "threshold_used": 0.55,
+        "top_candidates": [
+          {
+            "rank": 1,
+            "registry_id": "REG-0001",
+            "plate": "CG04MX4821",
+            "color": "white",
+            "body_type": "car",
+            "make": "Hyundai",
+            "model": "Verna",
+            "owner_region": "Raipur, CG",
+            "score": 0.8,
+            "breakdown": {
+              "plate_sim": 1.0,
+              "coverage": 1.0,
+              "plate": 0.65,
+              "color_sim": 0.0,
+              "color": 0.0,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.8,
+              "total": 0.8,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.65 of 0.65): 10 of 10 known characters match.",
+              "Colour (0.00 of 0.20): video grey, registry white.",
+              "Body type (0.15 of 0.15): exact match (car, 0.78).",
+              "Make/model: Maruti Suzuki Baleno (0.46) below 0.50, not used."
+            ],
+            "mismatches": [
+              "Colour mismatch: video grey, registry white"
+            ],
+            "matched_known": 10,
+            "known_count": 10
+          },
+          {
+            "rank": 2,
+            "registry_id": "REG-0004",
+            "plate": "CG04MX4827",
+            "color": "silver",
+            "body_type": "car",
+            "make": "Hyundai",
+            "model": "Verna",
+            "owner_region": "Raipur, CG",
+            "score": 0.835,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 0.5,
+              "color": 0.1,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.835,
+              "total": 0.835,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.10 of 0.20): similar shade under CCTV (video grey, registry silver).",
+              "Body type (0.15 of 0.15): exact match (car, 0.78).",
+              "Make/model: Maruti Suzuki Baleno (0.46) below 0.50, not used.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 10: video shows '1', registry has '7'"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 3,
+            "registry_id": "REG-0002",
+            "plate": "CG04MX4851",
+            "color": "white",
+            "body_type": "car",
+            "make": "Hyundai",
+            "model": "Verna",
+            "owner_region": "Raipur, CG",
+            "score": 0.735,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 0.0,
+              "color": 0.0,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.735,
+              "total": 0.735,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.00 of 0.20): video grey, registry white.",
+              "Body type (0.15 of 0.15): exact match (car, 0.78).",
+              "Make/model: Maruti Suzuki Baleno (0.46) below 0.50, not used.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 9: video shows '2', registry has '5'",
+              "Colour mismatch: video grey, registry white"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 4,
+            "registry_id": "REG-0003",
+            "plate": "CG04MX4621",
+            "color": "white",
+            "body_type": "car",
+            "make": "Honda",
+            "model": "City",
+            "owner_region": "Raipur, CG",
+            "score": 0.735,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 0.0,
+              "color": 0.0,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.735,
+              "total": 0.735,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.00 of 0.20): video grey, registry white.",
+              "Body type (0.15 of 0.15): exact match (car, 0.78).",
+              "Make/model: Maruti Suzuki Baleno (0.46) below 0.50, not used.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 8: video shows '8', registry has '6'",
+              "Colour mismatch: video grey, registry white"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 5,
+            "registry_id": "REG-0006",
+            "plate": "CG04NX4821",
+            "color": "white",
+            "body_type": "car",
+            "make": "Maruti Suzuki",
+            "model": "Dzire",
+            "owner_region": "Raipur, CG",
+            "score": 0.735,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 0.0,
+              "color": 0.0,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.735,
+              "total": 0.735,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.00 of 0.20): video grey, registry white.",
+              "Body type (0.15 of 0.15): exact match (car, 0.78).",
+              "Make/model: Maruti Suzuki Baleno (0.46) below 0.50, not used.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 5: video shows 'M', registry has 'N'",
+              "Colour mismatch: video grey, registry white"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          }
+        ],
+        "explanation": "REG-0001 (CG04MX4821) scored 0.80, above the 0.55 threshold, with 10 known plate characters. Higher-scoring REG-0004 contradict a confidently read plate character and are ranked below it.",
+        "known_count": 10,
+        "specificity": 1,
+        "specificity_text": "1 of 500 registry plates fit the known characters of 'CG04MX4821'",
+        "low_light": false,
+        "gap": null,
+        "registry_size": 500
+      },
+      "advisor": {
+        "needed": false,
+        "position": null,
+        "candidate_chars": {},
+        "lead_read_id": null,
+        "lead_frame_idx": null,
+        "lead_char": null,
+        "lead_conf": null,
+        "text": "Not needed: the top candidate is clearly ahead."
+      },
+      "sr_available": true
+    },
+    {
+      "track_id": 2,
+      "clip_role": "A",
+      "yolo_class": "car",
+      "first_seen_sec": 0.0,
+      "last_seen_sec": 5.96,
+      "n_detections": 150,
+      "best_crop_url": "/artifacts/3208b7f6489f/track2_best.jpg",
+      "frames": [],
+      "fused": {
+        "text": "",
+        "video_text": "",
+        "length": 0,
+        "reference_read": null,
+        "n_reads": 0,
+        "positions": [],
+        "hint": null,
+        "hint_conflicts": [],
+        "format_conflicts": [],
+        "excluded_reads": []
+      },
+      "attributes": {
+        "color": {
+          "value": "white",
+          "confidence": 0.5722,
+          "uncertain": false,
+          "top2": [
+            [
+              "white",
+              0.5722
+            ],
+            [
+              "silver",
+              0.2183
+            ]
+          ],
+          "source": "clip"
+        },
+        "body_type": {
+          "value": "SUV",
+          "confidence": 0.4163,
+          "uncertain": false,
+          "top2": [
+            [
+              "SUV",
+              0.4163
+            ],
+            [
+              "car",
+              0.2602
+            ]
+          ],
+          "source": "clip+yolo(car)"
+        },
+        "make_model": {
+          "value": "uncertain",
+          "confidence": 0.1137,
+          "uncertain": true,
+          "top2": [
+            [
+              "Kia Seltos",
+              0.1137
+            ],
+            [
+              "Toyota Innova",
+              0.0547
+            ]
+          ],
+          "source": "clip (body-type constrained)"
+        },
+        "yolo_class": "car"
+      },
+      "match": {
+        "status": "NO CONFIDENT MATCH",
+        "threshold_used": 0.55,
+        "top_candidates": [
+          {
+            "rank": 1,
+            "registry_id": "REG-0005",
+            "plate": "CG04HX4821",
+            "color": "white",
+            "body_type": "SUV",
+            "make": "Hyundai",
+            "model": "Creta",
+            "owner_region": "Raipur, CG",
+            "score": 0.35,
+            "breakdown": {
+              "plate_sim": 0.0,
+              "coverage": 0.0,
+              "plate": 0.0,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.35,
+              "total": 0.35,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.00 of 0.65): no plate characters were readable.",
+              "Colour (0.20 of 0.20): exact match (white, 0.57).",
+              "Body type (0.15 of 0.15): exact match (SUV, 0.42)."
+            ],
+            "mismatches": [],
+            "matched_known": 0,
+            "known_count": 0
+          },
+          {
+            "rank": 2,
+            "registry_id": "REG-0009",
+            "plate": "KA19RV8929",
+            "color": "white",
+            "body_type": "SUV",
+            "make": "Toyota",
+            "model": "Fortuner",
+            "owner_region": "Mangaluru, KA",
+            "score": 0.35,
+            "breakdown": {
+              "plate_sim": 0.0,
+              "coverage": 0.0,
+              "plate": 0.0,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.35,
+              "total": 0.35,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.00 of 0.65): no plate characters were readable.",
+              "Colour (0.20 of 0.20): exact match (white, 0.57).",
+              "Body type (0.15 of 0.15): exact match (SUV, 0.42)."
+            ],
+            "mismatches": [],
+            "matched_known": 0,
+            "known_count": 0
+          },
+          {
+            "rank": 3,
+            "registry_id": "REG-0031",
+            "plate": "22BH1234AA",
+            "color": "white",
+            "body_type": "SUV",
+            "make": "Kia",
+            "model": "Seltos",
+            "owner_region": "Bharat series (Raipur, CG)",
+            "score": 0.35,
+            "breakdown": {
+              "plate_sim": 0.0,
+              "coverage": 0.0,
+              "plate": 0.0,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.35,
+              "total": 0.35,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.00 of 0.65): no plate characters were readable.",
+              "Colour (0.20 of 0.20): exact match (white, 0.57).",
+              "Body type (0.15 of 0.15): exact match (SUV, 0.42)."
+            ],
+            "mismatches": [],
+            "matched_known": 0,
+            "known_count": 0
+          },
+          {
+            "rank": 4,
+            "registry_id": "REG-0035",
+            "plate": "CG15W2647",
+            "color": "white",
+            "body_type": "SUV",
+            "make": "Hyundai",
+            "model": "Venue",
+            "owner_region": "Ambikapur, CG",
+            "score": 0.35,
+            "breakdown": {
+              "plate_sim": 0.0,
+              "coverage": 0.0,
+              "plate": 0.0,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.35,
+              "total": 0.35,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.00 of 0.65): no plate characters were readable.",
+              "Colour (0.20 of 0.20): exact match (white, 0.57).",
+              "Body type (0.15 of 0.15): exact match (SUV, 0.42)."
+            ],
+            "mismatches": [],
+            "matched_known": 0,
+            "known_count": 0
+          },
+          {
+            "rank": 5,
+            "registry_id": "REG-0038",
+            "plate": "MH12UZ9939",
+            "color": "white",
+            "body_type": "SUV",
+            "make": "Tata",
+            "model": "Nexon",
+            "owner_region": "Pune, MH",
+            "score": 0.35,
+            "breakdown": {
+              "plate_sim": 0.0,
+              "coverage": 0.0,
+              "plate": 0.0,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.35,
+              "total": 0.35,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.00 of 0.65): no plate characters were readable.",
+              "Colour (0.20 of 0.20): exact match (white, 0.57).",
+              "Body type (0.15 of 0.15): exact match (SUV, 0.42)."
+            ],
+            "mismatches": [],
+            "matched_known": 0,
+            "known_count": 0
+          }
+        ],
+        "explanation": "Best candidate REG-0005 scored 0.35, below the 0.55 threshold. No plate characters were readable, so the score is capped at 0.45 and colour and body type alone can never produce a match.",
+        "known_count": 0,
+        "specificity": 500,
+        "specificity_text": "no known characters: all 500 registry plates fit",
+        "low_light": false,
+        "gap": 0.0,
+        "registry_size": 500
+      },
+      "advisor": {
+        "needed": true,
+        "position": null,
+        "candidate_chars": {},
+        "lead_read_id": null,
+        "lead_frame_idx": null,
+        "lead_char": null,
+        "lead_conf": null,
+        "text": "Every plate position was read, so the candidates are separated by colour, body type or OCR mix-ups rather than by an unknown position. Check the attribute chips and the confusable characters by eye."
+      },
+      "sr_available": true
+    }
+  ],
+  "narrative": {
+    "text": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX4821` across 24 plate reads [F5, F5c, F8]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.80 with 10 of 10 known characters matching [REG-0001]. Vehicle track 2 (white SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0005, scored 0.35 [REG-0005].",
+    "method": "template",
+    "sentences": [
+      {
+        "text": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX4821` across 24 plate reads [F5, F5c, F8].",
+        "passed": true,
+        "problems": []
+      },
+      {
+        "text": "The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.80 with 10 of 10 known characters matching [REG-0001].",
+        "passed": true,
+        "problems": []
+      },
+      {
+        "text": "Vehicle track 2 (white SUV, seen 00:00.0-00:06.0) gave no readable plate [T2].",
+        "passed": true,
+        "problems": []
+      },
+      {
+        "text": "No registry entry cleared the 0.55 threshold; the best, REG-0005, scored 0.35 [REG-0005].",
+        "passed": true,
+        "problems": []
+      }
+    ],
+    "checked": 4,
+    "removed": 0
+  },
+  "custody": {
+    "clip_sha256": "e013364c015a154d1f6270f72775ab8ca26db8cb73bab7945002a204b409854d",
+    "clips": [
+      {
+        "name": "day_clear_white.mp4",
+        "sha256": "e013364c015a154d1f6270f72775ab8ca26db8cb73bab7945002a204b409854d",
+        "width": 1280,
+        "height": 720,
+        "fps": 25.0,
+        "frame_count": 150,
+        "duration_sec": 6.0,
+        "median_brightness": 115.71,
+        "low_light": false
+      }
+    ],
+    "models": {
+      "prism": "1.0.0",
+      "tracker": "ultralytics yolo11s.pt + bytetrack.yaml",
+      "plate_detector": "fast-alpr yolo-v9-t-384-license-plate-end2end (vendor/fast-alpr)",
+      "ocr": "parseq:parseq (vendor/parseq)",
+      "super_resolution": "lpsr-lacd cgnetV2_deformable (visual aid only)",
+      "attributes": "OpenCLIP ViT-B-32 (laion2b_s34b_b79k)",
+      "device": "cuda (NVIDIA GeForce RTX 5050 Laptop GPU)"
+    },
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "ultralytics": "8.4.216",
+      "open_clip_torch": "4.2.2",
+      "fast-alpr": "0.4.0",
+      "fast-plate-ocr": "1.1.0",
+      "open-image-models": "0.6.0",
+      "onnxruntime": "1.32.0",
+      "opencv-python-headless": "5.1.0.95",
+      "opencv-python": "5.1.0.95",
+      "numpy": "2.4.6",
+      "fastapi": "0.165.0",
+      "pydantic": "2.14.4",
+      "jinja2": "3.1.6",
+      "playwright": "1.65.2",
+      "pytorch-lightning": "2.6.6",
+      "timm": "1.0.31"
+    },
+    "vendor_commits": {
+      "fast-alpr": "c5a94706f175590b2bc09aa86f46182d4c267fae",
+      "parseq": "1902db043c029a7e03a3818c616c06600af574be",
+      "lpsr-lacd": "8a3bdb55752c52028d1d5df74dd132c1542fd7fd",
+      "vehicle-reidentification": "2f8ab6b5632f4fd5edef0bcb0e4141ae2a2f77b9"
+    },
+    "prism_commit": "49adcea06057943222f6a1af92c95916a683eb01",
+    "config_hash": "f7f9601f12215b382bc07139481e9a4289f1cac44f17bc86673cb63fbbb665ce",
+    "config": {
+      "seed": 42,
+      "device": "auto",
+      "ingest": {
+        "low_light_brightness": 60.0,
+        "brightness_sample_every": 5
+      },
+      "track": {
+        "model_gpu": "yolo11s.pt",
+        "model_cpu": "yolo11n.pt",
+        "tracker": "bytetrack.yaml",
+        "classes": {
+          "2": "car",
+          "3": "motorcycle",
+          "5": "bus",
+          "7": "truck"
+        },
+        "det_conf": 0.25,
+        "crop_pad": 0.05,
+        "min_track_frames": 5,
+        "frame_stride_cpu": 2,
+        "frame_stride_gpu": 1,
+        "imgsz": 640
+      },
+      "plate": {
+        "detector_model": "yolo-v9-t-384-license-plate-end2end",
+        "det_conf": 0.35,
+        "min_sharpness": 45.0,
+        "min_width_px": 30,
+        "top_k_frames": 12,
+        "two_line_aspect": 2.2,
+        "two_line_gap_ratio": 0.6,
+        "clahe_clip_limit": 2.0,
+        "clahe_tile": [
+          8,
+          8
+        ],
+        "read_clahe_copy": true,
+        "vehicle_crops_for_attributes": 3,
+        "max_obs_per_track": 60,
+        "plate_pad_px": 2
+      },
+      "ocr": {
+        "backend": "parseq",
+        "parseq_variant": "parseq",
+        "fast_plate_ocr_model": "cct-s-v2-global-model",
+        "char_conf": 0.7,
+        "separators": " -.·_|"
+      },
+      "fusion": {
+        "s_ref": 100.0,
+        "sharpness_cap": 2.0,
+        "vote_min_weight": 0.9,
+        "vote_min_share": 0.6,
+        "vote_min_consistency": 0.4
+      },
+      "match": {
+        "tau": 0.55,
+        "w_plate": 0.65,
+        "w_color": 0.2,
+        "w_body": 0.15,
+        "mm_bonus": 0.05,
+        "mm_min_conf": 0.5,
+        "low_light_w_plate": 0.75,
+        "low_light_w_color": 0.1,
+        "no_plate_cap": 0.45,
+        "min_known_for_match": 3,
+        "mismatch_blocks_match": true,
+        "rank_contradictions_last": true,
+        "ambiguity_gap": 0.05,
+        "coverage_full": 6,
+        "confusable_credit": 0.35,
+        "shift_penalty": 0.05,
+        "shifts": [
+          -1,
+          0,
+          1
+        ],
+        "top_n": 5,
+        "confusable_pairs": [
+          [
+            "0",
+            "O"
+          ],
+          [
+            "1",
+            "I"
+          ],
+          [
+            "8",
+            "B"
+          ],
+          [
+            "5",
+            "S"
+          ],
+          [
+            "2",
+            "Z"
+          ],
+          [
+            "6",
+            "G"
+          ],
+          [
+            "4",
+            "A"
+          ]
+        ],
+        "adjacent_colors": [
+          [
+            "silver",
+            "grey"
+          ],
+          [
+            "white",
+            "silver"
+          ]
+        ],
+        "adjacent_colors_low_light": [
+          [
+            "grey",
+            "black"
+          ]
+        ],
+        "adjacent_color_credit": 0.5
+      },
+      "attributes": {
+        "clip_model": "ViT-B-32",
+        "clip_pretrained": "laion2b_s34b_b79k",
+        "n_crops": 3,
+        "uncertain_below": 0.4,
+        "logit_scale": 100.0
+      },
+      "super_res": {
+        "enabled": true,
+        "weights_file": "lpsr_cgnetV2_deformable.pth",
+        "pad_color": [
+          127,
+          127,
+          127
+        ],
+        "aspect_ratio": 3.0,
+        "in_h": 16,
+        "in_w": 48
+      },
+      "reid": {
+        "encoder": "clip",
+        "thresholds": {
+          "clip": 0.82,
+          "osnet": 0.8,
+          "resnet": 0.85
+        },
+        "max_city_speed_kmh": 120.0,
+        "n_crops": 3,
+        "min_plate_agree": 3
+      },
+      "narrative": {
+        "backend": "template",
+        "ollama_url": "http://127.0.0.1:11434",
+        "ollama_model": "llama3.2:3b",
+        "ollama_timeout_s": 45.0,
+        "max_failed_sentences": 1
+      }
+    },
+    "artifacts": [
+      {
+        "path": "/artifacts/3208b7f6489f/track1_best.jpg",
+        "sha256": "5a252eeab5550a91177f95a28b052558ab5299d06178b961c99506e47f23d71d",
+        "kind": "vehicle_best_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f10_plate.png",
+        "sha256": "e6a2c21debf9f64c3017c373c219a567d950e3868e76d72728ae0a46fb36a533",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f10_plate_clahe.png",
+        "sha256": "c3fd33ad1fff44e07da2e5e466f22dd9b181b927beb4a498a273d169862919bb",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f10_sr.png",
+        "sha256": "5e22345bedc2deab10b9b3e01e94853ef4a7bc6aad7b327ae5676f03e2447f9e",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f10_veh.jpg",
+        "sha256": "cd4b293f1024a1e75341ff260acb2f36f45886dde4ccf41122acaa305fbbf0a6",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f20_plate.png",
+        "sha256": "75403811933edbcab9ed0c30a735bdd039a2f4d926f96a097588bb25ea2569fc",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f20_plate_clahe.png",
+        "sha256": "a66d0c301302ee8ffbbad5d5627b7eed687e6e59de82be7ae4325648aeea4268",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f20_sr.png",
+        "sha256": "648af07282ecdeadaa5c8c773b8049b400f66bba045ffc95bd8ddd3c2983f1c2",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f20_veh.jpg",
+        "sha256": "781f51639da131afb191b99cf5051388cfa8e08b7b1f8c93ee2f3fd457c94a5d",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f23_plate.png",
+        "sha256": "3d2293c33e94f0aa2407f38b4f9d48cc4989840de546e5a5e539f60fa0e32f22",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f23_plate_clahe.png",
+        "sha256": "bc807b6a6aa53748af8e7a3cbb0f867790f74f1fb066dfa6a5cb72be709473fe",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f23_sr.png",
+        "sha256": "5493b775a4e3a7c7c4472f748fdd531026a9b881b47a767d87fe3f5cf56e8791",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f23_veh.jpg",
+        "sha256": "1e0e5ef98fde42f227578f241b88138892fadd789da04930d4607d7dff3f0fd0",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f30_plate.png",
+        "sha256": "fea0077231ab79877ed308994ef1b03c43a518f8fb32ff6515bf94e0dcc56610",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f30_plate_clahe.png",
+        "sha256": "68b65e2482a3b6083e577f0fabe22eb082a0cdc1bdf7e2dc3dd8666a9fbda7ab",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f30_sr.png",
+        "sha256": "0b9546e41d015eb865a95a6a6327cd8042cf7044e9af07c3e8f285039c2eb2d5",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f30_veh.jpg",
+        "sha256": "81357e9046b56ed47bdbd8d5aac6b0fbfd2d0120b91e2a8afb2267fcd4bb916d",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f33_plate.png",
+        "sha256": "4f01d13ecf7205461f4e4e090c1a7ed9cb1729edf71b456bda926f30b7c7e862",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f33_plate_clahe.png",
+        "sha256": "27d59e777f34175cfe3eea646bc477b3e953bdb0965a60ef7f0f79a22b9bed92",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f33_sr.png",
+        "sha256": "394fe80807784431bf172d3e7697e991545a0508c16f2f09b6d2c2684dec5ab1",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f33_veh.jpg",
+        "sha256": "386bee35167a3153f28cf043a76e9f37f9dd565f9c6eb68819e235f7359fd880",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f35_plate.png",
+        "sha256": "139cd17a38ad4547b994326b6f45ca6fbf0f50cf0608898645f1aec18f389bb8",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f35_plate_clahe.png",
+        "sha256": "fa0cca55cb5a46f8075c08a50d6dbbc41104c0a64f064c330278557042d193ef",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f35_sr.png",
+        "sha256": "badee30ef5aeb32ce2a2b07d9cdc176415e46dec697258ad4c6e825ec53ae052",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f35_veh.jpg",
+        "sha256": "a179cea21f2f55c0839f66767f1f51671fa4fadb554f7ea3c95d6cda47e26ba1",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f45_plate.png",
+        "sha256": "26b0cf3bdb82393207c7e3289b96469d97826b2b72d1cf7a285ff25b94516466",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f45_plate_clahe.png",
+        "sha256": "466b9904e17bf031fb6d801dc28bb33347271b76b21eccb42e49794e1dbb0171",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f45_sr.png",
+        "sha256": "906ec25e6a4eb77be1f8787925cce3d2a9873c5acb0191e248fdd9e09715aeb5",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f45_veh.jpg",
+        "sha256": "4d86be92b1f2ff2ad5f6f38d6a0273ef6a10c92ae74588a5bec94ed2618cde4c",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f51_plate.png",
+        "sha256": "2acb93b2a0fd209f3d2fa094f3b9e9aed3533134b3140db22c22d3fc83c5c560",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f51_plate_clahe.png",
+        "sha256": "e9ecb93bbbd15a57d9e15870856c44b78389170e304d632d4281428220a589c0",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f51_sr.png",
+        "sha256": "8236c94de92fba1feddcb1c20bb7eeb4eff21efb1ea9a4bc38bca316498134dd",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f51_veh.jpg",
+        "sha256": "02e9a285f8991725cfa6f6e6820007a87d592805dd0e38a564f05ef3dafd2c5c",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f58_plate.png",
+        "sha256": "f553ed5bc571d75001e14325cbf8882a5a99d5a031c2f579c31f35b7eea171a7",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f58_plate_clahe.png",
+        "sha256": "27d53c9a287d8b375a91e79c9fe3b919d7aa83106be911e5507a10acdfbaa477",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f58_sr.png",
+        "sha256": "efedaea353b87da6878571b03d13fe3613fa3a51b19be97d612fb613e1570159",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f58_veh.jpg",
+        "sha256": "a8b50b8222026c1dcd24d2e0221045749d05ce3e197bd94fbf8694689470b146",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f5_plate.png",
+        "sha256": "9a950776b95a28e02fac33f076a1610cdd0cb43b9f190059c4a20c7b78008373",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f5_plate_clahe.png",
+        "sha256": "ab367207807b4f1af62d0c343e778b7d0c718a307d80e54fe31b661dbd677cc4",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f5_sr.png",
+        "sha256": "2484996597c9e7d486369161e2d1b451ac1b4bf46926dd42ffc5ce92caab1304",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f5_veh.jpg",
+        "sha256": "55bd31e23075c57881ef3ab2077e43fa571497167b1addfad25fea700f152644",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f61_plate.png",
+        "sha256": "842ed603a0b61bdcd1a2f6ce884b7b0aa578092aa463622350a20da06476503b",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f61_plate_clahe.png",
+        "sha256": "9e8c3d88408f9b541e3640d4d244c6b5d5abea718f7464096833c5817e1123dc",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f61_sr.png",
+        "sha256": "cf67441160c299ff5bf45efe182be8c282b7df550fe955884f38d2e4a3454eb5",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f61_veh.jpg",
+        "sha256": "0e3274d4cab2a52d1c9f8ca0b135603661bca3b3a1a1c1c583bda305b6ca32a1",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f8_plate.png",
+        "sha256": "70b012c7f6a2d361cb07fc132e038c82d09ba3a66cad43009297928dc6b98dac",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f8_plate_clahe.png",
+        "sha256": "921e7642b9e43f91400f1f5be56cb91a395b196a672c96c7f847e7ec40b22103",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f8_sr.png",
+        "sha256": "0a23bfa518d04fcdd51be57d1865b2bf075ef96dad7addc4bb32490ae88b81ef",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track1_f8_veh.jpg",
+        "sha256": "5a252eeab5550a91177f95a28b052558ab5299d06178b961c99506e47f23d71d",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/3208b7f6489f/track2_best.jpg",
+        "sha256": "df8ca6b213485a959b94ffe8bacb00e4e5e019528fc4582e6b55d9d6f169d545",
+        "kind": "vehicle_best_crop"
+      }
+    ],
+    "registry_sha256": "e3cfb9b3ee460f6677fba2a15b66dac4f0fb523d73165fbdff991481fe9120f5"
+  },
+  "warnings": [],
+  "stage_timings": {
+    "ingest": 0.01,
+    "tracking": 4.75,
+    "plates": 2.69,
+    "ocr": 1.53,
+    "attributes": 0.06,
+    "matching": 0.04,
+    "total": 10.81
+  },
+  "crosscam": null,
+  "primary_track_id": 1
+}

@@ -1,0 +1,497 @@
+{
+  "clips": [
+    {
+      "clip": "camB_white__gauss.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "camB_white__motion.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "camB_white__down2x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "camB_white__down4x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "camB_white__jpeg20.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "camB_white__noise_dark.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [
+        1
+      ],
+      "note": "Second camera for the cross-camera demo: position 1 is smeared, position 9 is visible.",
+      "source_clip": "camB_white.mp4",
+      "degradation": "noise_dark"
+    },
+    {
+      "clip": "day_black_suv__gauss.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "day_black_suv__motion.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "day_black_suv__down2x.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "day_black_suv__down4x.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "day_black_suv__jpeg20.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "day_black_suv__noise_dark.mp4",
+      "plate": "MH12DE5678",
+      "registry_id": "REG-0010",
+      "color": "black",
+      "body_type": "SUV",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Black Toyota Innova (MPV/SUV).",
+      "source_clip": "day_black_suv.mp4",
+      "degradation": "noise_dark"
+    },
+    {
+      "clip": "day_blue_twoline__gauss.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "day_blue_twoline__motion.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "day_blue_twoline__down2x.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "day_blue_twoline__down4x.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "day_blue_twoline__jpeg20.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "day_blue_twoline__noise_dark.mp4",
+      "plate": "KA05MN2023",
+      "registry_id": "REG-0020",
+      "color": "blue",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Rear view, two-line plate.",
+      "source_clip": "day_blue_twoline.mp4",
+      "degradation": "noise_dark"
+    },
+    {
+      "clip": "day_clear_white__gauss.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "day_clear_white__motion.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "day_clear_white__down2x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "day_clear_white__down4x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "day_clear_white__jpeg20.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "day_clear_white__noise_dark.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Clear daytime approach; full plate readable.",
+      "source_clip": "day_clear_white.mp4",
+      "degradation": "noise_dark"
+    },
+    {
+      "clip": "night_partial_white__gauss.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "night_partial_white__motion.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "night_partial_white__down2x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "night_partial_white__down4x.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "night_partial_white__jpeg20.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "night_partial_white__noise_dark.mp4",
+      "plate": "CG04MX4821",
+      "registry_id": "REG-0001",
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "AMBIGUOUS",
+      "night": true,
+      "occluded_positions": [
+        9
+      ],
+      "note": "Night, position 9 smeared with mud. REG-0002 (CG04MX4851) differs only at position 9.",
+      "source_clip": "night_partial_white.mp4",
+      "degradation": "noise_dark"
+    },
+    {
+      "clip": "unregistered_white__gauss.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "gauss"
+    },
+    {
+      "clip": "unregistered_white__motion.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "motion"
+    },
+    {
+      "clip": "unregistered_white__down2x.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "down2x"
+    },
+    {
+      "clip": "unregistered_white__down4x.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "down4x"
+    },
+    {
+      "clip": "unregistered_white__jpeg20.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "jpeg20"
+    },
+    {
+      "clip": "unregistered_white__noise_dark.mp4",
+      "plate": "MH14XY0042",
+      "registry_id": null,
+      "color": "white",
+      "body_type": "car",
+      "expected_status": "NO CONFIDENT MATCH",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Plate not in the registry: PRISM must not force a match.",
+      "source_clip": "unregistered_white.mp4",
+      "degradation": "noise_dark"
+    }
+  ],
+  "crosscam_pairs": []
+}

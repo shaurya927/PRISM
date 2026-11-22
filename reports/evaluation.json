@@ -1,0 +1,2882 @@
+{
+  "n_vehicles": 120,
+  "tau": 0.55,
+  "device": "cuda",
+  "ocr_benchmark": {
+    "parseq": {
+      "committed_char_error": 0.064,
+      "recovery_rate": 0.691,
+      "top1": 0.725,
+      "top5": 0.7917,
+      "matched_correct": 0.6167,
+      "false_match_rate": 0.0083,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9923,
+          "top1": 0.975,
+          "top5": 0.975,
+          "matched_correct": 0.975,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0217,
+          "recovery_rate": 0.9351,
+          "top1": 0.95,
+          "top5": 0.975,
+          "matched_correct": 0.775,
+          "false_match_rate": 0.025,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.4434,
+          "recovery_rate": 0.1509,
+          "top1": 0.25,
+          "top5": 0.425,
+          "matched_correct": 0.1,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KA51F1957",
+          "fused": "?6NO????",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "??8??Y3276",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "CG15VG4804",
+          "fused": "11???1????",
+          "level": "hard",
+          "reads": [
+            "181",
+            "8831",
+            "12:30-12:48",
+            "610",
+            "1111",
+            "CITY",
+            "CLUBEVICARM",
+            "CLUB"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "????????0",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "??2U??",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "??G?2?0?",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "?H??2??9??",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        },
+        {
+          "truth": "MH02YY1234",
+          "fused": "?E??E?",
+          "level": "hard",
+          "reads": [
+            "WE'RED",
+            "GERRY",
+            "-",
+            "WELCOM",
+            "PARCE",
+            "PERFOR",
+            "-",
+            "WALCO"
+          ]
+        },
+        {
+          "truth": "KA51KY9729",
+          "fused": "KA51KM9729",
+          "level": "medium",
+          "reads": [
+            "KA51KM9729",
+            "KA51KM3729",
+            "KA51KM9729",
+            "9729",
+            "KA51KM9729",
+            "KASERM1577293",
+            "9729",
+            "MUP"
+          ]
+        },
+        {
+          "truth": "KA51SA0321",
+          "fused": "A??????9??",
+          "level": "hard",
+          "reads": [
+            "ANTO-SA-1963",
+            "ONES",
+            "OFFICE",
+            "CARKING",
+            "GASEGAMES",
+            "8833",
+            "NASTSAMES",
+            "MUSHI"
+          ]
+        },
+        {
+          "truth": "CG15TU1490",
+          "fused": "CG18TU1490",
+          "level": "medium",
+          "reads": [
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "0638TU1490",
+            "CG1RTU1490",
+            "CG18TU1490"
+          ]
+        },
+        {
+          "truth": "MH04VN1276",
+          "fused": "?0??6127?",
+          "level": "hard",
+          "reads": [
+            "900-861276",
+            "EURON",
+            "-",
+            "COMISON",
+            "MUSICUS",
+            "CAEID",
+            "133",
+            "CITRON"
+          ]
+        },
+        {
+          "truth": "DL9CZ7913",
+          "fused": "DL?C?7??8",
+          "level": "hard",
+          "reads": [
+            "&THERE",
+            "67399",
+            "194",
+            "81959",
+            "144",
+            "81996",
+            "DL9CB7918",
+            "055087818"
+          ]
+        },
+        {
+          "truth": "MH12MY5071",
+          "fused": "MH12MY8071",
+          "level": "medium",
+          "reads": [
+            "MH12MY8071",
+            "MH12MY",
+            "MH12MY8071",
+            "MH12MY8071",
+            "MH12MY8071",
+            "MH12MY",
+            "MH12MY8071",
+            "MH12MY"
+          ]
+        }
+      ],
+      "ms_per_read": 56.13
+    },
+    "fast_plate_ocr": {
+      "committed_char_error": 0.0297,
+      "recovery_rate": 0.4481,
+      "top1": 0.5167,
+      "top5": 0.625,
+      "matched_correct": 0.3917,
+      "false_match_rate": 0.0083,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0026,
+          "recovery_rate": 0.9871,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.925,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0507,
+          "recovery_rate": 0.3403,
+          "top1": 0.45,
+          "top5": 0.525,
+          "matched_correct": 0.25,
+          "false_match_rate": 0.025,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.5333,
+          "recovery_rate": 0.0179,
+          "top1": 0.15,
+          "top5": 0.4,
+          "matched_correct": 0.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "MH01WV1189",
+          "fused": "MH01WWV1189",
+          "level": "easy",
+          "reads": [
+            "MH01VOV1189",
+            "MH01VVY",
+            "MH01WV118",
+            "MH01WV1",
+            "MH01VVX",
+            "MH01VVY",
+            "MH01VOV1189",
+            "MH01WOVH11189"
+          ]
+        },
+        {
+          "truth": "DL4SC0257",
+          "fused": "DL45?025?",
+          "level": "medium",
+          "reads": [
+            "45",
+            "",
+            "DL4560251",
+            "DL15L075",
+            "C46C255",
+            "",
+            "DL45G0251",
+            "DLV5550251KP"
+          ]
+        },
+        {
+          "truth": "MH01NY3121",
+          "fused": "MH01????1??",
+          "level": "medium",
+          "reads": [
+            "MH01NVY1121",
+            "MH01NYYAA114",
+            "MM1141842A",
+            "",
+            "MH01NVYA121",
+            "MH03NYFA17M",
+            "M41444",
+            ""
+          ]
+        },
+        {
+          "truth": "DL9CZ7913",
+          "fused": "?AX?71?",
+          "level": "hard",
+          "reads": [
+            "1",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "AAE111",
+            "CAX1718"
+          ]
+        },
+        {
+          "truth": "MH12MY5071",
+          "fused": "MH1?M????7?",
+          "level": "medium",
+          "reads": [
+            "MH12MYYMQ71",
+            "",
+            "MH12MW1071",
+            "MH17MM371",
+            "MH18MWV1071",
+            "MM11M",
+            "MH13MYYM771",
+            ""
+          ]
+        },
+        {
+          "truth": "CG04CW8321",
+          "fused": "???1??",
+          "level": "hard",
+          "reads": [
+            "HW111",
+            "",
+            "1FF45",
+            "",
+            "",
+            "",
+            "64MTMN",
+            ""
+          ]
+        },
+        {
+          "truth": "DL7CUN8079",
+          "fused": "N?????",
+          "level": "hard",
+          "reads": [
+            "",
+            "",
+            "",
+            "",
+            "H1845",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "truth": "MH02Y3729",
+          "fused": "MH?2??3729",
+          "level": "medium",
+          "reads": [
+            "1",
+            "",
+            "MH44YY3729",
+            "MHK2L3729",
+            "MHI22Y37299",
+            "MHI21237729",
+            "MH2Y3729",
+            "NMH21YJ3329"
+          ]
+        },
+        {
+          "truth": "MH31PK2348",
+          "fused": "MH?????234?",
+          "level": "medium",
+          "reads": [
+            "MH31RKK2341",
+            "MH31R0234",
+            "MH88PK2348",
+            "MV38PRK344",
+            "MH341PK2348",
+            "MH331PKK2348",
+            "MH311K284W",
+            ""
+          ]
+        },
+        {
+          "truth": "KA19E3204",
+          "fused": "?A11????",
+          "level": "hard",
+          "reads": [
+            "VA16KB54",
+            "",
+            "166",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "truth": "KA05L0858",
+          "fused": "???4???",
+          "level": "hard",
+          "reads": [
+            "46M11",
+            "",
+            "NA",
+            "",
+            "WM16",
+            "",
+            "HH545",
+            ""
+          ]
+        },
+        {
+          "truth": "CG10K0921",
+          "fused": "2???????",
+          "level": "hard",
+          "reads": [
+            "GLK111",
+            "",
+            "1IP449",
+            "",
+            "1456510",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "truth": "CG04ZG7479",
+          "fused": "??44???",
+          "level": "hard",
+          "reads": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "truth": "CG04KH9273",
+          "fused": "?G04???9?7?",
+          "level": "medium",
+          "reads": [
+            "CG84WM92T3",
+            "",
+            "K004KHH9271",
+            "EE0VK9977",
+            "CG04KMHW271",
+            "550NKM121V0",
+            "CG04KHH9273",
+            "CG04KMH49273"
+          ]
+        },
+        {
+          "truth": "MH31D8149",
+          "fused": "M?3??8144",
+          "level": "medium",
+          "reads": [
+            "MM31D8144",
+            "MH31081441",
+            "MH31D814",
+            "MH310814",
+            "MNW10814",
+            "MNW14B",
+            "MNN3A8144",
+            ""
+          ]
+        }
+      ],
+      "ms_per_read": 28.93
+    }
+  },
+  "ocr_winner": "parseq",
+  "ablation": {
+    "single": {
+      "committed_char_error": 0.1561,
+      "recovery_rate": 0.733,
+      "top1": 0.7083,
+      "top5": 0.7583,
+      "matched_correct": 0.525,
+      "false_match_rate": 0.0,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9846,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.95,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0423,
+          "recovery_rate": 0.9403,
+          "top1": 0.9,
+          "top5": 0.925,
+          "matched_correct": 0.625,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.5657,
+          "recovery_rate": 0.2788,
+          "top1": 0.275,
+          "top5": 0.4,
+          "matched_correct": 0.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "MH12DE5878",
+          "fused": "90082085878",
+          "level": "hard",
+          "reads": [
+            "1858",
+            "CLEC",
+            "90082085878",
+            "99182263878",
+            "MORAL",
+            "CELEXI",
+            "-",
+            "CITTO"
+          ]
+        },
+        {
+          "truth": "KA51F1957",
+          "fused": "WAYSHOP",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "MA80AY3276",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "DL4SC0257",
+          "fused": "DL4SC025B",
+          "level": "medium",
+          "reads": [
+            "DL4SC025B",
+            "DL&SC0258",
+            "DL4SC025B",
+            "DL4SC0258",
+            "DL4SC0258",
+            "8258",
+            "DL4SC025B",
+            "DL4SC0258"
+          ]
+        },
+        {
+          "truth": "CG15VG4804",
+          "fused": "181",
+          "level": "hard",
+          "reads": [
+            "181",
+            "8831",
+            "12:30-12:48",
+            "610",
+            "1111",
+            "CITY",
+            "CLUBEVICARM",
+            "CLUB"
+          ]
+        },
+        {
+          "truth": "DL1CK1170",
+          "fused": "061CK1178",
+          "level": "hard",
+          "reads": [
+            "06:1881176",
+            "81009",
+            "AIRUS",
+            "81925",
+            "AEL-OR1178",
+            "RIODS",
+            "REDORSON",
+            "RIGHT"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "1880",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "77",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "6A80GX2488",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "HH812H7940",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        },
+        {
+          "truth": "CG04N1321",
+          "fused": "CGO?N1321",
+          "level": "medium",
+          "reads": [
+            "CGOBN1321",
+            "CGOBN1321",
+            "CGO8N1321",
+            "CG08N1321",
+            "CG08N1321",
+            "CG08N1321",
+            "CGOBN1321",
+            "CGO8N1321"
+          ]
+        },
+        {
+          "truth": "MH02YY1234",
+          "fused": "WE?RED",
+          "level": "hard",
+          "reads": [
+            "WE'RED",
+            "GERRY",
+            "-",
+            "WELCOM",
+            "PARCE",
+            "PERFOR",
+            "-",
+            "WALCO"
+          ]
+        },
+        {
+          "truth": "KA51KY9729",
+          "fused": "KA51KM9729",
+          "level": "medium",
+          "reads": [
+            "KA51KM9729",
+            "KA51KM3729",
+            "KA51KM9729",
+            "9729",
+            "KA51KM9729",
+            "KASERM1577293",
+            "9729",
+            "MUP"
+          ]
+        },
+        {
+          "truth": "CG04MX4827",
+          "fused": "CO06MX4827",
+          "level": "hard",
+          "reads": [
+            "SUBWERY",
+            "CLUB",
+            "-",
+            "6444",
+            "CO.06MX4827",
+            "4880",
+            "--------------------",
+            "CITY"
+          ]
+        }
+      ]
+    },
+    "majority": {
+      "committed_char_error": 0.1385,
+      "recovery_rate": 0.6833,
+      "top1": 0.625,
+      "top5": 0.725,
+      "matched_correct": 0.475,
+      "false_match_rate": 0.0,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9846,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.95,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0573,
+          "recovery_rate": 0.9403,
+          "top1": 0.8,
+          "top5": 0.825,
+          "matched_correct": 0.475,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.6752,
+          "recovery_rate": 0.1304,
+          "top1": 0.125,
+          "top5": 0.4,
+          "matched_correct": 0.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "MH12DE5878",
+          "fused": "CO8E8",
+          "level": "hard",
+          "reads": [
+            "1858",
+            "CLEC",
+            "90082085878",
+            "99182263878",
+            "MORAL",
+            "CELEXI",
+            "-",
+            "CITTO"
+          ]
+        },
+        {
+          "truth": "MH04UU7936",
+          "fused": "1113",
+          "level": "hard",
+          "reads": [
+            "--------------------------",
+            "1813",
+            "---------------------",
+            "1133",
+            "1113",
+            "(1113",
+            "-----------------------",
+            "CELL"
+          ]
+        },
+        {
+          "truth": "DL11CK2781",
+          "fused": "DL118K2781",
+          "level": "medium",
+          "reads": [
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL118K2781",
+            "BESERTHE"
+          ]
+        },
+        {
+          "truth": "KA51F1957",
+          "fused": "ONE",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "6880S",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "DL4SC0257",
+          "fused": "DL4SC0258",
+          "level": "medium",
+          "reads": [
+            "DL4SC025B",
+            "DL&SC0258",
+            "DL4SC025B",
+            "DL4SC0258",
+            "DL4SC0258",
+            "8258",
+            "DL4SC025B",
+            "DL4SC0258"
+          ]
+        },
+        {
+          "truth": "CG04UD4093",
+          "fused": "1E11",
+          "level": "hard",
+          "reads": [
+            "sweet",
+            "4444",
+            "###",
+            "(1275)",
+            "10-00-00-800",
+            "1111",
+            "CALORSHENESS",
+            "CLUBBIT"
+          ]
+        },
+        {
+          "truth": "CG15VG4804",
+          "fused": "C831",
+          "level": "hard",
+          "reads": [
+            "181",
+            "8831",
+            "12:30-12:48",
+            "610",
+            "1111",
+            "CITY",
+            "CLUBEVICARM",
+            "CLUB"
+          ]
+        },
+        {
+          "truth": "DL1CK1170",
+          "fused": "8117S",
+          "level": "hard",
+          "reads": [
+            "06:1881176",
+            "81009",
+            "AIRUS",
+            "81925",
+            "AEL-OR1178",
+            "RIODS",
+            "REDORSON",
+            "RIGHT"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "1180",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "MH01NY3121",
+          "fused": "MH01NY0121",
+          "level": "medium",
+          "reads": [
+            "MH01NY#121",
+            "MH01NY#121",
+            "MH01NY#121",
+            "MHOINY",
+            "MH01NY0121",
+            "MH01NY161212",
+            "MH01NY#121",
+            "###"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "OH7",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "888",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "721",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        }
+      ]
+    },
+    "conf_mask": {
+      "committed_char_error": 0.1495,
+      "recovery_rate": 0.6738,
+      "top1": 0.6333,
+      "top5": 0.7333,
+      "matched_correct": 0.4833,
+      "false_match_rate": 0.0,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9846,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.95,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0548,
+          "recovery_rate": 0.9403,
+          "top1": 0.825,
+          "top5": 0.85,
+          "matched_correct": 0.5,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.7452,
+          "recovery_rate": 0.1023,
+          "top1": 0.125,
+          "top5": 0.4,
+          "matched_correct": 0.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "MH12DE5878",
+          "fused": "CC8ED",
+          "level": "hard",
+          "reads": [
+            "1858",
+            "CLEC",
+            "90082085878",
+            "99182263878",
+            "MORAL",
+            "CELEXI",
+            "-",
+            "CITTO"
+          ]
+        },
+        {
+          "truth": "MH04UU7936",
+          "fused": "111L",
+          "level": "hard",
+          "reads": [
+            "--------------------------",
+            "1813",
+            "---------------------",
+            "1133",
+            "1113",
+            "(1113",
+            "-----------------------",
+            "CELL"
+          ]
+        },
+        {
+          "truth": "DL11CK2781",
+          "fused": "DL11SK2781",
+          "level": "medium",
+          "reads": [
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL11#K2781",
+            "DL118K2781",
+            "BESERTHE"
+          ]
+        },
+        {
+          "truth": "KA51F1957",
+          "fused": "OEP",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "YE2W6",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "DL4SC0257",
+          "fused": "DL4SC0258",
+          "level": "medium",
+          "reads": [
+            "DL4SC025B",
+            "DL&SC0258",
+            "DL4SC025B",
+            "DL4SC0258",
+            "DL4SC0258",
+            "8258",
+            "DL4SC025B",
+            "DL4SC0258"
+          ]
+        },
+        {
+          "truth": "CG04UD4093",
+          "fused": "1E1S",
+          "level": "hard",
+          "reads": [
+            "sweet",
+            "4444",
+            "###",
+            "(1275)",
+            "10-00-00-800",
+            "1111",
+            "CALORSHENESS",
+            "CLUBBIT"
+          ]
+        },
+        {
+          "truth": "CG15VG4804",
+          "fused": "CA01",
+          "level": "hard",
+          "reads": [
+            "181",
+            "8831",
+            "12:30-12:48",
+            "610",
+            "1111",
+            "CITY",
+            "CLUBEVICARM",
+            "CLUB"
+          ]
+        },
+        {
+          "truth": "DL1CK1170",
+          "fused": "81G7S",
+          "level": "hard",
+          "reads": [
+            "06:1881176",
+            "81009",
+            "AIRUS",
+            "81925",
+            "AEL-OR1178",
+            "RIODS",
+            "REDORSON",
+            "RIGHT"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "181Y",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "MH01NY3121",
+          "fused": "MH01NYY121",
+          "level": "medium",
+          "reads": [
+            "MH01NY#121",
+            "MH01NY#121",
+            "MH01NY#121",
+            "MHOINY",
+            "MH01NY0121",
+            "MH01NY161212",
+            "MH01NY#121",
+            "###"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "THE",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "OT0",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "7HE",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        }
+      ]
+    },
+    "two_condition": {
+      "committed_char_error": 0.1026,
+      "recovery_rate": 0.691,
+      "top1": 0.6833,
+      "top5": 0.7667,
+      "matched_correct": 0.5917,
+      "false_match_rate": 0.0083,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9923,
+          "top1": 0.975,
+          "top5": 0.975,
+          "matched_correct": 0.975,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0269,
+          "recovery_rate": 0.9403,
+          "top1": 0.925,
+          "top5": 0.95,
+          "matched_correct": 0.775,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.5899,
+          "recovery_rate": 0.1458,
+          "top1": 0.15,
+          "top5": 0.375,
+          "matched_correct": 0.025,
+          "false_match_rate": 0.025,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "MH12DE5878",
+          "fused": "9??820??87?",
+          "level": "hard",
+          "reads": [
+            "1858",
+            "CLEC",
+            "90082085878",
+            "99182263878",
+            "MORAL",
+            "CELEXI",
+            "-",
+            "CITTO"
+          ]
+        },
+        {
+          "truth": "MH04UU7936",
+          "fused": "1???",
+          "level": "hard",
+          "reads": [
+            "--------------------------",
+            "1813",
+            "---------------------",
+            "1133",
+            "1113",
+            "(1113",
+            "-----------------------",
+            "CELL"
+          ]
+        },
+        {
+          "truth": "KA51F1957",
+          "fused": "CO???????",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "??8?KY3276",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "CG04UD4093",
+          "fused": "CO0???????",
+          "level": "hard",
+          "reads": [
+            "sweet",
+            "4444",
+            "###",
+            "(1275)",
+            "10-00-00-800",
+            "1111",
+            "CALORSHENESS",
+            "CLUBBIT"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "M?R???????Y",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "2???4?MFOOD",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "P???2???",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "?H?POL?CE",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        },
+        {
+          "truth": "CG04N1321",
+          "fused": "CGO?N1321",
+          "level": "medium",
+          "reads": [
+            "CGOBN1321",
+            "CGOBN1321",
+            "CGO8N1321",
+            "CG08N1321",
+            "CG08N1321",
+            "CG08N1321",
+            "CGOBN1321",
+            "CGO8N1321"
+          ]
+        },
+        {
+          "truth": "KA51KY9729",
+          "fused": "KA51KM9729",
+          "level": "medium",
+          "reads": [
+            "KA51KM9729",
+            "KA51KM3729",
+            "KA51KM9729",
+            "9729",
+            "KA51KM9729",
+            "KASERM1577293",
+            "9729",
+            "MUP"
+          ]
+        },
+        {
+          "truth": "CG04MX4827",
+          "fused": "CO???X4?27",
+          "level": "hard",
+          "reads": [
+            "SUBWERY",
+            "CLUB",
+            "-",
+            "6444",
+            "CO.06MX4827",
+            "4880",
+            "--------------------",
+            "CITY"
+          ]
+        },
+        {
+          "truth": "KA51SA0321",
+          "fused": "??S???AM??",
+          "level": "hard",
+          "reads": [
+            "ANTO-SA-1963",
+            "ONES",
+            "OFFICE",
+            "CARKING",
+            "GASEGAMES",
+            "8833",
+            "NASTSAMES",
+            "MUSHI"
+          ]
+        },
+        {
+          "truth": "CG15TU1490",
+          "fused": "CG18TU1490",
+          "level": "medium",
+          "reads": [
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "0638TU1490",
+            "CG1RTU1490",
+            "CG18TU1490"
+          ]
+        }
+      ]
+    },
+    "full": {
+      "committed_char_error": 0.064,
+      "recovery_rate": 0.691,
+      "top1": 0.725,
+      "top5": 0.7917,
+      "matched_correct": 0.6167,
+      "false_match_rate": 0.0083,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 0.9923,
+          "top1": 0.975,
+          "top5": 0.975,
+          "matched_correct": 0.975,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0217,
+          "recovery_rate": 0.9351,
+          "top1": 0.95,
+          "top5": 0.975,
+          "matched_correct": 0.775,
+          "false_match_rate": 0.025,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.4434,
+          "recovery_rate": 0.1509,
+          "top1": 0.25,
+          "top5": 0.425,
+          "matched_correct": 0.1,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KA51F1957",
+          "fused": "?6NO????",
+          "level": "hard",
+          "reads": [
+            "WAYSHOP",
+            "WATER",
+            "---",
+            "ONE",
+            "###",
+            "COLD",
+            "NON-DRUT-VISITY",
+            "THE"
+          ]
+        },
+        {
+          "truth": "KA05KY3276",
+          "fused": "??8??Y3276",
+          "level": "hard",
+          "reads": [
+            "WA",
+            "###",
+            "WA",
+            "CLIS",
+            "68801",
+            "41895",
+            "MA80AY3276",
+            "8885KY3276"
+          ]
+        },
+        {
+          "truth": "CG15VG4804",
+          "fused": "11???1????",
+          "level": "hard",
+          "reads": [
+            "181",
+            "8831",
+            "12:30-12:48",
+            "610",
+            "1111",
+            "CITY",
+            "CLUBEVICARM",
+            "CLUB"
+          ]
+        },
+        {
+          "truth": "MH01RS5348",
+          "fused": "????????0",
+          "level": "hard",
+          "reads": [
+            "1880",
+            "1111",
+            "------------------",
+            "--",
+            "-",
+            "THE",
+            "-------------------------",
+            "2111"
+          ]
+        },
+        {
+          "truth": "CG10DG7934",
+          "fused": "??2U??",
+          "level": "hard",
+          "reads": [
+            "...8",
+            "26:34PMFood",
+            "77",
+            "THE",
+            "2",
+            "200",
+            "7042012",
+            "25"
+          ]
+        },
+        {
+          "truth": "KA19GX2689",
+          "fused": "??G?2?0?",
+          "level": "hard",
+          "reads": [
+            "$6.88-2009",
+            "OTE",
+            "6800",
+            "681",
+            "----------------------",
+            "11110",
+            "04038",
+            "88888"
+          ]
+        },
+        {
+          "truth": "CG10BM7273",
+          "fused": "CG18BM7273",
+          "level": "medium",
+          "reads": [
+            "CG38BM7273",
+            "4105",
+            "CG18BM7273",
+            "CG18BH7273",
+            "CG18BM7273",
+            "CG18BM7273",
+            "G18BM7273",
+            "G18BM7273"
+          ]
+        },
+        {
+          "truth": "MH31ZN7680",
+          "fused": "?H??2??9??",
+          "level": "hard",
+          "reads": [
+            "727",
+            "7421",
+            "969THE",
+            "graphy",
+            "HH812H7940",
+            "TOP",
+            "...1",
+            "BY"
+          ]
+        },
+        {
+          "truth": "MH02YY1234",
+          "fused": "?E??E?",
+          "level": "hard",
+          "reads": [
+            "WE'RED",
+            "GERRY",
+            "-",
+            "WELCOM",
+            "PARCE",
+            "PERFOR",
+            "-",
+            "WALCO"
+          ]
+        },
+        {
+          "truth": "KA51KY9729",
+          "fused": "KA51KM9729",
+          "level": "medium",
+          "reads": [
+            "KA51KM9729",
+            "KA51KM3729",
+            "KA51KM9729",
+            "9729",
+            "KA51KM9729",
+            "KASERM1577293",
+            "9729",
+            "MUP"
+          ]
+        },
+        {
+          "truth": "KA51SA0321",
+          "fused": "A??????9??",
+          "level": "hard",
+          "reads": [
+            "ANTO-SA-1963",
+            "ONES",
+            "OFFICE",
+            "CARKING",
+            "GASEGAMES",
+            "8833",
+            "NASTSAMES",
+            "MUSHI"
+          ]
+        },
+        {
+          "truth": "CG15TU1490",
+          "fused": "CG18TU1490",
+          "level": "medium",
+          "reads": [
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "CG18TU1490",
+            "0638TU1490",
+            "CG1RTU1490",
+            "CG18TU1490"
+          ]
+        },
+        {
+          "truth": "MH04VN1276",
+          "fused": "?0??6127?",
+          "level": "hard",
+          "reads": [
+            "900-861276",
+            "EURON",
+            "-",
+            "COMISON",
+            "MUSICUS",
+            "CAEID",
+            "133",
+            "CITRON"
+          ]
+        },
+        {
+          "truth": "DL9CZ7913",
+          "fused": "DL?C?7??8",
+          "level": "hard",
+          "reads": [
+            "&THERE",
+            "67399",
+            "194",
+            "81959",
+            "144",
+            "81996",
+            "DL9CB7918",
+            "055087818"
+          ]
+        },
+        {
+          "truth": "MH12MY5071",
+          "fused": "MH12MY8071",
+          "level": "medium",
+          "reads": [
+            "MH12MY8071",
+            "MH12MY",
+            "MH12MY8071",
+            "MH12MY8071",
+            "MH12MY8071",
+            "MH12MY",
+            "MH12MY8071",
+            "MH12MY"
+          ]
+        }
+      ]
+    }
+  },
+  "tau_sweep": [
+    {
+      "tau": 0.3,
+      "top1_matched": 0.625,
+      "false_match_rate": 0.0333
+    },
+    {
+      "tau": 0.35,
+      "top1_matched": 0.625,
+      "false_match_rate": 0.0333
+    },
+    {
+      "tau": 0.4,
+      "top1_matched": 0.625,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.45,
+      "top1_matched": 0.6167,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.5,
+      "top1_matched": 0.6167,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.55,
+      "top1_matched": 0.6167,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.6,
+      "top1_matched": 0.6167,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.65,
+      "top1_matched": 0.6167,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.7,
+      "top1_matched": 0.5833,
+      "false_match_rate": 0.0083
+    },
+    {
+      "tau": 0.75,
+      "top1_matched": 0.5833,
+      "false_match_rate": 0.0
+    },
+    {
+      "tau": 0.8,
+      "top1_matched": 0.575,
+      "false_match_rate": 0.0
+    },
+    {
+      "tau": 0.85,
+      "top1_matched": 0.45,
+      "false_match_rate": 0.0
+    },
+    {
+      "tau": 0.9,
+      "top1_matched": 0.3667,
+      "false_match_rate": 0.0
+    },
+    {
+      "tau": 0.95,
+      "top1_matched": 0.3583,
+      "false_match_rate": 0.0
+    }
+  ],
+  "tau_choice": {
+    "tau": 0.3,
+    "top1_matched": 0.625,
+    "false_match_rate": 0.0333
+  },
+  "clips": [
+    {
+      "clip": "day_clear_white.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 27.5,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.8,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white.mp4",
+      "degradation": "none",
+      "expected": "AMBIGUOUS",
+      "seconds": 11.0,
+      "tracks": 2,
+      "plate": "CG04MX48?1",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": true
+    },
+    {
+      "clip": "camB_white.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 11.8,
+      "tracks": 2,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 10.1,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 0.85,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": false,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 9.9,
+      "tracks": 1,
+      "plate": "KA05MN2023",
+      "truth": "KA05MN2023",
+      "status": "MATCHED",
+      "top_candidate": "REG-0020",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white.mp4",
+      "degradation": "none",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 11.1,
+      "tracks": 2,
+      "plate": "MH14XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0443",
+      "top_score": 0.64,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 11.1,
+      "tracks": 2,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 11.3,
+      "tracks": 2,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 10.0,
+      "tracks": 2,
+      "plate": "G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.8675,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 10.2,
+      "tracks": 2,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 11.8,
+      "tracks": 3,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "camB_white__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 11.2,
+      "tracks": 2,
+      "plate": "?G04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.95,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 9.2,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 0.85,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": false,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 9.2,
+      "tracks": 2,
+      "plate": "",
+      "truth": "MH12DE5678",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0010",
+      "top_score": 0.35,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 9.4,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 9.1,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 10.0,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 0.85,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": false,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 9.2,
+      "tracks": 1,
+      "plate": "MH12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 0.85,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": false,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 8.8,
+      "tracks": 1,
+      "plate": "??????",
+      "truth": "KA05MN2023",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0020",
+      "top_score": 0.4,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 9.5,
+      "tracks": 1,
+      "plate": "???P00?3",
+      "truth": "KA05MN2023",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0221",
+      "top_score": 0.4,
+      "committed": 4,
+      "wrong": 2,
+      "correct": 2,
+      "n_chars": 10,
+      "top1": false,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 9.3,
+      "tracks": 1,
+      "plate": "KA05MN2023",
+      "truth": "KA05MN2023",
+      "status": "MATCHED",
+      "top_candidate": "REG-0020",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 9.9,
+      "tracks": 1,
+      "plate": "KA05MN2023",
+      "truth": "KA05MN2023",
+      "status": "MATCHED",
+      "top_candidate": "REG-0020",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 10.6,
+      "tracks": 1,
+      "plate": "KA05MN2023",
+      "truth": "KA05MN2023",
+      "status": "MATCHED",
+      "top_candidate": "REG-0020",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_blue_twoline__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 9.4,
+      "tracks": 1,
+      "plate": "KA05MN",
+      "truth": "KA05MN2023",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0020",
+      "top_score": 0.3,
+      "committed": 6,
+      "wrong": 0,
+      "correct": 6,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 11.0,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 10.5,
+      "tracks": 2,
+      "plate": "??????4?2?",
+      "truth": "CG04MX4821",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0004",
+      "top_score": 0.5667,
+      "committed": 2,
+      "wrong": 0,
+      "correct": 2,
+      "n_chars": 10,
+      "top1": false,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 10.1,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.8,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 9.6,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 10.7,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 11.0,
+      "tracks": 2,
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "AMBIGUOUS",
+      "seconds": 11.3,
+      "tracks": 2,
+      "plate": "CG04MX4???",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0004",
+      "top_score": 0.95,
+      "committed": 7,
+      "wrong": 0,
+      "correct": 7,
+      "n_chars": 10,
+      "top1": false,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white__motion.mp4",
+      "degradation": "motion",
+      "expected": "AMBIGUOUS",
+      "seconds": 10.6,
+      "tracks": 2,
+      "plate": "",
+      "truth": "CG04MX4821",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0311",
+      "top_score": 0.3,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "AMBIGUOUS",
+      "seconds": 9.5,
+      "tracks": 2,
+      "plate": "CG04MX48?1",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": true
+    },
+    {
+      "clip": "night_partial_white__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "AMBIGUOUS",
+      "seconds": 9.5,
+      "tracks": 2,
+      "plate": "CG04MX48?1",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": true
+    },
+    {
+      "clip": "night_partial_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "AMBIGUOUS",
+      "seconds": 10.6,
+      "tracks": 2,
+      "plate": "CG04MX4881",
+      "truth": "CG04MX4821",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0001",
+      "top_score": 0.825,
+      "committed": 10,
+      "wrong": 1,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "AMBIGUOUS",
+      "seconds": 9.8,
+      "tracks": 2,
+      "plate": "CG04MX48?1",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": true
+    },
+    {
+      "clip": "unregistered_white__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 9.8,
+      "tracks": 2,
+      "plate": "M??4XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0171",
+      "top_score": 0.575,
+      "committed": 8,
+      "wrong": 0,
+      "correct": 8,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white__motion.mp4",
+      "degradation": "motion",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 9.2,
+      "tracks": 2,
+      "plate": "?H?4XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0171",
+      "top_score": 0.575,
+      "committed": 8,
+      "wrong": 0,
+      "correct": 8,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 9.2,
+      "tracks": 2,
+      "plate": "MH14XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0443",
+      "top_score": 0.64,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 9.9,
+      "tracks": 2,
+      "plate": "MH14XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0443",
+      "top_score": 0.64,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 11.4,
+      "tracks": 2,
+      "plate": "MH14XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0443",
+      "top_score": 0.64,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "unregistered_white__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "NO CONFIDENT MATCH",
+      "seconds": 11.2,
+      "tracks": 2,
+      "plate": "MH14XY0042",
+      "truth": "MH14XY0042",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-0443",
+      "top_score": 0.65,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    }
+  ],
+  "clip_summary": {
+    "committed_char_error": 0.00847457627118644,
+    "recovery_rate": 0.8357142857142857,
+    "top1": 0.8857142857142857,
+    "top5": 0.9714285714285714,
+    "false_match_rate": 0.09523809523809523,
+    "wrong_matched": 0,
+    "status_as_designed": 0.8333333333333334,
+    "color_acc": 0.3333333333333333,
+    "body_acc": 0.9047619047619048,
+    "mean_seconds": 10.607142857142856
+  }
+}

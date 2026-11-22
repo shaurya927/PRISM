@@ -1,0 +1,4613 @@
+{
+  "case_id": "a86d7cc1357c",
+  "created_at": "2026-11-22T21:44:46+05:30",
+  "prism_version": "1.0.0",
+  "mode": "clip",
+  "clip": {
+    "name": "day_black_suv.mp4",
+    "sha256": "cb20dbbefa9a983ff9e7cc865e13c7df54895134acbbbaf00becb6af4e570338",
+    "width": 1280,
+    "height": 720,
+    "fps": 25.0,
+    "frame_count": 150,
+    "duration_sec": 6.0,
+    "median_brightness": 105.98,
+    "low_light": false
+  },
+  "hint": null,
+  "threshold": 0.55,
+  "device": "cuda",
+  "ocr_backend": "parseq:parseq",
+  "tracks": [
+    {
+      "track_id": 1,
+      "clip_role": "A",
+      "yolo_class": "car",
+      "first_seen_sec": 0.0,
+      "last_seen_sec": 5.96,
+      "n_detections": 150,
+      "best_crop_url": "/artifacts/a86d7cc1357c/track1_best.jpg",
+      "frames": [
+        {
+          "read_id": "F3",
+          "frame_idx": 3,
+          "timestamp_sec": 0.12,
+          "sharpness": 7842.54,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WHI2DE5678",
+          "masked_text": "?H??DE5678",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.4184,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9981,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "I",
+              "conf": 0.8903,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "2",
+              "conf": 0.6784,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9649,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9826,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9885,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.995,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.8937,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [
+            "position 3: 'I' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            268,
+            646,
+            296
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f3_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f3_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f3_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f3_sr.png"
+        },
+        {
+          "read_id": "F3c",
+          "frame_idx": 3,
+          "timestamp_sec": 0.12,
+          "sharpness": 7842.54,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WHI2DE5678",
+          "masked_text": "????DE5678",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.8245,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "H",
+              "conf": 0.9966,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "I",
+              "conf": 0.5035,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "2",
+              "conf": 0.6442,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9877,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9564,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9235,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9946,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.8567,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [
+            "position 1: 'W' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'",
+            "position 2: 'H' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            268,
+            646,
+            296
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f3_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f3_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f3_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F5",
+          "frame_idx": 5,
+          "timestamp_sec": 0.2,
+          "sharpness": 10916.94,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH.C2DE5670",
+          "masked_text": "MH??DE567?",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8559,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9944,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "C",
+              "conf": 0.3221,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "2",
+              "conf": 0.4635,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9489,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9827,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9928,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9838,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "0",
+              "conf": 0.5569,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            272,
+            648,
+            300
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f5_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f5_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f5_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f5_sr.png"
+        },
+        {
+          "read_id": "F5c",
+          "frame_idx": 5,
+          "timestamp_sec": 0.2,
+          "sharpness": 10916.94,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WHIDES6TU",
+          "masked_text": "????E????",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.9679,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "H",
+              "conf": 0.9958,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "I",
+              "conf": 0.5513,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "D",
+              "conf": 0.5097,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9044,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "S",
+              "conf": 0.5435,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "6",
+              "conf": 0.4519,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "?",
+              "raw_char": "T",
+              "conf": 0.7024,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "U",
+              "conf": 0.5027,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [
+            "position 1: 'W' does not fit the Indian plate layout (standard SS D{1} L{2} DDDD | standard SS D{2} L{1} DDDD); masked to '?'",
+            "position 2: 'H' does not fit the Indian plate layout (standard SS D{1} L{2} DDDD | standard SS D{2} L{1} DDDD); masked to '?'",
+            "position 8: 'T' does not fit the Indian plate layout (standard SS D{1} L{2} DDDD | standard SS D{2} L{1} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            566,
+            272,
+            648,
+            300
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f5_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f5_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f5_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F10",
+          "frame_idx": 10,
+          "timestamp_sec": 0.4,
+          "sharpness": 10013.97,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WHIZDE5670",
+          "masked_text": "????DE567?",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.7048,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "H",
+              "conf": 0.9982,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "I",
+              "conf": 0.8479,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "Z",
+              "conf": 0.6704,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.7032,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9959,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9399,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9659,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9927,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "0",
+              "conf": 0.3347,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [
+            "position 1: 'W' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'",
+            "position 2: 'H' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'",
+            "position 3: 'I' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            569,
+            282,
+            655,
+            311
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f10_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f10_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f10_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f10_sr.png"
+        },
+        {
+          "read_id": "F10c",
+          "frame_idx": 10,
+          "timestamp_sec": 0.4,
+          "sharpness": 10013.97,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WH.ZZDIE5670",
+          "masked_text": "????DIE567?",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.9891,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "H",
+              "conf": 0.987,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "Z",
+              "conf": 0.955,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "Z",
+              "conf": 0.9354,
+              "reason": "format"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9802,
+              "reason": null
+            },
+            {
+              "char": "I",
+              "raw_char": "I",
+              "conf": 0.9417,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.985,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.8248,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.71,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9895,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "0",
+              "conf": 0.6613,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [
+            "position 1: 'W' does not fit the Indian plate layout (standard SS D{2} L{3} DDDD); masked to '?'",
+            "position 2: 'H' does not fit the Indian plate layout (standard SS D{2} L{3} DDDD); masked to '?'",
+            "position 3: 'Z' does not fit the Indian plate layout (standard SS D{2} L{3} DDDD); masked to '?'",
+            "position 4: 'Z' does not fit the Indian plate layout (standard SS D{2} L{3} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            569,
+            282,
+            655,
+            311
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f10_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f10_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f10_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F18",
+          "frame_idx": 18,
+          "timestamp_sec": 0.72,
+          "sharpness": 15558.01,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5670",
+          "masked_text": "MH?2DE567?",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.7678,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9966,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "1",
+              "conf": 0.5487,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9812,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.8824,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9763,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9956,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9934,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "0",
+              "conf": 0.5799,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            575,
+            298,
+            666,
+            329
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f18_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f18_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f18_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f18_sr.png"
+        },
+        {
+          "read_id": "F18c",
+          "frame_idx": 18,
+          "timestamp_sec": 0.72,
+          "sharpness": 15558.01,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "WHIZDE5678",
+          "masked_text": "????DE567?",
+          "chars": [
+            {
+              "char": "?",
+              "raw_char": "W",
+              "conf": 0.9865,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "H",
+              "conf": 0.9983,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "I",
+              "conf": 0.9019,
+              "reason": "format"
+            },
+            {
+              "char": "?",
+              "raw_char": "Z",
+              "conf": 0.5713,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9882,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9365,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9152,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9704,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "8",
+              "conf": 0.5767,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [
+            "position 1: 'W' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'",
+            "position 2: 'H' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'",
+            "position 3: 'I' does not fit the Indian plate layout (standard SS D{1} L{3} DDDD | standard SS D{2} L{2} DDDD); masked to '?'"
+          ],
+          "two_line": false,
+          "plate_bbox": [
+            575,
+            298,
+            666,
+            329
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f18_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f18_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f18_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F23",
+          "frame_idx": 23,
+          "timestamp_sec": 0.92,
+          "sharpness": 7909.62,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE567?",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9488,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9966,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.8239,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9576,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.8633,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.988,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9866,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9962,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "8",
+              "conf": 0.6157,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            578,
+            308,
+            674,
+            340
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f23_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f23_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f23_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f23_sr.png"
+        },
+        {
+          "read_id": "F23c",
+          "frame_idx": 23,
+          "timestamp_sec": 0.92,
+          "sharpness": 7909.62,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5676",
+          "masked_text": "MH?2DE5?7?",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8522,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9932,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "1",
+              "conf": 0.3898,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.8934,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.8677,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9902,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "6",
+              "conf": 0.6928,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9972,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "6",
+              "conf": 0.4443,
+              "reason": "low_confidence"
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            578,
+            308,
+            674,
+            340
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f23_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f23_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f23_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F25",
+          "frame_idx": 25,
+          "timestamp_sec": 1.0,
+          "sharpness": 8862.04,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8082,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.995,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9337,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.996,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9892,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9961,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9916,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9971,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9836,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            580,
+            311,
+            677,
+            345
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f25_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f25_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f25_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f25_sr.png"
+        },
+        {
+          "read_id": "F25c",
+          "frame_idx": 25,
+          "timestamp_sec": 1.0,
+          "sharpness": 8862.04,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9161,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9963,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.8551,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9965,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9903,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9955,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9816,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9803,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            580,
+            311,
+            677,
+            345
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f25_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f25_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f25_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F30",
+          "frame_idx": 30,
+          "timestamp_sec": 1.2,
+          "sharpness": 11533.49,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9796,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.983,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9998,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9968,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9938,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            322,
+            682,
+            356
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f30_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f30_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f30_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f30_sr.png"
+        },
+        {
+          "read_id": "F30c",
+          "frame_idx": 30,
+          "timestamp_sec": 1.2,
+          "sharpness": 11533.49,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9034,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9523,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9985,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9985,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9959,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9963,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            583,
+            322,
+            682,
+            356
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f30_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f30_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f30_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F38",
+          "frame_idx": 38,
+          "timestamp_sec": 1.52,
+          "sharpness": 10628.29,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8824,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9982,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9655,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9903,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.7615,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9996,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.997,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9898,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9944,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9753,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            589,
+            337,
+            694,
+            374
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f38_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f38_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f38_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f38_sr.png"
+        },
+        {
+          "read_id": "F38c",
+          "frame_idx": 38,
+          "timestamp_sec": 1.52,
+          "sharpness": 10628.29,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.7919,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9979,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9804,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9938,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9819,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.993,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.991,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9963,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9636,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            589,
+            337,
+            694,
+            374
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f38_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f38_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f38_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F43",
+          "frame_idx": 43,
+          "timestamp_sec": 1.72,
+          "sharpness": 10375.63,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9652,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9983,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9529,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9952,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9971,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.996,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9981,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9937,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            591,
+            349,
+            699,
+            386
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f43_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f43_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f43_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f43_sr.png"
+        },
+        {
+          "read_id": "F43c",
+          "frame_idx": 43,
+          "timestamp_sec": 1.72,
+          "sharpness": 10375.63,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH?2DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9275,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "?",
+              "raw_char": "1",
+              "conf": 0.6623,
+              "reason": "low_confidence"
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9546,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9955,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9969,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.997,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9985,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9944,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            591,
+            349,
+            699,
+            386
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f43_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f43_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f43_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F56",
+          "frame_idx": 56,
+          "timestamp_sec": 2.24,
+          "sharpness": 8007.14,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9737,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9786,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9986,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9971,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.994,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            598,
+            374,
+            715,
+            415
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f56_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f56_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f56_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f56_sr.png"
+        },
+        {
+          "read_id": "F56c",
+          "frame_idx": 56,
+          "timestamp_sec": 2.24,
+          "sharpness": 8007.14,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9514,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9612,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9987,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9984,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9982,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9988,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9963,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            598,
+            374,
+            715,
+            415
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f56_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f56_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f56_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F61",
+          "frame_idx": 61,
+          "timestamp_sec": 2.44,
+          "sharpness": 7856.2,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9025,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9978,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9686,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9977,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9927,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9997,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9972,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9871,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9953,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9883,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            598,
+            384,
+            719,
+            425
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f61_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f61_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f61_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f61_sr.png"
+        },
+        {
+          "read_id": "F61c",
+          "frame_idx": 61,
+          "timestamp_sec": 2.44,
+          "sharpness": 7856.2,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.8539,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9976,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.8422,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.998,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9945,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9979,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9802,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9965,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9916,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            598,
+            384,
+            719,
+            425
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f61_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f61_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f61_veh.jpg",
+          "sr_url": null
+        },
+        {
+          "read_id": "F63",
+          "frame_idx": 63,
+          "timestamp_sec": 2.52,
+          "sharpness": 7958.71,
+          "source": "raw",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9919,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.999,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.9766,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9998,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9977,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9989,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9994,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9943,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            599,
+            387,
+            722,
+            431
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f63_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f63_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f63_veh.jpg",
+          "sr_url": "/artifacts/a86d7cc1357c/track1_f63_sr.png"
+        },
+        {
+          "read_id": "F63c",
+          "frame_idx": 63,
+          "timestamp_sec": 2.52,
+          "sharpness": 7958.71,
+          "source": "clahe",
+          "ocr_backend": "parseq:parseq",
+          "raw_text": "MH12DE5678",
+          "masked_text": "MH12DE5678",
+          "chars": [
+            {
+              "char": "M",
+              "raw_char": "M",
+              "conf": 0.9892,
+              "reason": null
+            },
+            {
+              "char": "H",
+              "raw_char": "H",
+              "conf": 0.9992,
+              "reason": null
+            },
+            {
+              "char": "1",
+              "raw_char": "1",
+              "conf": 0.946,
+              "reason": null
+            },
+            {
+              "char": "2",
+              "raw_char": "2",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "D",
+              "raw_char": "D",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "E",
+              "raw_char": "E",
+              "conf": 0.9998,
+              "reason": null
+            },
+            {
+              "char": "5",
+              "raw_char": "5",
+              "conf": 0.9983,
+              "reason": null
+            },
+            {
+              "char": "6",
+              "raw_char": "6",
+              "conf": 0.9993,
+              "reason": null
+            },
+            {
+              "char": "7",
+              "raw_char": "7",
+              "conf": 0.9995,
+              "reason": null
+            },
+            {
+              "char": "8",
+              "raw_char": "8",
+              "conf": 0.9966,
+              "reason": null
+            }
+          ],
+          "format_conflicts": [],
+          "two_line": false,
+          "plate_bbox": [
+            599,
+            387,
+            722,
+            431
+          ],
+          "plate_crop_url": "/artifacts/a86d7cc1357c/track1_f63_plate.png",
+          "plate_clahe_url": "/artifacts/a86d7cc1357c/track1_f63_plate_clahe.png",
+          "vehicle_crop_url": "/artifacts/a86d7cc1357c/track1_f63_veh.jpg",
+          "sr_url": null
+        }
+      ],
+      "fused": {
+        "text": "MH12DE5678",
+        "video_text": "MH12DE5678",
+        "length": 10,
+        "reference_read": "F63",
+        "n_reads": 20,
+        "positions": [
+          {
+            "index": 0,
+            "char": "M",
+            "confidence": 1.0,
+            "weight": 32.5232,
+            "total_weight": 32.5232,
+            "source": "video",
+            "votes": {
+              "M": 32.5232
+            },
+            "supporting": [
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "?",
+                "raw_char": "W",
+                "raw_conf": 0.4184,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F3c",
+                "char": "?",
+                "raw_char": "W",
+                "raw_conf": 0.8245,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8559,
+                "weight": 1.7118
+              },
+              {
+                "read_id": "F18",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.7678,
+                "weight": 1.5356
+              },
+              {
+                "read_id": "F23",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9488,
+                "weight": 1.8976
+              },
+              {
+                "read_id": "F23c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8522,
+                "weight": 1.7044
+              },
+              {
+                "read_id": "F25",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8082,
+                "weight": 1.6164
+              },
+              {
+                "read_id": "F25c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9161,
+                "weight": 1.8322
+              },
+              {
+                "read_id": "F30",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9796,
+                "weight": 1.9592
+              },
+              {
+                "read_id": "F30c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9034,
+                "weight": 1.8068
+              },
+              {
+                "read_id": "F38",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8824,
+                "weight": 1.7648
+              },
+              {
+                "read_id": "F38c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.7919,
+                "weight": 1.5838
+              },
+              {
+                "read_id": "F43",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9652,
+                "weight": 1.9304
+              },
+              {
+                "read_id": "F43c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9275,
+                "weight": 1.855
+              },
+              {
+                "read_id": "F56",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9737,
+                "weight": 1.9474
+              },
+              {
+                "read_id": "F56c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9514,
+                "weight": 1.9028
+              },
+              {
+                "read_id": "F61",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9025,
+                "weight": 1.805
+              },
+              {
+                "read_id": "F61c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.8539,
+                "weight": 1.7078
+              },
+              {
+                "read_id": "F63",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9919,
+                "weight": 1.9838
+              },
+              {
+                "read_id": "F63c",
+                "char": "M",
+                "raw_char": "M",
+                "raw_conf": 0.9892,
+                "weight": 1.9784
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 1,
+            "char": "H",
+            "confidence": 1.0,
+            "weight": 37.906,
+            "total_weight": 37.906,
+            "source": "video",
+            "votes": {
+              "H": 37.906
+            },
+            "supporting": [
+              "F3",
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9981,
+                "weight": 1.9962
+              },
+              {
+                "read_id": "F3c",
+                "char": "?",
+                "raw_char": "H",
+                "raw_conf": 0.9966,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9944,
+                "weight": 1.9888
+              },
+              {
+                "read_id": "F18",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9966,
+                "weight": 1.9932
+              },
+              {
+                "read_id": "F23",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9966,
+                "weight": 1.9932
+              },
+              {
+                "read_id": "F23c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9932,
+                "weight": 1.9864
+              },
+              {
+                "read_id": "F25",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.995,
+                "weight": 1.99
+              },
+              {
+                "read_id": "F25c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9963,
+                "weight": 1.9926
+              },
+              {
+                "read_id": "F30",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F38",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9982,
+                "weight": 1.9964
+              },
+              {
+                "read_id": "F38c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9979,
+                "weight": 1.9958
+              },
+              {
+                "read_id": "F43",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9983,
+                "weight": 1.9966
+              },
+              {
+                "read_id": "F43c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F56",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F56c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F61",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9978,
+                "weight": 1.9956
+              },
+              {
+                "read_id": "F61c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9976,
+                "weight": 1.9952
+              },
+              {
+                "read_id": "F63",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F63c",
+                "char": "H",
+                "raw_char": "H",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 2,
+            "char": "1",
+            "confidence": 1.0,
+            "weight": 26.24,
+            "total_weight": 26.24,
+            "source": "video",
+            "votes": {
+              "1": 26.24
+            },
+            "supporting": [
+              "F23",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "?",
+                "raw_char": "I",
+                "raw_conf": 0.8903,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F3c",
+                "char": "?",
+                "raw_char": "I",
+                "raw_conf": 0.5035,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5",
+                "char": "?",
+                "raw_char": "C",
+                "raw_conf": 0.3221,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F18",
+                "char": "?",
+                "raw_char": "1",
+                "raw_conf": 0.5487,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F23",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.8239,
+                "weight": 1.6478
+              },
+              {
+                "read_id": "F23c",
+                "char": "?",
+                "raw_char": "1",
+                "raw_conf": 0.3898,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F25",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9337,
+                "weight": 1.8674
+              },
+              {
+                "read_id": "F25c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.8551,
+                "weight": 1.7102
+              },
+              {
+                "read_id": "F30",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.983,
+                "weight": 1.966
+              },
+              {
+                "read_id": "F30c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9523,
+                "weight": 1.9046
+              },
+              {
+                "read_id": "F38",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9655,
+                "weight": 1.931
+              },
+              {
+                "read_id": "F38c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9804,
+                "weight": 1.9608
+              },
+              {
+                "read_id": "F43",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9529,
+                "weight": 1.9058
+              },
+              {
+                "read_id": "F43c",
+                "char": "?",
+                "raw_char": "1",
+                "raw_conf": 0.6623,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F56",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9786,
+                "weight": 1.9572
+              },
+              {
+                "read_id": "F56c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9612,
+                "weight": 1.9224
+              },
+              {
+                "read_id": "F61",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9686,
+                "weight": 1.9372
+              },
+              {
+                "read_id": "F61c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.8422,
+                "weight": 1.6844
+              },
+              {
+                "read_id": "F63",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.9766,
+                "weight": 1.9532
+              },
+              {
+                "read_id": "F63c",
+                "char": "1",
+                "raw_char": "1",
+                "raw_conf": 0.946,
+                "weight": 1.892
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 3,
+            "char": "2",
+            "confidence": 1.0,
+            "weight": 33.504,
+            "total_weight": 33.504,
+            "source": "video",
+            "votes": {
+              "2": 33.504
+            },
+            "supporting": [
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "?",
+                "raw_char": "2",
+                "raw_conf": 0.6784,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F3c",
+                "char": "?",
+                "raw_char": "2",
+                "raw_conf": 0.6442,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F5",
+                "char": "?",
+                "raw_char": "2",
+                "raw_conf": 0.4635,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F18",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9812,
+                "weight": 1.9624
+              },
+              {
+                "read_id": "F23",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9576,
+                "weight": 1.9152
+              },
+              {
+                "read_id": "F23c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.8934,
+                "weight": 1.7868
+              },
+              {
+                "read_id": "F25",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.996,
+                "weight": 1.992
+              },
+              {
+                "read_id": "F25c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9965,
+                "weight": 1.993
+              },
+              {
+                "read_id": "F30",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F38",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9903,
+                "weight": 1.9806
+              },
+              {
+                "read_id": "F38c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9938,
+                "weight": 1.9876
+              },
+              {
+                "read_id": "F43",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F43c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9546,
+                "weight": 1.9092
+              },
+              {
+                "read_id": "F56",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9986,
+                "weight": 1.9972
+              },
+              {
+                "read_id": "F56c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9992,
+                "weight": 1.9984
+              },
+              {
+                "read_id": "F61",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9977,
+                "weight": 1.9954
+              },
+              {
+                "read_id": "F61c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.998,
+                "weight": 1.996
+              },
+              {
+                "read_id": "F63",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F63c",
+                "char": "2",
+                "raw_char": "2",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 4,
+            "char": "D",
+            "confidence": 1.0,
+            "weight": 38.4176,
+            "total_weight": 38.4176,
+            "source": "video",
+            "votes": {
+              "D": 38.4176
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9649,
+                "weight": 1.9298
+              },
+              {
+                "read_id": "F3c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9877,
+                "weight": 1.9754
+              },
+              {
+                "read_id": "F5",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9489,
+                "weight": 1.8978
+              },
+              {
+                "read_id": "F18",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.8824,
+                "weight": 1.7648
+              },
+              {
+                "read_id": "F23",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.8633,
+                "weight": 1.7266
+              },
+              {
+                "read_id": "F23c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.8677,
+                "weight": 1.7354
+              },
+              {
+                "read_id": "F25",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9892,
+                "weight": 1.9784
+              },
+              {
+                "read_id": "F25c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9903,
+                "weight": 1.9806
+              },
+              {
+                "read_id": "F30",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F30c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9985,
+                "weight": 1.997
+              },
+              {
+                "read_id": "F38",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.7615,
+                "weight": 1.523
+              },
+              {
+                "read_id": "F38c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9819,
+                "weight": 1.9638
+              },
+              {
+                "read_id": "F43",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9952,
+                "weight": 1.9904
+              },
+              {
+                "read_id": "F43c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9955,
+                "weight": 1.991
+              },
+              {
+                "read_id": "F56",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F56c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9987,
+                "weight": 1.9974
+              },
+              {
+                "read_id": "F61",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9927,
+                "weight": 1.9854
+              },
+              {
+                "read_id": "F61c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9945,
+                "weight": 1.989
+              },
+              {
+                "read_id": "F63",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F63c",
+                "char": "D",
+                "raw_char": "D",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 5,
+            "char": "E",
+            "confidence": 1.0,
+            "weight": 39.9822,
+            "total_weight": 39.9822,
+            "source": "video",
+            "votes": {
+              "E": 39.9822
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F3c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F5",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F18",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F23",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F23c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F25",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F25c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F30",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9998,
+                "weight": 1.9996
+              },
+              {
+                "read_id": "F30c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F38",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9996,
+                "weight": 1.9992
+              },
+              {
+                "read_id": "F38c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F43",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F43c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F56",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F56c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F61",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9997,
+                "weight": 1.9994
+              },
+              {
+                "read_id": "F61c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              },
+              {
+                "read_id": "F63",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9998,
+                "weight": 1.9996
+              },
+              {
+                "read_id": "F63c",
+                "char": "E",
+                "raw_char": "E",
+                "raw_conf": 0.9998,
+                "weight": 1.9996
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 6,
+            "char": "5",
+            "confidence": 1.0,
+            "weight": 39.6744,
+            "total_weight": 39.6744,
+            "source": "video",
+            "votes": {
+              "5": 39.6744
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9826,
+                "weight": 1.9652
+              },
+              {
+                "read_id": "F3c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9564,
+                "weight": 1.9128
+              },
+              {
+                "read_id": "F5",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9827,
+                "weight": 1.9654
+              },
+              {
+                "read_id": "F18",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9763,
+                "weight": 1.9526
+              },
+              {
+                "read_id": "F23",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.988,
+                "weight": 1.976
+              },
+              {
+                "read_id": "F23c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9902,
+                "weight": 1.9804
+              },
+              {
+                "read_id": "F25",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9961,
+                "weight": 1.9922
+              },
+              {
+                "read_id": "F25c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9955,
+                "weight": 1.991
+              },
+              {
+                "read_id": "F30",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9985,
+                "weight": 1.997
+              },
+              {
+                "read_id": "F38",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.997,
+                "weight": 1.994
+              },
+              {
+                "read_id": "F38c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.993,
+                "weight": 1.986
+              },
+              {
+                "read_id": "F43",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F43c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9969,
+                "weight": 1.9938
+              },
+              {
+                "read_id": "F56",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F56c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9984,
+                "weight": 1.9968
+              },
+              {
+                "read_id": "F61",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9972,
+                "weight": 1.9944
+              },
+              {
+                "read_id": "F61c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9979,
+                "weight": 1.9958
+              },
+              {
+                "read_id": "F63",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9977,
+                "weight": 1.9954
+              },
+              {
+                "read_id": "F63c",
+                "char": "5",
+                "raw_char": "5",
+                "raw_conf": 0.9983,
+                "weight": 1.9966
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 7,
+            "char": "6",
+            "confidence": 1.0,
+            "weight": 37.575,
+            "total_weight": 37.575,
+            "source": "video",
+            "votes": {
+              "6": 37.575
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F5",
+              "F18",
+              "F23",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9885,
+                "weight": 1.977
+              },
+              {
+                "read_id": "F3c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9235,
+                "weight": 1.847
+              },
+              {
+                "read_id": "F5",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9928,
+                "weight": 1.9856
+              },
+              {
+                "read_id": "F18",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9956,
+                "weight": 1.9912
+              },
+              {
+                "read_id": "F23",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9866,
+                "weight": 1.9732
+              },
+              {
+                "read_id": "F23c",
+                "char": "?",
+                "raw_char": "6",
+                "raw_conf": 0.6928,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F25",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9916,
+                "weight": 1.9832
+              },
+              {
+                "read_id": "F25c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9816,
+                "weight": 1.9632
+              },
+              {
+                "read_id": "F30",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9968,
+                "weight": 1.9936
+              },
+              {
+                "read_id": "F30c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9959,
+                "weight": 1.9918
+              },
+              {
+                "read_id": "F38",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9898,
+                "weight": 1.9796
+              },
+              {
+                "read_id": "F38c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.991,
+                "weight": 1.982
+              },
+              {
+                "read_id": "F43",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.996,
+                "weight": 1.992
+              },
+              {
+                "read_id": "F43c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.997,
+                "weight": 1.994
+              },
+              {
+                "read_id": "F56",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F56c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9982,
+                "weight": 1.9964
+              },
+              {
+                "read_id": "F61",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9871,
+                "weight": 1.9742
+              },
+              {
+                "read_id": "F61c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9802,
+                "weight": 1.9604
+              },
+              {
+                "read_id": "F63",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9989,
+                "weight": 1.9978
+              },
+              {
+                "read_id": "F63c",
+                "char": "6",
+                "raw_char": "6",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 8,
+            "char": "7",
+            "confidence": 1.0,
+            "weight": 39.8616,
+            "total_weight": 39.8616,
+            "source": "video",
+            "votes": {
+              "7": 39.8616
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F5",
+              "F18",
+              "F23",
+              "F23c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.995,
+                "weight": 1.99
+              },
+              {
+                "read_id": "F3c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9946,
+                "weight": 1.9892
+              },
+              {
+                "read_id": "F5",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9838,
+                "weight": 1.9676
+              },
+              {
+                "read_id": "F18",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9934,
+                "weight": 1.9868
+              },
+              {
+                "read_id": "F23",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9962,
+                "weight": 1.9924
+              },
+              {
+                "read_id": "F23c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9972,
+                "weight": 1.9944
+              },
+              {
+                "read_id": "F25",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9971,
+                "weight": 1.9942
+              },
+              {
+                "read_id": "F25c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F30",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9993,
+                "weight": 1.9986
+              },
+              {
+                "read_id": "F30c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F38",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9944,
+                "weight": 1.9888
+              },
+              {
+                "read_id": "F38c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9963,
+                "weight": 1.9926
+              },
+              {
+                "read_id": "F43",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9981,
+                "weight": 1.9962
+              },
+              {
+                "read_id": "F43c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9985,
+                "weight": 1.997
+              },
+              {
+                "read_id": "F56",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.999,
+                "weight": 1.998
+              },
+              {
+                "read_id": "F56c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9988,
+                "weight": 1.9976
+              },
+              {
+                "read_id": "F61",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9953,
+                "weight": 1.9906
+              },
+              {
+                "read_id": "F61c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9965,
+                "weight": 1.993
+              },
+              {
+                "read_id": "F63",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9994,
+                "weight": 1.9988
+              },
+              {
+                "read_id": "F63c",
+                "char": "7",
+                "raw_char": "7",
+                "raw_conf": 0.9995,
+                "weight": 1.999
+              }
+            ],
+            "note": null
+          },
+          {
+            "index": 9,
+            "char": "8",
+            "confidence": 1.0,
+            "weight": 31.185,
+            "total_weight": 31.185,
+            "source": "video",
+            "votes": {
+              "8": 31.185
+            },
+            "supporting": [
+              "F3",
+              "F3c",
+              "F25",
+              "F25c",
+              "F30",
+              "F30c",
+              "F38",
+              "F38c",
+              "F43",
+              "F43c",
+              "F56",
+              "F56c",
+              "F61",
+              "F61c",
+              "F63",
+              "F63c"
+            ],
+            "dissenting": [],
+            "cells": [
+              {
+                "read_id": "F3",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.8937,
+                "weight": 1.7874
+              },
+              {
+                "read_id": "F3c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.8567,
+                "weight": 1.7134
+              },
+              {
+                "read_id": "F5",
+                "char": "?",
+                "raw_char": "0",
+                "raw_conf": 0.5569,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F18",
+                "char": "?",
+                "raw_char": "0",
+                "raw_conf": 0.5799,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F23",
+                "char": "?",
+                "raw_char": "8",
+                "raw_conf": 0.6157,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F23c",
+                "char": "?",
+                "raw_char": "6",
+                "raw_conf": 0.4443,
+                "weight": 0.0
+              },
+              {
+                "read_id": "F25",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9836,
+                "weight": 1.9672
+              },
+              {
+                "read_id": "F25c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9803,
+                "weight": 1.9606
+              },
+              {
+                "read_id": "F30",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9938,
+                "weight": 1.9876
+              },
+              {
+                "read_id": "F30c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9963,
+                "weight": 1.9926
+              },
+              {
+                "read_id": "F38",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9753,
+                "weight": 1.9506
+              },
+              {
+                "read_id": "F38c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9636,
+                "weight": 1.9272
+              },
+              {
+                "read_id": "F43",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9937,
+                "weight": 1.9874
+              },
+              {
+                "read_id": "F43c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9944,
+                "weight": 1.9888
+              },
+              {
+                "read_id": "F56",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.994,
+                "weight": 1.988
+              },
+              {
+                "read_id": "F56c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9963,
+                "weight": 1.9926
+              },
+              {
+                "read_id": "F61",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9883,
+                "weight": 1.9766
+              },
+              {
+                "read_id": "F61c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9916,
+                "weight": 1.9832
+              },
+              {
+                "read_id": "F63",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9943,
+                "weight": 1.9886
+              },
+              {
+                "read_id": "F63c",
+                "char": "8",
+                "raw_char": "8",
+                "raw_conf": 0.9966,
+                "weight": 1.9932
+              }
+            ],
+            "note": null
+          }
+        ],
+        "hint": null,
+        "hint_conflicts": [],
+        "format_conflicts": [],
+        "excluded_reads": [
+          "F5c",
+          "F10",
+          "F10c",
+          "F18c"
+        ]
+      },
+      "attributes": {
+        "color": {
+          "value": "black",
+          "confidence": 0.6002,
+          "uncertain": false,
+          "top2": [
+            [
+              "black",
+              0.6002
+            ],
+            [
+              "grey",
+              0.1675
+            ]
+          ],
+          "source": "clip"
+        },
+        "body_type": {
+          "value": "car",
+          "confidence": 0.5637,
+          "uncertain": false,
+          "top2": [
+            [
+              "car",
+              0.5637
+            ],
+            [
+              "SUV",
+              0.4331
+            ]
+          ],
+          "source": "clip+yolo(car)"
+        },
+        "make_model": {
+          "value": "uncertain",
+          "confidence": 0.332,
+          "uncertain": true,
+          "top2": [
+            [
+              "Maruti Suzuki WagonR",
+              0.332
+            ],
+            [
+              "Tata Tiago",
+              0.1601
+            ]
+          ],
+          "source": "clip (body-type constrained)"
+        },
+        "yolo_class": "car"
+      },
+      "match": {
+        "status": "MATCHED",
+        "threshold_used": 0.55,
+        "top_candidates": [
+          {
+            "rank": 1,
+            "registry_id": "REG-0010",
+            "plate": "MH12DE5678",
+            "color": "black",
+            "body_type": "SUV",
+            "make": "Toyota",
+            "model": "Innova",
+            "owner_region": "Pune, MH",
+            "score": 0.85,
+            "breakdown": {
+              "plate_sim": 1.0,
+              "coverage": 1.0,
+              "plate": 0.65,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 0.0,
+              "body": 0.0,
+              "make_model": 0.0,
+              "raw_total": 0.85,
+              "total": 0.85,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.65 of 0.65): 10 of 10 known characters match.",
+              "Colour (0.20 of 0.20): exact match (black, 0.60).",
+              "Body type (0.00 of 0.15): video car, registry SUV."
+            ],
+            "mismatches": [
+              "Body type mismatch: video car, registry SUV"
+            ],
+            "matched_known": 10,
+            "known_count": 10
+          },
+          {
+            "rank": 2,
+            "registry_id": "REG-0014",
+            "plate": "MH14DE5678",
+            "color": "black",
+            "body_type": "car",
+            "make": "Honda",
+            "model": "City",
+            "owner_region": "Pimpri-Chinchwad, MH",
+            "score": 0.935,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.935,
+              "total": 0.935,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.20 of 0.20): exact match (black, 0.60).",
+              "Body type (0.15 of 0.15): exact match (car, 0.56).",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 4: video shows '2', registry has '4'"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 3,
+            "registry_id": "REG-0011",
+            "plate": "MH12DE5670",
+            "color": "black",
+            "body_type": "SUV",
+            "make": "Toyota",
+            "model": "Innova",
+            "owner_region": "Pune, MH",
+            "score": 0.785,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 0.0,
+              "body": 0.0,
+              "make_model": 0.0,
+              "raw_total": 0.785,
+              "total": 0.785,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.20 of 0.20): exact match (black, 0.60).",
+              "Body type (0.00 of 0.15): video car, registry SUV.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 10: video shows '8', registry has '0'",
+              "Body type mismatch: video car, registry SUV"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 4,
+            "registry_id": "REG-0013",
+            "plate": "MH12DE5878",
+            "color": "black",
+            "body_type": "SUV",
+            "make": "Mahindra",
+            "model": "Scorpio",
+            "owner_region": "Pune, MH",
+            "score": 0.785,
+            "breakdown": {
+              "plate_sim": 0.9,
+              "coverage": 1.0,
+              "plate": 0.585,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 0.0,
+              "body": 0.0,
+              "make_model": 0.0,
+              "raw_total": 0.785,
+              "total": 0.785,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.59 of 0.65): 9 of 10 known characters match.",
+              "Colour (0.20 of 0.20): exact match (black, 0.60).",
+              "Body type (0.00 of 0.15): video car, registry SUV.",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 8: video shows '6', registry has '8'",
+              "Body type mismatch: video car, registry SUV"
+            ],
+            "matched_known": 9,
+            "known_count": 10
+          },
+          {
+            "rank": 5,
+            "registry_id": "REG-0267",
+            "plate": "MH12ZD2617",
+            "color": "black",
+            "body_type": "car",
+            "make": "Maruti Suzuki",
+            "model": "Baleno",
+            "owner_region": "Pune, MH",
+            "score": 0.675,
+            "breakdown": {
+              "plate_sim": 0.5,
+              "coverage": 1.0,
+              "plate": 0.325,
+              "color_sim": 1.0,
+              "color": 0.2,
+              "body_sim": 1.0,
+              "body": 0.15,
+              "make_model": 0.0,
+              "raw_total": 0.675,
+              "total": 0.675,
+              "w_plate": 0.65,
+              "w_color": 0.2,
+              "w_body": 0.15,
+              "capped": null,
+              "shift": 0
+            },
+            "reasons": [
+              "Plate (0.33 of 0.65): 5 of 10 known characters match.",
+              "Colour (0.20 of 0.20): exact match (black, 0.60).",
+              "Body type (0.15 of 0.15): exact match (car, 0.56).",
+              "Ranked below every candidate without a plate contradiction: the video confidently shows a different character."
+            ],
+            "mismatches": [
+              "Mismatch at position 5: video shows 'D', registry has 'Z'",
+              "Mismatch at position 6: video shows 'E', registry has 'D'",
+              "Mismatch at position 7: video shows '5', registry has '2'",
+              "Mismatch at position 9: video shows '7', registry has '1'",
+              "Mismatch at position 10: video shows '8', registry has '7'"
+            ],
+            "matched_known": 5,
+            "known_count": 10
+          }
+        ],
+        "explanation": "REG-0010 (MH12DE5678) scored 0.85, above the 0.55 threshold, with 10 known plate characters. Higher-scoring REG-0014 contradict a confidently read plate character and are ranked below it.",
+        "known_count": 10,
+        "specificity": 1,
+        "specificity_text": "1 of 500 registry plates fit the known characters of 'MH12DE5678'",
+        "low_light": false,
+        "gap": null,
+        "registry_size": 500
+      },
+      "advisor": {
+        "needed": false,
+        "position": null,
+        "candidate_chars": {},
+        "lead_read_id": null,
+        "lead_frame_idx": null,
+        "lead_char": null,
+        "lead_conf": null,
+        "text": "Not needed: the top candidate is clearly ahead."
+      },
+      "sr_available": true
+    }
+  ],
+  "narrative": {
+    "text": "Vehicle track 1 (black car, seen 00:00.0-00:06.0) showed the plate `MH12DE5678` across 20 plate reads [F5, F18, F23]. The best registry candidate is REG-0010, `MH12DE5678`, scoring 0.85 with 10 of 10 known characters matching [REG-0010].",
+    "method": "template",
+    "sentences": [
+      {
+        "text": "Vehicle track 1 (black car, seen 00:00.0-00:06.0) showed the plate `MH12DE5678` across 20 plate reads [F5, F18, F23].",
+        "passed": true,
+        "problems": []
+      },
+      {
+        "text": "The best registry candidate is REG-0010, `MH12DE5678`, scoring 0.85 with 10 of 10 known characters matching [REG-0010].",
+        "passed": true,
+        "problems": []
+      }
+    ],
+    "checked": 2,
+    "removed": 0
+  },
+  "custody": {
+    "clip_sha256": "cb20dbbefa9a983ff9e7cc865e13c7df54895134acbbbaf00becb6af4e570338",
+    "clips": [
+      {
+        "name": "day_black_suv.mp4",
+        "sha256": "cb20dbbefa9a983ff9e7cc865e13c7df54895134acbbbaf00becb6af4e570338",
+        "width": 1280,
+        "height": 720,
+        "fps": 25.0,
+        "frame_count": 150,
+        "duration_sec": 6.0,
+        "median_brightness": 105.98,
+        "low_light": false
+      }
+    ],
+    "models": {
+      "prism": "1.0.0",
+      "tracker": "ultralytics yolo11s.pt + bytetrack.yaml",
+      "plate_detector": "fast-alpr yolo-v9-t-384-license-plate-end2end (vendor/fast-alpr)",
+      "ocr": "parseq:parseq (vendor/parseq)",
+      "super_resolution": "lpsr-lacd cgnetV2_deformable (visual aid only)",
+      "attributes": "OpenCLIP ViT-B-32 (laion2b_s34b_b79k)",
+      "device": "cuda (NVIDIA GeForce RTX 5050 Laptop GPU)"
+    },
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "ultralytics": "8.4.216",
+      "open_clip_torch": "4.2.2",
+      "fast-alpr": "0.4.0",
+      "fast-plate-ocr": "1.1.0",
+      "open-image-models": "0.6.0",
+      "onnxruntime": "1.32.0",
+      "opencv-python-headless": "5.1.0.95",
+      "opencv-python": "5.1.0.95",
+      "numpy": "2.4.6",
+      "fastapi": "0.165.0",
+      "pydantic": "2.14.4",
+      "jinja2": "3.1.6",
+      "playwright": "1.65.2",
+      "pytorch-lightning": "2.6.6",
+      "timm": "1.0.31"
+    },
+    "vendor_commits": {
+      "fast-alpr": "c5a94706f175590b2bc09aa86f46182d4c267fae",
+      "parseq": "1902db043c029a7e03a3818c616c06600af574be",
+      "lpsr-lacd": "8a3bdb55752c52028d1d5df74dd132c1542fd7fd",
+      "vehicle-reidentification": "2f8ab6b5632f4fd5edef0bcb0e4141ae2a2f77b9"
+    },
+    "prism_commit": "49adcea06057943222f6a1af92c95916a683eb01",
+    "config_hash": "f7f9601f12215b382bc07139481e9a4289f1cac44f17bc86673cb63fbbb665ce",
+    "config": {
+      "seed": 42,
+      "device": "auto",
+      "ingest": {
+        "low_light_brightness": 60.0,
+        "brightness_sample_every": 5
+      },
+      "track": {
+        "model_gpu": "yolo11s.pt",
+        "model_cpu": "yolo11n.pt",
+        "tracker": "bytetrack.yaml",
+        "classes": {
+          "2": "car",
+          "3": "motorcycle",
+          "5": "bus",
+          "7": "truck"
+        },
+        "det_conf": 0.25,
+        "crop_pad": 0.05,
+        "min_track_frames": 5,
+        "frame_stride_cpu": 2,
+        "frame_stride_gpu": 1,
+        "imgsz": 640
+      },
+      "plate": {
+        "detector_model": "yolo-v9-t-384-license-plate-end2end",
+        "det_conf": 0.35,
+        "min_sharpness": 45.0,
+        "min_width_px": 30,
+        "top_k_frames": 12,
+        "two_line_aspect": 2.2,
+        "two_line_gap_ratio": 0.6,
+        "clahe_clip_limit": 2.0,
+        "clahe_tile": [
+          8,
+          8
+        ],
+        "read_clahe_copy": true,
+        "vehicle_crops_for_attributes": 3,
+        "max_obs_per_track": 60,
+        "plate_pad_px": 2
+      },
+      "ocr": {
+        "backend": "parseq",
+        "parseq_variant": "parseq",
+        "fast_plate_ocr_model": "cct-s-v2-global-model",
+        "char_conf": 0.7,
+        "separators": " -.·_|"
+      },
+      "fusion": {
+        "s_ref": 100.0,
+        "sharpness_cap": 2.0,
+        "vote_min_weight": 0.9,
+        "vote_min_share": 0.6,
+        "vote_min_consistency": 0.4
+      },
+      "match": {
+        "tau": 0.55,
+        "w_plate": 0.65,
+        "w_color": 0.2,
+        "w_body": 0.15,
+        "mm_bonus": 0.05,
+        "mm_min_conf": 0.5,
+        "low_light_w_plate": 0.75,
+        "low_light_w_color": 0.1,
+        "no_plate_cap": 0.45,
+        "min_known_for_match": 3,
+        "mismatch_blocks_match": true,
+        "rank_contradictions_last": true,
+        "ambiguity_gap": 0.05,
+        "coverage_full": 6,
+        "confusable_credit": 0.35,
+        "shift_penalty": 0.05,
+        "shifts": [
+          -1,
+          0,
+          1
+        ],
+        "top_n": 5,
+        "confusable_pairs": [
+          [
+            "0",
+            "O"
+          ],
+          [
+            "1",
+            "I"
+          ],
+          [
+            "8",
+            "B"
+          ],
+          [
+            "5",
+            "S"
+          ],
+          [
+            "2",
+            "Z"
+          ],
+          [
+            "6",
+            "G"
+          ],
+          [
+            "4",
+            "A"
+          ]
+        ],
+        "adjacent_colors": [
+          [
+            "silver",
+            "grey"
+          ],
+          [
+            "white",
+            "silver"
+          ]
+        ],
+        "adjacent_colors_low_light": [
+          [
+            "grey",
+            "black"
+          ]
+        ],
+        "adjacent_color_credit": 0.5
+      },
+      "attributes": {
+        "clip_model": "ViT-B-32",
+        "clip_pretrained": "laion2b_s34b_b79k",
+        "n_crops": 3,
+        "uncertain_below": 0.4,
+        "logit_scale": 100.0
+      },
+      "super_res": {
+        "enabled": true,
+        "weights_file": "lpsr_cgnetV2_deformable.pth",
+        "pad_color": [
+          127,
+          127,
+          127
+        ],
+        "aspect_ratio": 3.0,
+        "in_h": 16,
+        "in_w": 48
+      },
+      "reid": {
+        "encoder": "clip",
+        "thresholds": {
+          "clip": 0.82,
+          "osnet": 0.8,
+          "resnet": 0.85
+        },
+        "max_city_speed_kmh": 120.0,
+        "n_crops": 3,
+        "min_plate_agree": 3
+      },
+      "narrative": {
+        "backend": "template",
+        "ollama_url": "http://127.0.0.1:11434",
+        "ollama_model": "llama3.2:3b",
+        "ollama_timeout_s": 45.0,
+        "max_failed_sentences": 1
+      }
+    },
+    "artifacts": [
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_best.jpg",
+        "sha256": "c5df367697b4264cdff62b135ae938b480742006a2b9f055b91300d7fea8a448",
+        "kind": "vehicle_best_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f10_plate.png",
+        "sha256": "32dbb91be76c85cc2680b9df6145441cd4bcc5d4f8a437debbd65414a19374f8",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f10_plate_clahe.png",
+        "sha256": "dbcde4fc2eb7b534ca0b86899a337f1490dd38f3fd7517b0de1f592e12119aef",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f10_sr.png",
+        "sha256": "53a76d50ca4e78edd30d4cacec89d987398393b06dd66fc142e2e66ea37e5b94",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f10_veh.jpg",
+        "sha256": "586686e4b7c61eb1c1c86514b363d4372cd10f7ab190a2b9e0accc0f0ec9a653",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f18_plate.png",
+        "sha256": "929301cec55e4288829795ba73ae1df990ddafd7ed5e75a041d46e3a5945afba",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f18_plate_clahe.png",
+        "sha256": "b05332f006a1b419f94dd75a253f81b641d3def80697660cc751fbcd7fbed556",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f18_sr.png",
+        "sha256": "8a0c1b4383e38448aff7920e9ea11b8b11cad80ab3bbffc27edd455a4ca34d1d",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f18_veh.jpg",
+        "sha256": "c5df367697b4264cdff62b135ae938b480742006a2b9f055b91300d7fea8a448",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f23_plate.png",
+        "sha256": "a881c7530a3be7aa2dd8b7df13e9c2b7ce1ec69e1d44c51825cb362edafc86fd",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f23_plate_clahe.png",
+        "sha256": "cce784df107004f31bbe957660fe4adb07220a631011287533af9a192d52eee5",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f23_sr.png",
+        "sha256": "93465a611bbad25504351eae89dc01da403b2ad715391e9fd79295fd3950cc81",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f23_veh.jpg",
+        "sha256": "09b8685219f9740dc65e27540322c385397095a10efb27b87ec973646b6bf868",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f25_plate.png",
+        "sha256": "9e5f074e33a06b8ebc146a990fb780e73a16e6123d15bf47e25fba6b36b74c67",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f25_plate_clahe.png",
+        "sha256": "528477854d041b74d74f824ec0bd4db0afae7e8ea52eceefc32617c1a272dfc9",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f25_sr.png",
+        "sha256": "43b2e795313bd920a6cbbde1bbacb5e7466bf2c99c8176965f241ca11a76b7e8",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f25_veh.jpg",
+        "sha256": "c9413d44a97bf652a3bbb1791e7b7cdbd9a2236926be193aada9dd80001519c5",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f30_plate.png",
+        "sha256": "81545f7447c9b47c36f970805248eefd87a5defa27447674c04fb9846363fb0a",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f30_plate_clahe.png",
+        "sha256": "c4d0c981e1711388267bfdb7b69b66e38065d1d252c863ff362766971ba03e42",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f30_sr.png",
+        "sha256": "0af49b1d5fbfbd2c4e4ab2d915e5f2dc628af2628619ccd6762503decd662401",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f30_veh.jpg",
+        "sha256": "7271f7759d6348f5323a926449a2af2def35f4213507b7897369f8e42f25c699",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f38_plate.png",
+        "sha256": "761b2f0a6602d8b5d60e7ffa50a3bba70a1b0a6711f565fba7d1beccf4e90aeb",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f38_plate_clahe.png",
+        "sha256": "24027af3e3d0b70f61ec8cd68950558cca23b6f2bf7de8a5253abeec95fb500b",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f38_sr.png",
+        "sha256": "9b7f06da563d19837af4d2835e4bffb5f9af7c2e5e244aa942a22cbd9cb3ea4e",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f38_veh.jpg",
+        "sha256": "f44710d080a5f125e88952b9ec6d8f9924b57722347ab8d10f3d64751344183f",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f3_plate.png",
+        "sha256": "de4345a4afdf11905a9d6c04d392f8443139fba81181154998df3109947aac2b",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f3_plate_clahe.png",
+        "sha256": "d3c7af8573344b59e068d878ffcbb7e3356e13b4f7ab2e7b8616e438eb417822",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f3_sr.png",
+        "sha256": "06f9cb9c62d17073d658bdb44905d009266dbb7e1a98fffa4a7e9aae05240f95",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f3_veh.jpg",
+        "sha256": "f41b2e59ba098791f496ac2aa295fa23167cc8b0a0505aee466be92598ccfa4e",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f43_plate.png",
+        "sha256": "2aca20395a316c3d61af5d19f8ec8f9df7394b79bbca1ea84de612b1d186facc",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f43_plate_clahe.png",
+        "sha256": "8d3e44decddfb0ec5249e54c91810ffbe1d65452ebfcb02b42b6acdccc8f9dac",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f43_sr.png",
+        "sha256": "533e79b36a7bbf7d1c6fbd100dc24e2e33f5aa778775028ef100284fcaf0cbb7",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f43_veh.jpg",
+        "sha256": "26e919c5a1893ad2b86de50e63a73d2b20e645f40b6d13ee70881b53c85af015",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f56_plate.png",
+        "sha256": "2cd77c484c4e954e195515f041e73932132287f94e5414ff0f2d15598de4b4b0",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f56_plate_clahe.png",
+        "sha256": "c36bff8bba619c27d7296a749533a94c2b02185f427965428ac7b24dd8e575e1",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f56_sr.png",
+        "sha256": "c84bf65236f42ebabee38114b13cb0064d8fb7827e375f551f86b9840040285e",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f56_veh.jpg",
+        "sha256": "025dfb36e3a56936d530c06f917f21c8cc8435728287ae0885926d09573fd2b1",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f5_plate.png",
+        "sha256": "8f5479e2233ac917c61c2cd966044366d54a3100a5c089521477663c954380bb",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f5_plate_clahe.png",
+        "sha256": "04d90f6c4c2d1b704c193753e29ddcdf576c932fc2828f17a812eb28f9ef9619",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f5_sr.png",
+        "sha256": "a51e5b123b80e82b05fb8f118d8e59190ccc880d235ab24906cc1b90c8d7589f",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f5_veh.jpg",
+        "sha256": "a11290955793ef5b63e0c8c9e092ffc8239fa9fbfb8f8751a25d39f34ee41153",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f61_plate.png",
+        "sha256": "7af0c8a7ae377aba69075ae030bf929dba0ccc89b4b6418c1d69b95d539be3c6",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f61_plate_clahe.png",
+        "sha256": "3ea591730a5bb5f6f1843c68ccdf3ee032ebb9f4b75845e1b17feeb3f637536d",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f61_sr.png",
+        "sha256": "b092d6dfa54d43e3869b248894317fca189f48aa67a68ef8381e571a76d62943",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f61_veh.jpg",
+        "sha256": "f669f9b8e03900dd19475f69341e3ac445fd8aaae73fea19cb867b1a7e2c6bfa",
+        "kind": "vehicle_crop"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f63_plate.png",
+        "sha256": "b1616eba65aa6fa8a0519b726e0143c58b29b9e9143f1a3f8639d2e63105f0e1",
+        "kind": "plate_crop_raw"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f63_plate_clahe.png",
+        "sha256": "2a03f59810c93bdfcc6d988b891fd9a47fbec557803a4e4aba144287b4a855bf",
+        "kind": "plate_crop_clahe"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f63_sr.png",
+        "sha256": "fc9341fe8d2e7cfe980ac4b1646f2cc87b65fef9720b78b7dce9b5b22db92f7b",
+        "kind": "super_res_visual_aid_not_evidence"
+      },
+      {
+        "path": "/artifacts/a86d7cc1357c/track1_f63_veh.jpg",
+        "sha256": "0cf2dc9595571630ebbd4f0010b963b07fa37d5012ca193e4002825b00f4322a",
+        "kind": "vehicle_crop"
+      }
+    ],
+    "registry_sha256": "e3cfb9b3ee460f6677fba2a15b66dac4f0fb523d73165fbdff991481fe9120f5"
+  },
+  "warnings": [],
+  "stage_timings": {
+    "ingest": 0.01,
+    "tracking": 4.69,
+    "plates": 1.58,
+    "ocr": 1.48,
+    "attributes": 0.04,
+    "matching": 0.02,
+    "total": 9.32
+  },
+  "crosscam": null,
+  "primary_track_id": 1
+}

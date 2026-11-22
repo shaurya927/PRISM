@@ -107,7 +107,8 @@ class FastPlateOCR(BasePlateOCR):
     def __init__(self, model_name: str = "cct-s-v2-global-model", device: str = "cpu"):
         try:
             mod, origin = import_vendor_first("fast_alpr.default_ocr", "fast-alpr")
-            wrapper = mod.DefaultOCR(hub_ocr_model=model_name, device="cuda" if device == "cuda" else "cpu")
+            # "auto" lets ONNX Runtime use CUDA only if onnxruntime-gpu is installed.
+            wrapper = mod.DefaultOCR(hub_ocr_model=model_name, device="auto" if device == "cuda" else "cpu")
             self._rec = wrapper.ocr_model
         except Exception as exc:
             raise OCRUnavailable(f"fast-plate-ocr unavailable: {exc}") from exc

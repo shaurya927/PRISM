@@ -396,6 +396,22 @@ def decide_status(
             f"clearly shows a different character.{alt}",
             gap,
         )
+    if rivals and gap is not None and gap >= cfg.ambiguity_gap:
+        # Colour between similar shades (white/silver, silver/grey, grey/black) is the most common
+        # CCTV misread. If plate and body evidence are identical, such a colour difference alone
+        # must not separate two candidates.
+        r = rivals[0]
+        shades = {frozenset(p) for p in list(cfg.adjacent_colors) + list(cfg.adjacent_colors_low_light)}
+        same_plate = abs(best.breakdown.plate - r.breakdown.plate) < 1e-9
+        same_body = abs(best.breakdown.body - r.breakdown.body) < 1e-9
+        if same_plate and same_body and frozenset((best.color, r.color)) in shades:
+            return (
+                MatchStatus.AMBIGUOUS,
+                f"{best.registry_id} ({best.score:.2f}) and {r.registry_id} ({r.score:.2f}) fit the plate and body "
+                f"type equally and differ only in colour ({best.color} vs {r.color}), shades that CCTV often "
+                "confuses, so colour alone is not used to separate them. See the advisor note.",
+                gap,
+            )
     if gap is not None and gap < cfg.ambiguity_gap:
         second = rivals[0]
         return (

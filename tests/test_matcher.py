@@ -149,6 +149,17 @@ def test_mismatch_is_listed_and_blocks_match():
     assert r.status == MatchStatus.NO_CONFIDENT_MATCH
 
 
+def test_similar_shade_colour_alone_cannot_separate_candidates():
+    """Night-clip failure: equal plate/body evidence, white vs silver decided the match."""
+    reg = [rec("REG-0001", "CG04MX4821", color="white"), rec("REG-0004", "CG04MX4827", color="silver")]
+    r = match("CG04MX4???", reg, MC, attr("silver"), attr("car"))
+    assert r.top_candidates[0].registry_id == "REG-0004" and r.gap >= 0.05
+    assert r.status == MatchStatus.AMBIGUOUS and "differ only in colour" in r.explanation
+    # A clearly different colour still separates them.
+    reg2 = [rec("REG-0001", "CG04MX4821", color="red"), rec("REG-0004", "CG04MX4827", color="silver")]
+    assert match("CG04MX4???", reg2, MC, attr("silver"), attr("car")).status == MatchStatus.MATCHED
+
+
 def test_specificity_count(small_registry):
     # CG04MX4821, CG04NX4821 and CG04HX4821 all fit.
     assert specificity("CG04?X4821", small_registry) == 3

@@ -28,6 +28,7 @@ class ReadObservation:
     raw_chars: list[str]
     raw_confs: list[float]
     sharpness: float
+    format_masked: int = 0    # confident characters the plate format check turned into '?'
 
     @classmethod
     def from_frame_read(cls, fr: FrameRead) -> "ReadObservation":
@@ -37,7 +38,19 @@ class ReadObservation:
             raw_chars=[c.raw_char for c in fr.chars],
             raw_confs=[float(c.conf) for c in fr.chars],
             sharpness=float(fr.sharpness),
+            format_masked=sum(1 for c in fr.chars if c.reason == "format"),
         )
+
+    @property
+    def plausible(self) -> bool:
+        """False if the format check had to mask too many confident characters: the OCR read
+        something that is not a plate (a word, a logo). Such reads cast no votes."""
+        n = len(self.chars)
+        if n < min(PLAUSIBLE_LENGTHS) - MAX_LENGTH_DIFF or n > max(PLAUSIBLE_LENGTHS) + MAX_LENGTH_DIFF:
+            return False
+        kept = sum(1 for c in self.chars if c != UNKNOWN)
+        confident = kept + self.format_masked
+        return confident == 0 or self.format_masked / confident <= MAX_FORMAT_MASKED_SHARE
 
     @property
     def known_conf_sum(self) -> float:
@@ -86,7 +99,7 @@ def align(read: Sequence[str], ref: Sequence[str]) -> list[Optional[int]]:
 
 PLAUSIBLE_LENGTHS = range(8, 12)  # every supported Indian layout is 8-11 characters
 MAX_LENGTH_DIFF = 2
-LONGER_READ_SHARE = 0.3
+MAX_FORMAT_MASKED_SHARE = 1 / 3
 
 
 def _camera(read_id: str) -> str:
@@ -103,33 +116,34 @@ def _pick_reference(reads: Sequence[ReadObservation]) -> tuple[int, Optional[Rea
         return 0, None
     reads = plausible or list(reads)
     conf_by_len: dict[int, float] = {}
+    fmt_by_len: dict[int, int] = {}
     for r in reads:
         if r.chars:
-            conf_by_len[len(r.chars)] = conf_by_len.get(len(r.chars), 0.0) + r.known_conf_sum
-    # Mode; ties broken by total confident evidence, then by length (deterministic).
-    L = max(lengths, key=lambda n: (lengths[n], conf_by_len[n], n))
-    # OCR drops hidden or edge characters far more often than it adds characters, so if a
-    # sizeable share of reads is one or two characters longer, the longer length is the plate.
-    base = lengths[L]
-    for extra in (2, 1):
-        if lengths.get(L + extra, 0) >= LONGER_READ_SHARE * base:
-            L = L + extra
-            break
+            n = len(r.chars)
+            conf_by_len[n] = conf_by_len.get(n, 0.0) + r.known_conf_sum
+            fmt_by_len[n] = fmt_by_len.get(n, 0) + r.format_masked
+    # Mode; ties broken by fewer format-check violations (the length whose reads fit an Indian
+    # layout), then total confident evidence, then length (deterministic).
+    L = max(lengths, key=lambda n: (lengths[n], -fmt_by_len.get(n, 0), conf_by_len[n], n))
     same = [r for r in reads if len(r.chars) == L]
     ref = max(same, key=lambda r: (r.known_conf_sum, -same.index(r)))
     return L, ref
 
 
 def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format: bool = True) -> FusedPlate:
-    """Fuse reads. `apply_format=False` skips the post-fusion format check (ablation only)."""
+    """Fuse reads. `apply_format=False` skips the format-based checks (ablation only)."""
     reads = [r for r in reads if r.chars]
+    # Reads that are not plate readings at all (most confident characters break the layout)
+    # are listed but cast no votes. Removing evidence can only produce more '?'.
+    excluded = [r.read_id for r in reads if apply_format and not r.plausible]
+    reads = [r for r in reads if not apply_format or r.plausible]
     L, ref = _pick_reference(reads)
     if ref is None:
         return FusedPlate(text="", video_text="", length=0, n_reads=0, positions=[],
-                          excluded_reads=[r.read_id for r in reads])
+                          excluded_reads=excluded + [r.read_id for r in reads])
     # Alignment can recover a lost first/last character; a read that is 3+ characters off the
     # plate length cannot be placed reliably, so it is listed but does not vote.
-    excluded = [r.read_id for r in reads if abs(len(r.chars) - L) > MAX_LENGTH_DIFF]
+    excluded += [r.read_id for r in reads if abs(len(r.chars) - L) > MAX_LENGTH_DIFF]
     reads = [r for r in reads if abs(len(r.chars) - L) <= MAX_LENGTH_DIFF]
 
     cells: list[list[VoteCell]] = [[] for _ in range(L)]

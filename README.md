@@ -106,8 +106,11 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 * **Fusion.** Reads are aligned (edit distance, `?` matches anything) to the most confident read of the modal
   plate length. Evidence `W_k(a) = Σ I(c=a) · p · min(S/100, 2.0)`. A character is accepted only if
   `W ≥ 0.9` **and** it holds `≥ 60%` of the evidence. A third, stricter check (`vote_min_consistency`, 40%)
-  requires the winner to be read confidently in a reasonable share of the reads that saw the position; it was
-  added after a night test where a half-hidden `2` was read as `8` at 0.85 in 4 of 24 reads. It can only add `?`.
+  requires the winner to be read confidently in a reasonable share of one camera's reads that saw the position;
+  it was added after a night test where a half-hidden `2` was read as `8` at 0.85 in 4 of 24 reads. Reads that
+  are not plate readings at all (PARSeq returning scene words such as `WATER` off a heavily blurred plate:
+  wrong length, or more than a third of the confident characters breaking every Indian layout) cast no votes.
+  Both checks only remove evidence, so they can only add `?`.
 * **Plate similarity.** Best of shifts −1/0/+1 (−0.05 per shift), 0.35 credit for `0/O 1/I 8/B 5/S 2/Z 6/G 4/A`,
   times coverage `min(1, |K|/6)`. Specificity = registry plates that fit the known characters exactly.
 * **Score.** `0.65·plate + 0.20·colour + 0.15·body + 0.05·make/model`; low light → `0.75 / 0.10`.
@@ -116,7 +119,9 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 * **Guardrails.** `|K| = 0` caps the score at 0.45; `< 3` known characters cannot be `MATCHED`; the make/model
   bonus cannot lift a candidate over τ; a candidate that contradicts a confidently read character is listed
   with a mismatch, ranked below every candidate that does not, cannot be `MATCHED`, and is not counted as a
-  rival for the ambiguity gap.
+  rival for the ambiguity gap. If the top two candidates have identical plate and body evidence and differ only
+  by similar shades (white/silver, silver/grey, grey/black), the result is `AMBIGUOUS`: the evaluation showed a
+  white car read as silver deciding a match on its own.
 * **Statuses.** `MATCHED` (top ≥ τ, `|K| ≥ 3`, gap ≥ 0.05), `AMBIGUOUS` (gap < 0.05), `NO CONFIDENT MATCH`
   (with a written explanation). τ defaults to 0.55 and can be moved live in the UI.
 
@@ -173,7 +178,85 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 ## Evaluation
 
 <!-- EVAL:START -->
-Run `python scripts/evaluate.py --clips` to fill this section.
+Synthetic plate-sequence benchmark: 120 registry vehicles x 8 degraded frames (raw + CLAHE reads), easy/medium/hard thirds, tau = 0.55. Device: cuda.
+
+**OCR benchmark** (full PRISM fusion + matching)
+
+| OCR backend | Committed-char error | Recovery | Top-1 | Top-5 | False-match | ms/read |
+|---|---|---|---|---|---|---|
+| parseq | 6.4% | 69.1% | 72.5% | 79.2% | 0.8% | 56.1 |
+| fast_plate_ocr | 3.0% | 44.8% | 51.7% | 62.5% | 0.8% | 28.9 |
+
+Winner: **parseq** (highest top-1 with false-match <= 5%, then lowest committed error).
+
+**Ablation** (parseq)
+
+| Variant | Committed error | Recovery | Top-5 | False-match |
+|---|---|---|---|---|
+| Best single frame, no fusion | 15.6% | 73.3% | 75.8% | 0.0% |
+| Majority vote, no confidence masking | 13.9% | 68.3% | 72.5% | 0.0% |
+| + confidence masking | 14.9% | 67.4% | 73.3% | 0.0% |
+| + two-condition vote | 10.3% | 69.1% | 76.7% | 0.8% |
+| + format check + coverage factor (full PRISM) | 6.4% | 69.1% | 79.2% | 0.8% |
+
+**Full PRISM by difficulty**
+
+| Level | Committed error | Recovery | Top-1 | Top-5 | False-match |
+|---|---|---|---|---|---|
+| easy | 0.0% | 99.2% | 97.5% | 97.5% | 0.0% |
+| medium | 2.2% | 93.5% | 95.0% | 97.5% | 2.5% |
+| hard | 44.3% | 15.1% | 25.0% | 42.5% | 0.0% |
+
+**Threshold sweep**: lowest tau with false-match rate <= 5% is **0.30** (false-match 3.3%, correct MATCHED 62.5%). Plot: `reports/tau_sweep.png`.
+
+**End-to-end clips** (full pipeline: YOLO11 + ByteTrack + fast-alpr + OCR + OpenCLIP)
+
+| Clip | Degradation | Fused plate | Status (expected) | Top-1 | Committed wrong | Colour/body | False-match | s |
+|---|---|---|---|---|---|---|---|---|
+| day_clear_white.mp4 | none | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 27.5 |
+| night_partial_white.mp4 | none | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 11.0 |
+| camB_white.mp4 | none | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.8 |
+| day_black_suv.mp4 | none | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 10.1 |
+| day_blue_twoline.mp4 | none | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.9 |
+| unregistered_white.mp4 | none | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.1 |
+| camB_white__gauss.mp4 | gauss | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.1 |
+| camB_white__motion.mp4 | motion | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.3 |
+| camB_white__down2x.mp4 | down2x | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 10.0 |
+| camB_white__down4x.mp4 | down4x | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 10.2 |
+| camB_white__jpeg20.mp4 | jpeg20 | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.8 |
+| camB_white__noise_dark.mp4 | noise_dark | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.2 |
+| day_black_suv__gauss.mp4 | gauss | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 9.2 |
+| day_black_suv__motion.mp4 | motion | `` | NO CONFIDENT MATCH (MATCHED) | yes | 0/0 | ok/ok | no | 9.2 |
+| day_black_suv__down2x.mp4 | down2x | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.4 |
+| day_black_suv__down4x.mp4 | down4x | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.1 |
+| day_black_suv__jpeg20.mp4 | jpeg20 | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 10.0 |
+| day_black_suv__noise_dark.mp4 | noise_dark | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 9.2 |
+| day_blue_twoline__gauss.mp4 | gauss | `??????` | NO CONFIDENT MATCH (MATCHED) | yes | 0/0 | ok/ok | no | 8.8 |
+| day_blue_twoline__motion.mp4 | motion | `???P00?3` | NO CONFIDENT MATCH (MATCHED) | no | 2/4 | ok/ok | no | 9.5 |
+| day_blue_twoline__down2x.mp4 | down2x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.3 |
+| day_blue_twoline__down4x.mp4 | down4x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.9 |
+| day_blue_twoline__jpeg20.mp4 | jpeg20 | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 10.6 |
+| day_blue_twoline__noise_dark.mp4 | noise_dark | `KA05MN` | NO CONFIDENT MATCH (MATCHED) | yes | 0/6 | ok/ok | no | 9.4 |
+| day_clear_white__gauss.mp4 | gauss | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 11.0 |
+| day_clear_white__motion.mp4 | motion | `??????4?2?` | NO CONFIDENT MATCH (MATCHED) | no | 0/2 | x/ok | no | 10.5 |
+| day_clear_white__down2x.mp4 | down2x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 10.1 |
+| day_clear_white__down4x.mp4 | down4x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 9.6 |
+| day_clear_white__jpeg20.mp4 | jpeg20 | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 10.7 |
+| day_clear_white__noise_dark.mp4 | noise_dark | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 11.0 |
+| night_partial_white__gauss.mp4 | gauss | `CG04MX4???` | AMBIGUOUS (AMBIGUOUS) | no | 0/7 | x/ok | no | 11.3 |
+| night_partial_white__motion.mp4 | motion | `` | NO CONFIDENT MATCH (AMBIGUOUS) | no | 0/0 | x/ok | no | 10.6 |
+| night_partial_white__down2x.mp4 | down2x | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.5 |
+| night_partial_white__down4x.mp4 | down4x | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.5 |
+| night_partial_white__jpeg20.mp4 | jpeg20 | `CG04MX4881` | NO CONFIDENT MATCH (AMBIGUOUS) | yes | 1/10 | x/ok | no | 10.6 |
+| night_partial_white__noise_dark.mp4 | noise_dark | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.8 |
+| unregistered_white__gauss.mp4 | gauss | `M??4XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/8 | x/ok | no | 9.8 |
+| unregistered_white__motion.mp4 | motion | `?H?4XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/8 | x/ok | no | 9.2 |
+| unregistered_white__down2x.mp4 | down2x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.2 |
+| unregistered_white__down4x.mp4 | down4x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.9 |
+| unregistered_white__jpeg20.mp4 | jpeg20 | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.4 |
+| unregistered_white__noise_dark.mp4 | noise_dark | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.2 |
+
+Clips (42): status as designed 83.3%, committed-char error 0.8%, recovery 83.6%, top-1 88.6%, top-5 97.1%, MATCHED to the wrong vehicle 0, false-match with true vehicle removed 9.5%, colour 33.3%, body 90.5%, mean 10.6 s/clip.
 <!-- EVAL:END -->
 
 ## Configuration and degradation
@@ -198,15 +281,24 @@ cases can be deleted from the UI (`DELETE /api/jobs/{id}`); every run is hashed 
 `vendor/` and weights are git-ignored; check each repository's licence before redistribution
 (the lpsr-lacd training data is licensed for non-commercial academic use).
 
-## Known limitations
+## Known limitations (from the evaluation above)
 
-* PARSeq is a general scene-text model. On the synthetic night clip it read a half-hidden `2` as `8` with
-  0.85 confidence in some frames; the consistency check keeps that position `?`, but OCR errors that are
-  confident *and* consistent across frames would still pass and would show up as a plate mismatch.
-* OpenCLIP colour is zero-shot: a white car under overcast or bluish light is often reported as grey or silver.
-  The adjacent-shade credit and the "uncertain" rule limit the damage; reported colour accuracy is in the
-  evaluation section.
-* The demo clips are synthetic composites; real CCTV is harder.
+* **Hard plates.** On the hardest synthetic third (70–100 px wide, heavy blur, 1–2 smeared characters) PARSeq,
+  a general scene-text model, often returns confident wrong characters, and committed-character error is
+  about 44% there (0% easy, 2% medium). Those reads mostly end in `NO CONFIDENT MATCH` rather than a false
+  match (false-match 0% on the hard third), but the committed characters themselves are not trustworthy.
+  A plate-specific OCR fine-tuned on Indian plates is the main improvement still open.
+* **Consistent OCR errors.** In the JPEG-20 night clip a half-hidden `2` was read as `8` consistently enough to
+  pass every vote check. PRISM then reported `NO CONFIDENT MATCH` (the true plate contradicts the `8`), which
+  is safe but not useful.
+* **"True vehicle removed" on the night clips.** When REG-0001 is removed, its decoy REG-0002 (`CG04MX4851`)
+  fits every character the night clip shows, so PRISM reports it as `MATCHED`. No system could separate them
+  from that evidence; this accounts for all 4 such cases (9.5%) in the clip benchmark. Across the 42 clips,
+  no vehicle was `MATCHED` to the wrong registry entry while the true one was present.
+* **Colour.** OpenCLIP read the white demo car as grey or silver in most clips (colour accuracy 33%). Similar-
+  shade credit, the uncertain rule and the similar-shade guardrail keep this from deciding matches.
+* **Synthetic data.** The demo clips are composites built from real vehicle photos; real CCTV is harder.
+  Add team-recorded clips to `data/test_clips/labels.json` and rerun `scripts/evaluate.py --clips`.
 
 The specification used is `docs/proposed_solution.md` (the final version of the proposed solution) together
 with `docs/Hackasol_5.0_Problem_Statement.pdf`, page 5.

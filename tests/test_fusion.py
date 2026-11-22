@@ -115,6 +115,21 @@ def test_truncated_reads_do_not_set_plate_length():
     assert set(f.excluded_reads) == {f"F{i}" for i in range(6)}
 
 
+def test_non_plate_reads_cast_no_votes():
+    """Scene-text words read off a blurry plate ('BLUEBONTOTO') must not produce characters."""
+    from prism.fusion import ReadObservation as RO
+    from prism.masking import mask_read as mr
+
+    def full(rid, text):
+        m = mr(text, [0.95] * len(text), OC)
+        return RO(rid, m.chars, m.raw_chars, m.raw_confs, 150, sum(1 for x in m.reasons if x == "format"))
+
+    reads = [full("F1", "BLUEBONTOTO"), full("F2", "BLUEBONTOTO"), full("F3", "WATER")]
+    f = fuse_reads(reads, FC)
+    assert f.text.replace("?", "") == ""
+    assert set(f.excluded_reads) >= {"F1", "F2", "F3"}
+
+
 def test_unknown_positions_carry_no_weight():
     f = fuse_reads([obs("F1", "CG04MX4821", [0.95, 0.95, 0.95, 0.95, 0.3, 0.95, 0.95, 0.95, 0.3, 0.95], 150)], FC)
     assert f.text == "CG04?X48?1"

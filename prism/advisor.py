@@ -9,6 +9,7 @@ nothing here feeds back into scoring.
 
 from __future__ import annotations
 
+import math
 from typing import Optional
 
 from prism.config import MatchConfig, OCRConfig
@@ -87,6 +88,8 @@ def advise(
             candidate_chars=chars,
             text=lead_txt + " No frame came close to reading it. Look for footage from another angle.",
         )
+    # Floor (not round) so a 0.6996 lead never displays as "0.70, below the 0.70 threshold".
+    lead_conf = math.floor(best_cell.raw_conf * 100) / 100
     fidx = (frame_lookup or {}).get(best_cell.read_id)
     fname = f"frame {fidx}" if fidx is not None else f"read {best_cell.read_id}"
     copy = " (CLAHE copy)" if best_cell.read_id.endswith("c") else ""
@@ -97,10 +100,10 @@ def advise(
         lead_read_id=best_cell.read_id,
         lead_frame_idx=fidx,
         lead_char=best_cell.raw_char.upper(),
-        lead_conf=round(best_cell.raw_conf, 2),
+        lead_conf=lead_conf,
         text=(
             f"{lead_txt} {fname.capitalize()}{copy} read it as `{best_cell.raw_char.upper()}` at "
-            f"{best_cell.raw_conf:.2f}, below the {ocr_cfg.char_conf:.2f} threshold, so it wasn't used. "
+            f"{lead_conf:.2f}, below the {ocr_cfg.char_conf:.2f} threshold, so it wasn't used. "
             f"Check {fname} by eye, or look for footage from another angle. This is a lead, not evidence."
         ),
     )
