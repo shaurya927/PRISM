@@ -62,9 +62,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PLAYWRIGHT_BROWSERS_PATH=/opt/playwright \
     PRISM_GIT_COMMIT=${PRISM_GIT_COMMIT}
 
-# OpenCV (pulled in by ultralytics) needs libGL and GLib.
+# OpenCV (pulled in by ultralytics) needs libGL and GLib. Playwright's bundled Node binary
+# needs libatomic, which python:slim does not ship (without it the driver exits with 127).
 RUN apt-get update \
- && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 \
+ && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 libatomic1 libstdc++6 \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -76,7 +77,9 @@ RUN pip install torch torchvision --index-url "${TORCH_INDEX}" \
 
 # Headless Chromium for PDF reports. Without it PRISM returns the HTML report instead.
 RUN if [ "${WITH_CHROMIUM}" = "1" ]; then \
-      python -m playwright install --with-deps chromium && rm -rf /var/lib/apt/lists/*; \
+      python -m playwright --version \
+      && python -m playwright install --with-deps chromium \
+      && rm -rf /var/lib/apt/lists/*; \
     fi
 
 RUN useradd --create-home --uid 10001 prism
