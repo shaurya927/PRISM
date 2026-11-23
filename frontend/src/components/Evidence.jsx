@@ -47,7 +47,7 @@ export function EvidenceStrip({ fused }) {
                 const disagree = p.char !== "?" && c.char !== p.char;
                 return (
                   <td key={p.index} className={`w-10 h-7 border border-white text-center font-mono font-semibold ${disagree ? "text-red-700" : "text-slate-900"}`}
-                    style={{ background: `rgba(201, 166, 107, ${0.1 + 0.7 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
+                    style={{ background: `rgba(20, 151, 172, ${0.1 + 0.7 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
                     {c.char}
                   </td>
                 );

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
 import { EASE, RollText } from "./motion.jsx";
-import { Arrow, Crest } from "./components.jsx";
+import { Arrow } from "./components.jsx";
 import { useClock, useHealth } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
 import { SiteCtx } from "./context.js";
@@ -26,8 +26,7 @@ export default function SiteLayout() {
 
   useEffect(() => {
     if (reduce) return;
-    // a slightly lower lerp and wheel step make the scroll glide and settle more slowly
-    const lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9, autoRaf: true });
+    const lenis = new Lenis({ lerp: 0.09, autoRaf: true });
     lenisRef.current = lenis;
     return () => { lenis.destroy(); lenisRef.current = null; };
   }, [reduce]);
@@ -58,7 +57,6 @@ export default function SiteLayout() {
         {!introDone && (
           <Intro onLeave={revealNow} onDone={() => { sessionStorage.setItem("prism-intro", "1"); setIntroDone(true); }} />
         )}
-        <ScrollProgress />
         <Topbar onMenu={() => setMenu(true)} />
         <AnimatePresence>{menu && <MobileMenu onClose={() => setMenu(false)} />}</AnimatePresence>
         {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
@@ -88,15 +86,6 @@ function Page({ children }) {
   );
 }
 
-/** Gold hairline at the top of the window that fills with the scroll position (spring-smoothed). */
-function ScrollProgress() {
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
-  if (reduce) return null;
-  return <motion.div className="sprog" style={{ scaleX }} aria-hidden />;
-}
-
 function Topbar({ onMenu }) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -114,8 +103,8 @@ function Topbar({ onMenu }) {
   return (
     <motion.header className={`topbar ${solid ? "is-solid" : ""}`} animate={{ y: hidden ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
       <Link to="/" className="topbar__logo" aria-label="PRISM home">
-        <Crest />
-        PRISM
+        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        prism
       </Link>
       <nav className="topbar__nav" aria-label="Main">
         {NAV.map(([label, to]) => (
@@ -136,7 +125,7 @@ function MobileMenu({ onClose }) {
   return (
     <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.4, ease: EASE_SHEET }}>
       <div className="flex justify-between items-center pt-4 h-[64px]">
-        <span className="topbar__logo"><Crest size={26} />PRISM</span>
+        <span className="text-[22px] font-medium tracking-[-0.04em]">prism</span>
         <button className="text-[15px] min-h-[44px] px-2 -mr-2" onClick={onClose}>close</button>
       </div>
       <nav className="mt-10 flex flex-col" aria-label="Main">
@@ -160,7 +149,6 @@ function Footer() {
   const health = useHealth();
   return (
     <footer className="foot">
-      <div className="ornament" aria-hidden><Crest size={34} /><span className="ornament__mark">PRISM</span><Crest size={34} /></div>
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10">
         <div className="col-span-2 md:col-span-4">
           <div className="tag mb-4">Get started</div>

@@ -56,7 +56,7 @@ function Hero() {
         {introReveal && (
         <div className="atf">
           <div className="hero__copy">
-            <motion.div className="hero__kicker" {...rise(0)}><span className="rec" />Camera 04<em>recording at</em>{clock}</motion.div>
+            <motion.div className="hero__kicker" {...rise(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
             {/* title rises letter by letter once the intro lifts */}
             <motion.h1 className="hero__h" aria-label="Every frame read. Nothing guessed." initial={reduce ? false : "hidden"} animate="shown">
               <span className="hero__line" aria-hidden><span className="inline-block"><SplitChars text="Every frame read" start={0.05} step={0.028} /></span></span>
@@ -275,11 +275,11 @@ function CtaBand() {
     <section className="relative isolate overflow-hidden">
       <ImageReveal src="/media/highway.jpg" alt="" className="absolute inset-0 -z-10" unfold radius={24} />
       <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden
-        style={{ background: "linear-gradient(to top, rgb(38 29 23 / .94) 0%, rgb(38 29 23 / .7) 45%, rgb(38 29 23 / .55) 100%)" }} />
+        style={{ background: "linear-gradient(to top, rgb(11 12 15 / .94) 0%, rgb(11 12 15 / .7) 45%, rgb(11 12 15 / .55) 100%)" }} />
       <div className="gutter py-24 md:py-32">
         <div className="grid md:grid-cols-12 gap-8 items-end">
           <div className="md:col-span-7">
-            <Label>Try it on the demo clips</Label>
+            <Label className="!text-[var(--muted-2)]">Try it on the demo clips</Label>
             <SplitLines as="h2" lines={["Open a case or upload a clip"]} className="display-2 mt-3" />
           </div>
           <Reveal className="md:col-span-5 flex flex-wrap md:justify-end gap-3" delay={0.2}>

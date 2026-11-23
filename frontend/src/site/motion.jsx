@@ -9,9 +9,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 //   - button labels roll letter by letter on hover (CSS, see .rt in site.css)
 // Under reduced motion everything renders in place.
 export const EASE = [0.22, 1, 0.36, 1];
-// Longer, softer curve for scroll reveals: starts quickly and settles slowly.
-export const EASE_SILK = [0.16, 1, 0.3, 1];
-export const EASE_REVEAL = EASE_SILK;
+export const EASE_REVEAL = EASE;
 export const EASE_APPEAR = EASE;
 
 // Trigger a little before the block is fully on screen, and only once.
@@ -19,11 +17,11 @@ const VIEWPORT = { once: true, amount: 0.15, margin: "0px 0px -8% 0px" };
 
 const lineVariants = {
   hidden: { y: "105%" },
-  shown: (i) => ({ y: "0%", transition: { duration: 1.05, ease: EASE_SILK, delay: i * 0.09 } }),
+  shown: (i) => ({ y: "0%", transition: { duration: 0.7, ease: EASE, delay: i * 0.07 } }),
 };
 const charVariants = {
-  hidden: { y: "115%", rotate: 4 },
-  shown: (d) => ({ y: "0%", rotate: 0, transition: { duration: 1.05, ease: EASE_SILK, delay: d } }),
+  hidden: { y: "115%" },
+  shown: (d) => ({ y: "0%", transition: { duration: 0.75, ease: EASE, delay: d } }),
 };
 
 /**
@@ -78,7 +76,7 @@ export function SplitLines({ lines, as: Tag = "h1", className = "" }) {
 
 const wordVariants = {
   hidden: { opacity: 0, y: "0.6em" },
-  shown: (d) => ({ opacity: 1, y: "0em", transition: { duration: 0.9, ease: EASE_SILK, delay: d } }),
+  shown: (d) => ({ opacity: 1, y: "0em", transition: { duration: 0.6, ease: EASE, delay: d } }),
 };
 
 /** Paragraph whose words fade up in turn the first time it scrolls into view. */
@@ -132,14 +130,14 @@ export function Unfold({ as: Tag = "section", className = "", children }) {
   return <M ref={ref} className={className} style={reduce ? undefined : { clipPath }}>{children}</M>;
 }
 
-/** Block that rises softly out of a slight blur the first time it scrolls into view. */
+/** Block that pops up a little (fade, 18px rise, slight scale) the first time it scrolls into view. */
 export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }) {
   const reduce = useReducedMotion();
   if (reduce) return <Tag className={className}>{children}</Tag>;
   const M = motion[Tag] || motion.div;
   return (
-    <M className={className} initial={{ opacity: 0, y: 32, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={VIEWPORT} transition={{ duration: 1.1, ease: EASE_SILK, delay: Math.min(delay, 0.45) }}>
+    <M className={className} initial={{ opacity: 0, y: 18, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={VIEWPORT} transition={{ duration: 0.6, ease: EASE, delay: Math.min(delay, 0.4) }}>
       {children}
     </M>
   );
@@ -181,28 +179,13 @@ export function ImageReveal({ src, alt = "", className = "", imgClassName = "", 
   );
 }
 
-/**
- * Section kicker in engraved gold capitals, e.g. "— 02 · Pipeline". A short gold rule draws in from
- * the left and the text follows, the first time it scrolls into view.
- */
+/** Mono micro-label with an index, e.g. "(02) Pipeline". */
 export function Label({ index, children, className = "" }) {
-  const reduce = useReducedMotion();
-  const body = (
-    <>
-      {index != null && <span>{String(index).padStart(2, "0")} ·</span>}
-      <span>{children}</span>
-    </>
-  );
-  if (reduce) return <div className={`label-mono kicker ${className}`}><span className="kicker__rule" aria-hidden />{body}</div>;
   return (
-    <motion.div className={`label-mono kicker ${className}`} initial="hidden" whileInView="shown" viewport={VIEWPORT}>
-      <motion.span className="kicker__rule" aria-hidden
-        variants={{ hidden: { scaleX: 0 }, shown: { scaleX: 1, transition: { duration: 1.1, ease: EASE_SILK } } }} />
-      <motion.span className="inline-flex gap-2"
-        variants={{ hidden: { opacity: 0, x: -8 }, shown: { opacity: 1, x: 0, transition: { duration: 0.9, ease: EASE_SILK, delay: 0.25 } } }}>
-        {body}
-      </motion.span>
-    </motion.div>
+    <div className={`label-mono ${className}`}>
+      {index != null && <span className="mr-2">({String(index).padStart(2, "0")})</span>}
+      {children}
+    </div>
   );
 }
 

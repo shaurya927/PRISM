@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "./api.js";
 import { useNetActive } from "./net.js";
 import { HighwayFeed } from "./site/fx.jsx";
-import { Crest } from "./site/components.jsx";
 import NewCase, { HintInput } from "./components/NewCase.jsx";
 import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
@@ -30,8 +29,8 @@ function Header({ health, jobId, onNew }) {
   return (
     <header className="app-top">
       <button onClick={onNew} className="topbar__logo" aria-label="New case">
-        <Crest size={26} />
-        PRISM
+        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        prism
       </button>
       <span className="app-top__crumb label-mono hidden sm:inline">/ investigator</span>
       <nav className="app-top__nav ml-6">
