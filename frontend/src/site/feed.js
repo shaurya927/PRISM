@@ -4,8 +4,8 @@
 // interpolates them to the video's current time and draws them over the cover-fitted video.
 //
 // One track is "focused": the car nearest the pointer when the pointer is over the feed, otherwise
-// the nearest (largest) car. Its plate is shown as ??????????, because at this range the plate has
-// too few pixels to read, and PRISM never fills in a character it cannot see.
+// the nearest (largest) car. Every track carries an illustrative plate (see fakePlate): the plates
+// in this footage are far too small to read, so these are made up for the demo, not OCR output.
 
 let tracksPromise = null;
 /** Detector output for the highway loop (null if the file is missing). Fetched once per page. */
@@ -16,6 +16,21 @@ export function loadTracks() {
 
 const KIND = { c: "CAR", t: "TRUCK", b: "BUS" };
 const RED = "#ff2a1f";
+
+// Illustrative Indian-format plate per track id (state, district, series, number), e.g. "MH 12 KX 4821".
+// Seeded by the id, so a car keeps the same plate for as long as it is tracked.
+const STATES = ["CG", "MH", "KA", "DL", "TN", "GJ", "RJ", "UP", "MP", "HR", "TS", "KL"];
+const SERIES = "ABCDEFGHJKLMNPRSTUVWXYZ"; // no I or O
+const plates = new Map();
+function fakePlate(id) {
+  if (plates.has(id)) return plates.get(id);
+  let s = (Number(id) * 2654435761) >>> 0;
+  const next = (n) => { s = (Math.imul(s ^ (s >>> 15), 2246822519) + 0x9e3779b9) >>> 0; return s % n; };
+  const pad = (v, n) => String(v).padStart(n, "0");
+  const plate = `${STATES[next(STATES.length)]} ${pad(1 + next(40), 2)} ${SERIES[next(SERIES.length)]}${SERIES[next(SERIES.length)]} ${pad(1 + next(9999), 4)}`;
+  plates.set(id, plate);
+  return plate;
+}
 
 /** Boxes at time t (seconds), linearly interpolated between the two nearest detector frames. */
 export function boxesAt(data, t) {
@@ -149,6 +164,7 @@ export function createFeedHud(canvas, video, opts = {}) {
         ctx.font = "500 9.5px 'Geist Mono Variable', ui-monospace, monospace";
         ctx.fillStyle = "rgba(255,255,255,.72)";
         ctx.fillText(`#${b.id} ${b.kind} ${b.conf.toFixed(2)}`, b.px, b.py - 4);
+        ctx.fillText(fakePlate(b.id), b.px, b.py + b.ph + 11);
       }
     }
     if (focus) {
@@ -163,7 +179,7 @@ export function createFeedHud(canvas, video, opts = {}) {
       ctx.shadowBlur = 0;
       if (opts.labels !== false) {
         tag(ctx, px, py - 3, `TRACK ${focus.id} · ${focus.kind} · ${focus.conf.toFixed(2)}`, RED, "#fff");
-        tag(ctx, px, py + ph + 21, "PLATE ??????????  too few pixels", "rgba(10,0,0,.82)", "#ffd9d6");
+        tag(ctx, px, py + ph + 21, `PLATE ${fakePlate(focus.id)}`, "rgba(10,0,0,.82)", "#ffd9d6");
       }
     }
   };
