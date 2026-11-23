@@ -1,27 +1,31 @@
-// First-visit intro: a car drives up the highway toward a CCTV camera, the camera locks onto it
-// and its plate, the plate is read character by character (each starts as ?), then the registry
-// details appear. The plate, scores and registry record are PRISM's real output for
-// day_clear_white.mp4 (see data/cases.json).
+// First-visit intro. A live night-freeway feed runs with PRISM's real detector boxes on it
+// (feed.js). Then the camera grabs the vehicle: a Hyundai Verna turns through a full circle and stops
+// facing the camera, with the car and plate boxes following it frame by frame (verna_spin.json), the
+// plate is read character by character (each starts as ?), and the registry record appears.
+//
+// The plate, read count, plate crops, scores and registry record are PRISM's real output for
+// day_clear_white.mp4 (data/cases.json). The turning car is studio footage of a Verna (credits in
+// public/media/CREDITS.md); its plates were blanked in the source, and the plate drawn on them is the
+// one PRISM read from the clip.
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { HighwayCanvas, useClock } from "./fx.jsx";
-import { projector } from "./highway.js";
+import { motion, useReducedMotion } from "framer-motion";
+import { HighwayFeed, useClock } from "./fx.jsx";
 import { caseById } from "./data/content.js";
 
 const EASE_SHEET = [0.76, 0, 0.24, 1];
-const LANE = 1.9; // the car uses the inner oncoming lane; the camera sits over it
-const T = { drive0: 0.25, drive1: 2.7, flash: 2.72, box: 2.8, plate: 3.15, read: 3.4, details: 4.25, end: 5.4 };
-const STAGES = [
-  [0, "Watching CAM 04 · NH-30"],
-  [1.3, "Tracking vehicle · YOLO11 + ByteTrack"],
-  [T.box, "Plate detected · fast-alpr"],
-  [T.read, "Reading plate · PARSeq"],
-  [T.details, "Registry match"],
-];
+const EASE_OUT = [0.18, 0.66, 0.18, 1];
+const RATE = 1.2; // spin playback speed
+const SPIN = 70 / 30 / RATE; // seconds the turn takes on screen
+const T0 = { flash: 2.45, cap: 2.5 };
+// The plate box waits for the car to stop: during the turn the plate moves too fast for an HTML overlay
+// to stay on it frame-accurately, and the stopped, face-on frame is the best plate frame anyway.
+const T = { ...T0, box: T0.cap + 0.2, pbox: T0.cap + SPIN, spun: T0.cap + SPIN, read: T0.cap + SPIN + 0.15,
+  details: T0.cap + SPIN + 0.9, end: T0.cap + SPIN + 2.3 };
+const ASPECT = 1912 / 1046;
+const MAX_WAIT = 5; // seconds the intro holds for the spin video before using its still frame
 
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-const easeOut = (u) => 1 - (1 - u) ** 3;
-const prog = (t, a, b) => clamp((t - a) / (b - a));
+const pct = (r) => (r ? { left: `${r[0] / 10}%`, top: `${r[1] / 10}%`, width: `${r[2] / 10}%`, height: `${r[3] / 10}%` } : null);
 
 function useViewport() {
   const [v, setV] = useState(() => ({ W: window.innerWidth, H: window.innerHeight }));
@@ -33,81 +37,26 @@ function useViewport() {
   return v;
 }
 
-/** Camera and final car size for this viewport, so the stopped car fills the lower middle. */
-function useStage({ W, H }) {
+/** Where the capture frame and the two panels go for this viewport. */
+function useLayout({ W, H }) {
   return useMemo(() => {
     const narrow = W < 900;
-    const horizon = narrow ? 0.34 : 0.44;
-    const opts = { focal: 0.95, horizon, camX: LANE };
-    const f = projector(W, H, { ...opts, camH: 1 }).f;
-    // Desktop: the plate panel (~370 px) and details panel (~290 px) sit either side of the car,
-    // so the car is never wider than the space they leave.
-    const side = W - 56 - 68 - 380 - 300;
-    const wpx = narrow ? W * 0.66 : Math.min(W >= 1200 ? Math.min(W * 0.34, 560) : W * 0.3, side * 0.96);
-    const groundY = narrow ? H * 0.5 : H * 0.88;
-    let s = wpx / 1.8;
-    s = Math.min(s, (groundY - H * 0.1) / 1.45);
-    const camH = clamp((groundY - H * horizon) / s, 0.8, 3.2);
-    return { narrow, opts: { ...opts, camH }, zEnd: f / s, zFar: 150 };
+    if (narrow) {
+      const g = 20;
+      const w = W - g * 2;
+      const h = w / ASPECT;
+      const top = Math.max(64, Math.min(H * 0.1, 90));
+      return { narrow, cap: { left: g, top, width: w, height: h }, plate: { left: g, top: top + h + 12, width: w }, det: { left: g, top: top + h + 176, width: w } };
+    }
+    const col = 380, gap = 28, side = 56;
+    const short = H < 640;
+    const w = Math.min(W - side * 2 - col - gap, (H - (short ? 140 : 210)) * ASPECT, 960);
+    const h = w / ASPECT;
+    const left = (W - (w + gap + col)) / 2;
+    const top = Math.max(64, (H - h) / 2 - (short ? 4 : 14));
+    return { narrow, short, cap: { left, top, width: w, height: h }, plate: { left: left + w + gap, top: short ? 56 : top - 40, width: col },
+      det: { left: left + w + gap, top: (short ? 56 : top - 40) + (short ? 122 : 160), width: col } };
   }, [W, H]);
-}
-
-function Car({ plate }) {
-  const p = `${plate.slice(0, 2)} ${plate.slice(2, 4)} ${plate.slice(4, 6)} ${plate.slice(6)}`;
-  return (
-    <svg viewBox="0 0 400 260" width="100%" height="100%" aria-hidden>
-      <defs>
-        <linearGradient id="ic-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#d9d3d1" />
-          <stop offset="0.55" stopColor="#a49c9a" />
-          <stop offset="1" stopColor="#5e5655" />
-        </linearGradient>
-        <linearGradient id="ic-roof" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#c9c2c0" />
-          <stop offset="1" stopColor="#8d8584" />
-        </linearGradient>
-        <linearGradient id="ic-glass" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#2a1416" />
-          <stop offset="1" stopColor="#090506" />
-        </linearGradient>
-        <radialGradient id="ic-pool" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#ecf6ff" stopOpacity="0.32" />
-          <stop offset="1" stopColor="#ecf6ff" stopOpacity="0" />
-        </radialGradient>
-        <filter id="ic-bloom" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" /></filter>
-      </defs>
-      <ellipse cx="200" cy="246" rx="235" ry="16" fill="url(#ic-pool)" />
-      <ellipse cx="200" cy="241" rx="186" ry="9" fill="#000" opacity="0.7" />
-      <rect x="40" y="196" width="52" height="46" rx="9" fill="#0a0808" />
-      <rect x="308" y="196" width="52" height="46" rx="9" fill="#0a0808" />
-      <path d="M86 124 L117 54 Q121 45 132 45 L268 45 Q279 45 283 54 L314 124 Z" fill="url(#ic-roof)" />
-      <path d="M103 120 L129 60 Q132 54 140 54 L260 54 Q268 54 271 60 L297 120 Z" fill="url(#ic-glass)" />
-      <path d="M152 60 L178 60 L141 116 L117 116 Z" fill="#fff" opacity="0.07" />
-      <path d="M66 112 L90 105 L93 123 L68 125 Q63 119 66 112 Z" fill="#7a7271" />
-      <path d="M334 112 L310 105 L307 123 L332 125 Q337 119 334 112 Z" fill="#7a7271" />
-      <path d="M22 152 Q22 130 46 123 L354 123 Q378 130 378 152 L378 206 Q378 221 362 223 L38 223 Q22 221 22 206 Z" fill="url(#ic-body)" />
-      <path d="M118 124 L148 144 M282 124 L252 144" stroke="#000" strokeOpacity="0.18" strokeWidth="2" />
-      <path d="M36 141 L120 147 L113 166 L45 162 Q34 157 36 141 Z" fill="#f3f8ff" />
-      <path d="M364 141 L280 147 L287 166 L355 162 Q366 157 364 141 Z" fill="#f3f8ff" />
-      <g filter="url(#ic-bloom)" opacity="0.9">
-        <ellipse cx="78" cy="154" rx="40" ry="11" fill="#fff" />
-        <ellipse cx="322" cy="154" rx="40" ry="11" fill="#fff" />
-      </g>
-      <path d="M42 144 L116 149" stroke="#bfe9ff" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M358 144 L284 149" stroke="#bfe9ff" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M131 149 L269 149 L261 175 L139 175 Z" fill="#100c0d" />
-      {[155, 162, 169].map((y) => <path key={y} d={`M${136 + (y - 149) * 0.3} ${y} L${264 - (y - 149) * 0.3} ${y}`} stroke="#2a2223" strokeWidth="2" />)}
-      <ellipse cx="200" cy="160" rx="11" ry="6" fill="none" stroke="#cfc8c6" strokeWidth="2" />
-      <rect x="64" y="196" width="272" height="17" rx="7" fill="#1d1718" />
-      <circle cx="80" cy="205" r="5" fill="#ffe7c2" />
-      <circle cx="320" cy="205" r="5" fill="#ffe7c2" />
-      <rect x="151" y="179" width="98" height="23" rx="2.5" fill="#f5f5f1" stroke="#1a1a1a" strokeWidth="1.5" />
-      <rect x="152" y="180" width="10" height="21" fill="#1d4fa8" />
-      <text x="157" y="194" fontSize="4.6" fill="#fff" textAnchor="middle" fontFamily="sans-serif" fontWeight="700">IND</text>
-      <text x="206" y="195" fontSize="11" fill="#111" textAnchor="middle" textLength="80" lengthAdjust="spacingAndGlyphs"
-        fontFamily="'Geist Mono Variable', monospace" fontWeight="700">{p}</text>
-    </svg>
-  );
 }
 
 function Brackets({ className = "" }) {
@@ -118,23 +67,71 @@ function Brackets({ className = "" }) {
   );
 }
 
+let spinPromise = null;
+const loadSpin = () => (spinPromise = spinPromise || fetch("/media/verna_spin.json").then((r) => (r.ok ? r.json() : null)).catch(() => null));
+
 export default function Intro({ onLeave, onDone }) {
   const vp = useViewport();
-  const stage = useStage(vp);
+  const L = useLayout(vp);
+  const reduce = useReducedMotion();
   const c = caseById("day_clear_white");
   const top = c?.top?.[0];
   const plate = c?.fused || "CG04MX4821";
   const [t, setT] = useState(0);
+  const [count, setCount] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const [spin, setSpin] = useState(null);
+  const vid = useRef(null);
+  const ready = useRef(false); // spin video can play through
+  const still = useRef(!!reduce); // show the last frame instead of playing
+  const started = useRef(false);
   const skipped = useRef(false);
   const clock = useClock();
 
+  const shown = useRef(-1); // index of the spin frame actually on screen (-1 = use currentTime)
+  useEffect(() => { loadSpin().then(setSpin); }, []);
+  useEffect(() => {
+    const v = vid.current;
+    if (!v) return undefined;
+    v.muted = true;
+    v.playbackRate = RATE;
+    const ok = () => { ready.current = true; };
+    if (v.readyState >= 3) ok();
+    v.addEventListener("canplaythrough", ok);
+    v.addEventListener("error", () => { still.current = true; });
+    // currentTime runs ahead of the presented frame; the frame callback reports the one on screen,
+    // so the boxes stay on the car and plate while it turns
+    let id = 0;
+    const onFrame = (_, meta) => { shown.current = Math.round(meta.mediaTime * 30); id = v.requestVideoFrameCallback(onFrame); };
+    if (v.requestVideoFrameCallback) id = v.requestVideoFrameCallback(onFrame);
+    return () => {
+      v.removeEventListener("canplaythrough", ok);
+      if (id) v.cancelVideoFrameCallback?.(id);
+    };
+  }, []);
+
   useEffect(() => {
     let raf;
-    const t0 = performance.now();
+    let last = performance.now();
+    let clockT = 0;
+    let waited = 0;
     const tick = (now) => {
-      // rAF timestamps are the frame start, which can be slightly before t0
-      const v = skipped.current ? T.end : Math.max(0, (now - t0) / 1000);
+      const dt = Math.max(0, Math.min(0.1, (now - last) / 1000));
+      last = now;
+      // hold just before the grab while the spin video is still loading
+      if (!ready.current && !still.current && clockT + dt >= T.cap - 0.06) {
+        waited += dt;
+        if (waited > MAX_WAIT) still.current = true;
+      } else {
+        clockT += dt;
+      }
+      const v = skipped.current ? T.end : clockT;
+      const el = vid.current;
+      if (el && v >= T.cap && !started.current) {
+        started.current = true;
+        if (still.current) { el.currentTime = el.duration || 99; }
+        else { el.playbackRate = RATE; el.play().catch(() => { el.currentTime = el.duration || 99; }); }
+      }
       setT(v);
       if (v >= T.end) { setLeaving(true); return; }
       raf = requestAnimationFrame(tick);
@@ -146,74 +143,94 @@ export default function Intro({ onLeave, onDone }) {
   }, []);
   useEffect(() => { if (leaving) onLeave?.(); }, [leaving, onLeave]);
 
-  // car position for this instant
-  const P = projector(vp.W, vp.H, stage.opts);
-  const u = easeOut(prog(t, T.drive0, T.drive1));
-  const z = stage.zFar + (stage.zEnd - stage.zFar) * u;
-  const g = P.p(LANE, z);
-  const wpx = 1.8 * g.s;
-  const elW = (wpx * 400) / 360;
-  const elH = (elW * 260) / 400;
-  const shake = Math.sin(t * 46) * 0.8 * (1 - u);
-  const car = { left: g.x - elW / 2, top: g.y - (240 / 260) * elH + shake, w: elW, h: elH };
-  const vb = (x, y) => ({ x: car.left + (x / 400) * car.w, y: car.top + (y / 260) * car.h });
-  const a = vb(14, 40), b = vb(386, 248);
-  const box = { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y };
-  const pa = vb(146, 175), pb = vb(254, 206);
-  const pbox = { x: pa.x, y: pa.y, w: pb.x - pa.x, h: pb.y - pa.y };
-  const lights = [vb(78, 154), vb(322, 154)];
-  const glowR = Math.max(34, wpx * 0.42);
-  const glowA = 0.95 - 0.45 * u;
-
-  const flash = t > T.flash ? Math.max(0, 0.45 - (t - T.flash) * 1.6) : 0;
-  const pct = Math.round(clamp(t / T.end) * 100);
-  const label = pct >= 100 ? "Ready" : ([...STAGES].reverse().find(([s]) => t >= s) || STAGES[0])[1];
-  const nar = stage.narrow;
-  const platePanel = nar
-    ? { left: "50%", top: box.y + box.h + 14, x: "-50%" }
-    : { left: box.x - 34, top: pbox.y + pbox.h / 2, x: "-100%", y: "-50%" };
-  const detailPanel = nar
-    ? { left: "50%", top: box.y + box.h + 124, x: "-50%" }
-    : { left: box.x + box.w + 34, top: Math.max(56, Math.min(box.y + 6, vp.H - 210)) };
-  const short = !nar && vp.H < 640; // landscape laptops with little height: drop secondary lines
   const show = (k) => t >= k;
+  const flash = t > T.flash ? Math.max(0, 0.5 - (t - T.flash) * 1.8) : 0;
+  const prog = Math.round(clamp(t / T.end) * 100);
+  const holding = !ready.current && !still.current && t >= T.cap - 0.1;
+  const stages = [
+    [0, "Watching CAM 04 · live"],
+    [0.7, `Tracking ${count || "…"} vehicles · YOLO11 + ByteTrack`],
+    [T.cap, "Vehicle locked · tracking as it turns"],
+    [T.pbox, "Best plate frame · plate detected"],
+    [T.read, "Reading plate · PARSeq"],
+    [T.details, "Registry match"],
+  ];
+  const label = prog >= 100 ? "Ready" : holding ? "Loading footage…" : ([...stages].reverse().find(([s]) => t >= s) || stages[0])[1];
+  const readDone = T.read + 0.12 + plate.length * 0.075;
+  const { narrow, short } = L;
+  const capOn = show(T.cap) && !holding;
+
+  // boxes for the frame on screen
+  let carBox = null, plateBox = null;
+  if (spin && capOn) {
+    const el = vid.current;
+    const n = spin.frames.length;
+    const live = el && !el.ended && el.currentTime < (el.duration || 1e9) - 0.02;
+    const k = !live ? n - 1 : shown.current >= 0 ? shown.current : Math.floor(el.currentTime * spin.fps);
+    [carBox, plateBox] = spin.frames[clamp(k, 0, n - 1)].map(pct);
+  }
+  // the panel title is the make and model, and the plate panel above shows the plate
+  const rows = top ? [
+    !(narrow || short) && ["Registered plate", top.plate],
+    ["Make", top.model?.split(" ")[0]],
+    ["Body", [top.style, top.body].filter(Boolean).join(" · ")],
+    ["Registered colour", top.color],
+    ["Registered in", top.region],
+  ].filter((r) => r && r[1]) : [];
 
   return (
     <div className="ld" aria-label="Loading PRISM">
       <motion.div className="ld__sheet" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.9, ease: EASE_SHEET, delay: 0.12 }}
         onAnimationComplete={() => leaving && onDone()} />
       <motion.div className="ld__panel intro" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.85, ease: EASE_SHEET }}>
-        <motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <HighwayCanvas hud={false} density={0.75} skipLanes={[LANE]} seed={3} {...stage.opts} />
+        <motion.div className="absolute inset-0" initial={{ opacity: 0 }} transition={{ duration: 0.6 }}
+          animate={{ opacity: capOn ? 0.3 : 1, filter: capOn ? "blur(3px)" : "blur(0px)" }}>
+          <HighwayFeed onCount={setCount} labels={!capOn} />
         </motion.div>
 
-        {lights.map((l, i) => (
-          <span key={i} className="intro__glow" style={{ left: l.x, top: l.y, width: glowR * 2, height: glowR * 2, opacity: glowA }} />
-        ))}
-        <div className="intro__car" style={{ left: car.left, top: car.top, width: car.w, height: car.h }}>
-          <Car plate={plate} />
-        </div>
+        {/* always mounted so the spin video loads while the feed plays */}
+        <motion.div className="cap" style={{ ...L.cap, pointerEvents: "none" }} initial={false}
+          animate={capOn ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
+          <div className="cap__media">
+            <video ref={vid} className="cap__vid" poster="/media/verna_spin.jpg" muted playsInline preload="auto" aria-hidden>
+              <source src="/media/verna_spin.webm" type="video/webm" />
+              <source src="/media/verna_spin.mp4" type="video/mp4" />
+            </video>
+            {show(T.box) && carBox && (
+              <div className="intro__box" style={carBox}>
+                <motion.div className="absolute inset-0" initial={{ opacity: 0, scale: 1.08 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, ease: EASE_OUT }}>
+                  <Brackets />
+                  <span className="intro__tag intro__tag--in">TRACK 1 · {(top?.model || "car").toUpperCase()}</span>
+                </motion.div>
+              </div>
+            )}
+            {show(T.pbox) && plateBox && (
+              <div className="intro__box intro__box--plate" style={plateBox}>
+                <motion.div className="absolute inset-0" initial={{ opacity: 0, scale: 1.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3, ease: EASE_OUT }}>
+                  <Brackets className="ibx--red" />
+                </motion.div>
+              </div>
+            )}
+          </div>
+          <div className="cap__fx" aria-hidden />
+          <div className="cap__hud">
+            <span><span className="rec" />CAM 04</span>
+            <span className="hidden sm:inline">{show(T.spun) ? "BEST PLATE FRAME" : "TRACKING"} · {clock}</span>
+          </div>
+          <div className="cap__credit">studio footage · Hyundai Verna</div>
+        </motion.div>
         <span className="intro__flash" style={{ opacity: flash }} />
 
-        {show(T.box) && (
-          <motion.div className="intro__box" style={{ left: box.x, top: box.y, width: box.w, height: box.h }}
-            initial={{ opacity: 0, scale: 1.18 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, ease: [0.18, 0.66, 0.18, 1] }}>
-            <Brackets />
-            <motion.span className="intro__sweep" initial={{ top: "0%", opacity: 1 }} animate={{ top: "100%", opacity: 0 }} transition={{ duration: 0.5, ease: "easeInOut" }} />
-            <span className="intro__tag">TRACK 1 · {(c?.body || "car").toUpperCase()} · CAM 04</span>
-          </motion.div>
-        )}
-        {show(T.plate) && (
-          <motion.div className="intro__box intro__box--plate" style={{ left: pbox.x, top: pbox.y, width: pbox.w, height: pbox.h }}
-            initial={{ opacity: 0, scale: 1.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3, ease: [0.18, 0.66, 0.18, 1] }}>
-            <Brackets className="ibx--red" />
-          </motion.div>
-        )}
-
         {show(T.read - 0.15) && (
-          <motion.div className="intro__panel" style={platePanel} initial={{ opacity: 0, y: nar ? 10 : "-50%", x: platePanel.x, scale: 0.96 }}
-            animate={{ opacity: 1, y: nar ? 0 : "-50%", x: platePanel.x, scale: 1 }} transition={{ duration: 0.45, ease: [0.18, 0.66, 0.18, 1] }}>
+          <motion.div className="intro__panel" style={L.plate} initial={{ opacity: 0, x: narrow ? 0 : 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.45, ease: EASE_OUT }}>
             <div className="intro__lbl">PLATE · FUSED FROM {c?.reads ?? 24} READS</div>
+            {!short && c?.plates?.length > 0 && (
+              <div className="intro__crops">
+                {c.plates.map((u, i) => (
+                  <motion.img key={u} src={u} alt="" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 * i, duration: 0.3 }} />
+                ))}
+              </div>
+            )}
             <div className="intro__cells">
               {plate.split("").map((ch, i) => {
                 const known = t >= T.read + 0.12 + i * 0.075;
@@ -221,44 +238,47 @@ export default function Intro({ onLeave, onDone }) {
               })}
             </div>
             <div className="intro__sub">
-              {t >= T.read + 0.12 + 10 * 0.075 ? `${plate.length} of ${plate.length} characters read clearly` : "unread characters stay ?"}
+              {t >= readDone ? `${plate.length} of ${plate.length} characters read clearly` : "unread characters stay ?"}
             </div>
-            {!nar && <motion.span className="intro__wire intro__wire--l" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.35, delay: 0.1 }} />}
           </motion.div>
         )}
 
         {show(T.details) && top && (
-          <motion.div className="intro__panel intro__panel--det" style={detailPanel} initial={{ opacity: 0, x: nar ? "-50%" : 18 }}
-            animate={{ opacity: 1, x: nar ? "-50%" : 0 }} transition={{ duration: 0.5, ease: [0.18, 0.66, 0.18, 1] }}>
-            {!nar && <motion.span className="intro__wire intro__wire--r" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.35 }} />}
+          <motion.div className="intro__panel intro__panel--det" style={L.det} initial={{ opacity: 0, x: narrow ? 0 : 16 }}
+            animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
             <div className="flex items-center justify-between gap-4">
-              <span className="intro__lbl">REGISTRY MATCH</span>
+              <span className="intro__lbl">REGISTRY MATCH · {top.id}</span>
               <span className="chip chip--ok">{c.status}</span>
             </div>
-            {[
-              <div key="id" className="intro__rid">{top.id}</div>,
-              <div key="mm" className="intro__row">{top.model} · {top.color} {top.body}</div>,
-              <div key="sc" className="intro__row intro__mono">score {top.score.toFixed(2)} · τ 0.55</div>,
-              !nar && !short && <div key="cl" className="intro__row intro__muted">colour seen as {c.color}, kept out of the decision</div>,
-            ].filter(Boolean).map((el, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 + i * 0.09, duration: 0.4 }}>{el}</motion.div>
-            ))}
+            <motion.div className="intro__rid" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }}>
+              {top.model}
+            </motion.div>
+            <dl className="intro__dl">
+              {rows.map(([k, v], i) => (
+                <motion.div key={k} className="intro__dr" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 + i * 0.07, duration: 0.35 }}>
+                  <dt>{k}</dt><dd>{v}</dd>
+                </motion.div>
+              ))}
+            </dl>
+            <motion.div className="intro__row intro__mono" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.4 }}>
+              score {top.score.toFixed(2)} · τ 0.55{!narrow && !short ? ` · colour seen as ${c.color}, not used to decide` : ""}
+            </motion.div>
           </motion.div>
         )}
 
         <div className="intro__hud">
           <span><span className="rec" />REC</span>
-          <span>CAM 04 · NH-30 · KM 42</span>
+          <span>CAM 04 · {count ? `${count} TRACKED` : "LIVE"}</span>
           <span className="hidden sm:inline">{clock}</span>
         </div>
         <button type="button" className="intro__skip f-u" onClick={() => { skipped.current = true; }}>skip intro →</button>
         <div className="ld__labels" style={{ opacity: short && show(T.read - 0.15) ? 0 : 1, transition: "opacity .3s" }}>
           <motion.span key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>{label}</motion.span>
         </div>
-        <div className="ld__count intro__count" style={{ opacity: (nar || vp.H < 640) && show(T.details) ? 0 : undefined, transition: "opacity .3s" }}>
-          {String(pct).padStart(3, "0")}<span className="ld__pct">%</span>
+        <div className="ld__count intro__count" style={{ opacity: (narrow || short) && show(T.details) ? 0 : undefined, transition: "opacity .3s" }}>
+          {String(prog).padStart(3, "0")}<span className="ld__pct">%</span>
         </div>
-        <div className="ld__bar" style={{ transform: `scaleX(${pct / 100})` }} />
+        <div className="ld__bar" style={{ transform: `scaleX(${prog / 100})` }} />
       </motion.div>
     </div>
   );

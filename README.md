@@ -189,13 +189,15 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 
 The same build serves a project website at `/` (the investigator app lives at `/app`):
 landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails, Docs and About.
-It uses React Router, framer-motion, Lenis smooth scrolling and a small WebGL shader, with Geist fonts.
+It uses React Router, framer-motion and Lenis smooth scrolling, with Geist fonts.
 The colour palette, type scale and easings follow melon.studio's public design tokens (`#0f0000` black,
 `#f6efed` paper, pure red, `#ffb3b3` pink, `#45e0ea → #1497ac` wordmark gradient); layout and motion are
 recreated in our own code, and no code, images or text were taken from melon.studio.
 
-Effects: loader with a filling mark and counter; a red-and-black sheet page transition; a WebGL liquid hero
-that bends and glows around the pointer; a full-width split wordmark whose letters rise toward the pointer and
+Effects: a first-visit intro (live freeway feed, then a Hyundai Verna turns a full circle with the tracking
+boxes following it, its plate is read character by character and the full registry record is shown, using
+PRISM's real `day_clear_white` result); a red-and-black sheet page transition; a hero of real night-freeway footage with PRISM's own
+YOLO11 + ByteTrack boxes drawn over it, where the car nearest the pointer is tracked; a full-width split wordmark whose letters rise toward the pointer and
 drift apart on scroll; centred 16:9 feature cards that scale in, tilt toward the pointer, skew with scroll speed
 and keep their caption pinned beside them; a trailing cursor ring that grows over links and shows "View"/"Open"
 labels; words that fill red from the pointer; list rows whose red fill enters from the side the pointer came in;
@@ -210,6 +212,16 @@ evidence strips from the batch-report runs into `frontend/public/media/`, writes
 night clip's 24 reads at τ_char 0.50–0.95 for the interactive fusion demo. Re-run it after
 `scripts/batch_report.py` or `scripts/evaluate.py`, then `npm run build`. Report links on the site are served
 from `reports/` by `GET /reports/{path}` (`.html`, `.pdf`, `.png` only).
+
+### Third-party media
+
+The highway footage is [Cars driving at night](https://commons.wikimedia.org/wiki/File:Cars_driving_at_night.webm)
+by Editor (YouTube), Wikimedia Commons, CC BY 3.0. The turning Verna in the intro is cut from a team screen
+recording of a 360° studio view (`video_assets/`, git-ignored); its rights are **not verified**, so replace
+`verna_spin.*` before any public or commercial use unless you hold them. Its plates were blanked in the source,
+and the plate drawn on them is the one PRISM read from day_clear_white. Details are in
+`frontend/public/media/CREDITS.md`. `scripts/build_scene_media.py` cuts the 12 s highway loop (H.264 and VP9),
+runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*` and its per-frame boxes.
 
 ## API
 

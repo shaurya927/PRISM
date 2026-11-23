@@ -21,7 +21,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0004",
@@ -32,7 +34,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Mismatch at position 10: video shows '1', registry has '7'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0002",
@@ -44,7 +48,9 @@
     "mismatches": [
      "Mismatch at position 9: video shows '2', registry has '5'",
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    }
   ],
   "advisor": null,
@@ -81,7 +87,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0002",
@@ -92,7 +100,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0004",
@@ -103,7 +113,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Mismatch at position 10: video shows '1', registry has '7'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    }
   ],
   "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",
@@ -2309,7 +2321,9 @@
     "color": "white",
     "body": "car",
     "model": "Hyundai Verna",
-    "mismatches": []
+    "mismatches": [],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0004",
@@ -2320,7 +2334,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Mismatch at position 10: video shows '1', registry has '7'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0002",
@@ -2331,7 +2347,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Mismatch at position 9: video shows '2', registry has '5'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    }
   ],
   "advisor": null,
@@ -2368,7 +2386,9 @@
     "model": "Toyota Innova",
     "mismatches": [
      "Body type mismatch: video car, registry SUV"
-    ]
+    ],
+    "style": "MPV",
+    "region": "Pune, MH"
    },
    {
     "id": "REG-0014",
@@ -2379,7 +2399,9 @@
     "model": "Honda City",
     "mismatches": [
      "Mismatch at position 4: video shows '2', registry has '4'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Pimpri-Chinchwad, MH"
    },
    {
     "id": "REG-0011",
@@ -2391,7 +2413,9 @@
     "mismatches": [
      "Mismatch at position 10: video shows '8', registry has '0'",
      "Body type mismatch: video car, registry SUV"
-    ]
+    ],
+    "style": "MPV",
+    "region": "Pune, MH"
    }
   ],
   "advisor": null,
@@ -2426,7 +2450,9 @@
     "color": "blue",
     "body": "car",
     "model": "Maruti Suzuki Alto",
-    "mismatches": []
+    "mismatches": [],
+    "style": "hatchback",
+    "region": "Bengaluru South, KA"
    },
    {
     "id": "REG-0021",
@@ -2437,7 +2463,9 @@
     "model": "Maruti Suzuki Alto",
     "mismatches": [
      "Mismatch at position 10: video shows '3', registry has '8'"
-    ]
+    ],
+    "style": "hatchback",
+    "region": "Bengaluru South, KA"
    },
    {
     "id": "REG-0022",
@@ -2448,7 +2476,9 @@
     "model": "Maruti Suzuki WagonR",
     "mismatches": [
      "Mismatch at position 6: video shows 'N', registry has 'M'"
-    ]
+    ],
+    "style": "hatchback",
+    "region": "Bengaluru South, KA"
    }
   ],
   "advisor": null,
@@ -2488,7 +2518,9 @@
      "Mismatch at position 6: video shows 'Y', registry has 'F'",
      "Mismatch at position 8: video shows '0', registry has '1'",
      "Mismatch at position 10: video shows '2', registry has '6'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Pune, MH"
    },
    {
     "id": "REG-0298",
@@ -2503,7 +2535,9 @@
      "Mismatch at position 8: video shows '0', registry has '9'",
      "Mismatch at position 9: video shows '4', registry has '9'",
      "Mismatch at position 10: video shows '2', registry has '1'"
-    ]
+    ],
+    "style": "hatchback",
+    "region": "Pimpri-Chinchwad, MH"
    },
    {
     "id": "REG-0054",
@@ -2520,7 +2554,9 @@
      "Mismatch at position 8: video shows '0', registry has '7'",
      "Mismatch at position 9: video shows '4', registry has '1'",
      "Mismatch at position 10: video shows '2', registry has '(nothing)'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Thane, MH"
    }
   ],
   "advisor": "Every plate position was read, so the candidates are separated by colour, body type or OCR mix-ups rather than by an unknown position. They differ on: Mismatch at position 4: video shows '4', registry has '2'; Mismatch at position 6: video shows 'Y', registry has 'F'; Mismatch at position 8: video shows '0', registry has '1'. Check the attribute chips and the confusable characters by eye.",
@@ -2557,7 +2593,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0002",
@@ -2568,7 +2606,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Colour mismatch: video grey, registry white"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    },
    {
     "id": "REG-0004",
@@ -2579,7 +2619,9 @@
     "model": "Hyundai Verna",
     "mismatches": [
      "Mismatch at position 10: video shows '1', registry has '7'"
-    ]
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
    }
   ],
   "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",

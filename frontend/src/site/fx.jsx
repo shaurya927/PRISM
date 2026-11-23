@@ -1,8 +1,8 @@
-// Pointer- and scroll-driven effects for the website: cursor, CCTV highway scene, split wordmark,
+// Pointer- and scroll-driven effects for the website: cursor, CCTV highway feed, split wordmark,
 // tilt cards, liquid text, direction-aware fills, roll links, live clock and /health status.
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { createHighway } from "./highway.js";
+import { createFeedHud } from "./feed.js";
 import { motion, useAnimationControls, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "framer-motion";
 
 /* ------------------------------------------------------------------ cursor */
@@ -55,18 +55,38 @@ export function Cursor() {
 }
 
 /* ------------------------------------------------------------------ CCTV highway */
-/** Night highway from a roadside camera (see highway.js). Options are passed to createHighway. */
-export function HighwayCanvas({ className = "", ...opts }) {
-  const ref = useRef(null);
+/**
+ * Real night-freeway footage (public/media/highway.mp4, credits in public/media/CREDITS.md) with
+ * PRISM's detector boxes drawn over it (see feed.js).
+ * hud: draw the tracking overlay; zone: [x0, y0, x1, y1] area the overlay may use;
+ * avoid: CSS selector of elements the boxes must not cover;
+ * labels: draw track and plate tags; onCount(n): number of vehicles currently tracked.
+ */
+export function HighwayFeed({ className = "", hud = true, zone, avoid, labels = true, onCount }) {
+  const vid = useRef(null);
+  const cv = useRef(null);
   const reduce = useReducedMotion();
-  const key = JSON.stringify(opts);
+  const countRef = useRef(onCount);
+  countRef.current = onCount;
+  const zoneKey = zone ? zone.join(",") : "";
   useEffect(() => {
-    const h = createHighway(ref.current, { ...JSON.parse(key), still: !!reduce });
+    const v = vid.current;
+    v.muted = true; // set the property too: React does not always reflect the muted attribute
+    if (reduce) v.pause();
+    else v.play().catch(() => {});
+    const h = createFeedHud(cv.current, v, {
+      hud, labels, avoid, still: !!reduce, zone: zoneKey ? zoneKey.split(",").map(Number) : null,
+      onCount: (n) => countRef.current?.(n),
+    });
     return () => h.destroy();
-  }, [key, reduce]);
+  }, [hud, labels, avoid, zoneKey, reduce]);
   return (
     <div className={`hwy ${className}`}>
-      <canvas ref={ref} aria-hidden />
+      <video ref={vid} className="hwy__vid" poster="/media/highway.jpg" muted loop playsInline autoPlay={!reduce} preload="auto" aria-hidden>
+        <source src="/media/highway.webm" type="video/webm" />
+        <source src="/media/highway.mp4" type="video/mp4" />
+      </video>
+      <canvas ref={cv} aria-hidden />
       <div className="hwy__fx" aria-hidden />
     </div>
   );

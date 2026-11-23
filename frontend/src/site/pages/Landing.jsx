@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { Counter, EASE_REVEAL, Label, Magnetic, Marquee, Reveal, SplitLines } from "../motion.jsx";
 import { Arrow, Plate, StatusChip, TauChart } from "../components.jsx";
 import { CrossCamStory, FusionDemo } from "../demos.jsx";
-import { HighwayCanvas, LiquidWord, RollLink, TiltCard, Wordmark, useClock, useDirFill, useHealth } from "../fx.jsx";
+import { HighwayFeed, LiquidWord, RollLink, TiltCard, useClock, useDirFill, useHealth } from "../fx.jsx";
 import { BUILT_ON, CASES, caseById, evaluation, FEATURES, MARQUEE, QUOTES, STAGES } from "../data/content.js";
 import { useSite } from "../Layout.jsx";
 
@@ -55,18 +55,31 @@ function Hero() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 700], [0, -90]);
   const fade = useTransform(scrollY, [0, 500], [1, 0.2]);
+  const rise = (i) => ({ initial: { y: "110%" }, animate: { y: "0%" }, transition: { duration: 1.1, ease: EASE_REVEAL, delay: d + i * 0.09 } });
+  const fadeUp = (delay) => ({ initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { delay: d + delay, duration: 0.9, ease: EASE_REVEAL } });
   return (
     <section className="hero" id="hero">
       <div className="hero__inner">
-        <HighwayCanvas hudZone={[0.3, 0.56, 0.72, 1]} />
-        {introReveal && <div className="hero__wm"><Wordmark text="PRISM" delay={d} /></div>}
+        <HighwayFeed zone={[0, 0.12, 1, 0.94]} avoid=".hero .hero__copy, .hero .atf__meta" />
+        <div className="hero__scrim" aria-hidden />
         {introReveal && (
         <motion.div className="atf" style={{ y, opacity: fade }}>
-          <div className="atf__st">
-            <SplitLines as="p" lines={["Reads blurry CCTV across every frame", "and never guesses a character."]} delay={d + 0.5} stagger={0.08} />
+          <div className="hero__copy">
+            <motion.div className="hero__kicker" {...fadeUp(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
+            <h1 className="hero__h">
+              <span className="hero__line"><motion.span className="inline-block" {...rise(1)}>Every frame read.</motion.span></span>
+              <span className="hero__line"><motion.span className="inline-block hero__h2" {...rise(2)}>Nothing guessed.</motion.span></span>
+            </h1>
+            <motion.p className="hero__sub" {...fadeUp(0.45)}>
+              PRISM reads number plates from blurry CCTV by fusing every frame of a clip. A character it cannot see stays <b>?</b>,
+              and the registry match says why.
+            </motion.p>
+            <motion.div className="hero__cta" {...fadeUp(0.6)}>
+              <Magnetic><a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a></Magnetic>
+              <Magnetic><Link to="/how-it-works" className="btn-pill btn-pill--ghost">How it works <Arrow /></Link></Magnetic>
+            </motion.div>
           </div>
-          <motion.div className="atf__meta" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: d + 0.8, duration: 0.9, ease: EASE_REVEAL }}>
-            <div><span className="rec" />REC · CAM 04 · NH-30 · {clock}</div>
+          <motion.div className="atf__meta" {...fadeUp(0.8)}>
             <div className="hidden md:block">Point at a car to track it</div>
             <div>
               <span className={`dot ${health ? "dot--live" : ""}`} />

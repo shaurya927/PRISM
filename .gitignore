@@ -31,6 +31,9 @@ dist/
 /Hackasol_5.0_Problem_Statement.pdf
 /Hackasol 5.0 AIML-01 Master Blueprint.pdf
 
+# Raw source recordings for the site media (scripts/build_scene_media.py)
+video_assets/
+
 # Other tools' local caches
 .opencode/
 

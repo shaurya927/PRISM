@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useSpring } from "framer-motion";
-import { HighwayCanvas } from "../site/fx.jsx";
+import { HighwayFeed } from "../site/fx.jsx";
 
 const EASE = [0.18, 0.66, 0.18, 1];
 
@@ -109,7 +109,7 @@ export default function Progress({ job }) {
 
   return (
     <motion.section className="aload max-w-5xl mx-auto" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
-      <HighwayCanvas className="aload__wave" horizon={0.22} camH={4.5} density={1.1} seed={5} />
+      <HighwayFeed className="aload__wave" labels={false} />
       <div className="p-6 md:p-10">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 label-mono">
           <span><span className={`dot ${failed ? "" : "dot--live"}`} style={failed ? { background: "var(--red-3)" } : undefined} />

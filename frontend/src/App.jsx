@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { api } from "./api.js";
 import { useNetActive } from "./net.js";
-import { Cursor, HighwayCanvas } from "./site/fx.jsx";
+import { Cursor, HighwayFeed } from "./site/fx.jsx";
 import NewCase, { HintInput } from "./components/NewCase.jsx";
 import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
@@ -62,7 +62,7 @@ function Header({ health, jobId, onNew }) {
 function Hero({ health }) {
   return (
     <div className="app-hero">
-      <HighwayCanvas horizon={0.3} camH={4} density={0.8} seed={11} />
+      <HighwayFeed labels={false} />
       <div className="app-hero__in">
         <h1 className="app-hero__h">
           <span className="mask-line"><motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE }}>Open a case.</motion.span></span>

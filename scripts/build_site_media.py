@@ -25,6 +25,8 @@ from prism.schemas import CaseResult  # noqa: E402
 
 MEDIA = ROOT / "frontend" / "public" / "media"
 DATA = ROOT / "frontend" / "src" / "site" / "data"
+# registry records by id, for the extra vehicle details the site shows (body style, region)
+REGISTRY = {r["registry_id"]: r for r in json.loads((ROOT / "data" / "registry.json").read_text(encoding="utf-8"))}
 CASES = ["day_clear_white", "night_partial_white", "camB_white", "day_black_suv", "day_blue_twoline",
          "unregistered_white", "crosscam_night_partial_white__camB_white"]
 
@@ -89,7 +91,9 @@ def main() -> None:
             "status": t.match.status.value if t.match else None,
             "explanation": t.match.explanation if t.match else "",
             "top": [{"id": c.registry_id, "plate": c.plate, "score": c.score, "color": c.color,
-                     "body": c.body_type, "model": f"{c.make} {c.model}", "mismatches": c.mismatches}
+                     "body": c.body_type, "model": f"{c.make} {c.model}", "mismatches": c.mismatches,
+                     "style": REGISTRY.get(c.registry_id, {}).get("body_style"),
+                     "region": REGISTRY.get(c.registry_id, {}).get("owner_region")}
                     for c in (t.match.top_candidates[:3] if t.match else [])],
             "advisor": t.advisor.text if t.advisor and t.advisor.needed else None,
             "color": t.attributes.color.value, "body": t.attributes.body_type.value,
