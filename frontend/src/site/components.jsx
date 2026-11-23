@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { EASE, ImageReveal, Label, Reveal, SplitLines } from "./motion.jsx";
 
 /** Plate rendered as character cells. `truth` highlights committed characters that are wrong. */
@@ -26,10 +26,13 @@ export function Plate({ text, truth, className = "", size = "1em", onCell, activ
   );
 }
 
+/** Status names in sentence case for chips and captions ("NO CONFIDENT MATCH" -> "No confident match"). */
+export const statusLabel = (s) => (s ? s.charAt(0) + s.slice(1).toLowerCase() : s);
+
 export function StatusChip({ status, className = "" }) {
   if (!status) return null;
   const tone = status === "MATCHED" ? "chip--ok" : status === "AMBIGUOUS" ? "chip--warn" : "chip--bad";
-  return <span className={`chip ${tone} ${className}`}><span className="chip__dot" aria-hidden />{status}</span>;
+  return <span className={`chip ${tone} ${className}`}><span className="chip__dot" aria-hidden />{statusLabel(status)}</span>;
 }
 
 export function Arrow({ className = "" }) {
@@ -55,9 +58,9 @@ export function PageHero({ index, label, lines, lead, children }) {
   return (
     <section className="gutter pt-[22vh] pb-[10vh]">
       <Reveal><Label index={index}>{label}</Label></Reveal>
-      <SplitLines lines={lines} className="display mt-6" delay={0.55} />
+      <SplitLines lines={lines} className="display mt-6" />
       {lead && (
-        <Reveal delay={0.8} className="mt-10 max-w-2xl">
+        <Reveal className="mt-10 max-w-2xl">
           <p className="lead">{lead}</p>
         </Reveal>
       )}
@@ -71,9 +74,9 @@ export function SectionHead({ index, label, title, aside, className = "" }) {
     <div className={`grid md:grid-cols-12 gap-6 items-end ${className}`}>
       <div className="md:col-span-8">
         <Reveal><Label index={index}>{label}</Label></Reveal>
-        <SplitLines as="h2" lines={Array.isArray(title) ? title : [title]} className="h-sec mt-5" />
+        <SplitLines as="h2" lines={Array.isArray(title) ? title : [title]} className="h-sec mt-4" />
       </div>
-      {aside && <Reveal delay={0.15} className="md:col-span-4 md:text-right"><p className="text-muted text-[15px] leading-relaxed">{aside}</p></Reveal>}
+      {aside && <Reveal className="md:col-span-4 md:text-right"><p className="text-muted text-[15px] leading-relaxed">{aside}</p></Reveal>}
     </div>
   );
 }
@@ -103,8 +106,6 @@ export function HoverPreviewList({ rows, renderRow }) {
   const [hover, setHover] = useState(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 260, damping: 28 });
-  const sy = useSpring(y, { stiffness: 260, damping: 28 });
   const move = (e) => { x.set(e.clientX); y.set(e.clientY); };
   return (
     <div className="hlist" onMouseMove={move} onMouseLeave={() => setHover(null)}>
@@ -115,7 +116,7 @@ export function HoverPreviewList({ rows, renderRow }) {
         {hover != null && rows[hover]?.img && (
           <motion.div
             className="hover-preview"
-            style={{ x: sx, y: sy }}
+            style={{ x, y }}
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.96 }}
@@ -182,8 +183,6 @@ export function Accordion({ items, defaultOpen = 0 }) {
 
 /** τ sweep chart: top-1 MATCHED and false-match rate against the match threshold. */
 export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
   const W = 640, H = 280, P = { l: 44, r: 16, t: 16, b: 34 };
   const xs = sweep.map((s) => s.tau);
   const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -192,7 +191,7 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
   const path = (k) => sweep.map((s, i) => `${i ? "L" : "M"}${X(s.tau).toFixed(1)},${Y(s[k]).toFixed(1)}`).join(" ");
   const nearest = sweep.reduce((a, b) => (Math.abs(b.tau - tau) < Math.abs(a.tau - tau) ? b : a));
   return (
-    <div ref={ref}>
+    <div>
       <svg viewBox={`0 0 ${W} ${H}`} className="chart w-full h-auto">
         {[0, 0.25, 0.5, 0.75, 1].map((v) => (
           <g key={v}>
@@ -205,10 +204,8 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
         ))}
         <line x1={X(defaultTau)} x2={X(defaultTau)} y1={P.t} y2={H - P.b} stroke="var(--muted)" strokeDasharray="3 4" />
         <text x={X(defaultTau) + 6} y={P.t + 10}>default</text>
-        <motion.path d={path("top1_matched")} fill="none" stroke="var(--ink)" strokeWidth="2"
-          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.2, ease: EASE }} />
-        <motion.path d={path("false_match_rate")} fill="none" stroke="var(--red)" strokeWidth="2"
-          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.2, ease: EASE, delay: 0.2 }} />
+        <path d={path("top1_matched")} fill="none" stroke="var(--ink)" strokeWidth="2" />
+        <path d={path("false_match_rate")} fill="none" stroke="var(--red)" strokeWidth="2" />
         <motion.line y1={P.t} y2={H - P.b} stroke="var(--accent)" strokeWidth="1.5"
           initial={{ x1: X(nearest.tau), x2: X(nearest.tau) }} animate={{ x1: X(nearest.tau), x2: X(nearest.tau) }} transition={{ duration: 0.25, ease: EASE }} />
         <motion.circle r="5" fill="var(--ink)" initial={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }}
@@ -242,14 +239,10 @@ export function Stat({ k, v, accent, bad }) {
 }
 
 /** Horizontal bar that grows when scrolled into view. */
-export function Bar({ value, max = 1, color = "var(--ink)", delay = 0 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+export function Bar({ value, max = 1, color = "var(--ink)" }) {
   return (
-    <div ref={ref} className="bar">
-      <motion.span style={{ background: color }} initial={{ width: 0 }}
-        animate={inView ? { width: `${Math.max(0.5, (value / max) * 100)}%` } : undefined}
-        transition={{ duration: 0.9, ease: EASE, delay }} />
+    <div className="bar">
+      <span style={{ background: color, width: `${Math.max(0.5, (value / max) * 100)}%` }} />
     </div>
   );
 }

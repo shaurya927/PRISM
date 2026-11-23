@@ -19,9 +19,9 @@ export function FusionDemo() {
   const unknown = cur.text.split("").filter((c) => c === "?").length;
   const p = cur.positions[pos];
   return (
-    <div className="grid lg:grid-cols-12 gap-10">
+    <div className="grid lg:grid-cols-12 gap-12">
       <div className="lg:col-span-7">
-        <div className="panel p-6 md:p-10">
+        <div className="panel p-6 md:p-8">
           <div className="flex items-center justify-between">
             <span className="tag">Fused plate · {night.evidence?.length ?? night.reads} reads</span>
             <span className={`chip ${wrong ? "chip--bad" : "chip--ok"}`}>{wrong ? `${wrong} wrong character` : `${unknown} unknown · 0 wrong`}</span>
@@ -34,7 +34,7 @@ export function FusionDemo() {
           </div>
           <div className="tag mt-2">Ground truth (REG-0001), shown for this demo only. PRISM never sees it.</div>
 
-          <div className="mt-10">
+          <div className="mt-12">
             <div className="flex items-baseline justify-between">
               <span className="label-mono">Character confidence threshold τ_char</span>
               <span className="text-[28px] font-medium tracking-[-0.02em] text-accent tabular-nums">{cur.tau.toFixed(2)}</span>
@@ -56,7 +56,7 @@ export function FusionDemo() {
           <div className="border-t rule pt-3"><div className="tag">Unknown positions</div><div className="text-[30px] font-medium tracking-[-0.02em] tabular-nums">{unknown}</div></div>
         </div>
         {p && (
-          <div className="panel p-5">
+          <div className="panel p-6">
             <div className="tag">Position {pos + 1} · hover a cell</div>
             <div className="flex items-center gap-4 mt-3">
               <span className="text-[40px]"><Plate text={p.char} /></span>
@@ -99,14 +99,14 @@ export function CrossCamStory() {
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div>
             <Label index={6}>Cross-camera</Label>
-            <SplitLines as="h2" lines={["Two partial views,", "one full plate"]} className="h-sec mt-5" />
+            <SplitLines as="h2" lines={["Two partial views,", "one full plate"]} className="h-sec mt-4" />
           </div>
           <div className="relative h-[30px] w-[230px]">
             <motion.div style={{ opacity: beforeOpacity }} className="absolute right-0"><StatusChip status={x.before} /></motion.div>
             <motion.div style={{ opacity: afterOpacity }} className="absolute right-0"><StatusChip status={x.after} /></motion.div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4 md:gap-8 mt-10">
+        <div className="grid grid-cols-2 gap-4 md:gap-8 mt-12">
           <motion.div style={{ x: ax, opacity: sideOpacity }}>
             <div className="card-media aspect-[16/10]"><img src={night?.best || c.best} alt="Camera A" className="w-full h-full object-cover" /></div>
             <div className="tag mt-3">Camera A · night</div>
@@ -118,7 +118,7 @@ export function CrossCamStory() {
             <div className="text-[clamp(0.9rem,2.2vw,1.8rem)] mt-2"><Plate text={x.b} /></div>
           </motion.div>
         </div>
-        <motion.div style={{ opacity: mergeOpacity, y: mergeY }} className="mt-10 flex flex-wrap items-center gap-6">
+        <motion.div style={{ opacity: mergeOpacity, y: mergeY }} className="mt-12 flex flex-wrap items-center gap-6">
           <span className="tag">Combined evidence</span>
           <span className="text-[clamp(1.5rem,4vw,3.25rem)]"><Plate text={x.combined} /></span>
           <span className="text-muted text-[15px] max-w-sm">Each camera fills the position the other could not read. Linking needed appearance, 3+ agreeing characters and the same body type.</span>
@@ -139,7 +139,7 @@ export function StatusTriplet() {
       {rows.map(([status, id], i) => {
         const c = caseById(id);
         return (
-          <Reveal key={status} delay={i * 0.1} className="panel p-6 flex flex-col">
+          <Reveal key={status} className="panel p-6 flex flex-col">
             <StatusChip status={status} />
             <p className="text-[20px] leading-snug tracking-[-0.02em] mt-6 flex-1">{c?.explanation}</p>
             <div className="tag mt-6">{c?.clip}</div>

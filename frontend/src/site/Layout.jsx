@@ -131,7 +131,7 @@ function MobileMenu({ onClose }) {
         <span className="text-[24px] font-medium tracking-[-0.04em]">prism</span>
         <button className="text-[16px]" onClick={onClose}>close</button>
       </div>
-      <nav className="mt-10 flex flex-col">
+      <nav className="mt-12 flex flex-col">
         {items.map(([label, to], i) => (
           <span key={to} className="mask-line">
             <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: EASE, delay: 0.2 + Math.min(i, 5) * 0.04 }}>
@@ -154,20 +154,20 @@ function Footer() {
     <footer className="foot">
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
         <div className="col-span-2 md:col-span-4">
-          <div className="tag mb-5">Get started</div>
+          <div className="tag mb-4">Get started</div>
           <a href="/app" className="text-[clamp(1.6rem,2.4vw,2.4rem)] font-normal tracking-[-0.025em] f-u">Open the investigator</a>
-          <div className="mt-8"><a href="/app" className="btn-pill btn-pill--red">Start a case <Arrow /></a></div>
+          <div className="mt-8"><a href="/app" className="btn-pill btn-pill--ghost">Start a case <Arrow /></a></div>
           <p className="label-mono mt-8"><span className={`dot ${health ? "dot--live" : ""}`} />{health ? "API online" : health === false ? "API offline" : "Checking API…"}</p>
         </div>
         <div className="md:col-span-2 md:col-start-6">
-          <div className="tag mb-5">Pages</div>
+          <div className="tag mb-4">Pages</div>
           <ul className="space-y-2 text-[17px]">
             <li><Link to="/" className="f-u">Home</Link></li>
             {NAV.map(([l, to]) => <li key={to}><Link to={to} className="f-u">{l}</Link></li>)}
           </ul>
         </div>
         <div className="md:col-span-2">
-          <div className="tag mb-5">Project</div>
+          <div className="tag mb-4">Project</div>
           <ul className="space-y-2 text-[17px]">
             <li><a className="f-u" href={REPO_URL} target="_blank" rel="noreferrer">GitHub</a></li>
             <li><a className="f-u" href="/reports/index.html" target="_blank" rel="noreferrer">Sample reports</a></li>
@@ -175,7 +175,7 @@ function Footer() {
           </ul>
         </div>
         <div className="col-span-2 md:col-span-3">
-          <div className="tag mb-5">Now running</div>
+          <div className="tag mb-4">Now running</div>
           <div className="flex gap-4 items-start">
             <div className="w-16 h-16 rounded-md bg-[var(--red)] grid place-items-center text-[28px] font-medium shrink-0">?</div>
             <div className="text-[15px] leading-snug">
@@ -186,7 +186,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t rule mt-[10vh]" />
+      <div className="border-t rule mt-24" />
       <FooterWordmark />
       <div className="flex flex-wrap justify-between gap-4 label-mono mt-6">
         <span>Hackasol 5.0 · AIML-01</span>
@@ -199,21 +199,10 @@ function Footer() {
 }
 
 function FooterWordmark() {
-  const letters = "prism?".split("");
   return (
     <div className="mt-6 select-none" aria-hidden>
-      <motion.div className="wordmark flex" initial="hide" whileInView="show" viewport={{ once: true, margin: "0px 0px -5% 0px" }}>
-        {letters.map((ch, i) => (
-          <span key={i} className="overflow-clip inline-block pb-[0.04em]">
-            <motion.span className={`inline-block ${ch === "?" ? "q" : ""}`}
-              variants={{ hide: { y: "100%" }, show: { y: "0%", transition: { duration: 0.8, ease: EASE, delay: i * 0.05 } } }}>
-              {ch}
-            </motion.span>
-          </span>
-        ))}
-      </motion.div>
+      <div className="wordmark">prism<span className="q">?</span></div>
     </div>
   );
 }
-
 export { RollLink };

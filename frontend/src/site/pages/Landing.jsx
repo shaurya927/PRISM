@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Counter, EASE, Label, Marquee, Reveal, SplitLines } from "../motion.jsx";
-import { Arrow, Plate, StatusChip, TauChart } from "../components.jsx";
+import { Arrow, Plate, StatusChip, statusLabel, TauChart } from "../components.jsx";
 import { CrossCamStory, FusionDemo } from "../demos.jsx";
 import { FeatureCard, HighwayFeed, RollLink, useClock, useDirFill, useHealth } from "../fx.jsx";
 import { BUILT_ON, CASES, caseById, evaluation, FEATURES, MARQUEE, QUOTES, STAGES } from "../data/content.js";
@@ -15,12 +15,12 @@ export default function Landing() {
       <Work />
       <Lede />
       <Stats />
-      <section className="gutter py-[14vh]">
+      <section className="gutter py-24">
         <Head label="Try the fusion" title="Lower the bar and it lies" aside="Drag the threshold. These are PRISM's real masking and fusion functions re-run on the 24 reads from the night clip." />
-        <div className="mt-14"><FusionDemo /></div>
+        <div className="mt-12"><FusionDemo /></div>
       </section>
       <Pipeline />
-      <Marquee items={MARQUEE} speed={40} />
+      <Marquee items={MARQUEE} />
       <CasesPeek />
       <CrossCamStory />
       <Threshold />
@@ -35,12 +35,12 @@ function Head({ label, title, aside, link }) {
   return (
     <div className="grid md:grid-cols-12 gap-6 items-end">
       <div className="md:col-span-8">
-        <Reveal><Label>{label}</Label></Reveal>
-        <SplitLines as="h2" lines={[title]} className="h-sec mt-5" />
+        <Label>{label}</Label>
+        <SplitLines as="h2" lines={[title]} className="h-sec mt-4" />
       </div>
       <div className="md:col-span-4 md:text-right">
-        {aside && <Reveal delay={0.1}><p className="text-muted text-[16px] leading-relaxed">{aside}</p></Reveal>}
-        {link && <Reveal delay={0.15} className="mt-4">{link}</Reveal>}
+        {aside && <p className="text-muted text-[16px] leading-relaxed">{aside}</p>}
+        {link && <div className="mt-4">{link}</div>}
       </div>
     </div>
   );
@@ -49,12 +49,8 @@ function Head({ label, title, aside, link }) {
 /* ---------------------------------------------------------------- hero */
 function Hero() {
   const { introReveal } = useSite();
-  const d = 0.25;
   const clock = useClock();
   const health = useHealth();
-  // One entrance once the intro lifts: lines rise from their mask, the rest fades up with a small stagger.
-  const rise = (i) => ({ initial: { y: "110%" }, animate: { y: "0%" }, transition: { duration: 0.8, ease: EASE, delay: d + i * 0.06 } });
-  const fadeUp = (delay) => ({ initial: { opacity: 0, y: 8 }, animate: { opacity: 1, y: 0 }, transition: { delay: d + delay, duration: 0.5, ease: EASE } });
   return (
     <section className="hero" id="hero">
       <div className="hero__inner">
@@ -63,31 +59,55 @@ function Hero() {
         {introReveal && (
         <div className="atf">
           <div className="hero__copy">
-            <motion.div className="hero__kicker" {...fadeUp(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
+            <div className="hero__kicker"><span className="rec" />REC · CAM 04 · {clock}</div>
             <h1 className="hero__h">
-              <span className="hero__line"><motion.span className="inline-block" {...rise(1)}>Every frame read</motion.span></span>
-              <span className="hero__line"><motion.span className="inline-block hero__h2" {...rise(2)}>Nothing guessed</motion.span></span>
+              <span className="hero__line">Every frame read</span>
+              <span className="hero__line hero__h2">Nothing guessed</span>
             </h1>
-            <motion.p className="hero__sub" {...fadeUp(0.2)}>
+            <p className="hero__sub">
               PRISM reads number plates from blurry CCTV by fusing every frame of a clip. A character it cannot see stays <b>?</b>,
               and the registry match says why.
-            </motion.p>
-            <motion.div className="hero__cta" {...fadeUp(0.26)}>
+            </p>
+            <div className="hero__cta">
               <a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a>
               <Link to="/how-it-works" className="btn-pill btn-pill--ghost">How it works <Arrow /></Link>
-            </motion.div>
+            </div>
           </div>
-          <motion.div className="atf__meta" {...fadeUp(0.32)}>
+          <div className="atf__meta">
+            <ReadOut />
             <div className="hidden md:block">Point at a car to track it</div>
             <div>
               <span className={`dot ${health ? "dot--live" : ""}`} />
               {health ? `Running on ${health.device === "cuda" ? "GPU" : "CPU"} · registry ${health.registry_size}` : "Open source · runs locally"}
             </div>
-          </motion.div>
+          </div>
         </div>
         )}
       </div>
     </section>
+  );
+}
+
+/** The product moment: PRISM's real result for the night clip, from the raw crops to the fused plate. */
+function ReadOut() {
+  const c = caseById("night_partial_white");
+  if (!c) return null;
+  const unknown = (c.fused || "").split("").filter((ch) => ch === "?").length;
+  return (
+    <Link to={`/cases/${c.id}`} className="readout" aria-label={`Open the case: ${c.title}`}>
+      <div className="readout__head">
+        <span>{c.clip}</span>
+        <StatusChip status={c.status} />
+      </div>
+      <div className="readout__crops">
+        {c.plates.map((src) => <img key={src} src={src} alt="" className="pixel" />)}
+      </div>
+      <div className="readout__plate"><Plate text={c.fused} /></div>
+      <div className="readout__foot">
+        <span>Fused from {c.reads} reads · {unknown} unknown</span>
+        <span className="readout__open">Open the case <Arrow /></span>
+      </div>
+    </Link>
   );
 }
 
@@ -180,7 +200,7 @@ function FeatureArt({ look }) {
         </div>
         <div className="absolute left-[9%] bottom-[10%] flex items-center gap-[2cqw]">
           <span className="text-[3cqw]"><Plate text={x.combined} /></span>
-          <span className="mono text-[1.3cqw] text-[var(--muted-2)]">{x.before} → {x.after}</span>
+          <span className="mono text-[1.3cqw] text-[var(--muted-2)]">{statusLabel(x.before)} → {statusLabel(x.after)}</span>
         </div>
       </div>
     );
@@ -220,47 +240,35 @@ function FeatureArt({ look }) {
 /* ---------------------------------------------------------------- lede */
 function Lede() {
   const words = "is a plate reader for investigators. It reads every frame, keeps only what it saw clearly, and marks the rest ? so you can tell evidence from a lead.".split(" ");
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 80%", "end 50%"] });
   return (
-    <section className="gutter py-[16vh]" ref={ref}>
-      <Reveal><Label>About PRISM</Label></Reveal>
-      <p className="lede mt-10 max-w-[19em]">
+    <section className="gutter py-24">
+      <Label>About PRISM</Label>
+      <p className="lede mt-12 max-w-[19em]">
         <span>PRISM</span>
         <span className="face"><img src="/media/night_partial_white_plate1.png" alt="" className="pixel" /></span>{" "}
         {words.map((w, i) => (
-          <LedeWord key={i} w={w} i={i} n={words.length} p={scrollYProgress} />
+          <React.Fragment key={i}><span className={w === "?" ? "text-[var(--red)]" : undefined}>{w}</span>{" "}</React.Fragment>
         ))}
       </p>
-      <Reveal className="mt-12"><RollLink to="/about">More about PRISM</RollLink></Reveal>
+      <div className="mt-12"><RollLink to="/about">More about PRISM</RollLink></div>
     </section>
   );
 }
-
-function LedeWord({ w, i, n, p }) {
-  const opacity = useTransform(p, [i / n, (i + 1) / n], [0.18, 1]);
-  return (
-    <motion.span style={{ opacity }} className="inline">
-      <span className={w === "?" ? "text-[var(--red)]" : undefined}>{w}</span>{" "}
-    </motion.span>
-  );
-}
-
 /* ---------------------------------------------------------------- stats */
 function Stats() {
   const s = evaluation.clip_summary;
   const n = evaluation.clips.length;
   const items = [
     { v: s.wrong_matched, d: 0, suffix: "", k: `Clips matched to the wrong vehicle, of ${n}` },
-    { v: s.committed_char_error * 100, d: 1, suffix: "%", k: "Committed characters that were wrong" },
-    { v: s.top5 * 100, d: 1, suffix: "%", k: "True vehicle in the top-5 shortlist" },
+    { v: s.committed_char_error * 100, d: 1, suffix: "%", k: `Committed characters that were wrong, over ${n} clips` },
+    { v: s.top5 * 100, d: 1, suffix: "%", k: `True vehicle in the top-5 shortlist, over ${n} clips` },
     { v: s.mean_seconds, d: 1, suffix: "s", k: `Mean time per clip on ${evaluation.device === "cuda" ? "an RTX 5050 GPU" : "CPU"}` },
   ];
   return (
-    <section className="gutter pb-[14vh]">
+    <section className="gutter pb-24">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
         {items.map((it, i) => (
-          <Reveal key={i} delay={i * 0.08} className="border-t rule pt-5">
+          <Reveal key={i} className="border-t rule pt-6">
             <div className="text-[clamp(3.25rem,6.4vw,6.25rem)] leading-none tracking-[-0.02em] font-normal tabular-nums">
               <Counter value={it.v} decimals={it.d} suffix={it.suffix} />
             </div>
@@ -268,7 +276,7 @@ function Stats() {
           </Reveal>
         ))}
       </div>
-      <Reveal className="mt-10"><RollLink to="/evaluation">Full evaluation</RollLink></Reveal>
+      <Reveal className="mt-12"><RollLink to="/evaluation">Full evaluation</RollLink></Reveal>
     </section>
   );
 }
@@ -276,11 +284,11 @@ function Stats() {
 /* ---------------------------------------------------------------- pipeline (experience-style rows) */
 function Pipeline() {
   return (
-    <section className="gutter py-[14vh]">
+    <section className="gutter py-24">
       <Head label="Pipeline" title="Eight stages, one evidence chain" link={<RollLink to="/how-it-works">All stages</RollLink>} />
-      <div className="mt-14">
-        {STAGES.map((s, i) => (
-          <Reveal key={s.n} delay={(i % 4) * 0.05} className="xp__row">
+      <div className="mt-12">
+        {STAGES.map((s) => (
+          <Reveal key={s.n} className="xp__row">
             <Link to="/how-it-works" className="xp__main group">
               <span className="xp__tile"><img src={s.img} alt="" className={s.pixel ? "pixel" : ""} /></span>
               <span>
@@ -301,7 +309,7 @@ function Pipeline() {
 function CasesPeek() {
   const [active, setActive] = useState(0);
   return (
-    <section className="gutter py-[14vh]">
+    <section className="gutter py-24">
       <Head label="Cases" title="Real runs on the demo clips" link={<RollLink to="/cases">All cases</RollLink>} />
       <div className="peek">
         <div className="peek__frame">
@@ -324,7 +332,7 @@ function CasesPeek() {
 function PeekRow({ c, i, onHover }) {
   const { hot, controls, handlers } = useDirFill();
   return (
-    <Reveal delay={(i % 4) * 0.05}>
+    <Reveal>
       <Link to={`/cases/${c.id}`} className={`peek__a ${hot ? "is-hot" : ""}`}
         onMouseEnter={(e) => { handlers.onMouseEnter(e); onHover(); }} onMouseLeave={handlers.onMouseLeave}>
         <motion.span className="peek__fill" initial={{ clipPath: "inset(0% 100% 0% 0%)" }} animate={controls} />
@@ -346,17 +354,17 @@ function PeekRow({ c, i, onHover }) {
 function Threshold() {
   const [tau, setTau] = useState(evaluation.tau);
   return (
-    <section className="gutter py-[14vh]">
+    <section className="gutter py-24">
       <div className="grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-5">
           <Label>Match threshold</Label>
-          <SplitLines as="h2" lines={["Move τ,", "see the cost"]} className="h-sec mt-5" />
-          <Reveal delay={0.1}>
+          <SplitLines as="h2" lines={["Move τ,", "see the cost"]} className="h-sec mt-4" />
+          <Reveal>
             <p className="lead mt-8">On {evaluation.n_vehicles} synthetic vehicles, a lower τ matches a few more true vehicles but lets in false matches.
               PRISM ships with τ = {evaluation.tau.toFixed(2)}, and the investigator can move it live.</p>
           </Reveal>
         </div>
-        <Reveal className="lg:col-span-7" delay={0.15}>
+        <Reveal className="lg:col-span-7">
           <TauChart sweep={evaluation.tau_sweep} tau={tau} onTau={setTau} defaultTau={evaluation.tau} />
         </Reveal>
       </div>
@@ -367,20 +375,20 @@ function Threshold() {
 /* ---------------------------------------------------------------- built on (cells light up) */
 function BuiltOn() {
   return (
-    <section className="gutter py-[14vh]">
+    <section className="gutter py-24">
       <div className="grid md:grid-cols-12 gap-6 items-end">
         <SplitLines as="h2" lines={["Built on"]} className="h-big md:col-span-8" />
         <Reveal className="md:col-span-4 md:text-right"><p className="text-muted text-[16px]">Open research models, wrapped read-only. Their versions and commits are recorded in every report.</p></Reveal>
       </div>
-      <ul className="cl mt-[9vh]">
-        {BUILT_ON.map((b, i) => (
-          <motion.li key={b.name} className="cl__cell" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: Math.min(i, 5) * 0.05, duration: 0.4, ease: EASE }}>
+      <ul className="cl mt-16">
+        {BUILT_ON.map((b) => (
+          <li key={b.name} className="cl__cell">
             <a href={b.url} target="_blank" rel="noreferrer" className="cl__in">
               <span className="cl__mark">{b.name}</span>
               <svg className="cl__arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.4" /></svg>
               <span className="cl__cap"><span>{b.role}</span></span>
             </a>
-          </motion.li>
+          </li>
         ))}
         <li className="cl__cell cl__cell--ask">
           <a href="/app" className="cl__in">
@@ -404,13 +412,13 @@ function Quotes() {
     <section className="rv">
       <div className="gutter grid md:grid-cols-12 gap-6">
         <div className="md:col-span-12"><SplitLines as="h2" lines={["In its own words"]} className="h-big" /></div>
-        <div className="md:col-span-9 md:col-start-4 mt-[7vh]">
+        <div className="md:col-span-9 md:col-start-4 mt-12">
           <span className="rv__mark" aria-hidden>“</span>
           <AnimatePresence mode="wait">
             <motion.figure key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3, ease: EASE }}>
               <blockquote className="rv__quote">{short}</blockquote>
               <figcaption className="rv__who"><span className="rv__dash" />{q.who}<span className="rv__role">{q.role}</span></figcaption>
-              <Link to={`/cases/${q.id}`} className="inline-flex items-center gap-2 mt-4 ml-[44px] text-[16px] font-medium f-u">Open the case <Arrow /></Link>
+              <Link to={`/cases/${q.id}`} className="inline-flex items-center gap-2 mt-4 ml-12 text-[16px] font-medium f-u">Open the case <Arrow /></Link>
             </motion.figure>
           </AnimatePresence>
           <div className="flex items-center gap-4 mt-12">
@@ -427,12 +435,12 @@ function Quotes() {
 /* ---------------------------------------------------------------- contact */
 function Contact() {
   return (
-    <section className="gutter pt-[22vh] pb-[6vh]">
-      <Reveal><Label>Get started</Label></Reveal>
+    <section className="gutter pt-24 pb-16">
+      <Label>Get started</Label>
       <div className="mt-8">
         <a href="/app" className="contact__big f-u"><SplitLines as="span" lines={[<>Open a case<Arrow /></>]} /></a>
       </div>
-      <Reveal className="mt-[5vh] flex flex-wrap gap-3">
+      <Reveal className="mt-12 flex flex-wrap gap-3">
         <a href="/app" className="btn-pill btn-pill--red">Upload a clip <Arrow /></a>
         <Link to="/docs" className="btn-pill btn-pill--ghost">Run it yourself <Arrow /></Link>
       </Reveal>

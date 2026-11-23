@@ -11,6 +11,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { HighwayFeed, useClock } from "./fx.jsx";
 import { caseById } from "./data/content.js";
+import { statusLabel } from "./components.jsx";
 
 const EASE_SHEET = [0.76, 0, 0.24, 1];
 const EASE_OUT = [0.18, 0.66, 0.18, 1];
@@ -215,7 +216,7 @@ export default function Intro({ onLeave, onDone }) {
           <div className="cap__fx" aria-hidden />
           <div className="cap__hud">
             <span><span className="rec" />CAM 04</span>
-            <span className="hidden sm:inline">{show(T.spun) ? "BEST PLATE FRAME" : "TRACKING"} · {clock}</span>
+            <span className="hidden sm:inline">{show(T.spun) ? "Best plate frame" : "Tracking"} · {clock}</span>
           </div>
           <div className="cap__credit">studio footage · Hyundai Verna</div>
         </motion.div>
@@ -223,7 +224,7 @@ export default function Intro({ onLeave, onDone }) {
 
         {show(T.read - 0.15) && (
           <motion.div className="intro__panel" style={L.plate} initial={{ opacity: 0, x: narrow ? 0 : 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.45, ease: EASE_OUT }}>
-            <div className="intro__lbl">PLATE · FUSED FROM {c?.reads ?? 24} READS</div>
+            <div className="intro__lbl">Plate · fused from {c?.reads ?? 24} reads</div>
             {!short && c?.plates?.length > 0 && (
               <div className="intro__crops">
                 {c.plates.map((u, i) => (
@@ -247,8 +248,8 @@ export default function Intro({ onLeave, onDone }) {
           <motion.div className="intro__panel intro__panel--det" style={L.det} initial={{ opacity: 0, x: narrow ? 0 : 16 }}
             animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
             <div className="flex items-center justify-between gap-4">
-              <span className="intro__lbl">REGISTRY MATCH · {top.id}</span>
-              <span className="chip chip--ok">{c.status}</span>
+              <span className="intro__lbl">Registry match · {top.id}</span>
+              <span className="chip chip--ok"><span className="chip__dot" aria-hidden />{statusLabel(c.status)}</span>
             </div>
             <motion.div className="intro__rid" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }}>
               {top.model}
@@ -268,7 +269,7 @@ export default function Intro({ onLeave, onDone }) {
 
         <div className="intro__hud">
           <span><span className="rec" />REC</span>
-          <span>CAM 04 · {count ? `${count} TRACKED` : "LIVE"}</span>
+          <span>CAM 04 · {count ? `${count} tracked` : "live"}</span>
           <span className="hidden sm:inline">{clock}</span>
         </div>
         <button type="button" className="intro__skip f-u" onClick={() => { skipped.current = true; }}>skip intro →</button>
