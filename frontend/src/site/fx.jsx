@@ -6,14 +6,20 @@ import { useReducedMotion } from "framer-motion";
 import { RollText } from "./motion.jsx";
 
 /* ------------------------------------------------------------------ CCTV highway */
+const FEEDS = {
+  night: { base: "/media/highway", tracks: "/media/highway_tracks.json" },
+  day: { base: "/media/highway_day", tracks: "/media/highway_day_tracks.json" },
+};
 /**
- * Real night-freeway footage (public/media/highway.mp4, credits in public/media/CREDITS.md) with
- * PRISM's detector boxes drawn over it (see feed.js).
+ * Real freeway footage with PRISM's detector boxes drawn over it (see feed.js). Credits are in
+ * public/media/CREDITS.md.
+ * variant: "night" (intro, investigator header) or "day" (landing hero);
  * hud: draw the tracking overlay; zone: [x0, y0, x1, y1] area the overlay may use;
  * avoid: CSS selector of elements the boxes must not cover;
  * labels: draw track and plate tags; onCount(n): number of vehicles currently tracked.
  */
-export function HighwayFeed({ className = "", hud = true, zone, avoid, labels = true, onCount }) {
+export function HighwayFeed({ className = "", variant = "night", hud = true, zone, avoid, labels = true, onCount }) {
+  const feed = FEEDS[variant] || FEEDS.night;
   const vid = useRef(null);
   const cv = useRef(null);
   const reduce = useReducedMotion();
@@ -27,15 +33,15 @@ export function HighwayFeed({ className = "", hud = true, zone, avoid, labels = 
     else v.play().catch(() => {});
     const h = createFeedHud(cv.current, v, {
       hud, labels, avoid, still: !!reduce, zone: zoneKey ? zoneKey.split(",").map(Number) : null,
-      onCount: (n) => countRef.current?.(n),
+      tracks: feed.tracks, onCount: (n) => countRef.current?.(n),
     });
     return () => h.destroy();
-  }, [hud, labels, avoid, zoneKey, reduce]);
+  }, [hud, labels, avoid, zoneKey, reduce, feed.tracks]);
   return (
-    <div className={`hwy ${className}`}>
-      <video ref={vid} className="hwy__vid" poster="/media/highway.jpg" muted loop playsInline autoPlay={!reduce} preload="auto" aria-hidden>
-        <source src="/media/highway.webm" type="video/webm" />
-        <source src="/media/highway.mp4" type="video/mp4" />
+    <div className={`hwy hwy--${variant} ${className}`}>
+      <video ref={vid} className="hwy__vid" poster={`${feed.base}.jpg`} muted loop playsInline autoPlay={!reduce} preload="auto" aria-hidden>
+        <source src={`${feed.base}.webm`} type="video/webm" />
+        <source src={`${feed.base}.mp4`} type="video/mp4" />
       </video>
       <canvas ref={cv} aria-hidden />
       <div className="hwy__fx" aria-hidden />

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Counter, EASE, ImageReveal, Label, Reveal, RollText, SplitChars, SplitLines, Unfold } from "../motion.jsx";
 import { Arrow, CaseCard, Plate, StatusChip, Tabs } from "../components.jsx";
 import { CrossCamCompare, FusionDemo } from "../demos.jsx";
@@ -47,13 +47,25 @@ function Hero() {
   const rise = (delay) => (reduce ? {} : {
     initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, ease: EASE, delay },
   });
+  // Spyker-style exit: as the hero scrolls away the frame shrinks into a rounded card, the footage
+  // drifts down inside it and the headline lifts and fades.
+  const ref = useRef(null);
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const scale = useTransform(p, [0, 1], [1, 0.84]);
+  const radius = useTransform(p, [0, 0.35], [0, 28]);
+  const mediaY = useTransform(p, [0, 1], ["0%", "14%"]);
+  const copyY = useTransform(p, [0, 1], ["0%", "-22%"]);
+  const copyOpacity = useTransform(p, [0, 0.55], [1, 0]);
+  const anim = !reduce;
   return (
-    <section className="hero" id="hero">
-      <div className="hero__inner">
-        <HighwayFeed zone={[0, 0.12, 1, 0.94]} avoid=".hero .hero__copy" />
+    <section className="hero" id="hero" ref={ref}>
+      <motion.div className="hero__inner" style={anim ? { scale, borderRadius: radius } : undefined}>
+        <motion.div className="hero__media" style={anim ? { y: mediaY } : undefined}>
+          <HighwayFeed variant="day" zone={[0, 0.14, 1, 0.92]} avoid=".hero .hero__copy" />
+        </motion.div>
         <div className="hero__scrim" aria-hidden />
         {introReveal && (
-        <div className="atf">
+        <motion.div className="atf" style={anim ? { y: copyY, opacity: copyOpacity } : undefined}>
           <div className="hero__copy">
             <motion.div className="hero__kicker" {...rise(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
             {/* title rises letter by letter once the intro lifts */}
@@ -70,9 +82,9 @@ function Hero() {
               <Link to="/how-it-works" className="btn-pill btn-pill--ghost"><RollText>How it works</RollText> <Arrow /></Link>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }

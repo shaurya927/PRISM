@@ -1,17 +1,18 @@
-// Tracking overlay for the real highway footage (public/media/highway.mp4).
-// The boxes are PRISM's own detector output for that clip: YOLO11 + ByteTrack, written by
-// scripts/build_scene_media.py to public/media/highway_tracks.json at 15 fps. This module only
-// interpolates them to the video's current time and draws them over the cover-fitted video.
+// Tracking overlay for the real highway footage: the night loop (public/media/highway.mp4, built by
+// scripts/build_scene_media.py) or the day loop (highway_day.mp4, built by scripts/build_day_media.py).
+// The boxes are PRISM's own detector output for each clip (YOLO11 + ByteTrack at 15 fps, in
+// highway_tracks.json / highway_day_tracks.json). This module only interpolates them to the video's
+// current time and draws them over the cover-fitted video.
 //
 // One track is "focused": the car nearest the pointer when the pointer is over the feed, otherwise
 // the nearest (largest) car. Every track carries an illustrative plate (see fakePlate): the plates
 // in this footage are far too small to read, so these are made up for the demo, not OCR output.
 
-let tracksPromise = null;
-/** Detector output for the highway loop (null if the file is missing). Fetched once per page. */
-export function loadTracks() {
-  tracksPromise = tracksPromise || fetch("/media/highway_tracks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  return tracksPromise;
+const tracksPromises = new Map();
+/** Detector output for a highway loop (null if the file is missing). Each file is fetched once per page. */
+export function loadTracks(url = "/media/highway_tracks.json") {
+  if (!tracksPromises.has(url)) tracksPromises.set(url, fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+  return tracksPromises.get(url);
 }
 
 const KIND = { c: "CAR", t: "TRUCK", b: "BUS" };
@@ -83,7 +84,7 @@ export function createFeedHud(canvas, video, opts = {}) {
   let focusId = null;
   let lastCount = -1;
 
-  loadTracks().then((d) => { if (alive) data = d; });
+  loadTracks(opts.tracks).then((d) => { if (alive) data = d; });
 
   const fit = () => {
     const r = canvas.getBoundingClientRect();
