@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Counter, EASE, ImageReveal, Label, Reveal, RollText, SplitChars, SplitLines, Unfold } from "../motion.jsx";
 import { Arrow, CaseCard, Plate, StatusChip, Tabs } from "../components.jsx";
 import { CrossCamCompare, FusionDemo } from "../demos.jsx";
-import { HighwayFeed, RollLink, useClock, useHealth } from "../fx.jsx";
+import { HighwayFeed, RollLink, useClock } from "../fx.jsx";
 import { CASES, caseById, evaluation, FEATURES, STATUS_INFO } from "../data/content.js";
 import { useSite } from "../context.js";
 
@@ -42,7 +42,6 @@ function Head({ label, title, aside, link }) {
 function Hero() {
   const { introReveal } = useSite();
   const clock = useClock();
-  const health = useHealth();
   const reduce = useReducedMotion();
   // fade-up for the hero copy around the title
   const rise = (delay) => (reduce ? {} : {
@@ -51,7 +50,7 @@ function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="hero__inner">
-        <HighwayFeed zone={[0, 0.12, 1, 0.94]} avoid=".hero .hero__copy, .hero .atf__meta" />
+        <HighwayFeed zone={[0, 0.12, 1, 0.94]} avoid=".hero .hero__copy" />
         <div className="hero__scrim" aria-hidden />
         {introReveal && (
         <div className="atf">
@@ -71,41 +70,10 @@ function Hero() {
               <Link to="/how-it-works" className="btn-pill btn-pill--ghost"><RollText>How it works</RollText> <Arrow /></Link>
             </motion.div>
           </div>
-          <div className="atf__meta">
-            <ReadOut />
-            <div className="hidden md:block">Point at a car to track it</div>
-            <div>
-              <span className={`dot ${health ? "dot--live" : ""}`} />
-              {health ? `Running on ${health.device === "cuda" ? "GPU" : "CPU"} · registry ${health.registry_size}` : "Open source · runs locally"}
-            </div>
-          </div>
         </div>
         )}
       </div>
     </section>
-  );
-}
-
-/** The product moment: PRISM's real result for the night clip, from the raw crops to the fused plate. */
-function ReadOut() {
-  const c = caseById("night_partial_white");
-  if (!c) return null;
-  const unknown = (c.fused || "").split("").filter((ch) => ch === "?").length;
-  return (
-    <Link to={`/cases/${c.id}`} className="readout" aria-label={`Open the case: ${c.title}`}>
-      <div className="readout__head">
-        <span>{c.clip}</span>
-        <StatusChip status={c.status} />
-      </div>
-      <div className="readout__crops">
-        {c.plates.map((src) => <img key={src} src={src} alt="" className="pixel" />)}
-      </div>
-      <div className="readout__plate"><Plate text={c.fused} /></div>
-      <div className="readout__foot">
-        <span>Fused from {c.reads} reads · {unknown} unknown</span>
-        <span className="readout__open">Open the case <Arrow /></span>
-      </div>
-    </Link>
   );
 }
 

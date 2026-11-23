@@ -11,7 +11,6 @@ import Intro from "./Intro.jsx";
 
 export { useSite } from "./context.js";
 
-const EASE_SHEET = EASE;
 let firstPage = true; // the first page is revealed by the loader, not by a page fade
 
 export default function SiteLayout() {
@@ -19,6 +18,7 @@ export default function SiteLayout() {
   const outlet = useOutlet();
   const reduce = useReducedMotion();
   const lenisRef = useRef(null);
+  const menuBtn = useRef(null);
   const [introDone, setIntroDone] = useState(() => reduce || sessionStorage.getItem("prism-intro") === "1");
   // True once the intro starts lifting (or was never shown): the hero animates in from then.
   const [introReveal, setIntroReveal] = useState(introDone);
@@ -39,6 +39,25 @@ export default function SiteLayout() {
 
   useEffect(() => { setMenu(false); }, [location.pathname]);
 
+  // While the menu is open, Escape closes it and returns focus to the toggle, and the page cannot
+  // scroll (Lenis is stopped above; the overflow lock also covers reduced motion, where Lenis is off).
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setMenu(false);
+      menuBtn.current?.focus();
+    };
+    const html = document.documentElement;
+    const overflow = html.style.overflow;
+    html.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      html.style.overflow = overflow;
+    };
+  }, [menu]);
+
   const titleFor = NAV.find(([, p]) => location.pathname.startsWith(p))?.[0];
   useEffect(() => {
     document.title = titleFor ? `${titleFor} · PRISM` : "PRISM · Plate Recovery & Identification from Surveillance Media";
@@ -57,12 +76,15 @@ export default function SiteLayout() {
         {!introDone && (
           <Intro onLeave={revealNow} onDone={() => { sessionStorage.setItem("prism-intro", "1"); setIntroDone(true); }} />
         )}
-        <Topbar onMenu={() => setMenu(true)} />
-        <AnimatePresence>{menu && <MobileMenu onClose={() => setMenu(false)} />}</AnimatePresence>
-        {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
-        <AnimatePresence mode="wait" onExitComplete={toTop}>
-          <Page key={location.pathname}>{outlet}</Page>
-        </AnimatePresence>
+        <Topbar menuOpen={menu} onMenu={() => setMenu((m) => !m)} onClose={() => setMenu(false)} btnRef={menuBtn} />
+        <AnimatePresence>{menu && <SiteMenu onClose={() => setMenu(false)} />}</AnimatePresence>
+        {/* While the menu is open the page behind it is inert: no focus, no clicks, hidden from screen readers. */}
+        <div inert={menu ? "" : undefined}>
+          {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
+          <AnimatePresence mode="wait" onExitComplete={toTop}>
+            <Page key={location.pathname}>{outlet}</Page>
+          </AnimatePresence>
+        </div>
       </div>
     </SiteCtx.Provider>
   );
@@ -86,7 +108,7 @@ function Page({ children }) {
   );
 }
 
-function Topbar({ onMenu }) {
+function Topbar({ menuOpen, onMenu, onClose, btnRef }) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
@@ -99,46 +121,108 @@ function Topbar({ onMenu }) {
     setSolid(y > (pathname === "/" ? window.innerHeight * 0.72 : 80));
     last.current = y;
   });
-  const counts = { "/cases": CASES.length };
+  // Logo on the left, menu toggle on the right. The bar sits above the open menu, so neither moves.
   return (
-    <motion.header className={`topbar ${solid ? "is-solid" : ""}`} animate={{ y: hidden ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
-      <Link to="/" className="topbar__logo" aria-label="PRISM home">
+    <motion.header className={`topbar ${solid ? "is-solid" : ""} ${menuOpen ? "is-menu" : ""}`}
+      animate={{ y: hidden && !menuOpen ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
+      <Link to="/" className="topbar__logo" aria-label="PRISM home" onClick={menuOpen ? onClose : undefined}>
         <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
         prism
       </Link>
-      <nav className="topbar__nav" aria-label="Main">
-        {NAV.map(([label, to]) => (
-          <NavLink key={to} to={to} className={({ isActive }) => `f-u ${isActive ? "is-on" : ""}`}>
-            {label.toLowerCase()}{counts[to] ? <sup>({counts[to]})</sup> : null}
-          </NavLink>
-        ))}
-        <a href="/app" className="f-u">open app <Arrow /></a>
-      </nav>
-      <button className="lg:hidden text-[15px] min-h-[44px] px-2 -mr-2 -mt-3" onClick={onMenu} aria-label="Open menu">menu</button>
+      <MenuButton open={menuOpen} onClick={onMenu} btnRef={btnRef} />
     </motion.header>
   );
 }
 
-function MobileMenu({ onClose }) {
-  const items = [["Home", "/"], ...NAV, ["Open app", "/app"]];
-  const size = "text-[clamp(2rem,8vw,2.75rem)] tracking-[-0.025em] font-normal leading-[1.15]";
+/** Menu toggle: the label rolls from "menu" to "close" and the two lines cross into an X. */
+function MenuButton({ open, onClick, btnRef }) {
   return (
-    <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.4, ease: EASE_SHEET }}>
-      <div className="flex justify-between items-center pt-4 h-[64px]">
-        <span className="text-[22px] font-medium tracking-[-0.04em]">prism</span>
-        <button className="text-[15px] min-h-[44px] px-2 -mr-2" onClick={onClose}>close</button>
+    <button ref={btnRef} type="button" onClick={onClick} className={`menu-btn ${open ? "is-open" : ""}`}
+      aria-expanded={open} aria-controls="site-menu" aria-label={open ? "Close menu" : "Open menu"}>
+      <span className="menu-btn__labels" aria-hidden>
+        <span className="menu-btn__label">menu</span>
+        <span className="menu-btn__label">close</span>
+      </span>
+      <span className="menu-btn__icon" aria-hidden><span /><span /></span>
+    </button>
+  );
+}
+
+const MENU_ITEMS = [["Home", "/"], ...NAV];
+
+// Menu motion: the curtain wipes down from the top bar, the page names rise out of their masks one
+// after another, then the side copy and the status line fade up. Closing plays it back, faster.
+const MENU_MOTION = {
+  sheet: {
+    open: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE, delayChildren: 0.16 } },
+    closed: { clipPath: "inset(0% 0% 100% 0%)", transition: { duration: 0.55, ease: EASE, delay: 0.12 } },
+  },
+  list: {
+    open: { transition: { staggerChildren: 0.05 } },
+    closed: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+  },
+  item: {
+    open: { y: "0%", transition: { duration: 0.8, ease: EASE } },
+    closed: { y: "140%", transition: { duration: 0.3, ease: EASE } },
+  },
+  side: {
+    open: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay: 0.42 } },
+    closed: { opacity: 0, y: 16, transition: { duration: 0.2, ease: EASE } },
+  },
+  foot: {
+    open: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay: 0.55 } },
+    closed: { opacity: 0, y: 8, transition: { duration: 0.2, ease: EASE } },
+  },
+};
+// Reduced motion: a short cross-fade and nothing moves.
+const MENU_FADE = {
+  sheet: { open: { opacity: 1, transition: { duration: 0.15 } }, closed: { opacity: 0, transition: { duration: 0.15 } } },
+  list: {}, item: {}, side: {}, foot: {},
+};
+
+/**
+ * Full-screen site menu, on every screen size. Hovering or focusing a page name locks a red tracking
+ * box onto it, like the tracked car in the hero feed, and dims the other names. The current page keeps
+ * a grey box, like an untracked detection.
+ */
+function SiteMenu({ onClose }) {
+  const reduce = useReducedMotion();
+  const health = useHealth();
+  const m = reduce ? MENU_FADE : MENU_MOTION;
+  const counts = { "/cases": CASES.length };
+  return (
+    <motion.div id="site-menu" className="menu" data-lenis-prevent variants={m.sheet} initial="closed" animate="open" exit="closed">
+      <div className="menu__body gutter">
+        <nav className="menu__nav" aria-label="Main">
+          <motion.ul className="menu__list" variants={m.list}>
+            {MENU_ITEMS.map(([label, to]) => (
+              <li key={to} className="mask-line">
+                <motion.span className="mask-line__in" variants={m.item}>
+                  <NavLink to={to} end={to === "/"} onClick={onClose} className="menu__link">
+                    <span className="menu__label">
+                      {label}
+                      {counts[to] ? <sup className="menu__count">({counts[to]})</sup> : null}
+                      <span className="menu__box" aria-hidden />
+                    </span>
+                  </NavLink>
+                </motion.span>
+              </li>
+            ))}
+          </motion.ul>
+        </nav>
+        <motion.div className="menu__side" variants={m.side}>
+          <div className="tag">Plate Recovery &amp; Identification from Surveillance Media</div>
+          <p>Upload a clip and get a ranked, explained registry shortlist. Characters PRISM cannot read stay <b>?</b>, and it never guesses them.</p>
+          <a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a>
+        </motion.div>
       </div>
-      <nav className="mt-10 flex flex-col" aria-label="Main">
-        {items.map(([label, to], i) => (
-          <span key={to} className="mask-line">
-            <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.4, ease: EASE, delay: 0.15 + Math.min(i, 5) * 0.03 }}>
-              {to === "/app"
-                ? <a href="/app" className={`inline-flex items-center gap-3 ${size}`}>{label} <Arrow className="w-[0.4em] h-[0.4em]" /></a>
-                : <Link to={to} onClick={onClose} className={size}>{label.toLowerCase()}</Link>}
-            </motion.span>
-          </span>
-        ))}
-      </nav>
+      <motion.div className="menu__foot gutter" variants={m.foot}>
+        <span>Every frame read. Nothing guessed.</span>
+        <span className="menu__status">
+          <span className={`dot ${health ? "dot--live" : ""}`} />
+          {health ? "API online" : health === false ? "API offline" : "Checking API…"}
+        </span>
+      </motion.div>
     </motion.div>
   );
 }
