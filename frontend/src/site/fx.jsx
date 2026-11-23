@@ -66,6 +66,36 @@ export function RollLink({ to, href, children, className = "" }) {
   return <a href={href} className={`roll ${className}`} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{inner}</a>;
 }
 
+/* ------------------------------------------------------------------ card spotlight */
+/**
+ * One pointer listener for the whole site: the card under the pointer gets --mx / --my (pointer
+ * position inside it), which its ::after spotlight in site.css follows. Off on touch screens.
+ */
+export function useSpotlight(selector = ".panel, .tile") {
+  useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) return undefined;
+    let raf = 0;
+    let ev = null;
+    const onMove = (e) => {
+      ev = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ev.target instanceof Element ? ev.target.closest(selector) : null;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${Math.round(ev.clientX - r.left)}px`);
+        el.style.setProperty("--my", `${Math.round(ev.clientY - r.top)}px`);
+      });
+    };
+    document.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      document.removeEventListener("pointermove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, [selector]);
+}
+
 /* ------------------------------------------------------------------ clock + health */
 export function useClock() {
   const fmt = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });

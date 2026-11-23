@@ -64,10 +64,11 @@ function Hero() {
           <HighwayFeed variant="day" zone={[0, 0.14, 1, 0.92]} avoid=".hero .hero__copy" />
         </motion.div>
         <div className="hero__scrim" aria-hidden />
+        <div className="hero__beam" aria-hidden />
         {introReveal && (
         <motion.div className="atf" style={anim ? { y: copyY, opacity: copyOpacity } : undefined}>
           <div className="hero__copy">
-            <motion.div className="hero__kicker" {...rise(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
+            <motion.div className="hero__kicker announce" {...rise(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
             {/* title rises letter by letter once the intro lifts */}
             <motion.h1 className="hero__h" aria-label="Every frame read. Nothing guessed." initial={reduce ? false : "hidden"} animate="shown">
               <span className="hero__line" aria-hidden><span className="inline-block"><SplitChars text="Every frame read" start={0.05} step={0.028} /></span></span>
@@ -92,7 +93,7 @@ function Hero() {
 /* ---------------------------------------------------------------- what PRISM does: 4 tiles */
 function Features() {
   return (
-    <section className="gutter py-16 md:py-20 relative z-[2]">
+    <section className="gutter py-16 md:py-24 relative z-[2] glow-top">
       <Head label="What PRISM does" title="Read what is there, mark what is not" link={<RollLink to="/how-it-works">How it works</RollLink>} />
       <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
         {FEATURES.map((f, i) => {
@@ -166,7 +167,7 @@ function Stats() {
     { v: s.mean_seconds, d: 1, suffix: "s", k: `Mean time per clip on ${evaluation.device === "cuda" ? "an RTX 5050 GPU" : "CPU"}` },
   ];
   return (
-    <section className="gutter py-16 md:py-20 border-t rule">
+    <section className="gutter py-16 md:py-24 border-t rule glow-top">
       <Head label="Measured" title="Key numbers" link={<RollLink to="/evaluation">Full evaluation</RollLink>} />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mt-10">
         {items.map((it, i) => (
@@ -239,7 +240,7 @@ function SeeItWork() {
 function FeaturedCases() {
   const cases = FEATURED_CASES.map(caseById).filter(Boolean);
   return (
-    <section className="gutter py-16 md:py-20 border-t rule">
+    <section className="gutter py-16 md:py-24 border-t rule glow-top">
       <Head label="Cases" title="Real runs on the demo clips" link={<RollLink to="/cases">All {CASES.length} cases</RollLink>} />
       <div className="grid md:grid-cols-3 gap-x-6 gap-y-10 mt-10">
         {cases.map((c, i) => <Reveal key={c.id} delay={i * 0.08}><CaseCard c={c} /></Reveal>)}
@@ -253,9 +254,9 @@ function FeaturedCases() {
 function CtaBand() {
   return (
     <section className="relative isolate overflow-hidden">
-      <ImageReveal src="/media/highway.jpg" alt="" className="absolute inset-0 -z-10" unfold radius={24} />
+      <ImageReveal src="/media/highway.jpg" alt="" className="absolute inset-0 -z-10" imgClassName="grayscale" unfold radius={28} />
       <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden
-        style={{ background: "linear-gradient(to top, rgb(11 12 15 / .94) 0%, rgb(11 12 15 / .7) 45%, rgb(11 12 15 / .55) 100%)" }} />
+        style={{ background: "linear-gradient(to top, rgb(0 0 0 / .95) 0%, rgb(0 0 0 / .72) 45%, rgb(0 0 0 / .55) 100%), radial-gradient(60% 80% at 50% 0%, rgb(255 255 255 / .06), transparent 70%)" }} />
       <div className="gutter py-24 md:py-32">
         <div className="grid md:grid-cols-12 gap-8 items-end">
           <div className="md:col-span-7">

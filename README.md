@@ -197,10 +197,11 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 
 The same build serves a project website at `/` (the investigator app lives at `/app`):
 landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails, Docs and About.
-It uses React Router, framer-motion and Lenis smooth scrolling, with Geist fonts.
-The colour palette, type scale and easings follow melon.studio's public design tokens (`#0f0000` black,
-`#f6efed` paper, pure red, `#ffb3b3` pink, `#45e0ea → #1497ac` wordmark gradient); layout and motion are
-recreated in our own code, and no code, images or text were taken from melon.studio.
+It uses React Router, framer-motion and Lenis smooth scrolling, with Geist and Instrument Serif fonts.
+The theme takes its look from resend.com: a pure black page, display-serif headlines that fade from white to
+grey, glass buttons with hairline rings, cards lit along their top edge and by the pointer, and text that blurs
+in as it scrolls into view. The earlier layout followed melon.studio. Both are recreated in our own code with
+open fonts, and no code, images, fonts or text were taken from resend.com or melon.studio.
 
 Effects: a first-visit intro (live freeway feed, then a Hyundai Verna turns a full circle with the tracking
 boxes following it, its plate is read character by character and the full registry record is shown, using

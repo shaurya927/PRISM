@@ -94,7 +94,7 @@ export default function About() {
         </div>
         <Reveal className="md:col-span-5 md:text-right">
           <a href={REPO_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[17px] ulink">github.com/shaurya927/PRISM <Arrow /></a>
-          <p className="tag mt-4 md:ml-auto">Website layout and motion inspired by melon.studio</p>
+          <p className="tag mt-4 md:ml-auto">Website theme inspired by resend.com, layout by melon.studio. Our own code, open fonts.</p>
         </Reveal>
       </section>
     </>
