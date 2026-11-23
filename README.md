@@ -128,6 +128,7 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 | `prism/custody.py` | SHA-256 of clip, crops, registry; config hash; package versions; git commits of PRISM and vendor repos |
 | `prism/report.py` + `templates/report.html.j2` | Self-contained HTML report, evidence-strip image, Playwright PDF with HTML fallback |
 | `prism/pipeline.py` | `run_pipeline`, `run_crosscam`, `rescore_case`, `hint_only_search` |
+| `prism/whatif.py` | Counterfactual what-if: hypothetical re-ranking, Hypothesis Stability Score, sensitivity matrix, differential justification |
 | `backend/app/main.py` | FastAPI: jobs, rescore, search, crosscam, report, artifacts, health, static UI |
 | `frontend/` | React + Vite + Tailwind investigator app (`/app`) and project website (`/`, `src/site/`) |
 | `data/generate_registry.py` | 500 synthetic records with decoys |
@@ -180,6 +181,13 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
    sharpness, raw/masked OCR and confidence pills; super-resolution toggle labelled
    *"Visual aid only. Not used for identification."* (or "not installed").
 5. **Shortlist**: top-5 cards with stacked score bars, match/mismatch badges, specificity, status banner, advisor.
+   **What-if**: edit any plate slot (fill a `?`, flip a look-alike such as 8/B, mark a character unreadable), assume the
+   colour is unreliable or seen under sodium street lighting, assume a colour or body type, or move τ. PRISM re-ranks
+   the registry under that hypothesis, then varies every slot and the lighting assumption you did not pin and reports
+   the **Hypothesis Stability Score** (share of perturbations in which the #1 candidate stays the sole #1), a
+   sensitivity matrix of which value hands #1 to whom (click a cell to adopt it), and a **differential justification**
+   of why #1 leads #2 and #3 component by component. Read-only: hypotheses are labelled as such and never change the
+   case result, report or custody.
 6. **Summary & report**: evidence-checked summary with citations; PDF and HTML download; custody hashes.
 7. **Cross-camera**: linked pairs with similarity, plate/body checks, speed flag and combined-evidence result.
 
@@ -230,6 +238,7 @@ runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*
 | POST | `/api/jobs` | multipart `file`, optional `hint`, `threshold` → `job_id` |
 | GET | `/api/jobs/{job_id}` | status, per-stage progress, result |
 | POST | `/api/jobs/{job_id}/rescore` | JSON `{threshold, hint}`; query `track_id`, `clear_hint` |
+| POST | `/api/jobs/{job_id}/whatif` | JSON `{track_id, slots: {position: char}, color, body_type, threshold}` → hypothetical shortlist, stability, differentials (read-only) |
 | POST | `/api/search` | JSON `{hint, color, body_type, make_model, threshold, low_light}` |
 | POST | `/api/crosscam` | multipart `file_a`, `file_b`, optional `hint`, `threshold`, `distance_km`, `gap_s` |
 | GET | `/api/report/{job_id}?format=pdf\|html` | forensic report |

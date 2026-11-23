@@ -305,6 +305,102 @@ class RescoreRequest(BaseModel):
     hint: Optional[str] = None
 
 
+class WhatIfRequest(BaseModel):
+    """A hypothesis to test against a finished case. Nothing here is evidence or saved to the case."""
+    track_id: Optional[int] = None
+    # 0-based plate position -> assumed character ('?' = treat as unreadable)
+    slots: dict[int, str] = Field(default_factory=dict)
+    # None or "recorded": the colour PRISM saw. "ignore": colour unreliable. "sodium": sodium-vapour
+    # street lighting (white/silver/grey/yellow look alike). A colour name: assume that colour.
+    color: Optional[str] = None
+    # None or "recorded" | "ignore" | a body type
+    body_type: Optional[str] = None
+    threshold: Optional[float] = Field(default=None, ge=0.0, le=1.0)
+
+
+class WhatIfPosition(BaseModel):
+    index: int
+    char: str                     # character used in this hypothesis ('?' if unknown)
+    video_char: str               # what the case result has at this position
+    source: Literal["video", "unknown", "investigator-supplied", "hypothesis"]
+
+
+class WhatIfComponent(BaseModel):
+    name: Literal["plate", "colour", "body", "make/model"]
+    leader: float
+    rival: float
+    delta: float                  # leader - rival
+
+
+class WhatIfDifferential(BaseModel):
+    leader_id: str
+    rival_id: str
+    rival_rank: int
+    leader_score: float
+    rival_score: float
+    gap: float                    # leader - rival (can be <= 0 when the rival contradicts the plate)
+    components: list[WhatIfComponent]
+    substitutions: list[str] = Field(default_factory=list)
+    rival_contradicts: bool = False
+    text: str
+
+
+class WhatIfWinShare(BaseModel):
+    registry_id: str
+    plate: str
+    share: float                  # share of scenarios in which this record is the sole #1
+    clear_share: float            # ... and is MATCHED (>= tau, enough known characters, gap >= 0.05)
+
+
+class WhatIfCell(BaseModel):
+    value: str                    # character, or colour/lighting mode
+    label: str
+    n: int                        # scenarios with this value
+    keeps_leader_share: float     # share of those in which the hypothesis leader is the sole #1
+    leader_id: Optional[str]      # most frequent sole #1 among those scenarios (None: most often a tie)
+    tie_share: float = 0.0        # share of those in which #1 is tied
+
+
+class WhatIfAxis(BaseModel):
+    kind: Literal["position", "colour"]
+    index: Optional[int] = None   # plate position (0-based) for kind == "position"
+    label: str
+    cells: list[WhatIfCell]
+    pivotal: bool = False         # some value of this axis hands #1 to another record
+
+
+class WhatIfStability(BaseModel):
+    leader_id: Optional[str]
+    leader_tied_with: list[str] = Field(default_factory=list)  # records level with the leader in this hypothesis
+    n_scenarios: int
+    n_combinations: int
+    sampled: bool
+    leader_share: float           # Hypothesis Stability Score: share in which the leader is the sole #1
+    tie_share: float = 0.0        # share in which #1 is tied (the order is then only the registry ID)
+    clear_share: float            # share in which the leader is MATCHED
+    win_shares: list[WhatIfWinShare]
+    axes: list[WhatIfAxis]
+    text: str
+
+
+class WhatIfResult(BaseModel):
+    hypothetical: bool = True
+    track_id: int
+    plate: str
+    positions: list[WhatIfPosition]
+    assumptions: list[str]
+    match: MatchResult
+    actual_leader_id: Optional[str] = None
+    actual_status: Optional[MatchStatus] = None
+    leader_changed: bool = False
+    status_changed: bool = False
+    stability: WhatIfStability
+    differentials: list[WhatIfDifferential]
+    contenders: int               # registry records scored exactly for every scenario
+    notice: str
+    elapsed_ms: float
+
+
 class SearchRequest(BaseModel):
     hint: str
     color: Optional[str] = None

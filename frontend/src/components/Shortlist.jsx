@@ -23,7 +23,7 @@ function ScoreBar({ b }) {
   );
 }
 
-function Candidate({ c, status, plateLen }) {
+export function Candidate({ c, status, plateLen }) {
   const top = c.rank === 1;
   const highlight = top && status === "MATCHED";
   const dim = status === "NO CONFIDENT MATCH";

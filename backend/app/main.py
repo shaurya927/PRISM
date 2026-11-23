@@ -5,6 +5,7 @@ Endpoints
   GET  /api/jobs                    list jobs
   GET  /api/jobs/{job_id}           status, stage progress and result
   POST /api/jobs/{job_id}/rescore   new threshold / hint / target track, Stage 5 only
+  POST /api/jobs/{job_id}/whatif    hypothetical re-ranking + stability analysis (read-only, not saved)
   DELETE /api/jobs/{job_id}         delete a job and its artifacts
   POST /api/search                  hint-only registry search
   POST /api/crosscam                two clips -> cross-camera job
@@ -54,10 +55,11 @@ from prism.config import (  # noqa: E402
 )
 from prism.custody import package_versions, prism_commit, vendor_commits  # noqa: E402
 from prism.pipeline import STAGES, get_hub, hint_only_search, rescore_case, run_crosscam, run_pipeline  # noqa: E402
-from prism.registry import load_registry  # noqa: E402
+from prism.registry import cached_registry, load_registry  # noqa: E402
 from prism.report import write_report  # noqa: E402
+from prism.whatif import WhatIfError, run_whatif  # noqa: E402
 from prism.runtime import gpu_name, resolve_device  # noqa: E402
-from prism.schemas import CaseResult, JobState, RescoreRequest, SearchRequest  # noqa: E402
+from prism.schemas import CaseResult, JobState, RescoreRequest, SearchRequest, WhatIfRequest, WhatIfResult  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 log = logging.getLogger("prism.api")
@@ -278,6 +280,22 @@ def rescore(job_id: str, req: RescoreRequest, track_id: Optional[int] = Query(No
                               clear_hint=clear_hint)
     _save_job(job)
     return job.result
+
+
+@app.post("/api/jobs/{job_id}/whatif")
+def whatif(job_id: str, req: WhatIfRequest) -> WhatIfResult:
+    """Test a hypothesis (assumed characters, colour/lighting, threshold) against a finished case.
+
+    Read-only: the case result, its report and its custody record are not changed."""
+    job = _get(job_id)
+    if job.status != "done" or job.result is None:
+        raise HTTPException(409, "job has no result yet")
+    try:
+        return run_whatif(job.result, req, cached_registry(str(REGISTRY_PATH)), CFG)
+    except WhatIfError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    except FileNotFoundError as exc:
+        raise HTTPException(503, str(exc)) from exc
 
 
 @app.delete("/api/jobs/{job_id}")

@@ -268,8 +268,17 @@ def match(
     tau: Optional[float] = None,
     low_light: bool = False,
     hint_positions: Sequence[int] = (),
+    specificity_override: Optional[int] = None,
+    n_registry: Optional[int] = None,
 ) -> MatchResult:
+    """Score and rank `registry` for one plate reading.
+
+    `registry` may be a pre-filtered pool of the full registry (prism.whatif does this). Pass the
+    full registry's specificity and size in `specificity_override` / `n_registry` so the status
+    explanation and counts still describe the whole registry.
+    """
     tau = cfg.tau if tau is None else float(tau)
+    n_reg = len(registry) if n_registry is None else int(n_registry)
     scored = []
     for rec in registry:
         s, bd, reasons, mism, n_exact = score_candidate(
@@ -307,13 +316,16 @@ def match(
                 known_count=K,
             )
         )
-    spec = specificity(plate, registry) if K else len(registry)
+    if specificity_override is not None:
+        spec = int(specificity_override)
+    else:
+        spec = specificity(plate, registry) if K else len(registry)
     spec_text = (
-        f"{spec} of {len(registry)} registry plates fit the known characters of '{plate}'"
+        f"{spec} of {n_reg} registry plates fit the known characters of '{plate}'"
         if K
-        else f"no known characters: all {len(registry)} registry plates fit"
+        else f"no known characters: all {n_reg} registry plates fit"
     )
-    status, explanation, gap = decide_status(top, K, tau, cfg, plate, color, spec=spec, n_registry=len(registry))
+    status, explanation, gap = decide_status(top, K, tau, cfg, plate, color, spec=spec, n_registry=n_reg)
     return MatchResult(
         status=status,
         threshold_used=tau,
@@ -324,7 +336,7 @@ def match(
         specificity_text=spec_text,
         low_light=low_light,
         gap=gap,
-        registry_size=len(registry),
+        registry_size=n_reg,
     )
 
 

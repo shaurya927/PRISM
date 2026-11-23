@@ -8,6 +8,7 @@ import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
 import Evidence from "./components/Evidence.jsx";
 import Shortlist from "./components/Shortlist.jsx";
+import WhatIf from "./components/WhatIf.jsx";
 import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
 import { Icon, StatusChip, fmt2 } from "./components/common.jsx";
@@ -134,6 +135,7 @@ const TABS = [
   ["vehicles", "Vehicles found"],
   ["evidence", "Evidence"],
   ["shortlist", "Shortlist"],
+  ["whatif", "What-if"],
   ["summary", "Summary & report"],
   ["crosscam", "Cross-camera"],
 ];
@@ -258,7 +260,7 @@ export default function App() {
                   {tab === k && <motion.span layoutId="tab-line" className="absolute left-2 right-2 -bottom-px h-[2px] bg-[var(--red)]" transition={{ duration: 0.25, ease: EASE }} />}
                 </button>
               ))}
-              {result.tracks.length > 1 && (tab === "evidence" || tab === "shortlist") && (
+              {result.tracks.length > 1 && (tab === "evidence" || tab === "shortlist" || tab === "whatif") && (
                 <select className="ml-auto my-1 input w-auto" value={trackId ?? ""} onChange={(e) => setTrackId(parseInt(e.target.value, 10))}>
                   {result.tracks.map((t) => <option key={t.track_id} value={t.track_id}>Track {t.track_id} · {t.fused.text || "no plate"}</option>)}
                 </select>
@@ -269,6 +271,7 @@ export default function App() {
                 label={result.crosscam ? "Camera A" : null} onSelect={(id) => { setTrackId(id); setTab("evidence"); }} />}
               {tab === "evidence" && <Evidence track={track} />}
               {tab === "shortlist" && <Shortlist track={track} />}
+              {tab === "whatif" && <WhatIf jobId={jobId} track={track} caseThreshold={result.threshold} />}
               {tab === "summary" && <Summary caseResult={result} jobId={jobId} />}
               {tab === "crosscam" && <CrossCam caseResult={result} />}
             </div>

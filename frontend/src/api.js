@@ -79,6 +79,14 @@ export const api = {
       }).then(handle)
     );
   },
+  /** Hypothetical re-ranking and stability analysis. Read-only: nothing is saved to the case. */
+  whatif: (id, { trackId, slots, color, bodyType, threshold }, signal) =>
+    fetch(`/api/jobs/${id}/whatif`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ track_id: trackId ?? null, slots: slots || {}, color: color || null, body_type: bodyType || null, threshold: threshold ?? null }),
+      signal,
+    }).then(handle),
   search: (body) =>
     tracked(
       fetch("/api/search", {
