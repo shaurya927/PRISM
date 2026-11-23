@@ -1,25 +1,58 @@
 import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-// One ease-out curve for every transition on the site. Motion only answers interaction
-// (hover, press, sliders, tabs, menus, page changes); nothing animates on its own.
+// One ease-out curve for every transition on the site. Motion answers interaction (hover, press,
+// sliders, tabs, menus, page changes) and scrolling: blocks rise into place once as they enter the
+// viewport. Under reduced motion everything renders in place.
 export const EASE = [0.22, 1, 0.36, 1];
 export const EASE_REVEAL = EASE;
 export const EASE_APPEAR = EASE;
 
-/** Headline split into lines. Each line keeps its own block so wraps stay where they were written. */
+// Trigger a little before the block is fully on screen, and only once.
+const VIEWPORT = { once: true, amount: 0.15, margin: "0px 0px -8% 0px" };
+
+const lineVariants = {
+  hidden: { y: "105%" },
+  shown: (i) => ({ y: "0%", transition: { duration: 0.7, ease: EASE, delay: i * 0.07 } }),
+};
+
+/**
+ * Headline split into lines. Each line keeps its own block so wraps stay where they were written.
+ * On scroll the lines rise out of their masks. The heading is observed (not the lines), because the
+ * lines start clipped by their masks and would never count as visible.
+ */
 export function SplitLines({ lines, as: Tag = "h1", className = "" }) {
+  const reduce = useReducedMotion();
+  if (reduce) {
+    return (
+      <Tag className={className}>
+        {lines.map((line, i) => <span key={i} className="mask-line"><span className="mask-line__in">{line}</span></span>)}
+      </Tag>
+    );
+  }
+  const M = motion[Tag] || motion.div;
   return (
-    <Tag className={className}>
+    <M className={className} initial="hidden" whileInView="shown" viewport={{ once: true, amount: 0.5 }}>
       {lines.map((line, i) => (
-        <span key={i} className="mask-line"><span className="mask-line__in">{line}</span></span>
+        <span key={i} className="mask-line">
+          <motion.span className="mask-line__in" variants={lineVariants} custom={i}>{line}</motion.span>
+        </span>
       ))}
-    </Tag>
+    </M>
   );
 }
 
-/** Plain block. Kept as a component so existing call sites do not change; it no longer animates in. */
-export function Reveal({ children, className = "", as: Tag = "div" }) {
-  return <Tag className={className}>{children}</Tag>;
+/** Block that pops up a little (fade, 18px rise, slight scale) the first time it scrolls into view. */
+export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <Tag className={className}>{children}</Tag>;
+  const M = motion[Tag] || motion.div;
+  return (
+    <M className={className} initial={{ opacity: 0, y: 18, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={VIEWPORT} transition={{ duration: 0.6, ease: EASE, delay: Math.min(delay, 0.4) }}>
+      {children}
+    </M>
+  );
 }
 
 /** Paragraph with the unknown `?` in the accent colour. */
@@ -27,7 +60,7 @@ export function ScrubText({ text, className = "" }) {
   return (
     <p className={`scrub ${className}`}>
       {text.split(" ").map((w, i) => (
-        <span key={i} className={w.includes("?") ? "text-accent" : ""}>{w}{" "}</span>
+        <span key={i}>{w.includes("?") ? <span className="pcell pcell--q">{w}</span> : w}{" "}</span>
       ))}
     </p>
   );
@@ -36,19 +69,6 @@ export function ScrubText({ text, className = "" }) {
 /** A measured figure in one format. */
 export function Counter({ value, decimals = 0, suffix = "", prefix = "", className = "" }) {
   return <span className={className}>{prefix}{Number(value).toFixed(decimals)}{suffix}</span>;
-}
-
-/** Row of capability names, wrapped instead of scrolling on its own. */
-export function Marquee({ items, className = "" }) {
-  return (
-    <div className={`marquee ${className}`}>
-      <ul className="marquee__track">
-        {items.map((it) => (
-          <li key={it} className="marquee__item">{it}</li>
-        ))}
-      </ul>
-    </div>
-  );
 }
 
 /** Image in a clipped frame. */
@@ -64,7 +84,7 @@ export function ImageReveal({ src, alt = "", className = "", imgClassName = "", 
 export function Label({ index, children, className = "" }) {
   return (
     <div className={`label-mono ${className}`}>
-      {index != null && <span className="opacity-50 mr-2">({String(index).padStart(2, "0")})</span>}
+      {index != null && <span className="mr-2">({String(index).padStart(2, "0")})</span>}
       {children}
     </div>
   );

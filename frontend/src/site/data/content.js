@@ -143,35 +143,29 @@ export const GUARDRAILS = [
   },
 ];
 
-export const MARQUEE = [
-  "Multi-frame fusion",
-  "Confidence masking",
-  "Registry shortlist",
-  "Cross-camera re-ID",
-  "Chain of custody",
-  "Evidence-checked summaries",
-  "Unknown stays ?",
-];
-
-// Feature scroll cards on the landing page. `look` picks the card artwork in pages/Landing.jsx.
+// Feature tiles on the landing page. `art` picks the small visual in pages/Landing.jsx.
+// Links starting with /app are full page loads (the investigator is a separate bundle).
 export const FEATURES = [
-  { id: "fusion", title: "Multi-frame fusion", kind: "24 reads, one plate", to: "/how-it-works", look: "fusion" },
-  { id: "unknown", title: "Unknown stays ?", kind: "No character is guessed", to: "/guardrails", look: "unknown" },
-  { id: "shortlist", title: "Ranked, explained shortlist", kind: "Investigator app", to: "/app", look: "shortlist", cursor: "Open" },
-  { id: "evidence", title: "Every read, inspectable", kind: "Evidence strip and frames", to: "/app", look: "evidence", cursor: "Open" },
-  { id: "crosscam", title: "Two cameras, one car", kind: "Cross-camera re-identification", to: "/cases/crosscam_night_partial_white__camB_white", look: "crosscam" },
-  { id: "night", title: "Built for night footage", kind: "Low-light weighting", to: "/cases/night_partial_white", look: "night" },
-  { id: "report", title: "Forensic PDF report", kind: "Chain of custody", href: "/reports/night_partial_white/PRISM_report_77dfa5837b25.pdf", look: "report", cursor: "PDF" },
-];
-
-export const BUILT_ON = [
-  { name: "YOLO11", role: "Vehicle detection", url: "https://github.com/ultralytics/ultralytics" },
-  { name: "ByteTrack", role: "Tracking", url: "https://github.com/ifzhang/ByteTrack" },
-  { name: "fast-alpr", role: "Plate detector", url: "https://github.com/ankandrew/fast-alpr" },
-  { name: "PARSeq", role: "OCR, per-character confidence", url: "https://github.com/baudm/parseq" },
-  { name: "OpenCLIP", role: "Colour, body, Re-ID", url: "https://github.com/mlfoundations/open_clip" },
-  { name: "lpsr-lacd", role: "Super-resolution, visual aid only", url: "https://github.com/valfride/lpsr-lacd" },
-  { name: "FastAPI", role: "API", url: "https://fastapi.tiangolo.com" },
+  {
+    id: "fusion", art: "fusion", title: "Multi-frame fusion",
+    body: "Every frame is read and the reads are voted together. A position is filled only when enough confident reads agree.",
+    to: "/how-it-works?tab=fusion", more: "How fusion works",
+  },
+  {
+    id: "unknown", art: "unknown", title: "Unknown stays ?",
+    body: "A character read below 0.70 confidence becomes ?. It stays unknown in the plate, the score and the report.",
+    to: "/guardrails", more: "The guardrails",
+  },
+  {
+    id: "shortlist", art: "shortlist", title: "Ranked, explained shortlist",
+    body: "Registry records are scored on plate, colour and body, and every part of the score is written out.",
+    to: "/app", more: "Open the investigator",
+  },
+  {
+    id: "crosscam", art: "crosscam", title: "Two cameras, one car",
+    body: "Two partial views are linked by appearance and agreeing plate characters, and each fills what the other missed.",
+    to: "/how-it-works?tab=crosscam", more: "See the cross-camera case",
+  },
 ];
 
 export const QUOTES = [

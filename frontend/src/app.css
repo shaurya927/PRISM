@@ -53,7 +53,7 @@
 .app .btn:not(:disabled):active { transform: scale(.98); }
 .app .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .app .btn-primary { background: var(--red); color: #fff; box-shadow: inset 0 1px 0 rgb(255 255 255 / .14); }
-.app .btn-primary:not(:disabled):hover { background: #c42619; color: #fff; }
+.app .btn-primary:not(:disabled):hover { background: var(--red-hover); color: #fff; }
 .app .btn-ghost { background: rgb(238 240 243 / .04); color: var(--ink); border: 0; box-shadow: inset 0 0 0 1px var(--rule-2); }
 .app .btn-ghost:not(:disabled):hover { background: rgb(238 240 243 / .09); color: var(--ink); }
 .app .btn:disabled { opacity: .4; cursor: not-allowed; }
@@ -162,7 +162,7 @@
 .app .seg__fill { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; }
 .app .seg.is-done .seg__fill { background: var(--red); }
 /* the running stage moves while it works, so the stripes say "live" */
-.app .seg.is-active .seg__fill { background: repeating-linear-gradient(-45deg, var(--red) 0 10px, #b9251a 10px 20px); background-size: 28px 100%;
+.app .seg.is-active .seg__fill { background: repeating-linear-gradient(-45deg, var(--red) 0 10px, var(--red-hover) 10px 20px); background-size: 28px 100%;
   animation: stripes .9s linear infinite; }
 @keyframes stripes { to { background-position: 28px 0; } }
 .app .seg__tip { position: absolute; bottom: calc(100% + 12px); transform: translateX(-50%); white-space: nowrap; pointer-events: none;

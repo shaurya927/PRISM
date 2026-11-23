@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { ImageReveal, Label, Reveal, SplitLines } from "../motion.jsx";
-import { Bar, BigCTA, NextLink, Pill, Plate, StatusChip } from "../components.jsx";
+import { Bar, NextLink, Pill, Plate, StatusChip } from "../components.jsx";
 import { CASES, caseById, STATUS_INFO } from "../data/content.js";
 import NotFound from "./NotFound.jsx";
 
@@ -11,7 +11,7 @@ function RichText({ text }) {
   return (
     <>
       {parts.map((p, i) => {
-        if (p.startsWith("`")) return <span key={i} className="mono text-accent">{p.slice(1, -1)}</span>;
+        if (p.startsWith("`")) return <span key={i} className="mono text-[var(--ink)]">{p.slice(1, -1)}</span>;
         if (/^\[[A-Z0-9, -]+\]$/.test(p)) return <sup key={i} className="mono text-[0.55em] text-muted ml-0.5">{p}</sup>;
         return <React.Fragment key={i}>{p}</React.Fragment>;
       })}
@@ -35,11 +35,11 @@ export default function CaseDetail() {
   ];
   return (
     <>
-      <section className="gutter pt-[22vh] pb-[8vh]">
+      <section className="gutter pt-32 md:pt-36 pb-10">
         <Reveal><Label index={c.index}>Case</Label></Reveal>
-        <SplitLines lines={[c.title]} className="display-2 mt-6 max-w-[14ch]" delay={0.55} />
-        <Reveal delay={0.8} className="mt-8 max-w-2xl"><p className="lead">{c.blurb}</p></Reveal>
-        <Reveal delay={0.9} className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-14 border-t rule pt-6">
+        <SplitLines lines={[c.title]} className="display-2 mt-4 max-w-[18ch]" />
+        <Reveal className="mt-6 max-w-2xl"><p className="lead">{c.blurb}</p></Reveal>
+        <Reveal className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-10 border-t rule pt-6">
           {meta.map(([k, v]) => (
             <div key={k}><div className="tag">{k}</div><div className="mt-2 text-[15px] break-words">{v}</div></div>
           ))}
@@ -54,13 +54,13 @@ export default function CaseDetail() {
         <div className="tag mt-3">Sharpest vehicle crop chosen by PRISM</div>
       </section>
 
-      <section className="gutter py-[12vh] grid md:grid-cols-12 gap-10">
+      <section className="gutter py-16 md:py-20 grid md:grid-cols-12 gap-8">
         <div className="md:col-span-4">
           <Label index={1}>Fused plate</Label>
           <Reveal delay={0.1}><p className="text-muted text-[15px] mt-4 leading-relaxed">Red ? cells are positions no frame read with enough confidence. They stay unknown in the plate and in the report.</p></Reveal>
         </div>
         <div className="md:col-span-8">
-          <Reveal><div className="text-[clamp(2rem,5.5vw,4.75rem)]"><Plate text={c.fused} /></div></Reveal>
+          <Reveal><div className="text-[clamp(1.75rem,3.6vw,3rem)]"><Plate text={c.fused} /></div></Reveal>
           {!!c.plates?.length && (
             <div className="grid grid-cols-3 gap-3 mt-10">
               {c.plates.map((src, i) => (
@@ -73,7 +73,7 @@ export default function CaseDetail() {
           )}
           {c.strip && (
             <Reveal className="mt-10">
-              <div className="rounded-xl overflow-auto bg-white max-h-[75vh]" data-lenis-prevent><img src={c.strip} alt="Evidence strip: per-position votes" className="w-full" /></div>
+              <div className="rounded-xl overflow-auto bg-white max-h-[75vh] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" data-lenis-prevent tabIndex={0} role="region" aria-label="Evidence strip, scrollable"><img src={c.strip} alt="Evidence strip: per-position votes" className="w-full" /></div>
               <div className="tag mt-2">Evidence strip: each column is a plate position, each row a read</div>
             </Reveal>
           )}
@@ -81,11 +81,11 @@ export default function CaseDetail() {
       </section>
 
       {!!top.length && (
-        <section className="gutter py-[12vh] border-t rule">
+        <section className="gutter py-16 md:py-20 border-t rule">
           <div className="grid md:grid-cols-12 gap-10">
             <div className="md:col-span-4">
               <Label index={2}>Shortlist</Label>
-              <SplitLines as="h2" lines={["Top candidates"]} className="h-sec mt-5" />
+              <SplitLines as="h2" lines={["Top candidates"]} className="h-sec mt-3" />
               <Reveal delay={0.1}><p className="text-muted text-[15px] mt-4 leading-relaxed">{STATUS_INFO[c.status]}</p></Reveal>
             </div>
             <div className="md:col-span-8">
@@ -94,11 +94,11 @@ export default function CaseDetail() {
                   <span className="tag pt-1">#{i + 1}</span>
                   <div>
                     <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <span className="text-[24px] tracking-[-0.03em] font-medium">{t.id} <span className="text-muted text-[16px] font-normal">· {t.model}</span></span>
-                      <span className="text-[24px] tabular-nums tracking-[-0.03em]">{t.score.toFixed(2)}</span>
+                      <span className="text-[20px] tracking-[-0.02em] font-medium">{t.id} <span className="text-muted text-[15px] font-normal">· {t.model}</span></span>
+                      <span className="text-[20px] tabular-nums tracking-[-0.02em]">{t.score.toFixed(2)}</span>
                     </div>
-                    <div className="mt-3 text-[18px]"><Plate text={t.plate} /></div>
-                    <div className="mt-4"><Bar value={t.score} max={maxScore} color={i === 0 ? "var(--accent)" : "var(--ink)"} delay={i * 0.1} /></div>
+                    <div className="mt-3 text-[16px]"><Plate text={t.plate} /></div>
+                    <div className="mt-4"><Bar value={t.score} max={maxScore} color={i === 0 ? "var(--ink)" : "var(--muted)"} /></div>
                     <div className="flex flex-wrap gap-2 mt-4">
                       <span className="chip">{t.color}</span>
                       <span className="chip">{t.body}</span>
@@ -113,53 +113,53 @@ export default function CaseDetail() {
         </section>
       )}
 
-      <section className="gutter py-[12vh] border-t rule grid md:grid-cols-12 gap-10">
+      <section className="gutter py-16 md:py-20 border-t rule grid md:grid-cols-12 gap-8">
         <div className="md:col-span-4"><Label index={3}>Why</Label></div>
-        <div className="md:col-span-8 space-y-10">
-          {c.explanation && <Reveal><p className="text-[clamp(1.4rem,2.6vw,2.25rem)] leading-[1.2] tracking-[-0.03em]">{c.explanation}</p></Reveal>}
+        <div className="md:col-span-8 space-y-8">
+          {c.explanation && <Reveal><p className="text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.35] tracking-[-0.015em]">{c.explanation}</p></Reveal>}
           {c.advisor && (
             <Reveal className="panel p-6 md:p-8 border-[var(--red)]">
-              <div className="tag text-accent">Next-best-evidence advisor</div>
-              <p className="text-[18px] leading-relaxed mt-3"><RichText text={c.advisor} /></p>
+              <div className="tag">Next-best-evidence advisor</div>
+              <p className="text-[16px] leading-relaxed mt-3"><RichText text={c.advisor} /></p>
             </Reveal>
           )}
           {c.summary && (
             <Reveal>
               <div className="tag">Evidence-checked summary</div>
-              <p className="text-[18px] leading-[1.6] mt-3 text-[var(--ink)] opacity-85"><RichText text={c.summary} /></p>
+              <p className="text-[16px] leading-[1.65] mt-3 text-[var(--muted-2)]"><RichText text={c.summary} /></p>
             </Reveal>
           )}
         </div>
       </section>
 
       {c.crosscam && (
-        <section className="gutter py-[12vh] border-t rule">
+        <section className="gutter py-16 md:py-20 border-t rule">
           <Label index={4}>Cross-camera link</Label>
-          <div className="grid md:grid-cols-2 gap-8 mt-10">
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
             {[["Camera A", c.best, c.crosscam.a], ["Camera B", c.crosscam.best_b, c.crosscam.b]].map(([k, src, plate], i) => (
               <Reveal key={k} delay={i * 0.1}>
                 <div className="card-media aspect-[16/10]"><ImageReveal src={src} alt={k} className="absolute inset-0" /></div>
                 <div className="tag mt-3">{k}</div>
-                <div className="text-[clamp(1rem,2.4vw,2rem)] mt-2"><Plate text={plate} /></div>
+                <div className="text-[clamp(1rem,1.8vw,1.375rem)] mt-2"><Plate text={plate} /></div>
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-12 flex flex-wrap items-center gap-6">
+          <Reveal className="panel p-5 md:p-6 mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
             <span className="tag">Combined</span>
-            <span className="text-[clamp(1.5rem,4vw,3.25rem)]"><Plate text={c.crosscam.combined} /></span>
+            <span className="text-[clamp(1.25rem,2.4vw,1.75rem)]"><Plate text={c.crosscam.combined} /></span>
             <StatusChip status={c.crosscam.before} /><span className="text-muted">→</span><StatusChip status={c.crosscam.after} />
             <span className="tag">appearance similarity {c.crosscam.similarity.toFixed(2)}</span>
           </Reveal>
         </section>
       )}
 
-      <section className="gutter py-[12vh] border-t rule grid md:grid-cols-12 gap-10">
+      <section className="gutter py-16 md:py-20 border-t rule grid md:grid-cols-12 gap-8">
         <div className="md:col-span-4"><Label index={c.crosscam ? 5 : 4}>Chain of custody</Label></div>
         <div className="md:col-span-8">
           {c.clip_sha256 && (
             <Reveal>
               <div className="tag">Clip SHA-256</div>
-              <div className="mono text-[13px] md:text-[15px] mt-2 break-all">{c.clip_sha256}</div>
+              <div className="mono text-[13px] md:text-[14px] mt-2 break-all">{c.clip_sha256}</div>
             </Reveal>
           )}
           <Reveal delay={0.1} className="flex flex-wrap gap-3 mt-8">
@@ -171,7 +171,6 @@ export default function CaseDetail() {
       </section>
 
       <NextLink to={`/cases/${next.id}`} label={`Next case (${String(next.index).padStart(2, "0")})`} title={next.title} />
-      <BigCTA />
     </>
   );
 }

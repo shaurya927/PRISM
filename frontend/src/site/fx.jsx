@@ -1,9 +1,8 @@
-// Effects for the website: CCTV highway feed, feature cards,
-// direction-aware fills, roll links, live clock and /health status.
+// Effects for the website: CCTV highway feed, roll links, live clock and /health status.
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { createFeedHud } from "./feed.js";
-import { useAnimationControls, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 
 /* ------------------------------------------------------------------ CCTV highway */
 /**
@@ -41,47 +40,6 @@ export function HighwayFeed({ className = "", hud = true, zone, avoid, labels = 
       <div className="hwy__fx" aria-hidden />
     </div>
   );
-}
-
-/* ------------------------------------------------------------------ feature card */
-/** Feature card: a flat 16:9 surface that links somewhere. No tilt, no shine, no scroll skew. */
-export function FeatureCard({ children, className = "", to, href, label = "View" }) {
-  const Tag = to ? Link : "a";
-  const linkProps = to ? { to } : { href, target: href?.startsWith("http") || href?.startsWith("/reports") ? "_blank" : undefined, rel: "noreferrer" };
-  return (
-    <div className={`feat__card ${className}`}>
-      <Tag {...linkProps} className="absolute inset-0 z-[3] rounded-[inherit]" aria-label={label} />
-      <div className="feat__media">{children}</div>
-    </div>
-  );
-}
-/* ------------------------------------------------------------------ direction-aware fill */
-const CLOSED = { l: "inset(0% 100% 0% 0%)", r: "inset(0% 0% 0% 100%)", t: "inset(0% 0% 100% 0%)", b: "inset(100% 0% 0% 0%)" };
-const nearestSide = (e, el) => {
-  const r = el.getBoundingClientRect();
-  const d = { l: e.clientX - r.left, r: r.right - e.clientX, t: e.clientY - r.top, b: r.bottom - e.clientY };
-  return Object.keys(d).reduce((a, k) => (d[k] < d[a] ? k : a), "l");
-};
-/** Fill that sweeps in from the side the pointer entered and leaves through the side it exited. */
-export function useDirFill() {
-  const controls = useAnimationControls();
-  const [hot, setHot] = useState(false);
-  const ease = { duration: 0.3, ease: [0.22, 1, 0.36, 1] };
-  return {
-    hot,
-    controls,
-    handlers: {
-      onMouseEnter: (e) => {
-        controls.set({ clipPath: CLOSED[nearestSide(e, e.currentTarget)] });
-        controls.start({ clipPath: "inset(0% 0% 0% 0%)", transition: ease });
-        setHot(true);
-      },
-      onMouseLeave: (e) => {
-        controls.start({ clipPath: CLOSED[nearestSide(e, e.currentTarget)], transition: ease });
-        setHot(false);
-      },
-    },
-  };
 }
 
 /* ------------------------------------------------------------------ roll link */

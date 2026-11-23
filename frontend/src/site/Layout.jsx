@@ -1,18 +1,18 @@
-import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
 import { EASE } from "./motion.jsx";
 import { Arrow } from "./components.jsx";
-import { RollLink, useClock, useHealth } from "./fx.jsx";
+import { useClock, useHealth } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
+import { SiteCtx } from "./context.js";
 import Intro from "./Intro.jsx";
 
-const SiteCtx = createContext({ introDone: true, introReveal: true, lenis: null });
-export const useSite = () => useContext(SiteCtx);
+export { useSite } from "./context.js";
 
 const EASE_SHEET = EASE;
-let firstPage = true; // the first page is revealed by the loader, not by a page curtain
+let firstPage = true; // the first page is revealed by the loader, not by a page fade
 
 export default function SiteLayout() {
   const location = useLocation();
@@ -59,6 +59,7 @@ export default function SiteLayout() {
         )}
         <Topbar onMenu={() => setMenu(true)} />
         <AnimatePresence>{menu && <MobileMenu onClose={() => setMenu(false)} />}</AnimatePresence>
+        {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
         <AnimatePresence mode="wait" onExitComplete={toTop}>
           <Page key={location.pathname}>{outlet}</Page>
         </AnimatePresence>
@@ -67,23 +68,18 @@ export default function SiteLayout() {
   );
 }
 
-/** Page wrapper. Leaving: a red sheet then a black panel rise over the page. Entering: they lift away. */
+/** Page wrapper: a short fade out and in (about 0.35 s in total). No motion under reduced motion. */
 function Page({ children }) {
   const skip = firstPage;
   useEffect(() => { firstPage = false; }, []);
   const reduce = useReducedMotion();
   if (reduce) return <div><main>{children}</main><Footer /></div>;
-  const sheet = (delayIn, delayOut) => ({
-    initial: { y: "0%" },
-    enter: { y: "-100%", transition: { duration: 0.8, ease: EASE_SHEET, delay: delayIn } },
-    exit: { y: ["100%", "0%"], transition: { duration: 0.6, ease: EASE_SHEET, delay: delayOut } },
-  });
   return (
-    <motion.div initial={skip ? false : "initial"} animate="enter" exit="exit">
-      <div className="curtain" aria-hidden>
-        <motion.div className="curtain__red" variants={sheet(0.18, 0)} />
-        <motion.div className="curtain__black" variants={sheet(0.02, 0.12)} />
-      </div>
+    <motion.div
+      initial={skip ? false : { opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.2, ease: EASE } }}
+      exit={{ opacity: 0, transition: { duration: 0.15, ease: EASE } }}
+    >
       <main>{children}</main>
       <Footer />
     </motion.div>
@@ -107,10 +103,10 @@ function Topbar({ onMenu }) {
   return (
     <motion.header className={`topbar ${solid ? "is-solid" : ""}`} animate={{ y: hidden ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
       <Link to="/" className="topbar__logo" aria-label="PRISM home">
-        <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
         prism
       </Link>
-      <nav className="topbar__nav">
+      <nav className="topbar__nav" aria-label="Main">
         {NAV.map(([label, to]) => (
           <NavLink key={to} to={to} className={({ isActive }) => `f-u ${isActive ? "is-on" : ""}`}>
             {label.toLowerCase()}{counts[to] ? <sup>({counts[to]})</sup> : null}
@@ -118,26 +114,27 @@ function Topbar({ onMenu }) {
         ))}
         <a href="/app" className="f-u">open app <Arrow /></a>
       </nav>
-      <button className="lg:hidden text-[16px] pt-1" onClick={onMenu}>menu</button>
+      <button className="lg:hidden text-[15px] min-h-[44px] px-2 -mr-2 -mt-3" onClick={onMenu} aria-label="Open menu">menu</button>
     </motion.header>
   );
 }
 
 function MobileMenu({ onClose }) {
   const items = [["Home", "/"], ...NAV, ["Open app", "/app"]];
+  const size = "text-[clamp(2rem,8vw,2.75rem)] tracking-[-0.025em] font-normal leading-[1.15]";
   return (
-    <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.5, ease: EASE_SHEET }}>
+    <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.4, ease: EASE_SHEET }}>
       <div className="flex justify-between items-center pt-4 h-[64px]">
-        <span className="text-[24px] font-medium tracking-[-0.04em]">prism</span>
-        <button className="text-[16px]" onClick={onClose}>close</button>
+        <span className="text-[22px] font-medium tracking-[-0.04em]">prism</span>
+        <button className="text-[15px] min-h-[44px] px-2 -mr-2" onClick={onClose}>close</button>
       </div>
-      <nav className="mt-12 flex flex-col">
+      <nav className="mt-10 flex flex-col" aria-label="Main">
         {items.map(([label, to], i) => (
           <span key={to} className="mask-line">
-            <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: EASE, delay: 0.2 + Math.min(i, 5) * 0.04 }}>
+            <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.4, ease: EASE, delay: 0.15 + Math.min(i, 5) * 0.03 }}>
               {to === "/app"
-                ? <a href="/app" className="inline-flex items-center gap-3 text-[clamp(2.4rem,10vw,4rem)] tracking-[-0.03em] font-normal leading-[1.08]">{label} <Arrow className="w-[0.4em] h-[0.4em]" /></a>
-                : <Link to={to} onClick={onClose} className="text-[clamp(2.4rem,10vw,4rem)] tracking-[-0.03em] font-normal leading-[1.08]">{label.toLowerCase()}</Link>}
+                ? <a href="/app" className={`inline-flex items-center gap-3 ${size}`}>{label} <Arrow className="w-[0.4em] h-[0.4em]" /></a>
+                : <Link to={to} onClick={onClose} className={size}>{label.toLowerCase()}</Link>}
             </motion.span>
           </span>
         ))}
@@ -152,23 +149,22 @@ function Footer() {
   const health = useHealth();
   return (
     <footer className="foot">
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10">
         <div className="col-span-2 md:col-span-4">
           <div className="tag mb-4">Get started</div>
-          <a href="/app" className="text-[clamp(1.6rem,2.4vw,2.4rem)] font-normal tracking-[-0.025em] f-u">Open the investigator</a>
-          <div className="mt-8"><a href="/app" className="btn-pill btn-pill--ghost">Start a case <Arrow /></a></div>
-          <p className="label-mono mt-8"><span className={`dot ${health ? "dot--live" : ""}`} />{health ? "API online" : health === false ? "API offline" : "Checking API…"}</p>
+          <p className="text-muted text-[15px] max-w-[30ch]">Upload a clip and get a ranked, explained registry shortlist.</p>
+          <div className="mt-6"><a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a></div>
         </div>
         <div className="md:col-span-2 md:col-start-6">
           <div className="tag mb-4">Pages</div>
-          <ul className="space-y-2 text-[17px]">
+          <ul className="space-y-2 text-[15px]">
             <li><Link to="/" className="f-u">Home</Link></li>
             {NAV.map(([l, to]) => <li key={to}><Link to={to} className="f-u">{l}</Link></li>)}
           </ul>
         </div>
         <div className="md:col-span-2">
           <div className="tag mb-4">Project</div>
-          <ul className="space-y-2 text-[17px]">
+          <ul className="space-y-2 text-[15px]">
             <li><a className="f-u" href={REPO_URL} target="_blank" rel="noreferrer">GitHub</a></li>
             <li><a className="f-u" href="/reports/index.html" target="_blank" rel="noreferrer">Sample reports</a></li>
             <li><a className="f-u" href="/api/docs" target="_blank" rel="noreferrer">API docs</a></li>
@@ -176,19 +172,17 @@ function Footer() {
         </div>
         <div className="col-span-2 md:col-span-3">
           <div className="tag mb-4">Now running</div>
-          <div className="flex gap-4 items-start">
-            <div className="w-16 h-16 rounded-md bg-[var(--red)] grid place-items-center text-[28px] font-medium shrink-0">?</div>
-            <div className="text-[15px] leading-snug">
-              <div className="flex items-center"><span className={`dot ${health ? "dot--live" : ""}`} /><span className="tag !text-[var(--ink)]">{health ? "Live" : "Offline"}</span></div>
-              <div className="mt-1">{health ? `OCR ${health.ocr_backend} on ${health.gpu || health.device}` : "PARSeq OCR"}</div>
-              <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 500 records"}</div>
+          <div className="text-[15px] leading-snug">
+            <div className="flex items-center">
+              <span className={`dot ${health ? "dot--live" : ""}`} />
+              <span>{health ? "API online" : health === false ? "API offline" : "Checking API…"}</span>
             </div>
+            <div className="mt-1 text-[var(--muted-2)]">{health ? `OCR ${health.ocr_backend} on ${health.gpu || health.device}` : "PARSeq OCR"}</div>
+            <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 500 records"}</div>
           </div>
         </div>
       </div>
-      <div className="border-t rule mt-24" />
-      <FooterWordmark />
-      <div className="flex flex-wrap justify-between gap-4 label-mono mt-6">
+      <div className="flex flex-wrap justify-between gap-4 label-mono mt-12 pt-6 border-t rule">
         <span>Hackasol 5.0 · AIML-01</span>
         <span>{clock} · local time</span>
         <span>Decision support only. It does not identify a vehicle on its own.</span>
@@ -197,12 +191,3 @@ function Footer() {
     </footer>
   );
 }
-
-function FooterWordmark() {
-  return (
-    <div className="mt-6 select-none" aria-hidden>
-      <div className="wordmark">prism<span className="q">?</span></div>
-    </div>
-  );
-}
-export { RollLink };

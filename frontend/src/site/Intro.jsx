@@ -277,7 +277,7 @@ export default function Intro({ onLeave, onDone }) {
           <motion.span key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>{label}</motion.span>
         </div>
         <div className="ld__count intro__count" style={{ opacity: (narrow || short) && show(T.details) ? 0 : undefined, transition: "opacity .3s" }}>
-          {String(prog).padStart(3, "0")}<span className="ld__pct">%</span>
+          {prog}<span className="ld__pct">%</span>
         </div>
         <div className="ld__bar" style={{ transform: `scaleX(${prog / 100})` }} />
       </motion.div>
