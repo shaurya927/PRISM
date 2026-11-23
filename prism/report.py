@@ -86,6 +86,11 @@ def evidence_strip_png(fp: FusedPlate, max_rows: int = 24) -> Optional[bytes]:
             cv2.rectangle(img, (x + 1, y + 1), (x + cw - 1, y + ch - 1), shade, -1)
             txt_col = (30, 30, 30) if c.char == p.char or p.char == "?" else (40, 40, 200)
             cv2.putText(img, c.char, (x + 15, y + 21), font, 0.6, txt_col, 2, cv2.LINE_AA)
+            if c.layout:  # layout-constrained read: dashed frame and a small "L"
+                for xx in range(x + 2, x + cw - 2, 6):
+                    cv2.line(img, (xx, y + 2), (min(xx + 3, x + cw - 2), y + 2), (140, 70, 150), 1)
+                    cv2.line(img, (xx, y + ch - 2), (min(xx + 3, x + cw - 2), y + ch - 2), (140, 70, 150), 1)
+                cv2.putText(img, "L", (x + cw - 10, y + 10), font, 0.28, (140, 70, 150), 1, cv2.LINE_AA)
     for r, rid in enumerate(reads):
         cv2.putText(img, rid, (6, hh + r * ch + 20), font, 0.45, (80, 80, 80), 1, cv2.LINE_AA)
     cv2.putText(img, "fused", (6, 30), font, 0.45, (80, 80, 80), 1, cv2.LINE_AA)

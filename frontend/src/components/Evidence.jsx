@@ -45,10 +45,13 @@ export function EvidenceStrip({ fused }) {
                   );
                 const t = c.weight / maxW;
                 const disagree = p.char !== "?" && c.char !== p.char;
+                const tip = c.layout
+                  ? `layout-constrained read: OCR's top character '${c.raw_char}' (${fmt2(c.raw_conf)}) breaks the plate layout; '${c.char}' was the model's own alternative · weight ${fmt2(c.weight)}`
+                  : `weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`;
                 return (
-                  <td key={p.index} className={`w-10 h-7 border border-white text-center font-mono font-semibold ${disagree ? "text-red-700" : "text-slate-900"}`}
-                    style={{ background: `rgba(20, 151, 172, ${0.1 + 0.7 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
-                    {c.char}
+                  <td key={p.index} className={`w-10 h-7 border text-center font-mono font-semibold ${c.layout ? "border-dashed border-purple-400" : "border-white"} ${disagree ? "text-red-700" : "text-slate-900"}`}
+                    style={{ background: `rgba(20, 151, 172, ${0.1 + 0.7 * t})` }} title={tip}>
+                    {c.char}{c.layout && <span className="text-[8px] align-super text-purple-700">L</span>}
                   </td>
                 );
               })}
@@ -59,6 +62,8 @@ export function EvidenceStrip({ fused }) {
       <p className="text-xs text-slate-500 mt-2">
         Brighter teal = more weight (confidence × sharpness). Amber cells were read below 0.70 and carry no weight. A position is
         accepted only if its winner has evidence ≥ 0.9 and at least 60% of all votes; otherwise it stays <span className="text-amber-500 font-semibold">?</span>.
+        Dashed cells marked <span className="text-purple-700 font-semibold">L</span> are layout-constrained reads: the OCR's top character broke the
+        Indian plate layout, and the model's own alternative (offered with ≥ 0.15 and ≥ 0.70 given the layout) votes with the model's probability.
       </p>
     </div>
   );

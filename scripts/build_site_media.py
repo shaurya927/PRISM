@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from prism.config import REPORTS_DIR, RUNS_DIR, load_config  # noqa: E402
-from prism.fusion import ReadObservation, fuse_reads  # noqa: E402
-from prism.masking import mask_read  # noqa: E402
+from prism.fusion import fuse_reads  # noqa: E402
+from prism.masking import mask_read, observation  # noqa: E402
 from prism.report import artifact_path, evidence_strip_png  # noqa: E402
 from prism.schemas import CaseResult  # noqa: E402
 
@@ -50,10 +50,10 @@ def fusion_sweep(frames) -> list[dict]:
         for f in frames:
             raw = [c.raw_char for c in f.chars]
             confs = [float(c.conf) for c in f.chars]
-            m = mask_read("".join(raw), confs, ocr_cfg)
-            obs.append(ReadObservation(read_id=f.read_id, chars=m.chars, raw_chars=m.raw_chars, raw_confs=m.raw_confs,
-                                       sharpness=float(f.sharpness),
-                                       format_masked=sum(1 for r in m.reasons if r == "format")))
+            # the model's saved top candidates (cases analysed with layout-constrained decoding)
+            dists = [c.alts or None for c in f.chars]
+            m = mask_read("".join(raw), confs, ocr_cfg, dists)
+            obs.append(observation(f.read_id, m, float(f.sharpness)))
         fused = fuse_reads(obs, base.fusion)
         out.append({
             "tau": tau,

@@ -8,6 +8,10 @@
 
 Only characters that survived masking (confidence >= tau_char, valid format) carry
 weight, so every fused character was read with confidence in at least one real frame.
+The one exception is a layout-constrained character (prism.layout_decode): the OCR's top choice
+broke the plate layout and the model's own second choice, offered with probability >= 0.15, reaches
+tau_char once the layout is taken into account. It votes with the model's own probability, so it
+needs several frames to pass the two-condition vote, and every cell carrying one is flagged.
 """
 
 from __future__ import annotations
@@ -29,6 +33,9 @@ class ReadObservation:
     raw_confs: list[float]
     sharpness: float
     format_masked: int = 0    # confident characters the plate format check turned into '?'
+    # Layout-constrained decoding: the model's own probability of the written character per position
+    # (None where the character was read directly). That probability, not raw_confs, is its vote weight.
+    layout_probs: Optional[list[Optional[float]]] = None
 
     @classmethod
     def from_frame_read(cls, fr: FrameRead) -> "ReadObservation":
@@ -38,8 +45,18 @@ class ReadObservation:
             raw_chars=[c.raw_char for c in fr.chars],
             raw_confs=[float(c.conf) for c in fr.chars],
             sharpness=float(fr.sharpness),
-            format_masked=sum(1 for c in fr.chars if c.reason == "format"),
+            # a layout-constrained character still broke the layout as read, so it counts here
+            format_masked=sum(1 for c in fr.chars if c.reason in ("format", "layout")),
+            layout_probs=[c.model_prob if c.layout_from else None for c in fr.chars],
         )
+
+    def is_layout(self, idx: int) -> bool:
+        return bool(self.layout_probs) and idx < len(self.layout_probs) and self.layout_probs[idx] is not None
+
+    def vote_conf(self, idx: int) -> float:
+        """Weight of the character at idx: the OCR confidence, or for a layout-constrained character the
+        model's own probability of it."""
+        return float(self.layout_probs[idx]) if self.is_layout(idx) else self.raw_confs[idx]
 
     @property
     def plausible(self) -> bool:
@@ -54,7 +71,7 @@ class ReadObservation:
 
     @property
     def known_conf_sum(self) -> float:
-        return sum(p for c, p in zip(self.chars, self.raw_confs) if c != UNKNOWN)
+        return sum(self.vote_conf(i) for i, c in enumerate(self.chars) if c != UNKNOWN)
 
 
 def quality_weight(sharpness: float, cfg: FusionConfig) -> float:
@@ -155,15 +172,15 @@ def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format
                 cells[k].append(VoteCell(read_id=r.read_id, char=None))
                 continue
             c = r.chars[idx]
-            p = r.raw_confs[idx]
-            w = p * q if c != UNKNOWN else 0.0
+            w = r.vote_conf(idx) * q if c != UNKNOWN else 0.0
             cells[k].append(
                 VoteCell(
                     read_id=r.read_id,
                     char=c,
                     raw_char=r.raw_chars[idx],
-                    raw_conf=round(p, 4),
+                    raw_conf=round(r.raw_confs[idx], 4),
                     weight=round(w, 4),
+                    layout=r.is_layout(idx) and c != UNKNOWN,
                 )
             )
 
@@ -215,6 +232,10 @@ def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format
         char = a_star if accepted else UNKNOWN
         supporting = [c.read_id for c in cells[k] if c.char == a_star and a_star != UNKNOWN]
         dissenting = [c.read_id for c in cells[k] if c.char not in (None, UNKNOWN) and c.char != a_star]
+        layout_sup = [c.read_id for c in cells[k] if c.layout and c.char == a_star and a_star != UNKNOWN]
+        if accepted and layout_sup:
+            note = (f"{len(layout_sup)} of {len(supporting)} supporting reads are layout-constrained "
+                    f"(their top OCR character broke the plate layout; weighted by the model's own probability of '{a_star}')")
         positions.append(
             FusedPosition(
                 index=k,
@@ -226,6 +247,7 @@ def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format
                 votes={a: round(w, 4) for a, w in sorted(votes.items())},
                 supporting=supporting,
                 dissenting=dissenting,
+                layout_supporting=layout_sup,
                 cells=cells[k],
                 note=note,
             )

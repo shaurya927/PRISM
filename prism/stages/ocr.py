@@ -24,6 +24,8 @@ from prism.stages.plate_detect import PlateCrop, split_two_line
 log = logging.getLogger("prism.ocr")
 
 ALLOWED_SOURCES = ("raw", "clahe")
+TOP_K = 8  # candidate characters kept per position (PARSeq's charset has 94)
+_ALNUM = frozenset("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 
 class SuperResolutionLeakError(RuntimeError):
@@ -34,12 +36,23 @@ class OCRUnavailable(RuntimeError):
     pass
 
 
+CharDist = Optional[dict[str, float]]  # model probability of each candidate character at one position
+
+
 class BasePlateOCR(ABC):
     name: str = "base"
 
     @abstractmethod
     def read(self, plate_crop: np.ndarray) -> tuple[str, list[float]]:
         """Return (raw_text, char_confidences), one confidence per character in raw_text."""
+
+    def read_dist(self, plate_crop: np.ndarray) -> tuple[str, list[float], list[CharDist]]:
+        """Like read(), plus the model's probability for the top candidate characters at each position.
+
+        Backends that cannot expose the full distribution return None per position; layout-
+        constrained decoding (prism.layout_decode) is then simply not applied to their reads."""
+        text, confs = self.read(plate_crop)
+        return text, confs, [None] * len(text)
 
 
 # --------------------------------------------------------------------------- PARSeq
@@ -88,7 +101,7 @@ class ParseqOCR(BasePlateOCR):
         x = (x - 0.5) / 0.5  # same normalisation as SceneTextDataModule.get_transform
         return x.unsqueeze(0).to(self.device)
 
-    def read(self, plate_crop: np.ndarray) -> tuple[str, list[float]]:
+    def _forward(self, plate_crop: np.ndarray):
         with self.torch.inference_mode():
             logits = self.model(self._prep(plate_crop))
             probs = logits.softmax(-1)
@@ -97,7 +110,30 @@ class ParseqOCR(BasePlateOCR):
         c = confs[0].detach().float().cpu().tolist()
         # decode() appends the EOS probability when EOS was emitted; drop it so there is
         # exactly one confidence per character.
-        return text, [float(v) for v in c[: len(text)]]
+        return text, [float(v) for v in c[: len(text)]], probs
+
+    def read(self, plate_crop: np.ndarray) -> tuple[str, list[float]]:
+        text, confs, _ = self._forward(plate_crop)
+        return text, confs
+
+    def read_dist(self, plate_crop: np.ndarray) -> tuple[str, list[float], list[CharDist]]:
+        """PARSeq's softmax over its charset at every decoded position, folded to upper-case A-Z/0-9."""
+        text, confs, probs = self._forward(plate_crop)
+        itos = getattr(self.tokenizer, "_itos", None)
+        if itos is None:
+            return text, confs, [None] * len(text)
+        k = min(TOP_K, probs.shape[-1])
+        dists: list[CharDist] = []
+        top_p, top_i = probs[0, : len(text)].float().topk(k, dim=-1)
+        for ps, ids in zip(top_p.cpu().tolist(), top_i.cpu().tolist()):
+            d: dict[str, float] = {}
+            for p, i in zip(ps, ids):
+                tok = itos[i] if 0 <= i < len(itos) else ""
+                if len(tok) == 1 and tok.upper() in _ALNUM:
+                    u = tok.upper()
+                    d[u] = d.get(u, 0.0) + float(p)  # 'b' and 'B' are one plate character
+            dists.append({c: round(p, 5) for c, p in d.items()})
+        return text, confs, dists
 
 
 # --------------------------------------------------------------------------- fast-plate-ocr
@@ -170,14 +206,24 @@ def read_plate_crop(ocr: BasePlateOCR, crop: PlateCrop, two_line: bool, plate_cf
     Returns (raw_text, confidences, was_split). If splitting fails, the whole crop is read;
     masking still applies, so a bad split only produces more '?'.
     """
+    text, confs, _, split = read_plate_crop_dist(ocr, crop, two_line, plate_cfg)
+    return text, confs, split
+
+
+def read_plate_crop_dist(ocr: BasePlateOCR, crop: PlateCrop, two_line: bool,
+                         plate_cfg: PlateConfig) -> tuple[str, list[float], list[CharDist], bool]:
+    """read_plate_crop plus the per-position character distributions (None where unavailable).
+
+    Goes through the same source gate: super-resolution output is refused here too."""
     _check_source(crop)
     if two_line:
         rows = split_two_line(crop.image, plate_cfg)
         if rows is not None:
-            parts = [ocr.read(r) for r in rows]
-            text = "".join(t for t, _ in parts)
-            confs = [c for _, cs in parts for c in cs]
+            parts = [ocr.read_dist(r) for r in rows]
+            text = "".join(t for t, _, _ in parts)
+            confs = [c for _, cs, _ in parts for c in cs]
+            dists = [d for _, _, ds in parts for d in ds]
             if text:
-                return text, confs, True
-    text, confs = ocr.read(crop.image)
-    return text, confs, False
+                return text, confs, dists, True
+    text, confs, dists = ocr.read_dist(crop.image)
+    return text, confs, dists, False

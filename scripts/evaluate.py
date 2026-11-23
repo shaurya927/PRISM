@@ -41,14 +41,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from prism.config import REPORTS_DIR, SEED, TEST_CLIPS_DIR, PrismConfig, set_seeds, with_overrides  # noqa: E402
 from prism.fusion import ReadObservation, align, fuse_reads  # noqa: E402
-from prism.masking import confidence_mask, mask_read  # noqa: E402
+from prism.masking import confidence_mask, mask_read, observation  # noqa: E402
 from prism.matcher import match  # noqa: E402
 from prism.plate_grammar import ALNUM, UNKNOWN, pretty  # noqa: E402
 from prism.registry import load_registry  # noqa: E402
 from prism.runtime import resolve_device  # noqa: E402
 from prism.schemas import AttributeValue, MatchStatus, RegistryRecord  # noqa: E402
 from prism.stages.plate_detect import PlateCrop, clahe_copy, is_two_line, laplacian_sharpness  # noqa: E402
-from prism.stages.ocr import FastPlateOCR, ParseqOCR, read_plate_crop  # noqa: E402
+from prism.stages.ocr import FastPlateOCR, ParseqOCR, read_plate_crop_dist  # noqa: E402
 
 FRAMES_PER_VEHICLE = 8
 LEVELS = {
@@ -100,6 +100,7 @@ class Read:
     sharpness: float
     source: str
     frame: int
+    dists: Optional[list] = None  # OCR model's per-position character distributions (PARSeq)
 
 
 @dataclass
@@ -152,8 +153,8 @@ def build_vehicles(registry: list[RegistryRecord], n: int, ocrs: dict, cfg: Pris
             t = time.perf_counter()
             for f, img, s in crops:
                 for crop in (PlateCrop(img, "raw"), PlateCrop(clahe_copy(img, cfg.plate), "clahe")):
-                    text, confs, _ = read_plate_crop(ocr, crop, is_two_line(img, cfg.plate), cfg.plate)
-                    reads.append(Read(text, confs, s, crop.source, f))
+                    text, confs, dists, _ = read_plate_crop_dist(ocr, crop, is_two_line(img, cfg.plate), cfg.plate)
+                    reads.append(Read(text, confs, s, crop.source, f, dists))
             v.reads[name] = reads
             v.ms[name] = 1000 * (time.perf_counter() - t) / max(1, len(reads))
         out.append(v)
@@ -219,11 +220,10 @@ def variant_plate(variant: str, reads: list[Read], cfg: PrismConfig) -> str:
             ch, cs = _clean(r.text, r.confs, cfg)
             masked = confidence_mask(ch, cs, cfg.ocr.char_conf)[0]
             obs.append(ReadObservation(f"R{i}", masked, ch, cs, r.sharpness))
-        else:  # full
-            m = mask_read(r.text, r.confs, cfg.ocr)
-            obs.append(ReadObservation(f"R{i}", m.chars, m.raw_chars, m.raw_confs, r.sharpness,
-                                       format_masked=sum(1 for x in m.reasons if x == "format")))
-    return fuse_reads(obs, cfg.fusion, apply_format=(variant == "full")).text
+        else:  # full (with layout-constrained decoding when the backend exposes distributions) / no_layout
+            m = mask_read(r.text, r.confs, cfg.ocr, r.dists if variant == "full" else None)
+            obs.append(observation(f"R{i}", m, r.sharpness))
+    return fuse_reads(obs, cfg.fusion, apply_format=(variant in ("full", "no_layout"))).text
 
 
 def char_scores(fused: str, truth: str) -> tuple[int, int, int]:
@@ -244,13 +244,14 @@ VARIANTS = [
     ("majority", "Majority vote, no confidence masking"),
     ("conf_mask", "+ confidence masking"),
     ("two_condition", "+ two-condition vote"),
-    ("full", "+ format check + coverage factor (full PRISM)"),
+    ("no_layout", "+ format check + coverage factor, format violations masked only"),
+    ("full", "+ layout-constrained decoding (full PRISM)"),
 ]
 
 
 def evaluate_variant(vehicles: list[Vehicle], backend: str, variant: str, registry: list[RegistryRecord],
                      cfg: PrismConfig, tau: float) -> dict:
-    mcfg = cfg.match if variant == "full" else with_overrides(cfg, match={"coverage_full": 1}).match
+    mcfg = cfg.match if variant in ("full", "no_layout") else with_overrides(cfg, match={"coverage_full": 1}).match
     tot = dict(committed=0, wrong=0, correct=0, chars=0, top1=0, top5=0, matched_correct=0, fm=0, n=0)
     per_level: dict[str, dict] = {}
     errors: list[dict] = []

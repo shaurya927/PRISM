@@ -31,7 +31,13 @@ class CharRead(BaseModel):
     char: str                     # masked character ('?' if unknown)
     raw_char: str                 # character the OCR produced (before masking)
     conf: float                   # OCR confidence for raw_char
-    reason: Optional[str] = None  # why it was masked: low_confidence | non_alphanumeric | format
+    # why it was masked: low_confidence | non_alphanumeric | format; "layout" = layout-constrained read
+    reason: Optional[str] = None
+    # Layout-constrained decoding (prism.layout_decode): set only when it wrote `char`.
+    layout_from: Optional[str] = None   # the OCR's top character, ruled out by the plate layouts
+    model_prob: Optional[float] = None  # the OCR model's own probability of `char` (its fusion weight)
+    layout_prob: Optional[float] = None # probability of `char` given the layouts
+    alts: dict[str, float] = Field(default_factory=dict)  # OCR model's top candidate characters here
 
 
 class FrameRead(BaseModel):
@@ -60,8 +66,10 @@ class VoteCell(BaseModel):
     read_id: str
     char: Optional[str]           # masked char at this position, '?' if unknown, None if gap
     raw_char: Optional[str] = None
-    raw_conf: float = 0.0
+    raw_conf: float = 0.0         # OCR confidence of raw_char
     weight: float = 0.0
+    layout: bool = False          # char came from layout-constrained decoding (weight uses the model's own
+                                  # probability of char, not raw_conf)
 
 
 class FusedPosition(BaseModel):
@@ -74,6 +82,7 @@ class FusedPosition(BaseModel):
     votes: dict[str, float] = Field(default_factory=dict)
     supporting: list[str] = Field(default_factory=list)
     dissenting: list[str] = Field(default_factory=list)
+    layout_supporting: list[str] = Field(default_factory=list)  # supporting reads that were layout-constrained
     cells: list[VoteCell] = Field(default_factory=list)
     note: Optional[str] = None
 

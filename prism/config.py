@@ -239,6 +239,15 @@ class OCRConfig:
     char_conf: float = 0.70                 # tau_char
     # Layout separators dropped before masking (they are not plate characters).
     separators: str = " -.\u00b7_|"
+    # Layout-constrained decoding (prism.layout_decode). Only a position whose top OCR character
+    # the Indian plate layouts rule out is re-decided, and only to a character the model itself
+    # gave at least `layout_min_model_prob`, whose probability given the layouts is at least
+    # `char_conf`, and that the likely layouts agree on (`layout_min_agreement`).
+    layout_decode: bool = True
+    layout_min_model_prob: float = 0.15
+    layout_min_agreement: float = 0.90
+    layout_cut_prior: float = 0.05          # prior weight of a layout that lost its first/last character
+    layout_max_ruled_out: int = 1           # a read breaking the layout in more places is only masked
 
 
 @dataclass(frozen=True)

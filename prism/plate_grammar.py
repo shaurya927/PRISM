@@ -2,6 +2,7 @@
 
 Supported layouts (separators removed):
   * Standard:      SS D{1,2} L{1,3} DDDD     e.g. CG04MX4821, MH12DE5678
+                   (a single-digit RTO is 1-9; two-digit RTOs are 01-99)
   * Delhi (old):   DL D{1,2} C L{0,2} DDDD   e.g. DL1CAB1234 (a sub-case of Standard)
   * Bharat series: YY BH DDDD L{1,2}        e.g. 22BH1234AA
 
@@ -49,12 +50,17 @@ def _cut_templates(n: int) -> list[Template]:
     return out
 
 
+NONZERO = DIGITS - {"0"}
+
+
 @lru_cache(maxsize=1)
 def all_templates() -> tuple[Template, ...]:
     out: list[Template] = []
     for d in (1, 2):
+        # RTO codes start at 1: a single-digit RTO (Delhi's DL 3 C ...) is 1-9, never 0.
+        rto = (NONZERO,) if d == 1 else (DIGITS, DIGITS)
         for l in (1, 2, 3):
-            slots = (LETTERS, LETTERS) + (DIGITS,) * d + (LETTERS,) * l + (DIGITS,) * 4
+            slots = (LETTERS, LETTERS) + rto + (LETTERS,) * l + (DIGITS,) * 4
             out.append(Template(f"standard SS D{{{d}}} L{{{l}}} DDDD", slots, True))
     for l in (1, 2):
         slots = (DIGITS, DIGITS, frozenset("B"), frozenset("H")) + (DIGITS,) * 4 + (LETTERS,) * l
@@ -132,7 +138,7 @@ def format_mask(chars: Sequence[str]) -> FormatCheck:
 
 
 _FULL_RE = re.compile(
-    r"^(?:(?P<state>[A-Z]{2})(?P<rto>\d{1,2})(?P<series>[A-Z]{1,3})(?P<num>\d{4})"
+    r"^(?:(?P<state>[A-Z]{2})(?P<rto>[1-9]|\d{2})(?P<series>[A-Z]{1,3})(?P<num>\d{4})"
     r"|(?P<yy>\d{2})BH(?P<bnum>\d{4})(?P<bser>[A-Z]{1,2}))$"
 )
 

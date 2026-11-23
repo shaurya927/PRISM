@@ -103,6 +103,18 @@ export function AttrChip({ label, attr }) {
 }
 
 export function ConfPill({ c, tau = 0.7 }) {
+  const alts = c.alts && Object.keys(c.alts).length
+    ? " · model candidates: " + Object.entries(c.alts).map(([k, v]) => `${k} ${Number(v).toFixed(2)}`).join(", ")
+    : "";
+  if (c.reason === "layout" && c.layout_from) {
+    return (
+      <span className="inline-flex flex-col items-center rounded px-1 py-0.5 mx-[1px] text-[10px] font-mono bg-purple-50 text-purple-700 border border-dashed border-purple-400"
+        title={`layout-constrained read: '${c.layout_from}' breaks the Indian plate layout; '${c.char}' is the model's own alternative (model ${Number(c.model_prob).toFixed(2)}, after the layout ${Number(c.layout_prob).toFixed(2)})${alts}`}>
+        <span className="text-xs font-semibold">{c.layout_from}→{c.char}</span>
+        <span>{Number(c.model_prob).toFixed(2)}</span>
+      </span>
+    );
+  }
   const ok = c.char !== "?";
   const cls = ok
     ? "bg-green-100 text-green-800"
@@ -111,7 +123,7 @@ export function ConfPill({ c, tau = 0.7 }) {
     : "bg-amber-100 text-amber-800";
   return (
     <span className={`inline-flex flex-col items-center rounded px-1 py-0.5 mx-[1px] text-[10px] font-mono ${cls}`}
-      title={ok ? "accepted" : c.reason === "format" ? "masked: breaks Indian plate format" : c.reason === "non_alphanumeric" ? "masked: not A-Z/0-9" : `masked: confidence below ${tau}`}>
+      title={(ok ? "accepted" : c.reason === "format" ? "masked: breaks Indian plate format" : c.reason === "non_alphanumeric" ? "masked: not A-Z/0-9" : `masked: confidence below ${tau}`) + alts}>
       <span className="text-xs font-semibold">{c.raw_char || "·"}</span>
       <span>{Number(c.conf).toFixed(2)}</span>
     </span>

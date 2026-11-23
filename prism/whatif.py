@@ -21,8 +21,9 @@ Guardrails
     scores and statuses are identical to scoring the full registry.
 
 Perturbation space
-  * unknown slot ('?'): stays unknown, or each character the leading contenders have there, or one
-    a frame half-read (sub-threshold votes), limited to characters the Indian plate layout allows;
+  * unknown slot ('?'): stays unknown, or each character the OCR model itself offered there (its
+    second choices, across the track's reads), then those the leading contenders have there, then
+    any a frame half-read (sub-threshold votes), limited to characters the Indian plate layout allows;
   * a read character with an OCR look-alike (0/O, 1/I, 8/B, 5/S, 2/Z, 6/G, 4/A): either of the pair;
   * a weakly supported read character (fusion share below ``WEAK_SHARE``): it, or unreadable;
   * colour: as recorded, unreliable (ignored), and, for light shades, sodium-vapour lighting.
@@ -387,10 +388,27 @@ class _Axis:
     labels: list[str]
 
 
+def _model_alternatives(track: TrackResult, length: int) -> dict[int, list[str]]:
+    """Per plate position, the characters the OCR model offered across this track's reads (summed
+    model probability, most probable first). Only reads of the plate's length are used, so positions
+    line up without alignment."""
+    mass: dict[int, dict[str, float]] = {}
+    for fr in track.frames:
+        if len(fr.chars) != length:
+            continue
+        for k, c in enumerate(fr.chars):
+            cand = c.alts or ({c.raw_char.upper(): c.conf} if c.raw_char else {})
+            for ch, p in cand.items():
+                if ch in ALNUM:
+                    mass.setdefault(k, {})[ch] = mass.get(k, {}).get(ch, 0.0) + float(p)
+    return {k: [c for c, _ in sorted(m.items(), key=lambda kv: (-kv[1], kv[0]))] for k, m in mass.items()}
+
+
 def _position_axes(track: TrackResult, plate: str, pinned: set[int], contenders: Sequence[str],
                    cfg: MatchConfig) -> list[_Axis]:
     partner = _partner(cfg)
     pos = {p.index: p for p in track.fused.positions}
+    model_alts = _model_alternatives(track, len(plate))
     axes: list[_Axis] = []
     for k, ch in enumerate(plate):
         if k in pinned:
@@ -401,6 +419,9 @@ def _position_axes(track: TrackResult, plate: str, pinned: set[int], contenders:
         allowed = _layout_chars(plate, k)
         if ch == UNKNOWN:
             seen: list[str] = []
+            for c in model_alts.get(k, []):  # the OCR model's own candidates here, most probable first
+                if c in allowed and c not in seen:
+                    seen.append(c)
             for plate_r in contenders:  # characters the leading contenders have here
                 if k < len(plate_r) and plate_r[k] in allowed and plate_r[k] not in seen:
                     seen.append(plate_r[k])

@@ -36,7 +36,7 @@ from prism.config import (
 )
 from prism.custody import CustodyLog, build_custody, sha256_file
 from prism.fusion import fuse_frame_reads, fuse_reads, merge_hint, normalize_hint, ReadObservation
-from prism.masking import mask_read
+from prism.masking import char_reads, mask_read
 from prism.matcher import match
 from prism.narrative import summarize
 from prism.registry import load_registry
@@ -48,7 +48,6 @@ from prism.schemas import (
     AttributeValue,
     Attributes,
     CaseResult,
-    CharRead,
     ClipMeta,
     CrossCamPair,
     CrossCamResult,
@@ -227,7 +226,7 @@ def analyze_clip(
     role: str = "A",
     compute_embeddings: bool = False,
 ) -> ClipAnalysis:
-    from prism.stages.ocr import read_plate_crop
+    from prism.stages.ocr import read_plate_crop_dist
     from prism.stages.plate_detect import collect_plate_samples
     from prism.stages.super_res import write_sr_artifact
     from prism.stages.track import run_tracking
@@ -284,15 +283,14 @@ def analyze_clip(
             if cfg.plate.read_clahe_copy:
                 copies.append((s.clahe, f"{rid_prefix}F{s.frame_idx}c"))
             for crop, read_id in copies:
-                text, confs, split = read_plate_crop(ocr, crop, s.two_line, cfg.plate)
-                m = mask_read(text, confs, cfg.ocr)
+                text, confs, dists, split = read_plate_crop_dist(ocr, crop, s.two_line, cfg.plate)
+                m = mask_read(text, confs, cfg.ocr, dists)
                 frames.append(
                     FrameRead(
                         read_id=read_id, frame_idx=s.frame_idx, timestamp_sec=s.timestamp_sec,
                         sharpness=s.sharpness, source=crop.source, ocr_backend=ocr.name, raw_text=text,
                         masked_text=m.masked_text,
-                        chars=[CharRead(char=c, raw_char=r, conf=round(p, 4), reason=why)
-                               for c, r, p, why in zip(m.chars, m.raw_chars, m.raw_confs, m.reasons)],
+                        chars=char_reads(m),
                         format_conflicts=m.conflicts, two_line=split, plate_bbox=s.plate_bbox,
                         plate_crop_url=raw_url, plate_clahe_url=clahe_url, vehicle_crop_url=veh_url,
                     )
