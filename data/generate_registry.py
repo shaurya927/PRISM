@@ -1,6 +1,6 @@
 """Generate the synthetic Indian vehicle registry (data/registry.json).
 
-* 500 records, fixed seed, all owner data synthetic.
+* Up to 50,000 records, fixed seed, all owner data synthetic.
 * Plates from Chhattisgarh, Maharashtra, Delhi (old DL 1C AB format), Karnataka and
   Bharat-series (BH).
 * Make/model fixes the body type; colours follow realistic frequencies.
@@ -83,15 +83,113 @@ FORMAT_EXAMPLES: list[dict] = [
 ]
 
 RTO = {
-    "CG": [("04", "Raipur"), ("07", "Durg"), ("10", "Bilaspur"), ("13", "Raigarh"), ("15", "Ambikapur")],
-    "MH": [("01", "Mumbai Central"), ("02", "Mumbai West"), ("04", "Thane"), ("12", "Pune"),
-           ("14", "Pimpri-Chinchwad"), ("31", "Nagpur")],
-    "KA": [("01", "Bengaluru Central"), ("03", "Bengaluru East"), ("05", "Bengaluru South"),
-           ("19", "Mangaluru"), ("51", "Electronic City")],
+    # --- Northern India ---
     "DL": [(str(i), f"Delhi zone {i}") for i in range(1, 15)],
+    "UP": [("14", "Ghaziabad"), ("15", "Meerut"), ("16", "Noida"), ("32", "Lucknow"),
+           ("65", "Varanasi"), ("70", "Allahabad"), ("78", "Kanpur"), ("80", "Agra"),
+           ("81", "Mathura"), ("25", "Bareilly")],
+    "HR": [("01", "Ambala"), ("02", "Hisar"), ("03", "Panchkula"), ("06", "Rohtak"),
+           ("26", "Gurugram"), ("29", "Faridabad"), ("38", "Karnal"), ("51", "Panipat")],
+    "PB": [("01", "Amritsar"), ("02", "Jalandhar"), ("03", "Patiala"), ("05", "Bathinda"),
+           ("10", "Ludhiana"), ("11", "Mohali"), ("13", "Chandigarh Road")],
+    "RJ": [("01", "Ajmer"), ("02", "Alwar"), ("09", "Bikaner"), ("14", "Jaipur"),
+           ("19", "Jodhpur"), ("25", "Udaipur"), ("27", "Sikar"), ("45", "Kota")],
+    "HP": [("01", "Shimla"), ("02", "Mandi"), ("03", "Kangra"), ("05", "Kullu"),
+           ("07", "Una")],
+    "UK": [("01", "Dehradun"), ("02", "Almora"), ("04", "Haridwar"), ("07", "Nainital"),
+           ("13", "Mussoorie")],
+    "JK": [("01", "Srinagar"), ("02", "Jammu"), ("03", "Anantnag"), ("08", "Kathua")],
+    "CH": [("01", "Chandigarh"), ("02", "Chandigarh"), ("03", "Chandigarh")],
+    "LA": [("01", "Leh"), ("02", "Kargil")],
+    # --- Western India ---
+    "MH": [("01", "Mumbai Central"), ("02", "Mumbai West"), ("03", "Mumbai East"),
+           ("04", "Thane"), ("05", "Kalyan"), ("06", "Raigad"), ("12", "Pune"),
+           ("14", "Pimpri-Chinchwad"), ("20", "Aurangabad"), ("31", "Nagpur"),
+           ("43", "Nashik"), ("46", "Kolhapur"), ("47", "Satara"), ("48", "Solapur")],
+    "GJ": [("01", "Ahmedabad"), ("02", "Mehsana"), ("05", "Surat"), ("06", "Vadodara"),
+           ("10", "Jamnagar"), ("11", "Junagadh"), ("15", "Rajkot"), ("18", "Gandhinagar"),
+           ("27", "Anand")],
+    "GA": [("01", "North Goa"), ("02", "South Goa"), ("03", "Mapusa"), ("04", "Ponda"),
+           ("05", "Margao"), ("06", "Vasco"), ("07", "Bicholim"), ("08", "Panaji")],
+    "DD": [("01", "Daman"), ("02", "Diu"), ("03", "Silvassa")],
+    # --- Central India ---
+    "MP": [("01", "Bhopal"), ("04", "Gwalior"), ("07", "Indore"), ("09", "Jabalpur"),
+           ("10", "Rewa"), ("13", "Ujjain"), ("20", "Sagar"), ("50", "Satna")],
+    "CG": [("04", "Raipur"), ("07", "Durg"), ("10", "Bilaspur"), ("13", "Raigarh"),
+           ("15", "Ambikapur"), ("17", "Korba"), ("18", "Jagdalpur")],
+    # --- Southern India ---
+    "KA": [("01", "Bengaluru Central"), ("02", "Bengaluru West"), ("03", "Bengaluru East"),
+           ("04", "Bengaluru North"), ("05", "Bengaluru South"), ("09", "Mysuru"),
+           ("10", "Belgaum"), ("19", "Mangaluru"), ("34", "Dharwad"), ("41", "Davangere"),
+           ("50", "Tumkur"), ("51", "Electronic City"), ("53", "Hosur Road")],
+    "TN": [("01", "Chennai Central"), ("02", "Chennai West"), ("03", "Chennai South"),
+           ("04", "Chennai North"), ("06", "Chengalpattu"), ("07", "Vellore"),
+           ("09", "Salem"), ("10", "Erode"), ("11", "Tiruppur"), ("14", "Madurai"),
+           ("18", "Tiruchirapalli"), ("20", "Coimbatore"), ("22", "Thanjavur"),
+           ("33", "Cuddalore"), ("37", "Krishnagiri"), ("38", "Dharmapuri"),
+           ("39", "Namakkal"), ("45", "Virudhunagar"), ("66", "Tirunelveli")],
+    "KL": [("01", "Thiruvananthapuram"), ("02", "Kollam"), ("04", "Alappuzha"),
+           ("07", "Kottayam"), ("09", "Ernakulam"), ("11", "Palakkad"),
+           ("14", "Malappuram"), ("16", "Kozhikode"), ("20", "Kannur"),
+           ("58", "Thrissur")],
+    "AP": [("05", "Anantapur"), ("09", "Guntur"), ("11", "Kadapa"), ("16", "Nellore"),
+           ("28", "Visakhapatnam"), ("31", "Vijayawada"), ("37", "Tirupati"),
+           ("39", "Rajahmundry")],
+    "TS": [("02", "Hyderabad East"), ("03", "Hyderabad West"), ("04", "Hyderabad South"),
+           ("07", "Secunderabad"), ("08", "Medchal"), ("09", "Ranga Reddy"),
+           ("11", "Warangal"), ("13", "Karimnagar"), ("14", "Nizamabad"),
+           ("22", "Nalgonda"), ("28", "Khammam"), ("29", "Mahbubnagar")],
+    "PY": [("01", "Puducherry"), ("02", "Karaikal"), ("05", "Yanam")],
+    # --- Eastern India ---
+    "WB": [("01", "Kolkata North"), ("02", "Kolkata South"), ("06", "Howrah"),
+           ("14", "Siliguri"), ("18", "Asansol"), ("23", "Durgapur"),
+           ("26", "Haldia"), ("31", "Barrackpore"), ("74", "Burdwan")],
+    "BR": [("01", "Patna"), ("02", "Gaya"), ("06", "Muzaffarpur"), ("09", "Bhagalpur"),
+           ("19", "Darbhanga"), ("21", "Purnia"), ("24", "Ara"), ("31", "Saharsa")],
+    "JH": [("01", "Ranchi"), ("02", "Dhanbad"), ("04", "Jamshedpur"), ("05", "Bokaro"),
+           ("10", "Hazaribagh"), ("14", "Deoghar")],
+    "OD": [("02", "Bhubaneswar"), ("05", "Cuttack"), ("06", "Berhampur"),
+           ("08", "Rourkela"), ("13", "Sambalpur"), ("19", "Balasore")],
+    "AN": [("01", "Port Blair")],
+    # --- North-Eastern India ---
+    "AS": [("01", "Guwahati"), ("02", "Nagaon"), ("03", "Jorhat"), ("04", "Silchar"),
+           ("06", "Tinsukia"), ("09", "Dibrugarh"), ("12", "Tezpur")],
+    "NL": [("01", "Kohima"), ("02", "Dimapur"), ("04", "Mokokchung")],
+    "MN": [("01", "Imphal East"), ("02", "Imphal West")],
+    "ML": [("02", "Shillong"), ("04", "Jowai"), ("06", "Tura")],
+    "MZ": [("01", "Aizawl"), ("02", "Lunglei"), ("04", "Champhai")],
+    "TR": [("01", "Agartala"), ("02", "Udaipur")],
+    "AR": [("01", "Itanagar"), ("02", "Tawang"), ("06", "Pasighat")],
+    "SK": [("01", "Gangtok"), ("02", "Namchi"), ("04", "Mangan")],
+    "DN": [("01", "Silvassa")],
+    "LD": [("01", "Kavaratti")],
 }
-STATE_WEIGHTS = {"CG": 0.30, "MH": 0.25, "KA": 0.20, "DL": 0.15, "BH": 0.10}
-BH_CITIES = ["Raipur, CG", "Pune, MH", "Bengaluru, KA", "New Delhi, DL", "Durg, CG", "Nagpur, MH"]
+
+# Weights reflect realistic Indian traffic distribution
+STATE_WEIGHTS = {
+    # Metros & high-density states
+    "UP": 0.12, "MH": 0.11, "DL": 0.08, "KA": 0.07, "TN": 0.07,
+    "GJ": 0.06, "RJ": 0.05, "WB": 0.04, "TS": 0.04, "AP": 0.03,
+    "KL": 0.03, "MP": 0.03, "HR": 0.03, "PB": 0.02, "BR": 0.02,
+    # Chhattisgarh (project origin state — overweighted for demo clips)
+    "CG": 0.04,
+    # Medium-density
+    "JH": 0.02, "OD": 0.015, "UK": 0.015, "HP": 0.01,
+    "AS": 0.01, "JK": 0.01, "CH": 0.005, "GA": 0.005,
+    # Bharat series
+    "BH": 0.04,
+    # Low-density (NE, islands, UTs)
+    "NL": 0.003, "MN": 0.003, "ML": 0.003, "MZ": 0.002,
+    "TR": 0.003, "AR": 0.002, "SK": 0.002, "AN": 0.002,
+    "PY": 0.003, "DD": 0.002, "DN": 0.001, "LD": 0.001, "LA": 0.001,
+}
+
+BH_CITIES = [
+    "Raipur, CG", "Pune, MH", "Bengaluru, KA", "New Delhi, DL", "Durg, CG",
+    "Nagpur, MH", "Hyderabad, TS", "Chennai, TN", "Ahmedabad, GJ", "Lucknow, UP",
+    "Jaipur, RJ", "Kolkata, WB", "Chandigarh, CH", "Kochi, KL", "Guwahati, AS",
+    "Bhopal, MP", "Patna, BR", "Noida, UP", "Gurugram, HR", "Coimbatore, TN",
+]
 
 BODY_WEIGHTS = {"car": 0.40, "SUV": 0.25, "two-wheeler": 0.22, "auto-rickshaw": 0.06, "truck": 0.04, "bus": 0.03}
 COLOR_WEIGHTS = {
@@ -142,7 +240,7 @@ def generate(n: int = 500, seed: int = SEED) -> list[dict]:
     records = list(fixed)
     next_id = 1
     while len(records) < n:
-        while f"REG-{next_id:04d}" in used_ids:
+        while f"REG-{next_id:05d}" in used_ids:
             next_id += 1
         body = _weighted(rng, BODY_WEIGHTS)
         make, model, body_type, style = rng.choice(models_by_body[body])
@@ -151,7 +249,7 @@ def generate(n: int = 500, seed: int = SEED) -> list[dict]:
         if plate in used_plates or plate[:6] in demo_prefixes or not is_valid_plate(plate):
             continue
         color = _weighted(rng, COLOR_WEIGHTS.get(body_type, COLOR_WEIGHTS["default"]))
-        rid = f"REG-{next_id:04d}"
+        rid = f"REG-{next_id:05d}"
         used_ids.add(rid)
         used_plates.add(plate)
         records.append(
@@ -164,7 +262,7 @@ def generate(n: int = 500, seed: int = SEED) -> list[dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--n", type=int, default=500)
+    ap.add_argument("--n", type=int, default=50000)
     ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--out", type=Path, default=REGISTRY_PATH)
     args = ap.parse_args()
