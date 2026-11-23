@@ -33,7 +33,7 @@ function DropZone({ label, file, onFile }) {
       onDragOver={(e) => { e.preventDefault(); setOver(true); }}
       onDragLeave={() => setOver(false)}
       onDrop={(e) => { e.preventDefault(); setOver(false); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); }}
-      className={`group flex flex-col items-center justify-center border border-dashed rounded-xl p-8 cursor-pointer text-center transition-colors duration-150 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 ${over ? "border-[rgb(238_240_243/.5)] bg-slate-100" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
+      className={`group flex flex-col items-center justify-center border border-dashed rounded-xl p-8 cursor-pointer text-center transition-colors duration-150 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 ${over ? "border-[rgb(239_228_210/.5)] bg-slate-100" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
     >
       <input type="file" accept="video/*,.mp4,.avi,.mov,.mkv" className="sr-only" onChange={(e) => e.target.files[0] && onFile(e.target.files[0])} />
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden

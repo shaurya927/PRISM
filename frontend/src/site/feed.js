@@ -15,7 +15,7 @@ export function loadTracks() {
 }
 
 const KIND = { c: "CAR", t: "TRUCK", b: "BUS" };
-const RED = "#ff2a1f";
+const GOLD = "#c9a66b";
 
 // Illustrative Indian-format plate per track id (state, district, series, number), e.g. "MH 12 KX 4821".
 // Seeded by the id, so a car keeps the same plate for as long as it is tracked.
@@ -156,30 +156,30 @@ export function createFeedHud(canvas, video, opts = {}) {
     focusId = focus?.id ?? null;
 
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgba(255,255,255,.62)";
+    ctx.strokeStyle = "rgba(239,228,210,.55)";
     for (const b of boxes) {
       if (b === focus) continue;
       brackets(ctx, b.px, b.py, b.pw, b.ph, 9);
       if (b.pw > 34 && opts.labels !== false) {
         ctx.font = "500 9.5px 'Geist Mono Variable', ui-monospace, monospace";
-        ctx.fillStyle = "rgba(255,255,255,.72)";
+        ctx.fillStyle = "rgba(239,228,210,.72)";
         ctx.fillText(`#${b.id} ${b.kind} ${b.conf.toFixed(2)}`, b.px, b.py - 4);
         ctx.fillText(fakePlate(b.id), b.px, b.py + b.ph + 11);
       }
     }
     if (focus) {
       const { px, py, pw, ph } = focus;
-      ctx.fillStyle = "rgba(255,20,10,.09)";
+      ctx.fillStyle = "rgba(201,166,107,.1)";
       ctx.fillRect(px, py, pw, ph);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = RED;
-      ctx.shadowColor = "rgba(255,0,0,.8)";
+      ctx.lineWidth = 1.75;
+      ctx.strokeStyle = GOLD;
+      ctx.shadowColor = "rgba(201,166,107,.7)";
       ctx.shadowBlur = 8;
       brackets(ctx, px, py, pw, ph, 14);
       ctx.shadowBlur = 0;
       if (opts.labels !== false) {
-        tag(ctx, px, py - 3, `TRACK ${focus.id} · ${focus.kind} · ${focus.conf.toFixed(2)}`, RED, "#fff");
-        tag(ctx, px, py + ph + 21, `PLATE ${fakePlate(focus.id)}`, "rgba(10,0,0,.82)", "#ffd9d6");
+        tag(ctx, px, py - 3, `TRACK ${focus.id} · ${focus.kind} · ${focus.conf.toFixed(2)}`, GOLD, "#241a12");
+        tag(ctx, px, py + ph + 21, `PLATE ${fakePlate(focus.id)}`, "rgba(30,22,17,.86)", "#f0dcb4");
       }
     }
   };

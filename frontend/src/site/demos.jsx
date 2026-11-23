@@ -36,7 +36,7 @@ export function FusionDemo() {
 
           <div className="mt-10">
             <div className="flex items-baseline justify-between gap-4">
-              <span className="label-mono">Character confidence threshold τ_char</span>
+              <span className="label-mono">Character confidence threshold <span className="normal-case">τ_char</span></span>
               <span className="text-[24px] font-medium tracking-[-0.02em] tabular-nums">{cur.tau.toFixed(2)}</span>
             </div>
             <input type="range" className="rng mt-4" min="0.5" max="0.95" step="0.05" value={tau}

@@ -4,6 +4,18 @@ import { AnimatePresence, motion, useMotionValue, useReducedMotion } from "frame
 import { EASE, ImageReveal, Label, Reveal, RollText, SplitLines, Words } from "./motion.jsx";
 import { useSite } from "./context.js";
 
+/** PRISM crest: a prism inside a double ring, drawn in fine gold lines. */
+export function Crest({ size = 30 }) {
+  return (
+    <svg className="crest" width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" aria-hidden>
+      <circle cx="20" cy="20" r="19" strokeWidth="1" />
+      <circle cx="20" cy="20" r="16" strokeWidth=".6" opacity=".7" />
+      <polygon points="20,10 28.66,25 11.34,25" strokeWidth="1.1" strokeLinejoin="round" />
+      <path d="M20 10 L20 25" strokeWidth=".6" opacity=".7" />
+    </svg>
+  );
+}
+
 /** Plate rendered as character cells. `truth` highlights committed characters that are wrong. */
 export function Plate({ text, truth, className = "", size = "1em", onCell, active }) {
   if (!text) return <span className={`mono text-muted ${className}`}>no plate read</span>;
@@ -337,7 +349,7 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
         <div className="mt-6" style={{ paddingLeft: `${(P.l / W) * 100}%`, paddingRight: `${(P.r / W) * 100}%` }}>
           <input type="range" className="rng" min={x0} max={x1} step={0.05} value={tau}
             onChange={(e) => onTau(parseFloat(e.target.value))} aria-label="Match threshold τ" />
-          <div className="flex justify-between tag mt-3"><span>τ {x0.toFixed(2)}</span><span>τ {x1.toFixed(2)}</span></div>
+          <div className="flex justify-between tag mt-3"><span><span className="normal-case">τ</span> {x0.toFixed(2)}</span><span><span className="normal-case">τ</span> {x1.toFixed(2)}</span></div>
         </div>
       )}
       <div className="grid grid-cols-3 gap-4 mt-8">
@@ -352,7 +364,7 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
 export function Stat({ k, v, bad }) {
   return (
     <div className="border-t rule pt-3">
-      <div className="tag">{k}</div>
+      <div className="tag">{k === "τ" ? <span className="normal-case">τ</span> : k}</div>
       <div className={`text-[22px] md:text-[26px] tracking-[-0.02em] font-medium tabular-nums mt-1 ${bad ? "text-bad" : ""}`}>{v}</div>
     </div>
   );
@@ -372,7 +384,7 @@ export function NextLink({ to, label, title }) {
   return (
     <Link to={to} className="block gutter py-16 border-t rule group">
       <div className="tag">{label}</div>
-      <div className="h-sec mt-3 flex items-center gap-4 transition-colors duration-150 group-hover:text-white">
+      <div className="h-sec mt-3 flex items-center gap-4 transition-colors duration-300 group-hover:text-[var(--gold)]">
         {title}
         <Arrow className="w-[0.5em] h-[0.5em] transition-transform duration-150 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
       </div>
