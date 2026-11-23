@@ -143,7 +143,11 @@ def test_health(client):
     r = client.get("/health")
     assert r.status_code == 200
     body = r.json()
-    assert body["status"] == "ok" and body["registry_size"] == 500 and body["device"] in ("cpu", "cuda")
+    # the bundled registry size changes when it is regenerated, so compare with the file itself
+    from prism.registry import load_registry
+
+    assert body["status"] == "ok" and body["device"] in ("cpu", "cuda")
+    assert body["registry_size"] == len(load_registry()) > 0
 
 
 def test_search_rescore_and_report(client):
