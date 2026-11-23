@@ -340,20 +340,17 @@ body:has(.site) { background: #000; }
 .site .ld__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; transform-origin: 0 50%;
   background: linear-gradient(90deg, rgb(255 255 255 / .15), #fff); box-shadow: 0 0 18px rgb(255 255 255 / .45); }
 
-/* hero (after spykercars.com): daytime highway feed filling the screen, headline centred on it.
-   While the page scrolls away the frame shrinks into a rounded card and the footage drifts inside it
-   (Landing.jsx drives the transforms). */
-.site .hero { position: relative; height: max(100svh, 680px); isolation: isolate; }
-.site .hero__inner { position: absolute; inset: 0; background: var(--black); overflow: clip; transform-origin: 50% 0; will-change: transform; }
-.site .hero__media { position: absolute; inset: -9% 0; }
-.site .atf { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center;
-  padding: 96px var(--pad-x) 120px; text-align: center; }
-/* legibility scrim for the bright footage: an even dim, darker behind the nav, the headline and the foot */
+/* hero: live highway feed with the headline on its darker lower left */
+.site .hero { position: relative; height: max(100svh, 680px); isolation: isolate;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 14vh), transparent 100%); mask-image: linear-gradient(to bottom, #000 calc(100% - 14vh), transparent 100%); }
+.site .hero__inner { position: absolute; inset: 0; background: var(--black); overflow: clip; }
+.site .atf { position: absolute; left: var(--pad-x); right: var(--pad-x); bottom: calc(22vh + 8px); z-index: 5;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--f-gap); align-items: end; }
+/* legibility scrim over the footage, pure black */
 .site .hero__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to bottom, rgb(0 0 0 / .55) 0%, transparent 22%),
-    linear-gradient(to top, rgb(0 0 0 / .9) 0%, rgb(0 0 0 / .35) 30%, transparent 55%),
-    radial-gradient(55% 45% at 50% 48%, rgb(0 0 0 / .55), transparent 75%),
-    rgb(0 0 0 / .28); }
+  background: linear-gradient(to top, rgb(0 0 0 / .94) 0%, rgb(0 0 0 / .6) 30%, transparent 62%),
+    radial-gradient(70% 62% at 10% 88%, rgb(0 0 0 / .8), transparent 70%),
+    linear-gradient(to bottom, rgb(0 0 0 / .55), transparent 22%); }
 /* a soft diagonal light that drifts across the footage */
 .site .hero__beam { position: absolute; inset: -25% -15%; z-index: 1; pointer-events: none; will-change: transform;
   background: linear-gradient(118deg, transparent 30%, rgb(255 255 255 / .02) 38%, rgb(255 255 255 / .06) 45%, rgb(255 255 255 / .025) 52%, transparent 62%),
@@ -361,21 +358,20 @@ body:has(.site) { background: #000; }
   animation: hero-beam 16s ease-in-out infinite alternate; }
 @keyframes hero-beam { from { transform: translate3d(-5%, -2%, 0); } to { transform: translate3d(6%, 2%, 0); } }
 @media (prefers-reduced-motion: reduce) { .site .hero__beam { animation: none; } }
-.site .hero__copy { max-width: 900px; display: flex; flex-direction: column; align-items: center; }
-.site .hero__kicker { display: inline-flex; align-items: center; margin-bottom: 24px; font: 400 12px/1 var(--font-mono); letter-spacing: .02em; color: var(--ink); }
+.site .hero__copy { grid-column: 1 / 9; max-width: 860px; }
+.site .hero__kicker { margin-bottom: 28px; font: 400 12px/1 var(--font-mono); letter-spacing: .02em; color: var(--ink); }
 .site .hero__h { font-family: var(--font-display); font-weight: 400; font-size: clamp(52px, 7vw, 112px); line-height: 1; letter-spacing: -0.012em; }
 .site .hero__line { display: block; overflow: visible; }
-.site .hero__sub { margin-top: 24px; max-width: 34em; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; color: rgb(240 240 240 / .88); text-wrap: pretty; }
+.site .hero__sub { margin-top: 24px; max-width: 34em; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; color: var(--muted-2); text-wrap: pretty; }
 .site .hero__sub b { font: 500 .95em/1 var(--font-mono); color: #fff; background: var(--red); padding: .05em .32em; border-radius: 4px; }
-.site .hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
-/* the day footage is already bright and saturated: keep its colour, take the edge off the glare */
-.site .hwy--day .hwy__vid { filter: saturate(.92) contrast(1.04) brightness(.86); }
+.site .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 /* status dot: grey when unknown or offline, cyan when the API answers */
 .site .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: .04em; }
 .site .dot--live { background: var(--cyan); }
 @media (max-width: 809.98px) {
   .site .hero { height: max(100svh, 640px); }
-  .site .atf { padding: 88px var(--pad-x) 112px; }
+  .site .atf { bottom: calc(20vh + 8px); grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .site .hero__copy { grid-column: 1; }
   .site .hero__h { font-size: clamp(42px, 12.5vw, 60px); }
   .site .hero__sub { margin-top: 16px; font-size: 16px; }
   .site .hero__cta { margin-top: 24px; }
