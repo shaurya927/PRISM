@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { Counter, EASE_REVEAL, Label, Magnetic, Marquee, Reveal, SplitLines } from "../motion.jsx";
 import { Arrow, Plate, StatusChip, TauChart } from "../components.jsx";
 import { CrossCamStory, FusionDemo } from "../demos.jsx";
-import { LiquidWord, RollLink, TiltCard, WaveCanvas, Wordmark, useClock, useDirFill, useHealth } from "../fx.jsx";
+import { HighwayCanvas, LiquidWord, RollLink, TiltCard, Wordmark, useClock, useDirFill, useHealth } from "../fx.jsx";
 import { BUILT_ON, CASES, caseById, evaluation, FEATURES, MARQUEE, QUOTES, STAGES } from "../data/content.js";
 import { useSite } from "../Layout.jsx";
 
@@ -48,8 +48,8 @@ function Head({ label, title, aside, link }) {
 
 /* ---------------------------------------------------------------- hero */
 function Hero() {
-  const { introDone } = useSite();
-  const [d] = useState(() => (introDone ? 0.3 : 2.5));
+  const { introReveal } = useSite();
+  const d = 0.25;
   const clock = useClock();
   const health = useHealth();
   const { scrollY } = useScroll();
@@ -58,20 +58,23 @@ function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="hero__inner">
-        <WaveCanvas />
-        <div className="hero__wm"><Wordmark text="PRISM" delay={d} /></div>
+        <HighwayCanvas hudZone={[0.3, 0.56, 0.72, 1]} />
+        {introReveal && <div className="hero__wm"><Wordmark text="PRISM" delay={d} /></div>}
+        {introReveal && (
         <motion.div className="atf" style={{ y, opacity: fade }}>
           <div className="atf__st">
             <SplitLines as="p" lines={["Reads blurry CCTV across every frame", "and never guesses a character."]} delay={d + 0.5} stagger={0.08} />
           </div>
           <motion.div className="atf__meta" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: d + 0.8, duration: 0.9, ease: EASE_REVEAL }}>
-            <div>{clock} · Hackasol 5.0, AIML-01</div>
+            <div><span className="rec" />REC · CAM 04 · NH-30 · {clock}</div>
+            <div className="hidden md:block">Point at a car to track it</div>
             <div>
               <span className={`dot ${health ? "dot--live" : ""}`} />
               {health ? `Running on ${health.device === "cuda" ? "GPU" : "CPU"} · registry ${health.registry_size}` : "Open source · runs locally"}
             </div>
           </motion.div>
         </motion.div>
+        )}
       </div>
     </section>
   );

@@ -1,7 +1,8 @@
-// Pointer- and scroll-driven effects for the website: cursor, WebGL hero wave, split wordmark,
+// Pointer- and scroll-driven effects for the website: cursor, CCTV highway scene, split wordmark,
 // tilt cards, liquid text, direction-aware fills, roll links, live clock and /health status.
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { createHighway } from "./highway.js";
 import { motion, useAnimationControls, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "framer-motion";
 
 /* ------------------------------------------------------------------ cursor */
@@ -53,112 +54,20 @@ export function Cursor() {
   );
 }
 
-/* ------------------------------------------------------------------ WebGL wave */
-const VERT = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
-const FRAG = `precision highp float;
-uniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;uniform float uAmt;
-float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
- return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}
-float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<4;i++){v+=a*n(p);p=m*p;a*=.5;}return v;}
-void main(){
- vec2 uv=gl_FragCoord.xy/uRes;float ar=uRes.x/uRes.y;
- vec2 p=vec2(uv.x*ar,uv.y);vec2 m=vec2(uMouse.x*ar,uMouse.y);
- float d=distance(p,m);
- p+=(p-m)*uAmt*.55*exp(-d*d*5.);
- float t=uTime*.055;
- vec2 q=vec2(fbm(p*1.3+vec2(0.,t)),fbm(p*1.3+vec2(5.2,-t)));
- vec2 r=vec2(fbm(p*1.5+3.*q+vec2(1.7,9.2)+t*1.4),fbm(p*1.5+3.*q+vec2(8.3,2.8)-t));
- float f=fbm(p*1.15+3.4*r);
- float silk=.5+.5*sin(9.*f+t*5.+r.x*4.);
- float band=smoothstep(.45,1.,f*1.25)*silk;
- vec3 black=vec3(.059,0.,0.);vec3 deep=vec3(.42,0.,0.);vec3 red=vec3(1.,.04,0.);vec3 pink=vec3(1.,.70,.70);
- vec3 c=mix(black,deep,smoothstep(.25,.75,f));
- c=mix(c,red,band*.8);
- c=mix(c,pink,pow(band,5.)*.45);
- c+=red*.22*uAmt*exp(-d*d*9.);
- c*=mix(.25,1.,smoothstep(-.1,.75,uv.y));
- gl_FragColor=vec4(c,1.);
-}`;
-
-export function WaveCanvas({ className = "" }) {
+/* ------------------------------------------------------------------ CCTV highway */
+/** Night highway from a roadside camera (see highway.js). Options are passed to createHighway. */
+export function HighwayCanvas({ className = "", ...opts }) {
   const ref = useRef(null);
   const reduce = useReducedMotion();
-  const [ok, setOk] = useState(true);
+  const key = JSON.stringify(opts);
   useEffect(() => {
-    const canvas = ref.current;
-    const gl = canvas?.getContext("webgl", { antialias: false, alpha: false, powerPreference: "high-performance" });
-    if (!gl) { setOk(false); return; }
-    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
-    const prog = gl.createProgram();
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { setOk(false); return; }
-    gl.useProgram(prog);
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, "p");
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const uRes = gl.getUniformLocation(prog, "uRes");
-    const uTime = gl.getUniformLocation(prog, "uTime");
-    const uMouse = gl.getUniformLocation(prog, "uMouse");
-    const uAmt = gl.getUniformLocation(prog, "uAmt");
-    const scale = 0.5; // render below CSS resolution; the wave is soft anyway
-    const resize = () => {
-      const r = canvas.getBoundingClientRect();
-      canvas.width = Math.max(2, Math.round(r.width * scale));
-      canvas.height = Math.max(2, Math.round(r.height * scale));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-    const target = { x: 0.5, y: 0.6, amt: 0 };
-    const cur = { x: 0.5, y: 0.6, amt: 0 };
-    let lastMove = 0;
-    const move = (e) => {
-      const r = canvas.getBoundingClientRect();
-      target.x = (e.clientX - r.left) / r.width;
-      target.y = 1 - (e.clientY - r.top) / r.height;
-      lastMove = performance.now();
-    };
-    window.addEventListener("pointermove", move, { passive: true });
-    let visible = true;
-    const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; });
-    io.observe(canvas);
-    let raf;
-    const t0 = performance.now();
-    let last = 0;
-    const frame = (now) => {
-      raf = requestAnimationFrame(frame);
-      if (!visible || now - last < 30) return; // ~30 fps is plenty for a slow wave
-      last = now;
-      target.amt = now - lastMove < 1200 ? 1 : 0;
-      cur.x += (target.x - cur.x) * 0.06;
-      cur.y += (target.y - cur.y) * 0.06;
-      cur.amt += (target.amt - cur.amt) * 0.04;
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, reduce ? 20 : (now - t0) / 1000);
-      gl.uniform2f(uMouse, cur.x, cur.y);
-      gl.uniform1f(uAmt, cur.amt);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-      if (reduce) cancelAnimationFrame(raf);
-    };
-    raf = requestAnimationFrame(frame);
-    return () => {
-      cancelAnimationFrame(raf);
-      ro.disconnect();
-      io.disconnect();
-      window.removeEventListener("pointermove", move);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
-    };
-  }, [reduce]);
+    const h = createHighway(ref.current, { ...JSON.parse(key), still: !!reduce });
+    return () => h.destroy();
+  }, [key, reduce]);
   return (
-    <div className={`hero__wave ${className}`}>
-      {ok ? <canvas ref={ref} aria-hidden /> : <div className="hero__fallback" />}
+    <div className={`hwy ${className}`}>
+      <canvas ref={ref} aria-hidden />
+      <div className="hwy__fx" aria-hidden />
     </div>
   );
 }

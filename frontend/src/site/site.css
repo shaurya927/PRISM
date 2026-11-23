@@ -384,6 +384,67 @@ body:has(.site) { background: #0f0000; }
 .site .paper .text-muted, .site .paper .tag, .site .paper .label-mono { color: rgb(15 0 0 / .62); }
 .site .paper .rule, .site .paper.rule { border-color: rgb(15 0 0 / .16); }
 
+/* CCTV highway (hero, app header, analysis loader): canvas + scanlines and lens vignette */
+.site .hwy, .site .hwy canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.site .hwy__fx { position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgb(255 255 255 / .022) 0 1px, transparent 1px 3px),
+    radial-gradient(125% 95% at 50% 42%, transparent 52%, rgb(0 0 0 / .62) 100%); }
+.site .rec { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-right: 8px; vertical-align: .05em;
+  box-shadow: 0 0 10px rgb(255 0 0 / .8); animation: rec 1.1s steps(2, jump-none) infinite; }
+@keyframes rec { 50% { opacity: .15; } }
+/* Wordmark lets the road and headlights show through, so the scene reads as a camera feed. */
+.site .hero .hero__wm { opacity: .72; mix-blend-mode: screen; }
+.site .hero .atf__st, .site .hero .atf__meta { text-shadow: 0 2px 18px rgb(0 0 0 / .85), 0 0 2px rgb(0 0 0 / .6); }
+
+/* intro: car approaches the camera, plate captured, registry details */
+.site .intro { overflow: clip; background: #050000; }
+.site .intro__car { position: absolute; pointer-events: none; will-change: left, top, width, height; filter: drop-shadow(0 14px 30px rgb(0 0 0 / .6)); }
+.site .intro__glow { position: absolute; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); mix-blend-mode: screen;
+  background: radial-gradient(circle, rgb(240 248 255 / .95) 0%, rgb(220 238 255 / .32) 22%, rgb(220 238 255 / .06) 50%, transparent 70%); }
+.site .intro__flash { position: absolute; inset: 0; background: #fff; pointer-events: none; }
+.site .intro__box { position: absolute; pointer-events: none; transform-origin: 50% 50%; }
+.site .ibx, .site .ibx i { position: absolute; inset: 0; }
+.site .ibx i { inset: auto; width: min(22px, 22%); height: min(22px, 30%); border: 2px solid var(--cyan); filter: drop-shadow(0 0 6px rgb(69 224 234 / .7)); }
+.site .ibx i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.site .ibx i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.site .ibx i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.site .ibx i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.site .ibx--red i { border-color: #ff3b30; width: 10px; height: 10px; filter: drop-shadow(0 0 6px rgb(255 0 0 / .8)); }
+.site .intro__sweep { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); box-shadow: 0 0 14px var(--cyan); }
+.site .intro__tag { position: absolute; left: 0; bottom: calc(100% + 8px); white-space: nowrap; padding: 5px 9px; font: 600 11px/1 var(--font-mono);
+  letter-spacing: .04em; background: var(--cyan); color: var(--black); }
+.site .intro__panel { position: absolute; z-index: 3; padding: 16px 18px 15px; border-radius: 14px; border: 1px solid rgb(255 255 255 / .16);
+  background: rgb(15 0 0 / .8); backdrop-filter: blur(10px); box-shadow: 0 24px 60px rgb(0 0 0 / .55); }
+.site .intro__panel--det { width: 290px; }
+.site .intro__lbl { font: 500 11px/1.2 var(--font-mono); letter-spacing: .06em; color: var(--muted); }
+.site .intro__cells { display: flex; gap: 5px; margin-top: 12px; }
+.site .intro__cell { display: grid; place-items: center; width: 28px; height: 38px; border-radius: 6px; font: 600 19px/1 var(--font-mono);
+  background: rgb(255 255 255 / .1); color: var(--ink); transition: background-color .2s; }
+.site .intro__cell.is-q { background: var(--red); color: var(--ink); }
+.site .intro__sub { margin-top: 10px; font: 500 11.5px/1.3 var(--font-mono); color: var(--muted-2); }
+.site .intro__rid { margin-top: 12px; font: 300 38px/1 var(--font); letter-spacing: -0.04em; }
+.site .intro__row { margin-top: 8px; font-size: 16px; line-height: 1.3; }
+.site .intro__mono { font: 500 13px/1.3 var(--font-mono); color: var(--cyan); }
+.site .intro__muted { font-size: 13.5px; color: var(--muted); }
+.site .intro__wire { position: absolute; top: 50%; width: 34px; height: 1px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+.site .intro__wire--l { left: 100%; transform-origin: 0 50%; }
+.site .intro__wire--r { right: 100%; top: 22px; transform-origin: 100% 50%; }
+.site .intro__hud { position: absolute; z-index: 4; left: var(--gutter); top: 26px; display: flex; gap: 22px; align-items: center;
+  font: 500 12px/1 var(--font-mono); letter-spacing: .06em; color: var(--muted-2); text-shadow: 0 1px 8px #000; }
+.site .intro__skip { position: absolute; z-index: 4; right: var(--gutter); top: 22px; font: 500 13px/1 var(--font-mono); color: var(--ink); padding: 6px 0; }
+.site .intro .ld__labels, .site .intro .ld__count { z-index: 4; text-shadow: 0 2px 16px #000; }
+.site .intro__count { font-size: clamp(56px, 8vw, 132px); opacity: .9; }
+@media (max-width: 899.98px) {
+  .site .intro__cells { gap: 4px; }
+  .site .intro__cell { width: 24px; height: 32px; font-size: 16px; }
+  .site .intro__panel { padding: 12px 14px; }
+  .site .intro__panel--det { width: min(300px, 86vw); }
+  .site .intro__rid { font-size: 28px; margin-top: 8px; }
+  .site .intro__hud { gap: 14px; font-size: 11px; }
+  .site .intro__count { font-size: 44px; bottom: 26px; }
+  .site .intro .ld__labels { bottom: 30px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .site .grain, .site .marquee__track, .site .scroll-cue, .site .eq i, .site .dot--live { animation: none; }
+  .site .grain, .site .marquee__track, .site .scroll-cue, .site .eq i, .site .dot--live, .site .rec { animation: none; }
 }

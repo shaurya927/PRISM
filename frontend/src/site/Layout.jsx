@@ -1,13 +1,14 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
-import { AnimatePresence, animate, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
 import { EASE_REVEAL, Magnetic } from "./motion.jsx";
 import { Arrow } from "./components.jsx";
 import { Cursor, RollLink, useClock, useHealth } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
+import Intro from "./Intro.jsx";
 
-const SiteCtx = createContext({ introDone: true, lenis: null });
+const SiteCtx = createContext({ introDone: true, introReveal: true, lenis: null });
 export const useSite = () => useContext(SiteCtx);
 
 const EASE_SHEET = [0.76, 0, 0.24, 1];
@@ -19,6 +20,8 @@ export default function SiteLayout() {
   const reduce = useReducedMotion();
   const lenisRef = useRef(null);
   const [introDone, setIntroDone] = useState(() => reduce || sessionStorage.getItem("prism-intro") === "1");
+  // True once the intro starts lifting (or was never shown): the hero animates in from then.
+  const [introReveal, setIntroReveal] = useState(introDone);
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -41,15 +44,19 @@ export default function SiteLayout() {
     document.title = titleFor ? `${titleFor} · PRISM` : "PRISM · Plate Recovery & Identification from Surveillance Media";
   }, [titleFor]);
 
+  const revealNow = useCallback(() => setIntroReveal(true), []);
+
   const toTop = () => {
     if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true, force: true });
     else window.scrollTo(0, 0);
   };
 
   return (
-    <SiteCtx.Provider value={{ introDone, lenis: lenisRef }}>
+    <SiteCtx.Provider value={{ introDone, introReveal, lenis: lenisRef }}>
       <div className="site">
-        {!introDone && <Loader onDone={() => { sessionStorage.setItem("prism-intro", "1"); setIntroDone(true); }} />}
+        {!introDone && (
+          <Intro onLeave={revealNow} onDone={() => { sessionStorage.setItem("prism-intro", "1"); setIntroDone(true); }} />
+        )}
         <Topbar onMenu={() => setMenu(true)} />
         <AnimatePresence>{menu && <MobileMenu onClose={() => setMenu(false)} />}</AnimatePresence>
         <AnimatePresence mode="wait" onExitComplete={toTop}>
@@ -82,31 +89,6 @@ function Page({ children }) {
       <main>{children}</main>
       <Footer />
     </motion.div>
-  );
-}
-
-/** First-visit loader: mark fills left to right, mono counter, red bar; then the panels lift. */
-function Loader({ onDone }) {
-  const [n, setN] = useState(0);
-  const [leaving, setLeaving] = useState(false);
-  useEffect(() => {
-    const c = animate(0, 100, { duration: 1.7, ease: [0.6, 0.05, 0.2, 1], onUpdate: (v) => setN(Math.round(v)), onComplete: () => setTimeout(() => setLeaving(true), 180) });
-    return () => c.stop();
-  }, []);
-  return (
-    <div className="ld" aria-label="Loading">
-      <motion.div className="ld__sheet" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.9, ease: EASE_SHEET, delay: 0.12 }}
-        onAnimationComplete={() => leaving && onDone()} />
-      <motion.div className="ld__panel" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.85, ease: EASE_SHEET }}>
-        <div className="ld__mark">
-          <span className="ld__ghost">PRISM</span>
-          <span className="ld__fill" style={{ clipPath: `inset(0% ${100 - n}% 0% 0%)` }}>PRISM</span>
-        </div>
-        <div className="ld__labels"><span>{n < 100 ? "Reading frames" : "Ready"}</span></div>
-        <div className="ld__count">{String(n).padStart(3, "0")}<span className="ld__pct">%</span></div>
-        <div className="ld__bar" style={{ transform: `scaleX(${n / 100})` }} />
-      </motion.div>
-    </div>
   );
 }
 
