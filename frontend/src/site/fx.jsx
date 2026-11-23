@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { createFeedHud } from "./feed.js";
 import { useReducedMotion } from "framer-motion";
+import { RollText } from "./motion.jsx";
 
 /* ------------------------------------------------------------------ CCTV highway */
 /**
@@ -51,10 +52,7 @@ const ArrowSvg = ({ className = "" }) => (
 export function RollLink({ to, href, children, className = "" }) {
   const inner = (
     <>
-      <span className="roll__clip">
-        <span className="roll__t">{children}</span>
-        <span className="roll__t roll__t--b" aria-hidden>{children}</span>
-      </span>
+      <RollText>{children}</RollText>
       <span className="roll__arrs"><ArrowSvg className="roll__arr" /><ArrowSvg className="roll__arr roll__arr--b" /></span>
     </>
   );

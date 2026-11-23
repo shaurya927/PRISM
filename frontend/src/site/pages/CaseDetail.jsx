@@ -49,7 +49,7 @@ export default function CaseDetail() {
 
       <section className="gutter">
         <div className="card-media aspect-[16/9] md:aspect-[21/9]">
-          <ImageReveal src={c.best} alt={`${c.title}: sharpest vehicle crop`} className="absolute inset-0" />
+          <ImageReveal src={c.best} alt={`${c.title}: sharpest vehicle crop`} className="absolute inset-0" unfold />
         </div>
         <div className="tag mt-3">Sharpest vehicle crop chosen by PRISM</div>
       </section>

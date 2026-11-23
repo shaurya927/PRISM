@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
-import { EASE } from "./motion.jsx";
+import { EASE, RollText } from "./motion.jsx";
 import { Arrow } from "./components.jsx";
 import { useClock, useHealth } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
@@ -153,7 +153,7 @@ function Footer() {
         <div className="col-span-2 md:col-span-4">
           <div className="tag mb-4">Get started</div>
           <p className="text-muted text-[15px] max-w-[30ch]">Upload a clip and get a ranked, explained registry shortlist.</p>
-          <div className="mt-6"><a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a></div>
+          <div className="mt-6"><a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a></div>
         </div>
         <div className="md:col-span-2 md:col-start-6">
           <div className="tag mb-4">Pages</div>

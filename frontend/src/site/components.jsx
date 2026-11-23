@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
-import { EASE, ImageReveal, Label, Reveal, SplitLines } from "./motion.jsx";
+import { EASE, ImageReveal, Label, Reveal, RollText, SplitLines, Words } from "./motion.jsx";
 import { useSite } from "./context.js";
 
 /** Plate rendered as character cells. `truth` highlights committed characters that are wrong. */
@@ -47,7 +47,7 @@ export function Arrow({ className = "" }) {
 /** Pill link. Internal paths use the router; everything else is a normal anchor. */
 export function Pill({ to, children, ghost = false, external = false, className = "" }) {
   const cls = `btn-pill ${ghost ? "btn-pill--ghost" : ""} ${className}`;
-  const inner = (<>{children}<Arrow /></>);
+  const inner = (<><RollText>{children}</RollText><Arrow /></>);
   if (external || /^https?:|^\/(app|reports)/.test(to)) {
     return <a href={to} className={cls} {...(external ? { target: "_blank", rel: "noreferrer" } : {})}>{inner}</a>;
   }
@@ -61,9 +61,9 @@ export function PageHero({ index, label, lines, lead, children }) {
       <Reveal><Label index={index}>{label}</Label></Reveal>
       <SplitLines lines={lines} className="display mt-4" />
       {lead && (
-        <Reveal className="mt-6 max-w-2xl">
-          <p className="lead">{lead}</p>
-        </Reveal>
+        <div className="mt-6 max-w-2xl">
+          <Words className="lead" text={lead} start={0.25} />
+        </div>
       )}
       {children}
     </section>

@@ -32,7 +32,7 @@ function Pipeline() {
             <div className="md:col-span-3">
               <div className={`card-media ${s.pixel ? "aspect-[3/1]" : "aspect-[16/10]"}`}>
                 <ImageReveal src={s.img} alt={`${s.name} output`} className="absolute inset-0" pixel={s.pixel}
-                  imgClassName={s.img.includes("strip") ? "!object-contain bg-white" : ""} />
+                  parallax={!s.img.includes("strip")} imgClassName={s.img.includes("strip") ? "!object-contain bg-white" : ""} />
               </div>
             </div>
           </Reveal>

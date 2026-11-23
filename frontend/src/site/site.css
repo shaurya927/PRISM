@@ -80,9 +80,25 @@ body:has(.site) { background: #0b0c0f; }
 .site .plate-type { font-family: var(--font-mono); font-weight: 500; letter-spacing: .08em; }
 .site .scrub { font-size: clamp(1.375rem, 2.2vw, 2rem); line-height: 1.3; letter-spacing: -0.015em; font-weight: 400; }
 
-/* masked lines */
+/* masked lines; text lines rise letter by letter (SplitChars in motion.jsx) */
 .site .mask-line { display: block; overflow: clip; padding-bottom: .14em; margin-bottom: -.14em; }
 .site .mask-line__in { display: inline-block; will-change: transform; }
+.site .chars__w { display: inline-block; white-space: nowrap; }
+.site .chars__c { display: inline-block; will-change: transform; }
+
+/* letter roll for button and link labels: the label rises out letter by letter and a copy follows
+   from below (RollText in motion.jsx) */
+.site .rt { position: relative; display: inline-block; overflow: clip; vertical-align: top; line-height: 1.2; }
+.site .rt__row { display: inline-block; white-space: pre; }
+.site .rt__row--b { position: absolute; left: 0; top: 0; }
+.site .rt__c { display: inline-block; white-space: pre; transition: transform .5s var(--ease); transition-delay: calc(var(--i) * 14ms); }
+.site .rt__row--b .rt__c { transform: translateY(120%); }
+.site :is(.btn-pill, .roll):is(:hover, :focus-visible) .rt__row--a .rt__c { transform: translateY(-120%); }
+.site :is(.btn-pill, .roll):is(:hover, :focus-visible) .rt__row--b .rt__c { transform: none; }
+@media (prefers-reduced-motion: reduce) { .site .rt__c { transition: none; } }
+
+/* scrubbed band on the landing page (Unfold in motion.jsx) */
+.site .band { background: #111318; }
 
 /* underline link (grows from the left, leaves to the right) */
 .site .f-u { position: relative; }
@@ -98,10 +114,6 @@ body:has(.site) { background: #0b0c0f; }
 .site .roll::before { opacity: .3; }
 .site .roll::after { transform: scaleX(0); transform-origin: 0; transition: transform .55s var(--ease-appear); }
 .site .roll:hover::after { transform: scaleX(1); }
-.site .roll__clip { display: block; overflow: clip; position: relative; }
-.site .roll__t { display: block; transition: transform .3s var(--ease); }
-.site .roll__t--b { position: absolute; top: 100%; left: 0; }
-.site .roll:hover .roll__t { transform: translateY(-100%); }
 .site .roll__arrs { position: relative; width: 14px; height: 14px; overflow: clip; flex: none; }
 .site .roll__arr { position: absolute; inset: 0; transition: transform .3s var(--ease); }
 .site .roll__arr--b { transform: translateX(-150%); }

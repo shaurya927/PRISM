@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Counter, Label, Reveal, SplitLines } from "../motion.jsx";
+import { motion, useReducedMotion } from "framer-motion";
+import { Counter, EASE, ImageReveal, Label, Reveal, RollText, SplitChars, SplitLines, Unfold } from "../motion.jsx";
 import { Arrow, CaseCard, Plate, StatusChip, Tabs } from "../components.jsx";
 import { CrossCamCompare, FusionDemo } from "../demos.jsx";
 import { HighwayFeed, RollLink, useClock, useHealth } from "../fx.jsx";
@@ -42,6 +43,11 @@ function Hero() {
   const { introReveal } = useSite();
   const clock = useClock();
   const health = useHealth();
+  const reduce = useReducedMotion();
+  // fade-up for the hero copy around the title
+  const rise = (delay) => (reduce ? {} : {
+    initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, ease: EASE, delay },
+  });
   return (
     <section className="hero" id="hero">
       <div className="hero__inner">
@@ -50,19 +56,20 @@ function Hero() {
         {introReveal && (
         <div className="atf">
           <div className="hero__copy">
-            <div className="hero__kicker"><span className="rec" />REC · CAM 04 · {clock}</div>
-            <h1 className="hero__h">
-              <span className="hero__line">Every frame read</span>
-              <span className="hero__line hero__h2">Nothing guessed</span>
-            </h1>
-            <p className="hero__sub">
+            <motion.div className="hero__kicker" {...rise(0)}><span className="rec" />REC · CAM 04 · {clock}</motion.div>
+            {/* title rises letter by letter once the intro lifts */}
+            <motion.h1 className="hero__h" aria-label="Every frame read. Nothing guessed." initial={reduce ? false : "hidden"} animate="shown">
+              <span className="hero__line" aria-hidden><span className="inline-block"><SplitChars text="Every frame read" start={0.05} step={0.028} /></span></span>
+              <span className="hero__line hero__h2" aria-hidden><span className="inline-block"><SplitChars text="Nothing guessed" start={0.3} step={0.028} /></span></span>
+            </motion.h1>
+            <motion.p className="hero__sub" {...rise(0.65)}>
               PRISM reads number plates from blurry CCTV by fusing every frame of a clip. A character it cannot see stays <b>?</b>,
               and the registry match says why.
-            </p>
-            <div className="hero__cta">
-              <a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a>
-              <Link to="/how-it-works" className="btn-pill btn-pill--ghost">How it works <Arrow /></Link>
-            </div>
+            </motion.p>
+            <motion.div className="hero__cta" {...rise(0.8)}>
+              <a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a>
+              <Link to="/how-it-works" className="btn-pill btn-pill--ghost"><RollText>How it works</RollText> <Arrow /></Link>
+            </motion.div>
           </div>
           <div className="atf__meta">
             <ReadOut />
@@ -240,10 +247,11 @@ function SeeItWork() {
     },
   ];
   return (
-    <section className="gutter py-16 md:py-20 border-t rule">
+    // a lighter band that unfolds to full width as it scrolls in and folds back as it leaves
+    <Unfold className="band gutter py-20 md:py-24">
       <Head label="See it work" title="Real runs, real numbers" />
       <div className="mt-8"><Tabs id="demo" label="Demos" tabs={tabs} /></div>
-    </section>
+    </Unfold>
   );
 }
 
@@ -261,17 +269,23 @@ function FeaturedCases() {
 }
 
 /* ---------------------------------------------------------------- one call to action */
+/* Closing band over a still of the highway feed; the backdrop unfolds and drifts as it scrolls in. */
 function CtaBand() {
   return (
-    <section className="gutter py-16 md:py-20 border-t rule">
-      <div className="grid md:grid-cols-12 gap-8 items-end">
-        <div className="md:col-span-7">
-          <Label>Try it on the demo clips</Label>
-          <h2 className="h-sec mt-3">Open a case or upload a clip</h2>
-        </div>
-        <div className="md:col-span-5 flex flex-wrap md:justify-end gap-3">
-          <a href="/app" className="btn-pill btn-pill--red">Open the investigator <Arrow /></a>
-          <Link to="/docs" className="btn-pill btn-pill--ghost">Run it yourself <Arrow /></Link>
+    <section className="relative isolate overflow-hidden">
+      <ImageReveal src="/media/highway.jpg" alt="" className="absolute inset-0 -z-10" unfold radius={24} />
+      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden
+        style={{ background: "linear-gradient(to top, rgb(11 12 15 / .94) 0%, rgb(11 12 15 / .7) 45%, rgb(11 12 15 / .55) 100%)" }} />
+      <div className="gutter py-24 md:py-32">
+        <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="md:col-span-7">
+            <Label className="!text-[var(--muted-2)]">Try it on the demo clips</Label>
+            <SplitLines as="h2" lines={["Open a case or upload a clip"]} className="display-2 mt-3" />
+          </div>
+          <Reveal className="md:col-span-5 flex flex-wrap md:justify-end gap-3" delay={0.2}>
+            <a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a>
+            <Link to="/docs" className="btn-pill btn-pill--ghost"><RollText>Run it yourself</RollText> <Arrow /></Link>
+          </Reveal>
         </div>
       </div>
     </section>

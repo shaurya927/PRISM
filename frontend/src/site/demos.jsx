@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Reveal } from "./motion.jsx";
+import { ImageReveal, Reveal } from "./motion.jsx";
 import { Plate, StatusChip } from "./components.jsx";
 import { caseById, TRUE_NIGHT_PLATE } from "./data/content.js";
 
@@ -94,7 +94,7 @@ export function CrossCamCompare() {
       <div className="grid sm:grid-cols-2 gap-6">
         {cams.map(([k, src, plate]) => (
           <figure key={k}>
-            <div className="card-media aspect-[16/10]"><img src={src} alt={k} loading="lazy" className="w-full h-full object-cover" /></div>
+            <div className="card-media aspect-[16/10]"><ImageReveal src={src} alt={k} className="absolute inset-0" /></div>
             <figcaption className="tag mt-3">{k}</figcaption>
             <div className="text-[clamp(1rem,1.8vw,1.375rem)] mt-2"><Plate text={plate} /></div>
           </figure>
