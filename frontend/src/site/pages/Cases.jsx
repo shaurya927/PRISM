@@ -13,7 +13,7 @@ export default function Cases() {
   const shown = CASES.filter((c) => f === "All" || c.status === f);
   return (
     <>
-      <PageHero index={2} label="Cases" lines={["Seven clips.", "Seven reports."]}
+      <PageHero index={2} label="Cases" lines={["Seven clips", "Seven reports"]}
         lead="Each case is a real PRISM run on a demo clip, produced by scripts/batch_report.py. Open one to see the plate crops, the fusion strip, the shortlist, the written summary and the PDF." />
       <section className="gutter pb-[14vh]">
         <Reveal className="flex flex-wrap items-center justify-between gap-4 border-t rule pt-6">
@@ -44,7 +44,7 @@ export default function Cases() {
                 renderRow={(c) => (
                   <Link to={`/cases/${c.id}`} className="hlist__row grid grid-cols-[3rem_1fr_auto] md:grid-cols-[4rem_1.3fr_1fr_12rem_auto] items-center gap-4 py-6">
                     <span className="tag">({String(c.index).padStart(2, "0")})</span>
-                    <span className="text-[clamp(1.4rem,2.8vw,2.5rem)] tracking-[-0.04em] font-medium leading-none">{c.title}</span>
+                    <span className="text-[clamp(1.4rem,2.8vw,2.5rem)] tracking-[-0.02em] font-medium leading-none">{c.title}</span>
                     <span className="hidden md:block text-[18px]"><Plate text={c.fused} /></span>
                     <span className="hidden md:block"><StatusChip status={c.status} /></span>
                     <Arrow />

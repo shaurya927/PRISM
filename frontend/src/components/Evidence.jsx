@@ -20,7 +20,7 @@ export function EvidenceStrip({ fused }) {
               const share = p.total_weight ? Math.max(0, ...Object.values(p.votes)) / p.total_weight : 0;
               return (
                 <th key={p.index} className="px-1 pb-1" title={p.note || `${p.source}; votes ${JSON.stringify(p.votes)}`}>
-                  <div className={`font-mono text-xl font-bold ${p.char === "?" ? (p.source === "conflict" ? "text-red-600" : "text-amber-500") : p.source === "investigator-supplied" ? "text-blue-600" : "text-slate-900"}`}>{p.char}</div>
+                  <div className={`font-mono text-xl font-semibold ${p.char === "?" ? (p.source === "conflict" ? "text-red-600" : "text-amber-500") : p.source === "investigator-supplied" ? "text-blue-600" : "text-slate-900"}`}>{p.char}</div>
                   <div className="h-1.5 w-9 bg-slate-200 rounded mx-auto mt-0.5 overflow-hidden">
                     <div className={`h-full ${p.char !== "?" ? "bg-green-500" : "bg-amber-400"}`} style={{ width: `${share * 100}%` }} />
                   </div>
@@ -46,7 +46,7 @@ export function EvidenceStrip({ fused }) {
                 const t = c.weight / maxW;
                 const disagree = p.char !== "?" && c.char !== p.char;
                 return (
-                  <td key={p.index} className={`w-10 h-7 border border-white text-center font-mono font-bold ${disagree ? "text-red-700" : "text-slate-900"}`}
+                  <td key={p.index} className={`w-10 h-7 border border-white text-center font-mono font-semibold ${disagree ? "text-red-700" : "text-slate-900"}`}
                     style={{ background: `rgba(20, 151, 172, ${0.1 + 0.7 * t})` }} title={`weight ${fmt2(c.weight)} (conf ${fmt2(c.raw_conf)})`}>
                     {c.char}
                   </td>
@@ -57,8 +57,8 @@ export function EvidenceStrip({ fused }) {
         </tbody>
       </table>
       <p className="text-xs text-slate-500 mt-2">
-        Brighter teal = more weight (confidence × sharpness). Pink cells were read below 0.70 and carry no weight. A position is
-        accepted only if its winner has evidence ≥ 0.9 <i>and</i> at least 60% of all votes; otherwise it stays <span className="text-amber-500 font-bold">?</span>.
+        Brighter teal = more weight (confidence × sharpness). Amber cells were read below 0.70 and carry no weight. A position is
+        accepted only if its winner has evidence ≥ 0.9 and at least 60% of all votes; otherwise it stays <span className="text-amber-500 font-semibold">?</span>.
       </p>
     </div>
   );
@@ -101,7 +101,7 @@ function FramesTable({ frames, showSR, srAvailable }) {
                 )}
                 <td className="p-2 text-right font-mono text-xs">{f.sharpness.toFixed(1)}</td>
                 <td className="p-2 font-mono text-xs">{f.raw_text || <span className="text-slate-400">(empty)</span>}</td>
-                <td className="p-2 font-mono text-sm font-bold">{f.masked_text.split("").map((ch, i) => <span key={i} className={ch === "?" ? "text-amber-500" : ""}>{ch}</span>)}</td>
+                <td className="p-2 font-mono text-sm font-semibold">{f.masked_text.split("").map((ch, i) => <span key={i} className={ch === "?" ? "text-amber-500" : ""}>{ch}</span>)}</td>
                 <td className="p-2 whitespace-nowrap">
                   {f.chars.map((c, i) => <ConfPill key={i} c={c} />)}
                   {f.format_conflicts?.map((m, i) => <div key={i} className="text-[10px] text-red-600 whitespace-normal">{m}</div>)}
@@ -137,13 +137,13 @@ export default function Evidence({ track }) {
       </div>
 
       <div className="card p-4">
-        <h3 className="font-semibold mb-2">Plate evidence strip</h3>
+        <h3 className="mb-2">Plate evidence strip</h3>
         <EvidenceStrip fused={f} />
       </div>
 
       <div className="card p-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold">Frame-by-frame ({track.frames.length} reads from {new Set(track.frames.map((x) => x.frame_idx)).size} frames)</h3>
+          <h3>Frame-by-frame ({track.frames.length} reads from {new Set(track.frames.map((x) => x.frame_idx)).size} frames)</h3>
           <label className={`flex items-center gap-2 text-xs px-2 py-1 rounded border ${track.sr_available ? "border-purple-300 bg-purple-50 text-purple-800" : "border-slate-200 text-slate-400"}`}>
             <input type="checkbox" disabled={!track.sr_available} checked={sr} onChange={(e) => setSR(e.target.checked)} />
             {track.sr_available ? "Super-resolution preview: Visual aid only. Not used for identification." : "Super-resolution not installed"}

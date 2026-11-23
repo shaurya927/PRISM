@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { api } from "./api.js";
 import { useNetActive } from "./net.js";
-import { Cursor, HighwayFeed } from "./site/fx.jsx";
+import { HighwayFeed } from "./site/fx.jsx";
 import NewCase, { HintInput } from "./components/NewCase.jsx";
 import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
@@ -10,9 +10,9 @@ import Evidence from "./components/Evidence.jsx";
 import Shortlist from "./components/Shortlist.jsx";
 import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
-import { StatusChip, fmt2 } from "./components/common.jsx";
+import { Icon, StatusChip, fmt2 } from "./components/common.jsx";
 
-const EASE = [0.18, 0.66, 0.18, 1];
+const EASE = [0.22, 1, 0.36, 1];
 
 function DeviceBadge({ health }) {
   if (health === undefined) return <span className="chip">checking…</span>;
@@ -37,7 +37,7 @@ function Header({ health, jobId, onNew }) {
         <a href="/" className="f-u">project site</a>
         <a href="/how-it-works" className="f-u">how it works</a>
         <a href="/guardrails" className="f-u">guardrails</a>
-        <a href="/api/docs" target="_blank" rel="noreferrer" className="f-u">api ↗</a>
+        <a href="/api/docs" target="_blank" rel="noreferrer" className="f-u">api <Icon name="arrow" size={12} /></a>
       </nav>
       <div className="ml-auto flex items-center gap-4">
         {health && (
@@ -48,9 +48,9 @@ function Header({ health, jobId, onNew }) {
         <DeviceBadge health={health} />
         <AnimatePresence>
           {jobId && (
-            <motion.button key="new" className="btn-pill btn-pill--red !h-10 !px-5" onClick={onNew}
-              initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }}>
-              + New case
+            <motion.button key="new" className="btn-pill btn-pill--red !h-10 !px-4" onClick={onNew}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.16, ease: EASE }}>
+              <Icon name="plus" size={16} />New case
             </motion.button>
           )}
         </AnimatePresence>
@@ -65,9 +65,9 @@ function Hero({ health }) {
       <HighwayFeed labels={false} />
       <div className="app-hero__in">
         <h1 className="app-hero__h">
-          <span className="mask-line"><motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE }}>Open a case.</motion.span></span>
+          <span className="mask-line"><motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE }}>Open a case</motion.span></span>
         </h1>
-        <motion.p className="label-mono text-right hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
+        <motion.p className="label-mono text-right hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.4, ease: EASE }}>
           {health ? <>Running on {health.gpu || health.device}<br />τ {health.thresholds?.tau} · τ_char {health.thresholds?.char_conf}</> : "Connecting to the PRISM API…"}
         </motion.p>
       </div>
@@ -78,20 +78,20 @@ function Hero({ health }) {
 function CaseList({ jobs, current, onOpen, onDelete }) {
   if (!jobs.length) return null;
   return (
-    <motion.div className="card p-5 md:p-6 max-w-4xl mx-auto mt-6" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}>
+    <motion.div className="card p-5 md:p-6 max-w-4xl mx-auto mt-6" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: EASE, delay: 0.1 }}>
       <div className="flex items-baseline justify-between mb-3">
         <div className="label">Previous cases</div>
         <div className="label-mono">{jobs.length}</div>
       </div>
       <div className="hlist">
         {jobs.slice(0, 12).map((j) => (
-          <div key={j.job_id} className={`hlist__row flex items-center gap-3 py-2.5 text-sm ${current === j.job_id ? "font-semibold" : ""}`}>
-            <button className="font-mono text-blue-700 f-u" data-cursor="open" onClick={() => onOpen(j.job_id)}>{j.job_id}</button>
+          <div key={j.job_id} className={`hlist__row flex items-center gap-3 py-2.5 text-sm ${current === j.job_id ? "font-medium" : ""}`}>
+            <button className="font-mono text-blue-700 f-u" onClick={() => onOpen(j.job_id)}>{j.job_id}</button>
             <span className="text-slate-500">{j.kind}</span>
             <span className="truncate">{j.clip || ""}</span>
             <span className="ml-auto label-mono hidden sm:inline">{j.created_at?.replace("T", " ").slice(0, 19)}</span>
             <span className={`chip ${j.status === "done" ? "chip--ok" : j.status === "error" ? "chip--bad" : "chip--warn"}`}>{j.status}</span>
-            <button className="text-xs text-slate-400 hover:text-red-600 transition-colors" title="Delete case and its crops" onClick={() => onDelete(j.job_id)}>✕</button>
+            <button className="grid place-items-center w-7 h-7 rounded-md text-slate-400 hover:text-red-600 hover:bg-slate-100 transition-colors" title="Delete case and its crops" aria-label={`Delete case ${j.job_id}`} onClick={() => onDelete(j.job_id)}><Icon name="x" size={14} /></button>
           </div>
         ))}
       </div>
@@ -205,8 +205,6 @@ export default function App() {
 
   return (
     <div className="site app min-h-screen">
-      <Cursor />
-      <div className="grain" aria-hidden />
       <AnimatePresence>
         {(netActive || busy || analysing) && (
           <motion.div key="net" className="netbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -241,14 +239,14 @@ export default function App() {
         {jobId && job && (job.status === "queued" || job.status === "running" || job.status === "error") && <Progress job={job} />}
 
         {jobId && result && (
-          <motion.div className="space-y-5" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
+          <motion.div className="space-y-5" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: EASE }}>
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <h2 className="text-[clamp(1.75rem,3vw,2.75rem)] leading-none mr-2">
                 {result.mode === "hint-only" ? "Hint-only search" : result.clip?.name}
                 {result.crosscam && <span className="text-slate-500 font-normal"> + {result.crosscam.clip_b?.name}</span>}
               </h2>
               <span className="text-xs font-mono text-slate-500">case {result.case_id}</span>
-              {result.clip?.low_light && <span className="chip bg-indigo-900 text-white">🌙 low light (median brightness {fmt2(result.clip.median_brightness)})</span>}
+              {result.clip?.low_light && <span className="chip bg-indigo-900 text-indigo-800"><Icon name="moon" size={12} />low light · median brightness {fmt2(result.clip.median_brightness)}</span>}
               {track?.match && <StatusChip status={track.match.status} />}
               {result.warnings?.map((w, i) => <span key={i} className="chip bg-amber-100 text-amber-800">{w}</span>)}
             </div>
@@ -257,7 +255,7 @@ export default function App() {
               {TABS.filter(([k]) => !(result.mode === "hint-only" && (k === "evidence" || k === "vehicles" || k === "crosscam"))).map(([k, l]) => (
                 <button key={k} className={`tab relative !border-transparent ${tab === k ? "tab-active" : ""}`} onClick={() => setTab(k)}>
                   {l}{k === "crosscam" && result.crosscam ? ` (${result.crosscam.pairs.filter((p) => p.same_vehicle).length})` : ""}
-                  {tab === k && <motion.span layoutId="tab-line" className="absolute left-2 right-2 -bottom-px h-[2px] bg-[var(--red)]" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
+                  {tab === k && <motion.span layoutId="tab-line" className="absolute left-2 right-2 -bottom-px h-[2px] bg-[var(--red)]" transition={{ duration: 0.25, ease: EASE }} />}
                 </button>
               ))}
               {result.tracks.length > 1 && (tab === "evidence" || tab === "shortlist") && (

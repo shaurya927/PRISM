@@ -7,7 +7,7 @@ import { STAGES } from "../data/content.js";
 export default function HowItWorks() {
   return (
     <>
-      <PageHero index={1} label="How it works" lines={["From pixels", "to a shortlist."]}
+      <PageHero index={1} label="How it works" lines={["From pixels", "to a shortlist"]}
         lead="Eight stages turn a clip into a ranked list of registry vehicles. Masking, the format check and fusion can only turn characters into ?, never add them, so the final plate contains nothing the camera did not show." />
 
       <section className="gutter pb-[10vh]">
@@ -33,7 +33,7 @@ export default function HowItWorks() {
       </section>
 
       <section className="gutter py-[12vh]">
-        <SectionHead index={2} label="The vote" title={["Evidence, weighted", "by sharpness."]} />
+        <SectionHead index={2} label="The vote" title={["Evidence, weighted", "by sharpness"]} />
         <div className="grid md:grid-cols-3 gap-6 mt-12">
           {[
             ["Evidence per character", "W_k(a) = Σ_t I(c_tk = a) · p_tk · min(S_t / 100, 2)", "Each frame's vote for character a at position k is its OCR confidence times a sharpness weight, capped at 2."],
@@ -51,13 +51,13 @@ export default function HowItWorks() {
       </section>
 
       <section className="gutter py-[12vh] border-t rule">
-        <SectionHead index={3} label="The score" title={["One number,", "fully itemised."]}
+        <SectionHead index={3} label="The score" title={["One number,", "fully itemised"]}
           aside="Plate similarity tolerates a one-character shift (−0.05) and gives 0.35 credit to confusable pairs 0/O, 1/I, 8/B, 5/S, 2/Z, 6/G, 4/A, scaled by how many characters are known." />
         <div className="grid md:grid-cols-4 gap-6 mt-12">
           {[["Plate", "0.65", "0.75 in low light"], ["Colour", "0.20", "0.10 in low light; half credit for adjacent shades"], ["Body type", "0.15", "car, SUV, two-wheeler, auto, truck, bus"], ["Make / model", "+0.05", "bonus only; cannot lift a candidate over τ"]].map(([k, v, d], i) => (
             <Reveal key={k} delay={i * 0.06} className="border-t rule pt-4">
               <div className="tag">{k}</div>
-              <div className="text-[clamp(2.5rem,5vw,4.5rem)] tracking-[-0.05em] font-medium leading-none mt-3">{v}</div>
+              <div className="text-[clamp(2.5rem,5vw,4.5rem)] tracking-[-0.03em] font-medium leading-none mt-3">{v}</div>
               <p className="text-muted text-[14px] mt-3">{d}</p>
             </Reveal>
           ))}
@@ -69,7 +69,7 @@ export default function HowItWorks() {
         <div className="grid md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-5">
             <Label index={4}>Super-resolution</Label>
-            <SplitLines as="h2" lines={["For eyes only."]} className="h-sec mt-5" />
+            <SplitLines as="h2" lines={["For eyes only"]} className="h-sec mt-5" />
           </div>
           <Reveal className="md:col-span-6 md:col-start-7">
             <p className="lead !text-[var(--ink)]">

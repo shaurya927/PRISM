@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { api } from "../api.js";
+import { Icon } from "./common.jsx";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 /** Real upload progress from the browser: bytes sent, percentage and throughput. */
 function UploadBar({ up }) {
@@ -30,15 +33,14 @@ function DropZone({ label, file, onFile }) {
       onDragOver={(e) => { e.preventDefault(); setOver(true); }}
       onDragLeave={() => setOver(false)}
       onDrop={(e) => { e.preventDefault(); setOver(false); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); }}
-      data-cursor={file ? "change" : "drop"}
-      className={`group flex flex-col items-center justify-center border border-dashed rounded-2xl p-8 cursor-pointer text-center transition-colors duration-300 ${over ? "border-[var(--red)] bg-[rgb(255_0_0/.08)]" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
+      className={`group flex flex-col items-center justify-center border border-dashed rounded-xl p-8 cursor-pointer text-center transition-colors duration-150 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 ${over ? "border-[rgb(238_240_243/.5)] bg-slate-100" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
     >
-      <input type="file" accept="video/*,.mp4,.avi,.mov,.mkv" className="hidden" onChange={(e) => e.target.files[0] && onFile(e.target.files[0])} />
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden
-        className={`transition-transform duration-500 group-hover:-translate-y-1 ${file ? "text-green-800" : over ? "text-red-700" : "text-slate-500"}`}>
+      <input type="file" accept="video/*,.mp4,.avi,.mov,.mkv" className="sr-only" onChange={(e) => e.target.files[0] && onFile(e.target.files[0])} />
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden
+        className={`transition-colors duration-150 ${file ? "text-green-800" : over ? "text-slate-700" : "text-slate-500 group-hover:text-slate-700"}`}>
         <rect x="3" y="5" width="13" height="14" rx="2" /><path d="M16 10l5-3v10l-5-3z" />
       </svg>
-      <div className="mt-3 text-[19px] font-light tracking-[-0.02em]">{label}</div>
+      <div className="mt-3 text-[19px] font-normal tracking-[-0.01em]">{label}</div>
       <div className="label-mono mt-1">{file ? `${file.name} · ${(file.size / 1e6).toFixed(1)} MB` : "Drag a CCTV clip here or click to choose"}</div>
     </label>
   );
@@ -69,7 +71,7 @@ export function HintInput({ value, onChange }) {
               type="button"
               key={i}
               onClick={() => (c ? toggle(i) : onChange((value + "?".repeat(Math.max(0, i - value.length + 1))).slice(0, 12)))}
-              className={`w-7 h-8 rounded border text-sm font-mono font-bold ${c === "?" ? "border-amber-400 bg-amber-50 text-amber-600" : c ? "border-blue-400 bg-blue-50 text-blue-700" : "border-dashed border-slate-300 text-slate-300"}`}
+              className={`w-7 h-8 rounded-md border text-sm font-mono font-medium transition-colors duration-150 ${c === "?" ? "border-amber-400 bg-amber-50 text-amber-600" : c ? "border-blue-400 bg-blue-50 text-blue-700" : "border-dashed border-slate-300 text-slate-300"}`}
               title={c ? "click to toggle unknown" : "click to add an unknown position"}
             >
               {c || "·"}
@@ -77,7 +79,7 @@ export function HintInput({ value, onChange }) {
           );
         })}
       </div>
-      <p className="text-xs text-slate-500 mt-1">Hint characters are always labelled <span className="text-blue-600 font-semibold">investigator-supplied</span>, never treated as video evidence.</p>
+      <p className="text-xs text-slate-500 mt-1">Hint characters are always labelled <span className="text-blue-600 font-medium">investigator-supplied</span>, never treated as video evidence.</p>
     </div>
   );
 }
@@ -130,14 +132,14 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
   }
 
   return (
-    <motion.div className="max-w-4xl mx-auto card p-6 md:p-8 space-y-6" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, ease: [0.18, 0.66, 0.18, 1], delay: 0.1 }}>
+    <motion.div className="max-w-4xl mx-auto card p-6 md:p-8 space-y-6" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}>
       <div className="flex items-center justify-between">
         <h2 className="text-[30px] leading-none">New case</h2>
-        <div className="relative flex rounded-full border border-slate-300 p-1 text-sm">
+        <div className="relative flex rounded-[10px] border border-slate-300 p-1 text-sm" role="tablist" aria-label="Case type">
           {[["single", "Single clip"], ["crosscam", "Two cameras"], ["search", "Hint-only search"]].map(([k, l]) => (
-            <button key={k} onClick={() => setMode(k)} className={`relative px-4 py-1.5 rounded-full transition-colors duration-300 ${mode === k ? "text-white" : "text-slate-500 hover:text-white"}`}>
-              {mode === k && <motion.span layoutId="mode-pill" className="absolute inset-0 rounded-full bg-[var(--red)]" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+            <button key={k} role="tab" aria-selected={mode === k} onClick={() => setMode(k)} className={`relative px-4 py-1.5 rounded-md transition-colors duration-150 ${mode === k ? "text-slate-900" : "text-slate-500 hover:text-white"}`}>
+              {mode === k && <motion.span layoutId="mode-pill" className="absolute inset-0 rounded-md bg-slate-200 shadow-[inset_0_1px_0_rgb(255_255_255/.08)]" transition={{ duration: 0.25, ease: EASE }} />}
               <span className="relative">{l}</span>
             </button>
           ))}
@@ -183,11 +185,11 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
         </div>
       </div>
 
-      {err && <div className="bg-red-50 text-red-700 border border-red-200 rounded p-2 text-sm">{err}</div>}
+      {err && <div className="bg-red-50 text-red-700 border border-red-200 rounded-lg p-3 text-sm">{err}</div>}
       <div className="flex flex-wrap items-center gap-4">
         <button className="btn-primary !h-12 !px-6 !text-[15px]" disabled={!canStart || busy} onClick={start}>
           {busy ? (mode === "search" ? "Searching…" : "Uploading…") : mode === "search" ? "Search registry" : "Analyse footage"}
-          <span aria-hidden>↗</span>
+          <Icon name="arrow" />
         </button>
         <span className="label-mono">All models run locally; footage never leaves this machine.</span>
       </div>

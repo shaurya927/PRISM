@@ -69,7 +69,7 @@ export default function Docs() {
   };
   return (
     <>
-      <PageHero index={5} label="Docs" lines={["Run it", "yourself."]}
+      <PageHero index={5} label="Docs" lines={["Run it", "yourself"]}
         lead="Windows commands shown; on Linux or macOS use .venv/bin/python and forward slashes. A CUDA GPU is optional; on CPU PRISM processes every second frame.">
         <Reveal delay={0.9} className="mt-10"><Pill to={REPO_URL} external>Repository on GitHub</Pill></Reveal>
       </PageHero>

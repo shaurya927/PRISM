@@ -26,7 +26,7 @@ const DELIVERABLES = [
 export default function About() {
   return (
     <>
-      <PageHero index={6} label="About" lines={["A plate reader", "that admits doubt."]}
+      <PageHero index={6} label="About" lines={["A plate reader", "that admits doubt"]}
         lead="PRISM was built for Hackasol 5.0, Track 2 (AIML), problem AIML-01: vehicle identification and traceability from CCTV footage." />
 
       <section className="gutter pb-[12vh] grid md:grid-cols-12 gap-10">
@@ -40,7 +40,7 @@ export default function About() {
       <Marquee items={["Synthetic registry · 500 records", "Generated demo clips", "No real personal data", "Runs offline once set up"]} speed={30} />
 
       <section className="gutter py-[12vh]">
-        <SectionHead index={2} label="What's in the repo" title={["Six deliverables."]} />
+        <SectionHead index={2} label="What's in the repo" title={["Six deliverables"]} />
         <div className="grid md:grid-cols-3 gap-x-6 gap-y-10 mt-14">
           {DELIVERABLES.map(([t, d], i) => (
             <Reveal key={t} delay={(i % 3) * 0.08} className="border-t rule pt-5">
@@ -53,14 +53,14 @@ export default function About() {
       </section>
 
       <section className="gutter py-[12vh] border-t rule">
-        <SectionHead index={3} label="Built on" title={["Open research,", "wrapped carefully."]}
+        <SectionHead index={3} label="Built on" title={["Open research,", "wrapped carefully"]}
           aside="The research repos are cloned read-only into vendor/ and wrapped, never edited. Their commits are recorded in each report." />
         <div className="mt-14">
           <HoverPreviewList
             rows={BUILT_ON}
             renderRow={([name, role, url]) => (
               <a href={url} target="_blank" rel="noreferrer" className="hlist__row grid grid-cols-[1fr_auto] md:grid-cols-[1.2fr_1fr_auto] items-center gap-4 py-6">
-                <span className="text-[clamp(1.4rem,2.6vw,2.25rem)] tracking-[-0.04em] font-medium leading-none">{name}</span>
+                <span className="text-[clamp(1.4rem,2.6vw,2.25rem)] tracking-[-0.02em] font-medium leading-none">{name}</span>
                 <span className="hidden md:block text-muted">{role}</span>
                 <Arrow />
               </a>
@@ -73,10 +73,10 @@ export default function About() {
       <section className="gutter py-[12vh] border-t rule grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-7">
           <Label index={4}>Source</Label>
-          <SplitLines as="h2" lines={["Read the code."]} className="display-2 mt-5" />
+          <SplitLines as="h2" lines={["Read the code"]} className="display-2 mt-5" />
         </div>
         <Reveal className="md:col-span-5 md:text-right">
-          <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-[clamp(1.1rem,2vw,1.6rem)] ulink">github.com/shaurya927/PRISM ↗</a>
+          <a href={REPO_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[clamp(1.1rem,2vw,1.6rem)] ulink">github.com/shaurya927/PRISM <Arrow /></a>
           <p className="tag mt-6">Website layout and motion inspired by melon.studio</p>
         </Reveal>
       </section>

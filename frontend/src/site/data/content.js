@@ -165,13 +165,13 @@ export const FEATURES = [
 ];
 
 export const BUILT_ON = [
-  { name: "YOLO11", role: "Vehicle detection", url: "https://github.com/ultralytics/ultralytics", lit: "#ffffff", on: "#0f0000" },
-  { name: "ByteTrack", role: "Tracking", url: "https://github.com/ifzhang/ByteTrack", lit: "#45e0ea", on: "#0f0000" },
-  { name: "fast-alpr", role: "Plate detector", url: "https://github.com/ankandrew/fast-alpr", lit: "#ff0000", on: "#ffffff" },
-  { name: "PARSeq", role: "OCR, per-character confidence", url: "https://github.com/baudm/parseq", lit: "#ffb3b3", on: "#0f0000" },
-  { name: "OpenCLIP", role: "Colour, body, Re-ID", url: "https://github.com/mlfoundations/open_clip", lit: "#1497ac", on: "#ffffff" },
-  { name: "lpsr-lacd", role: "Super-resolution, visual aid only", url: "https://github.com/valfride/lpsr-lacd", lit: "#e5524a", on: "#ffffff" },
-  { name: "FastAPI", role: "API", url: "https://fastapi.tiangolo.com", lit: "#f6efed", on: "#0f0000" },
+  { name: "YOLO11", role: "Vehicle detection", url: "https://github.com/ultralytics/ultralytics" },
+  { name: "ByteTrack", role: "Tracking", url: "https://github.com/ifzhang/ByteTrack" },
+  { name: "fast-alpr", role: "Plate detector", url: "https://github.com/ankandrew/fast-alpr" },
+  { name: "PARSeq", role: "OCR, per-character confidence", url: "https://github.com/baudm/parseq" },
+  { name: "OpenCLIP", role: "Colour, body, Re-ID", url: "https://github.com/mlfoundations/open_clip" },
+  { name: "lpsr-lacd", role: "Super-resolution, visual aid only", url: "https://github.com/valfride/lpsr-lacd" },
+  { name: "FastAPI", role: "API", url: "https://fastapi.tiangolo.com" },
 ];
 
 export const QUOTES = [

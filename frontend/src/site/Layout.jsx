@@ -2,16 +2,16 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
-import { EASE_REVEAL, Magnetic } from "./motion.jsx";
+import { EASE } from "./motion.jsx";
 import { Arrow } from "./components.jsx";
-import { Cursor, RollLink, useClock, useHealth } from "./fx.jsx";
+import { RollLink, useClock, useHealth } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
 import Intro from "./Intro.jsx";
 
 const SiteCtx = createContext({ introDone: true, introReveal: true, lenis: null });
 export const useSite = () => useContext(SiteCtx);
 
-const EASE_SHEET = [0.76, 0, 0.24, 1];
+const EASE_SHEET = EASE;
 let firstPage = true; // the first page is revealed by the loader, not by a page curtain
 
 export default function SiteLayout() {
@@ -62,8 +62,6 @@ export default function SiteLayout() {
         <AnimatePresence mode="wait" onExitComplete={toTop}>
           <Page key={location.pathname}>{outlet}</Page>
         </AnimatePresence>
-        <Cursor />
-        <div className="grain" aria-hidden />
       </div>
     </SiteCtx.Provider>
   );
@@ -107,7 +105,7 @@ function Topbar({ onMenu }) {
   });
   const counts = { "/cases": CASES.length };
   return (
-    <motion.header className={`topbar ${solid ? "is-solid" : ""}`} animate={{ y: hidden ? -120 : 0 }} transition={{ duration: 0.6, ease: EASE_REVEAL }}>
+    <motion.header className={`topbar ${solid ? "is-solid" : ""}`} animate={{ y: hidden ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
       <Link to="/" className="topbar__logo" aria-label="PRISM home">
         <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
         prism
@@ -118,7 +116,7 @@ function Topbar({ onMenu }) {
             {label.toLowerCase()}{counts[to] ? <sup>({counts[to]})</sup> : null}
           </NavLink>
         ))}
-        <a href="/app" className="f-u">open app ↗</a>
+        <a href="/app" className="f-u">open app <Arrow /></a>
       </nav>
       <button className="lg:hidden text-[16px] pt-1" onClick={onMenu}>menu</button>
     </motion.header>
@@ -128,18 +126,18 @@ function Topbar({ onMenu }) {
 function MobileMenu({ onClose }) {
   const items = [["Home", "/"], ...NAV, ["Open app", "/app"]];
   return (
-    <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.75, ease: EASE_SHEET }}>
+    <motion.div className="menu gutter flex flex-col" initial={{ y: "-100%" }} animate={{ y: 0 }} exit={{ y: "-100%" }} transition={{ duration: 0.5, ease: EASE_SHEET }}>
       <div className="flex justify-between items-center pt-4 h-[64px]">
-        <span className="text-[24px] font-medium tracking-[-0.06em]">prism</span>
+        <span className="text-[24px] font-medium tracking-[-0.04em]">prism</span>
         <button className="text-[16px]" onClick={onClose}>close</button>
       </div>
       <nav className="mt-10 flex flex-col">
         {items.map(([label, to], i) => (
           <span key={to} className="mask-line">
-            <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE_REVEAL, delay: 0.25 + i * 0.05 }}>
+            <motion.span className="mask-line__in" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: EASE, delay: 0.2 + Math.min(i, 5) * 0.04 }}>
               {to === "/app"
-                ? <a href="/app" className="text-[clamp(2.6rem,11vw,4.5rem)] tracking-[-0.05em] font-light leading-[1.02]">{label} ↗</a>
-                : <Link to={to} onClick={onClose} className="text-[clamp(2.6rem,11vw,4.5rem)] tracking-[-0.05em] font-light leading-[1.02]">{label.toLowerCase()}</Link>}
+                ? <a href="/app" className="inline-flex items-center gap-3 text-[clamp(2.4rem,10vw,4rem)] tracking-[-0.03em] font-normal leading-[1.08]">{label} <Arrow className="w-[0.4em] h-[0.4em]" /></a>
+                : <Link to={to} onClick={onClose} className="text-[clamp(2.4rem,10vw,4rem)] tracking-[-0.03em] font-normal leading-[1.08]">{label.toLowerCase()}</Link>}
             </motion.span>
           </span>
         ))}
@@ -157,9 +155,9 @@ function Footer() {
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
         <div className="col-span-2 md:col-span-4">
           <div className="tag mb-5">Get started</div>
-          <a href="/app" className="text-[clamp(1.6rem,2.4vw,2.4rem)] font-light tracking-[-0.04em] f-u">Open the investigator</a>
-          <div className="mt-8"><Magnetic><a href="/app" className="btn-pill btn-pill--red">Start a case <Arrow /></a></Magnetic></div>
-          <p className="label-mono mt-8"><span className="dot dot--live" />{health ? "API online" : health === false ? "API offline" : "Checking API…"}</p>
+          <a href="/app" className="text-[clamp(1.6rem,2.4vw,2.4rem)] font-normal tracking-[-0.025em] f-u">Open the investigator</a>
+          <div className="mt-8"><a href="/app" className="btn-pill btn-pill--red">Start a case <Arrow /></a></div>
+          <p className="label-mono mt-8"><span className={`dot ${health ? "dot--live" : ""}`} />{health ? "API online" : health === false ? "API offline" : "Checking API…"}</p>
         </div>
         <div className="md:col-span-2 md:col-start-6">
           <div className="tag mb-5">Pages</div>
@@ -181,7 +179,7 @@ function Footer() {
           <div className="flex gap-4 items-start">
             <div className="w-16 h-16 rounded-md bg-[var(--red)] grid place-items-center text-[28px] font-medium shrink-0">?</div>
             <div className="text-[15px] leading-snug">
-              <div className="flex items-center"><span className="eq"><i /><i /><i /><i /></span><span className="tag !text-[var(--ink)]">Live</span></div>
+              <div className="flex items-center"><span className={`dot ${health ? "dot--live" : ""}`} /><span className="tag !text-[var(--ink)]">{health ? "Live" : "Offline"}</span></div>
               <div className="mt-1">{health ? `OCR ${health.ocr_backend} on ${health.gpu || health.device}` : "PARSeq OCR"}</div>
               <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 500 records"}</div>
             </div>
@@ -208,7 +206,7 @@ function FooterWordmark() {
         {letters.map((ch, i) => (
           <span key={i} className="overflow-clip inline-block pb-[0.04em]">
             <motion.span className={`inline-block ${ch === "?" ? "q" : ""}`}
-              variants={{ hide: { y: "100%" }, show: { y: "0%", transition: { duration: 1.2, ease: EASE_REVEAL, delay: i * 0.06 } } }}>
+              variants={{ hide: { y: "100%" }, show: { y: "0%", transition: { duration: 0.8, ease: EASE, delay: i * 0.05 } } }}>
               {ch}
             </motion.span>
           </span>

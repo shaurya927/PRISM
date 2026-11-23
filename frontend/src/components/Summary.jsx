@@ -1,5 +1,6 @@
 import React from "react";
 import { api } from "../api.js";
+import { Icon } from "./common.jsx";
 
 export default function Summary({ caseResult, jobId }) {
   const n = caseResult.narrative;
@@ -8,7 +9,7 @@ export default function Summary({ caseResult, jobId }) {
     <div className="space-y-4">
       <div className="card p-5">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold">Evidence-checked summary</h3>
+          <h3>Evidence-checked summary</h3>
           <span className="chip bg-slate-100 text-slate-700">{n?.method} · {n?.checked} checked · {n?.removed} removed</span>
         </div>
         <p className="text-[15px] leading-relaxed">
@@ -29,14 +30,14 @@ export default function Summary({ caseResult, jobId }) {
       </div>
 
       <div className="card p-5 flex flex-wrap items-center gap-3">
-        <h3 className="font-semibold mr-auto">Forensic report</h3>
-        <a className="btn-primary" href={api.reportUrl(jobId, "pdf")} target="_blank" rel="noreferrer">⬇ Download PDF</a>
-        <a className="btn-ghost" href={api.reportUrl(jobId, "html")} target="_blank" rel="noreferrer">⬇ Download HTML</a>
+        <h3 className="mr-auto">Forensic report</h3>
+        <a className="btn-primary" href={api.reportUrl(jobId, "pdf")} target="_blank" rel="noreferrer"><Icon name="download" size={16} />Download PDF</a>
+        <a className="btn-ghost" href={api.reportUrl(jobId, "html")} target="_blank" rel="noreferrer"><Icon name="download" size={16} />Download HTML</a>
       </div>
 
       {cu && (
         <div className="card p-5 text-sm">
-          <h3 className="font-semibold mb-2">Chain of custody</h3>
+          <h3 className="mb-2">Chain of custody</h3>
           <div className="grid md:grid-cols-2 gap-x-6 gap-y-1">
             {cu.clips.map((c, i) => <div key={i}><span className="label">Clip {c.name}</span><div className="font-mono text-[11px] break-all">{c.sha256}</div></div>)}
             <div><span className="label">Config hash</span><div className="font-mono text-[11px] break-all">{cu.config_hash}</div></div>
@@ -47,7 +48,7 @@ export default function Summary({ caseResult, jobId }) {
           <p className="text-xs text-slate-500 mt-2">{cu.artifacts.length} saved artifacts are hashed with SHA-256; the full list is in the report.</p>
         </div>
       )}
-      <p className="text-xs font-semibold text-slate-600 border border-slate-300 rounded p-3 bg-white">
+      <p className="text-xs font-medium text-slate-600 border border-slate-300 rounded-lg p-3 bg-white">
         PRISM output supports an investigator's decision. It does not identify a vehicle on its own.
       </p>
     </div>

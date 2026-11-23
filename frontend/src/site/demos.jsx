@@ -37,7 +37,7 @@ export function FusionDemo() {
           <div className="mt-10">
             <div className="flex items-baseline justify-between">
               <span className="label-mono">Character confidence threshold τ_char</span>
-              <span className="text-[28px] font-medium tracking-[-0.04em] text-accent tabular-nums">{cur.tau.toFixed(2)}</span>
+              <span className="text-[28px] font-medium tracking-[-0.02em] text-accent tabular-nums">{cur.tau.toFixed(2)}</span>
             </div>
             <input type="range" className="rng mt-4" min="0.5" max="0.95" step="0.05" value={tau}
               onChange={(e) => setTau(parseFloat(e.target.value))} aria-label="Character confidence threshold" />
@@ -52,8 +52,8 @@ export function FusionDemo() {
             : <>At {cur.tau.toFixed(2)} the hidden digit stays <span className="text-accent">?</span>. Nothing wrong is committed, so the two look-alike registry cars stay tied and PRISM reports AMBIGUOUS.</>}
         </motion.p>
         <div className="grid grid-cols-2 gap-4">
-          <div className="border-t rule pt-3"><div className="tag">Characters kept</div><div className="text-[30px] font-medium tracking-[-0.04em] tabular-nums">{cur.kept}<span className="text-muted text-[18px]">/{cur.total}</span></div></div>
-          <div className="border-t rule pt-3"><div className="tag">Unknown positions</div><div className="text-[30px] font-medium tracking-[-0.04em] tabular-nums">{unknown}</div></div>
+          <div className="border-t rule pt-3"><div className="tag">Characters kept</div><div className="text-[30px] font-medium tracking-[-0.02em] tabular-nums">{cur.kept}<span className="text-muted text-[18px]">/{cur.total}</span></div></div>
+          <div className="border-t rule pt-3"><div className="tag">Unknown positions</div><div className="text-[30px] font-medium tracking-[-0.02em] tabular-nums">{unknown}</div></div>
         </div>
         {p && (
           <div className="panel p-5">
@@ -99,7 +99,7 @@ export function CrossCamStory() {
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div>
             <Label index={6}>Cross-camera</Label>
-            <SplitLines as="h2" lines={["Two partial views,", "one full plate."]} className="h-sec mt-5" />
+            <SplitLines as="h2" lines={["Two partial views,", "one full plate"]} className="h-sec mt-5" />
           </div>
           <div className="relative h-[30px] w-[230px]">
             <motion.div style={{ opacity: beforeOpacity }} className="absolute right-0"><StatusChip status={x.before} /></motion.div>

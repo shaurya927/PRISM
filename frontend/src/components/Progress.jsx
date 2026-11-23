@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useSpring } from "framer-motion";
 import { HighwayFeed } from "../site/fx.jsx";
+import { Icon } from "./common.jsx";
 
-const EASE = [0.18, 0.66, 0.18, 1];
+const EASE = [0.22, 1, 0.36, 1];
 
 // One entry per backend stage (prism.pipeline.STAGES), in pipeline order.
 const STAGES = [
@@ -66,7 +67,7 @@ function SegBar({ values, active, selected, onSelect, waiting }) {
             className={`seg ${done ? "is-done" : ""} ${isActive ? "is-active" : ""} ${selected === key ? "is-sel" : ""}`}
             onPointerEnter={() => setHover(i)} onFocus={() => setHover(i)} onBlur={() => setHover(null)}
             onClick={() => onSelect(key)} aria-label={`${name}: ${Math.round(v * 100)}%`}>
-            <motion.span className="seg__fill" initial={false} animate={{ scaleX: v }} transition={{ type: "spring", stiffness: 60, damping: 18 }} />
+            <motion.span className="seg__fill" initial={false} animate={{ scaleX: v }} transition={{ duration: 0.4, ease: EASE }} />
             {waiting && i === 0 && <span className="indet" />}
           </button>
         );
@@ -74,7 +75,7 @@ function SegBar({ values, active, selected, onSelect, waiting }) {
       <AnimatePresence>
         {hover != null && (
           <motion.span key="tip" className="seg__tip" style={{ left: `${((hover + 0.5) / STAGES.length) * 100}%` }}
-            initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.2 }}>
+            initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }} transition={{ duration: 0.16, ease: EASE }}>
             {String(hover + 1).padStart(2, "0")} · {STAGES[hover][1]} · {Math.round((values[STAGES[hover][0]] ?? 0) * 100)}%
           </motion.span>
         )}
@@ -108,11 +109,11 @@ export default function Progress({ job }) {
   const pick = (k) => setPicked(k === active ? null : k);
 
   return (
-    <motion.section className="aload max-w-5xl mx-auto" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
+    <motion.section className="aload max-w-5xl mx-auto" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: EASE }}>
       <HighwayFeed className="aload__wave" labels={false} />
       <div className="p-6 md:p-10">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 label-mono">
-          <span><span className={`dot ${failed ? "" : "dot--live"}`} style={failed ? { background: "var(--red-3)" } : undefined} />
+          <span><span className={`dot ${failed ? "" : running ? "dot--run" : "dot--live"}`} style={failed ? { background: "var(--red-3)" } : undefined} />
             {failed ? "analysis stopped" : waiting ? "queued" : `analysing${job.kind === "crosscam" ? " two clips" : ""}`}</span>
           <span>job {job.job_id}</span>
           <span>{elapsed} elapsed</span>
@@ -125,7 +126,7 @@ export default function Progress({ job }) {
             <span className="mask-line relative">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.span key={active} className="mask-line__in aload__stage" initial={{ y: "110%" }} animate={{ y: 0 }} exit={{ y: "-110%" }}
-                  transition={{ duration: 0.55, ease: EASE }}>
+                  transition={{ duration: 0.4, ease: EASE }}>
                   {STAGES[Math.max(0, activeIdx)][1]}
                 </motion.span>
               </AnimatePresence>
@@ -156,8 +157,8 @@ export default function Progress({ job }) {
                     <span className="stg__model block truncate">{model}</span>
                   </span>
                   <span className="stg__v">
-                    {done ? <span className="stg__ok">done ✓</span>
-                      : isActive ? <span><span className="dot dot--live" style={{ background: "var(--red)" }} />{Math.round(v * 100)}%</span>
+                    {done ? <span className="stg__ok"><Icon name="check" size={12} />done</span>
+                      : isActive ? <span><span className="dot dot--run" />{Math.round(v * 100)}%</span>
                       : failed && key === active ? <span className="text-red-700">failed</span>
                       : <span className="text-slate-400">waiting</span>}
                   </span>
@@ -170,11 +171,11 @@ export default function Progress({ job }) {
             <div className="panel p-5 min-h-[170px]">
               <div className="flex items-center justify-between label-mono">
                 <span>{String(STAGES.indexOf(sel) + 1).padStart(2, "0")} · {sel[2]}</span>
-                {picked && <button type="button" className="f-u" onClick={() => setPicked(null)}>follow live ↺</button>}
+                {picked && <button type="button" className="f-u inline-flex items-center gap-1.5" onClick={() => setPicked(null)}><Icon name="refresh" size={12} />follow live</button>}
               </div>
               <AnimatePresence mode="wait" initial={false}>
-                <motion.div key={sel[0]} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3 }}>
-                  <div className="text-[22px] font-light tracking-[-0.03em] mt-3">{sel[1]}</div>
+                <motion.div key={sel[0]} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2, ease: EASE }}>
+                  <div className="text-[22px] font-normal tracking-[-0.015em] mt-3">{sel[1]}</div>
                   <p className="text-[15px] text-slate-500 mt-2 leading-snug">{sel[3]}</p>
                 </motion.div>
               </AnimatePresence>

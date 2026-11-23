@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ImageReveal, Label, Parallax, Reveal, SplitLines } from "../motion.jsx";
+import { ImageReveal, Label, Reveal, SplitLines } from "../motion.jsx";
 import { Bar, BigCTA, NextLink, Pill, Plate, StatusChip } from "../components.jsx";
 import { CASES, caseById, STATUS_INFO } from "../data/content.js";
 import NotFound from "./NotFound.jsx";
@@ -49,9 +49,7 @@ export default function CaseDetail() {
 
       <section className="gutter">
         <div className="card-media aspect-[16/9] md:aspect-[21/9]">
-          <Parallax offset={40} className="absolute inset-[-8%_0]">
-            <ImageReveal src={c.best} alt={`${c.title}: sharpest vehicle crop`} className="absolute inset-0" />
-          </Parallax>
+          <ImageReveal src={c.best} alt={`${c.title}: sharpest vehicle crop`} className="absolute inset-0" />
         </div>
         <div className="tag mt-3">Sharpest vehicle crop chosen by PRISM</div>
       </section>
@@ -59,7 +57,7 @@ export default function CaseDetail() {
       <section className="gutter py-[12vh] grid md:grid-cols-12 gap-10">
         <div className="md:col-span-4">
           <Label index={1}>Fused plate</Label>
-          <Reveal delay={0.1}><p className="text-muted text-[15px] mt-4 leading-relaxed">Amber cells are positions no frame read with enough confidence. They stay unknown in the plate and in the report.</p></Reveal>
+          <Reveal delay={0.1}><p className="text-muted text-[15px] mt-4 leading-relaxed">Red ? cells are positions no frame read with enough confidence. They stay unknown in the plate and in the report.</p></Reveal>
         </div>
         <div className="md:col-span-8">
           <Reveal><div className="text-[clamp(2rem,5.5vw,4.75rem)]"><Plate text={c.fused} /></div></Reveal>

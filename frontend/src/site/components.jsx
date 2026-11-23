@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from "framer-motion";
-import { EASE_REVEAL, ImageReveal, Label, Magnetic, Reveal, SplitLines } from "./motion.jsx";
+import { EASE, ImageReveal, Label, Reveal, SplitLines } from "./motion.jsx";
 
 /** Plate rendered as character cells. `truth` highlights committed characters that are wrong. */
 export function Plate({ text, truth, className = "", size = "1em", onCell, active }) {
@@ -29,7 +29,7 @@ export function Plate({ text, truth, className = "", size = "1em", onCell, activ
 export function StatusChip({ status, className = "" }) {
   if (!status) return null;
   const tone = status === "MATCHED" ? "chip--ok" : status === "AMBIGUOUS" ? "chip--warn" : "chip--bad";
-  return <span className={`chip ${tone} ${className}`}>● {status}</span>;
+  return <span className={`chip ${tone} ${className}`}><span className="chip__dot" aria-hidden />{status}</span>;
 }
 
 export function Arrow({ className = "" }) {
@@ -81,16 +81,16 @@ export function SectionHead({ index, label, title, aside, className = "" }) {
 /** Large case card with hover zoom and the "View" bubble. */
 export function CaseCard({ c, tall = false }) {
   return (
-    <Link to={`/cases/${c.id}`} className="case-card block group" data-cursor="View">
+    <Link to={`/cases/${c.id}`} className="case-card block group">
       <div className={`card-media ${tall ? "aspect-[4/5]" : "aspect-[4/3]"}`}>
         <ImageReveal src={c.best} alt={c.title} className="absolute inset-0 zoom" />
-        <div className="absolute left-4 top-4 flex gap-2"><StatusChip status={c.status} className="backdrop-blur bg-black/50" /></div>
-        <div className="absolute right-4 bottom-4 text-[22px] backdrop-blur bg-black/50 rounded-lg px-2 py-1">
+        <div className="absolute left-4 top-4 flex gap-2"><StatusChip status={c.status} className="!bg-black/70" /></div>
+        <div className="absolute right-4 bottom-4 text-[22px] bg-black/70 rounded-lg px-2 py-1">
           <Plate text={c.fused} />
         </div>
       </div>
       <div className="flex items-baseline justify-between gap-4 mt-4">
-        <h3 className="card-title text-[22px] md:text-[26px] tracking-[-0.03em] font-medium">{c.title}</h3>
+        <h3 className="card-title text-[22px] md:text-[26px] tracking-[-0.02em] font-medium">{c.title}</h3>
         <span className="tag">({String(c.index).padStart(2, "0")})</span>
       </div>
       <p className="text-muted text-[15px] mt-1 max-w-md">{c.clip}</p>
@@ -116,10 +116,10 @@ export function HoverPreviewList({ rows, renderRow }) {
           <motion.div
             className="hover-preview"
             style={{ x: sx, y: sy }}
-            initial={{ opacity: 0, scale: 0.7, rotate: -4 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.45, ease: EASE_REVEAL }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: EASE }}
           >
             <AnimatePresence mode="popLayout">
               <motion.img
@@ -130,7 +130,7 @@ export function HoverPreviewList({ rows, renderRow }) {
                 initial={{ clipPath: "inset(100% 0 0 0)" }}
                 animate={{ clipPath: "inset(0% 0 0 0)" }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: EASE_REVEAL }}
+                transition={{ duration: 0.4, ease: EASE }}
               />
             </AnimatePresence>
           </motion.div>
@@ -150,7 +150,7 @@ export function Accordion({ items, defaultOpen = 0 }) {
           <div className={`acc__row ${open === i ? "is-open" : ""}`}>
             <button className="acc__btn" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i}>
               <span className="tag">({String(i + 1).padStart(2, "0")})</span>
-              <span className="text-[22px] md:text-[32px] tracking-[-0.035em] font-medium leading-tight">{it.t}</span>
+              <span className="text-[22px] md:text-[32px] tracking-[-0.02em] font-normal leading-tight">{it.t}</span>
               <span className="acc__plus" aria-hidden />
             </button>
             <AnimatePresence initial={false}>
@@ -159,7 +159,7 @@ export function Accordion({ items, defaultOpen = 0 }) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.6, ease: EASE_REVEAL }}
+                  transition={{ duration: 0.4, ease: EASE }}
                   className="overflow-hidden"
                 >
                   <div className="grid md:grid-cols-[3.5rem_1fr] gap-4 pb-8">
@@ -206,15 +206,15 @@ export function TauChart({ sweep, tau, onTau, defaultTau = 0.55 }) {
         <line x1={X(defaultTau)} x2={X(defaultTau)} y1={P.t} y2={H - P.b} stroke="var(--muted)" strokeDasharray="3 4" />
         <text x={X(defaultTau) + 6} y={P.t + 10}>default</text>
         <motion.path d={path("top1_matched")} fill="none" stroke="var(--ink)" strokeWidth="2"
-          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.6, ease: EASE_REVEAL }} />
+          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.2, ease: EASE }} />
         <motion.path d={path("false_match_rate")} fill="none" stroke="var(--red)" strokeWidth="2"
-          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.6, ease: EASE_REVEAL, delay: 0.2 }} />
+          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={{ duration: 1.2, ease: EASE, delay: 0.2 }} />
         <motion.line y1={P.t} y2={H - P.b} stroke="var(--accent)" strokeWidth="1.5"
-          initial={{ x1: X(nearest.tau), x2: X(nearest.tau) }} animate={{ x1: X(nearest.tau), x2: X(nearest.tau) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+          initial={{ x1: X(nearest.tau), x2: X(nearest.tau) }} animate={{ x1: X(nearest.tau), x2: X(nearest.tau) }} transition={{ duration: 0.25, ease: EASE }} />
         <motion.circle r="5" fill="var(--ink)" initial={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }}
-          animate={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+          animate={{ cx: X(nearest.tau), cy: Y(nearest.top1_matched) }} transition={{ duration: 0.25, ease: EASE }} />
         <motion.circle r="5" fill="var(--red)" initial={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }}
-          animate={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+          animate={{ cx: X(nearest.tau), cy: Y(nearest.false_match_rate) }} transition={{ duration: 0.25, ease: EASE }} />
       </svg>
       {onTau && (
         <div className="mt-6" style={{ paddingLeft: `${(P.l / W) * 100}%`, paddingRight: `${(P.r / W) * 100}%` }}>
@@ -236,7 +236,7 @@ export function Stat({ k, v, accent, bad }) {
   return (
     <div className="border-t rule pt-3">
       <div className="tag">{k}</div>
-      <div className={`text-[28px] md:text-[36px] tracking-[-0.04em] font-medium mt-1 ${accent ? "text-accent" : bad ? "text-bad" : ""}`}>{v}</div>
+      <div className={`text-[28px] md:text-[36px] tracking-[-0.02em] font-medium tabular-nums mt-1 ${accent ? "text-accent" : bad ? "text-bad" : ""}`}>{v}</div>
     </div>
   );
 }
@@ -249,7 +249,7 @@ export function Bar({ value, max = 1, color = "var(--ink)", delay = 0 }) {
     <div ref={ref} className="bar">
       <motion.span style={{ background: color }} initial={{ width: 0 }}
         animate={inView ? { width: `${Math.max(0.5, (value / max) * 100)}%` } : undefined}
-        transition={{ duration: 1.3, ease: EASE_REVEAL, delay }} />
+        transition={{ duration: 0.9, ease: EASE, delay }} />
     </div>
   );
 }
@@ -260,13 +260,11 @@ export function BigCTA() {
     <section className="gutter py-[16vh] border-t rule">
       <Label index="→">Try it on the demo clips</Label>
       <div className="grid md:grid-cols-12 gap-10 items-end mt-8">
-        <SplitLines as="h2" lines={["Open a case.", "Upload a clip."]} className="display-2 md:col-span-8" />
+        <SplitLines as="h2" lines={["Open a case", "Upload a clip"]} className="display-2 md:col-span-8" />
         <div className="md:col-span-4 flex md:justify-end">
-          <Magnetic strength={0.4}>
-            <a href="/app" className="grid place-items-center w-44 h-44 md:w-56 md:h-56 rounded-full bg-[var(--accent)] text-[var(--black)] text-[18px] font-medium tracking-[-0.02em] hover:scale-105 transition-transform duration-500">
-              <span className="flex items-center gap-2">Open app <Arrow /></span>
-            </a>
-          </Magnetic>
+          <a href="/app" className="grid place-items-center w-44 h-44 md:w-56 md:h-56 rounded-full bg-[var(--accent)] hover:bg-[#c42619] text-white text-[18px] font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+            <span className="flex items-center gap-2">Open app <Arrow /></span>
+          </a>
         </div>
       </div>
     </section>
@@ -276,9 +274,9 @@ export function BigCTA() {
 /** Big "next" link at the bottom of detail pages. */
 export function NextLink({ to, label, title }) {
   return (
-    <Link to={to} className="block gutter py-[12vh] border-t rule group" data-cursor="Next">
+    <Link to={to} className="block gutter py-[12vh] border-t rule group">
       <div className="tag">{label}</div>
-      <div className="display-2 mt-4 flex items-center gap-6 transition-transform duration-700 group-hover:translate-x-4">
+      <div className="display-2 mt-4 flex items-center gap-6 transition-colors duration-150 group-hover:text-white">
         {title}
         <Arrow className="w-[0.5em] h-[0.5em]" />
       </div>

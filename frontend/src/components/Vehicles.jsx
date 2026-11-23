@@ -1,5 +1,5 @@
 import React from "react";
-import { AttrChip, Empty, PlateText, StatusChip, ts } from "./common.jsx";
+import { AttrChip, Empty, Icon, PlateText, StatusChip, ts } from "./common.jsx";
 
 export default function Vehicles({ tracks, selected, onSelect, primaryId, label }) {
   if (!tracks?.length) return <Empty>No vehicle tracks of at least 5 frames were found in this clip.</Empty>;
@@ -11,14 +11,14 @@ export default function Vehicles({ tracks, selected, onSelect, primaryId, label 
           <button
             key={`${t.clip_role}-${t.track_id}`}
             onClick={() => onSelect(t.track_id)}
-            className={`card text-left overflow-hidden hover:shadow-md transition ${selected === t.track_id ? "ring-2 ring-blue-500" : ""}`}
+            className={`card text-left overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${selected === t.track_id ? "ring-1 ring-blue-500" : ""}`}
           >
             <div className="h-36 bg-slate-900 flex items-center justify-center overflow-hidden">
               {t.best_crop_url ? <img src={t.best_crop_url} className="max-h-36 object-contain" alt="" /> : <span className="text-slate-500 text-xs">no crop</span>}
             </div>
             <div className="p-3 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold">Track {t.track_id}{t.track_id === primaryId ? " ★" : ""}</span>
+                <span className="text-sm font-medium inline-flex items-center gap-1.5">Track {t.track_id}{t.track_id === primaryId && <Icon name="star" size={12} className="text-slate-500" title="primary track" />}</span>
                 <StatusChip status={t.match?.status} />
               </div>
               <PlateText fused={t.fused} size="text-lg" />
@@ -40,9 +40,9 @@ export default function Vehicles({ tracks, selected, onSelect, primaryId, label 
         ))}
       </div>
       <p className="text-xs text-slate-500 mt-3">
-        <span className="text-amber-500 font-bold font-mono">?</span> unknown (never guessed) ·{" "}
-        <span className="text-blue-600 font-bold font-mono underline decoration-dotted">A</span> investigator-supplied ·{" "}
-        <span className="text-red-600 font-bold font-mono">?</span> video/hint conflict · ★ primary track
+        <span className="text-amber-500 font-semibold font-mono">?</span> unknown (never guessed) ·{" "}
+        <span className="text-blue-600 font-semibold font-mono underline decoration-dotted">A</span> investigator-supplied ·{" "}
+        <span className="text-red-600 font-semibold font-mono">?</span> video/hint conflict · <Icon name="star" size={12} /> primary track
       </p>
     </div>
   );

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { animate, motion, useInView, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { animate, motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-export const EASE_REVEAL = [0.18, 0.66, 0.18, 1];
-export const EASE_APPEAR = [0.11, 0.06, 0.18, 1];
+// One easing curve for every transition on the site.
+export const EASE = [0.22, 1, 0.36, 1];
+export const EASE_REVEAL = EASE;
+export const EASE_APPEAR = EASE;
 
 /** Masked line reveal: each line slides up from behind an overflow mask. */
 export function SplitLines({ lines, as: Tag = "h1", className = "", delay = 0, stagger = 0.08, once = true }) {
@@ -17,7 +19,7 @@ export function SplitLines({ lines, as: Tag = "h1", className = "", delay = 0, s
             className="mask-line__in"
             initial={reduce ? false : { y: "110%" }}
             animate={inView ? { y: "0%" } : undefined}
-            transition={{ duration: 1.1, ease: EASE_REVEAL, delay: delay + i * stagger }}
+            transition={{ duration: 0.8, ease: EASE, delay: delay + i * stagger }}
           >
             {line}
           </motion.span>
@@ -28,7 +30,7 @@ export function SplitLines({ lines, as: Tag = "h1", className = "", delay = 0, s
 }
 
 /** Fade + rise on enter. */
-export function Reveal({ children, delay = 0, y = 28, className = "", as = "div" }) {
+export function Reveal({ children, delay = 0, y = 12, className = "", as = "div" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -12% 0px" });
   const reduce = useReducedMotion();
@@ -39,7 +41,7 @@ export function Reveal({ children, delay = 0, y = 28, className = "", as = "div"
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 1, ease: EASE_APPEAR, delay }}
+      transition={{ duration: 0.5, ease: EASE, delay }}
     >
       {children}
     </M>
@@ -93,28 +95,6 @@ export function Counter({ value, decimals = 0, suffix = "", prefix = "", duratio
   );
 }
 
-/** Element drifts toward the pointer while hovered. */
-export function Magnetic({ children, strength = 0.35, className = "" }) {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });
-  const sy = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });
-  const reduce = useReducedMotion();
-  const onMove = (e) => {
-    if (reduce) return;
-    const r = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * strength);
-    y.set((e.clientY - (r.top + r.height / 2)) * strength);
-  };
-  const reset = () => { x.set(0); y.set(0); };
-  return (
-    <motion.div ref={ref} onMouseMove={onMove} onMouseLeave={reset} style={{ x: sx, y: sy }} className={`inline-block ${className}`}>
-      {children}
-    </motion.div>
-  );
-}
-
 /** Infinite horizontal marquee; speeds up with scroll velocity. */
 export function Marquee({ items, speed = 40, className = "" }) {
   const reduce = useReducedMotion();
@@ -145,24 +125,11 @@ export function ImageReveal({ src, alt = "", className = "", imgClassName = "", 
         alt={alt}
         loading="lazy"
         className={`w-full h-full object-cover ${pixel ? "pixel" : ""} ${imgClassName}`}
-        initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)", scale: 1.18 }}
-        animate={inView ? { clipPath: "inset(0% 0% 0% 0%)", scale: 1 } : undefined}
-        transition={{ duration: 1.4, ease: EASE_REVEAL, delay }}
+        initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
+        animate={inView ? { clipPath: "inset(0% 0% 0% 0%)" } : undefined}
+        transition={{ duration: 0.8, ease: EASE, delay }}
       />
     </div>
-  );
-}
-
-/** Vertical parallax for children. */
-export function Parallax({ children, offset = 80, className = "" }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
-  const reduce = useReducedMotion();
-  return (
-    <motion.div ref={ref} style={{ y: reduce ? 0 : y }} className={className}>
-      {children}
-    </motion.div>
   );
 }
 

@@ -11,7 +11,7 @@ const HINT_RULES = [
 export default function Guardrails() {
   return (
     <>
-      <PageHero index={4} label="Guardrails" lines={["Rules it", "cannot break."]}
+      <PageHero index={4} label="Guardrails" lines={["Rules it", "cannot break"]}
         lead="A tool that names a vehicle can send an investigation the wrong way. Each rule below is enforced in code and checked by a test, several of them with property-based tests that generate thousands of random reads." />
 
       <section className="gutter pb-[12vh]">
@@ -26,7 +26,7 @@ export default function Guardrails() {
       </section>
 
       <section className="gutter py-[12vh] border-t rule">
-        <SectionHead index={2} label="Investigator hints" title={["A witness can help,", "but never overrule."]}
+        <SectionHead index={2} label="Investigator hints" title={["A witness can help,", "but never overrule"]}
           aside="Hints fill only positions the video could not read. Where video and hint disagree, the position becomes ? and the conflict is written into the report." />
         <div className="mt-14 space-y-4">
           {HINT_RULES.map(([video, hint, out, d], i) => (
@@ -41,7 +41,7 @@ export default function Guardrails() {
       </section>
 
       <section className="gutter py-[12vh] border-t rule">
-        <SectionHead index={3} label="Summaries" title={["Every sentence", "is checked."]} />
+        <SectionHead index={3} label="Summaries" title={["Every sentence", "is checked"]} />
         <div className="grid md:grid-cols-3 gap-6 mt-14">
           {[
             ["Template by default", "The case summary is generated from the evidence with a fixed template. An optional local LLM (Ollama) can rewrite it."],
