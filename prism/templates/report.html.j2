@@ -167,7 +167,8 @@ make/model {{ c.breakdown.make_model | f2 }}</td>
 <table class="kv">
   <thead><tr><th>Track Attribute</th><th>Observed Output</th></tr></thead>
   <tbody>
-  <tr><th>Seen</th><td>{{ t.first_seen_sec | ts }} &ndash; {{ t.last_seen_sec | ts }} ({{ t.n_detections }} detections, YOLO class <code>{{ t.yolo_class }}</code>){% if t.merged_track_ids %}<br><span class="mute small">{{ t.merge_note }}</span>{% endif %}</td></tr>
+  {% set src = case.crosscam.clip_b if (t.clip_role == 'B' and case.crosscam) else case.clip %}
+  <tr><th>Seen</th><td>{% if src and src.media == 'image' %}In the photo (YOLO class <code>{{ t.yolo_class }}</code>){% else %}{{ t.first_seen_sec | ts }} &ndash; {{ t.last_seen_sec | ts }} ({{ t.n_detections }} detections, YOLO class <code>{{ t.yolo_class }}</code>){% endif %}{% if t.merged_track_ids %}<br><span class="mute small">{{ t.merge_note }}</span>{% endif %}</td></tr>
   <tr><th>Colour</th><td>{{ t.attributes.color.value }} ({{ t.attributes.color.confidence | f2 }}){% if t.attributes.color.uncertain and t.attributes.color.top2 %} &mdash; top 2: {% for l, p in t.attributes.color.top2 %}{{ l }} {{ p | f2 }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</td></tr>
   <tr><th>Body type</th><td>{{ t.attributes.body_type.value }} ({{ t.attributes.body_type.confidence | f2 }}){% if t.attributes.body_type.source %} &mdash; <code>{{ t.attributes.body_type.source }}</code>{% endif %}</td></tr>
   {% if t.attributes.make_model %}<tr><th>Make/model</th><td>{{ t.attributes.make_model.value }} ({{ t.attributes.make_model.confidence | f2 }}){% if t.attributes.make_model.uncertain %} &mdash; uncertain, not used{% endif %}</td></tr>{% endif %}
@@ -258,7 +259,7 @@ make/model {{ c.breakdown.make_model | f2 }}</td>
   <thead><tr><th>Item</th><th>Value</th></tr></thead>
   <tbody>
   {% for c in cu.clips %}
-  <tr><th>Clip {{ loop.index }}: {{ c.name }}</th><td><span class="hash">SHA-256: {{ c.sha256 }}</span><br>{{ c.width }}&times;{{ c.height }}, {{ c.fps }} fps, {{ c.frame_count }} frames, {{ c.duration_sec }} s, median brightness {{ c.median_brightness }}{% if c.low_light %} (LOW LIGHT){% endif %}</td></tr>
+  <tr><th>{{ 'Photo' if c.media == 'image' else 'Clip' }} {{ loop.index }}: {{ c.name }}</th><td><span class="hash">SHA-256: {{ c.sha256 }}</span><br>{{ c.width }}&times;{{ c.height }}{% if c.media == 'image' %} still image (analysed as one frame){% else %}, {{ c.fps }} fps, {{ c.frame_count }} frames, {{ c.duration_sec }} s{% endif %}, median brightness {{ c.median_brightness }}{% if c.low_light %} (LOW LIGHT){% endif %}</td></tr>
   {% endfor %}
   <tr><th>Config hash</th><td class="mono">{{ cu.config_hash }}</td></tr>
   {% if cu.registry_sha256 %}<tr><th>Registry SHA-256</th><td class="mono">{{ cu.registry_sha256 }}</td></tr>{% endif %}

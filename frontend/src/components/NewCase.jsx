@@ -26,22 +26,49 @@ function UploadBar({ up }) {
   );
 }
 
+// Videos, or a still photo (analysed as a one-frame clip). Must match ALLOWED_EXT in backend/app/main.py.
+const VIDEO_EXT = [".mp4", ".avi", ".mov", ".mkv", ".m4v", ".webm"];
+const IMAGE_EXT = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"];
+const ACCEPT = ["video/*", "image/*", ...VIDEO_EXT, ...IMAGE_EXT].join(",");
+const extOf = (name) => (name.match(/\.[^.]+$/)?.[0] || "").toLowerCase();
+export const isPhoto = (file) => Boolean(file) && (file.type?.startsWith("image/") || IMAGE_EXT.includes(extOf(file.name)));
+const isAccepted = (file) => isPhoto(file) || file.type?.startsWith("video/") || VIDEO_EXT.includes(extOf(file.name));
+
 function DropZone({ label, file, onFile }) {
   const [over, setOver] = useState(false);
+  const [bad, setBad] = useState("");
+  const photo = isPhoto(file);
+  // a small preview of a chosen photo, released when it changes
+  const preview = useMemo(() => (photo ? URL.createObjectURL(file) : null), [file, photo]);
+  useEffect(() => () => { if (preview) URL.revokeObjectURL(preview); }, [preview]);
+  const take = (f) => {
+    if (!f) return;
+    if (!isAccepted(f)) { setBad(`${f.name}: not a video or photo`); return; }
+    setBad("");
+    onFile(f);
+  };
   return (
     <label
       onDragOver={(e) => { e.preventDefault(); setOver(true); }}
       onDragLeave={() => setOver(false)}
-      onDrop={(e) => { e.preventDefault(); setOver(false); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); }}
+      onDrop={(e) => { e.preventDefault(); setOver(false); take(e.dataTransfer.files[0]); }}
       className={`group flex flex-col items-center justify-center border border-dashed rounded-xl p-8 cursor-pointer text-center transition-colors duration-150 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 ${over ? "border-[rgb(238_240_243/.5)] bg-slate-100" : file ? "border-green-300 bg-green-50" : "border-slate-300 bg-slate-50 hover:bg-slate-100"}`}
     >
-      <input type="file" accept="video/*,.mp4,.avi,.mov,.mkv" className="sr-only" onChange={(e) => e.target.files[0] && onFile(e.target.files[0])} />
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden
-        className={`transition-colors duration-150 ${file ? "text-green-800" : over ? "text-slate-700" : "text-slate-500 group-hover:text-slate-700"}`}>
-        <rect x="3" y="5" width="13" height="14" rx="2" /><path d="M16 10l5-3v10l-5-3z" />
-      </svg>
+      <input type="file" accept={ACCEPT} className="sr-only" onChange={(e) => take(e.target.files[0])} />
+      {preview ? (
+        <img src={preview} alt="" className="max-h-28 max-w-full rounded-md object-contain" />
+      ) : (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden
+          className={`transition-colors duration-150 ${file ? "text-green-800" : over ? "text-slate-700" : "text-slate-500 group-hover:text-slate-700"}`}>
+          <rect x="3" y="5" width="13" height="14" rx="2" /><path d="M16 10l5-3v10l-5-3z" />
+        </svg>
+      )}
       <div className="mt-3 text-[19px] font-normal tracking-[-0.01em]">{label}</div>
-      <div className="label-mono mt-1">{file ? `${file.name} · ${(file.size / 1e6).toFixed(1)} MB` : "Drag a CCTV clip here or click to choose"}</div>
+      <div className="label-mono mt-1">
+        {file ? `${photo ? "photo" : "video"} · ${file.name} · ${(file.size / 1e6).toFixed(1)} MB` : "Drag a CCTV clip or a photo here, or click to choose"}
+      </div>
+      {bad && <div className="text-xs text-red-600 mt-2">{bad}</div>}
+      {!file && <div className="text-xs text-slate-500 mt-2">Video: MP4, MOV, AVI, MKV, WebM · Photo: JPG, PNG, WebP, BMP, TIFF</div>}
     </label>
   );
 }
@@ -137,7 +164,7 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
       <div className="flex items-center justify-between">
         <h2 className="text-[30px] leading-none">New case</h2>
         <div className="relative flex rounded-[10px] border border-slate-300 p-1 text-sm" role="tablist" aria-label="Case type">
-          {[["single", "Single clip"], ["crosscam", "Two cameras"], ["search", "Hint-only search"]].map(([k, l]) => (
+          {[["single", "Clip or photo"], ["crosscam", "Two cameras"], ["search", "Hint-only search"]].map(([k, l]) => (
             <button key={k} role="tab" aria-selected={mode === k} onClick={() => setMode(k)} className={`relative px-4 py-1.5 rounded-md transition-colors duration-150 ${mode === k ? "text-slate-900" : "text-slate-500 hover:text-white"}`}>
               {mode === k && <motion.span layoutId="mode-pill" className="absolute inset-0 rounded-md bg-slate-200 shadow-[inset_0_1px_0_rgb(255_255_255/.08)]" transition={{ duration: 0.25, ease: EASE }} />}
               <span className="relative">{l}</span>
@@ -148,8 +175,8 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
 
       {mode !== "search" && (
         <div className={`grid gap-4 ${mode === "crosscam" ? "md:grid-cols-2" : ""}`}>
-          <DropZone label={mode === "crosscam" ? "Camera A clip" : "CCTV clip"} file={fileA} onFile={setFileA} />
-          {mode === "crosscam" && <DropZone label="Camera B clip" file={fileB} onFile={setFileB} />}
+          <DropZone label={mode === "crosscam" ? "Camera A clip or photo" : "CCTV clip or photo"} file={fileA} onFile={setFileA} />
+          {mode === "crosscam" && <DropZone label="Camera B clip or photo" file={fileB} onFile={setFileB} />}
         </div>
       )}
 
@@ -188,7 +215,8 @@ export default function NewCase({ health, onStarted, onSearchResult }) {
       {err && <div className="bg-red-50 text-red-700 border border-red-200 rounded-lg p-3 text-sm">{err}</div>}
       <div className="flex flex-wrap items-center gap-4">
         <button className="btn-primary !h-12 !px-6 !text-[15px]" disabled={!canStart || busy} onClick={start}>
-          {busy ? (mode === "search" ? "Searching…" : "Uploading…") : mode === "search" ? "Search registry" : "Analyse footage"}
+          {busy ? (mode === "search" ? "Searching…" : "Uploading…") : mode === "search" ? "Search registry"
+            : mode === "single" && isPhoto(fileA) ? "Analyse photo" : "Analyse footage"}
           <Icon name="arrow" />
         </button>
         <span className="label-mono">All models run locally; footage never leaves this machine.</span>

@@ -244,6 +244,8 @@ class ClipMeta(BaseModel):
     duration_sec: float
     median_brightness: float
     low_light: bool
+    # "image": a still photo, analysed as a one-frame clip (fps 0, one frame, duration 0)
+    media: Literal["video", "image"] = "video"
 
 
 class ArtifactHash(BaseModel):

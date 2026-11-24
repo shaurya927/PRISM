@@ -173,7 +173,8 @@ def _positions(ps: Sequence[int]) -> tuple[str, str]:
     return txt, ", ".join(f"POS-{p}" for p in ps1)
 
 
-def _track_sentences(t: TrackResult) -> list[str]:
+def _track_sentences(t: TrackResult, still: bool = False) -> list[str]:
+    """Sentences for one vehicle. still: the case is a photo (no time range, one frame and its CLAHE copy)."""
     out: list[str] = []
     a = t.attributes
     desc = " ".join(
@@ -187,16 +188,22 @@ def _track_sentences(t: TrackResult) -> list[str]:
                 support.append(rid)
     cites = ", ".join(support[:3] or [f.read_id for f in t.frames[:3]]) or f"T{t.track_id}"
     hint_only = t.n_detections == 0 and t.yolo_class.startswith("n/a")
+    where = "in the photo" if still else f"seen {_ts(t.first_seen_sec)}-{_ts(t.last_seen_sec)}"
     if hint_only:
         out.append(f"This is a hint-only search for `{fp.text or '(empty)'}` with no video evidence [T{t.track_id}].")
+    elif fp.length and fp.n_reads and still:
+        out.append(
+            f"Vehicle {t.track_id} ({desc}, {where}) showed the plate `{fp.video_text}`, read from the photo and its "
+            f"contrast-enhanced copy [{cites}]."
+        )
     elif fp.length and fp.n_reads:
         out.append(
-            f"Vehicle track {t.track_id} ({desc}, seen {_ts(t.first_seen_sec)}-{_ts(t.last_seen_sec)}) showed the "
+            f"Vehicle track {t.track_id} ({desc}, {where}) showed the "
             f"plate `{fp.video_text}` across {fp.n_reads} plate reads [{cites}]."
         )
     else:
         out.append(
-            f"Vehicle track {t.track_id} ({desc}, seen {_ts(t.first_seen_sec)}-{_ts(t.last_seen_sec)}) gave no "
+            f"Vehicle {'' if still else 'track '}{t.track_id} ({desc}, {where}) gave no "
             f"readable plate [T{t.track_id}]."
         )
     hint_pos = [p.index for p in fp.positions if p.source == "investigator-supplied"]
@@ -254,8 +261,9 @@ def _primary_tracks(case: CaseResult, limit: int = 3) -> list[TrackResult]:
 
 def template_summary(case: CaseResult) -> list[str]:
     sents: list[str] = []
+    still = bool(case.clip and case.clip.media == "image")
     for t in _primary_tracks(case):
-        sents += _track_sentences(t)
+        sents += _track_sentences(t, still)
     if case.crosscam:
         for pr in case.crosscam.pairs:
             if pr.same_vehicle and pr.combined_match and pr.combined_match.top_candidates:

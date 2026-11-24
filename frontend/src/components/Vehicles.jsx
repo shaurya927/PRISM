@@ -24,13 +24,14 @@ function HiddenNote({ hidden }) {
   );
 }
 
-export default function Vehicles({ tracks, selected, onSelect, primaryId, label, hidden }) {
+export default function Vehicles({ tracks, selected, onSelect, primaryId, label, hidden, still = false }) {
+  const where = still ? "photo" : "clip";
   if (!tracks?.length) {
     return (
       <div>
         <Empty>{hidden?.length
-          ? "No vehicle in this clip showed a readable plate, so none is listed."
-          : "No vehicle tracks of at least 5 frames were found in this clip."}</Empty>
+          ? `No vehicle in this ${where} showed a readable plate, so none is listed.`
+          : still ? "No vehicle was detected in this photo." : "No vehicle tracks of at least 5 frames were found in this clip."}</Empty>
         <HiddenNote hidden={hidden} />
       </div>
     );
@@ -60,7 +61,9 @@ export default function Vehicles({ tracks, selected, onSelect, primaryId, label,
                 {t.attributes.make_model && <AttrChip label="model" attr={t.attributes.make_model} />}
               </div>
               <div className="text-xs text-slate-500">
-                seen {ts(t.first_seen_sec)}–{ts(t.last_seen_sec)} · {t.frames.length} plate reads · YOLO {t.yolo_class}
+                {still
+                  ? <>in the photo · {t.frames.length ? "plate read from the photo and a contrast-enhanced copy" : "no plate found"} · YOLO {t.yolo_class}</>
+                  : <>seen {ts(t.first_seen_sec)}–{ts(t.last_seen_sec)} · {t.frames.length} plate reads · YOLO {t.yolo_class}</>}
               </div>
               {t.merged_track_ids?.length > 0 && (
                 <div className="text-xs text-blue-700" title={t.merge_note || ""}>

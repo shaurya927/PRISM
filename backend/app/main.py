@@ -62,6 +62,7 @@ from prism.registry import cached_registry, load_registry  # noqa: E402
 from prism.report import write_report  # noqa: E402
 from prism.whatif import WhatIfError, run_whatif  # noqa: E402
 from prism.runtime import gpu_name, resolve_device  # noqa: E402
+from prism.stages.track import IMAGE_EXTS, VIDEO_EXTS  # noqa: E402
 from prism.schemas import CaseResult, JobState, RescoreRequest, SearchRequest, WhatIfRequest, WhatIfResult  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -69,7 +70,7 @@ log = logging.getLogger("prism.api")
 
 CFG = load_config()
 RUNS_DIR.mkdir(parents=True, exist_ok=True)
-ALLOWED_EXT = {".mp4", ".avi", ".mov", ".mkv", ".m4v", ".webm"}
+ALLOWED_EXT = VIDEO_EXTS | IMAGE_EXTS  # a still photo is analysed as a one-frame clip
 MAX_UPLOAD_BYTES = 1024 * 1024 * 1024  # 1 GB
 
 # OpenAPI docs live under /api so the website can use /docs.

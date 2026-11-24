@@ -248,9 +248,10 @@ def analyze_clip(
     from prism.stages.ocr import read_plate_crop_dist
     from prism.stages.plate_detect import collect_plate_samples
     from prism.stages.super_res import write_sr_artifact
-    from prism.stages.track import run_tracking
+    from prism.stages.track import is_image, run_tracking
 
     video_path = Path(video_path)
+    still = is_image(video_path)  # a photo runs as a one-frame clip (prism.stages.track)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     timings: dict[str, float] = {}
@@ -268,15 +269,18 @@ def analyze_clip(
     stats, tracks, yolo_name = run_tracking(
         video_path, cfg.track, cfg.ingest, hub.device, lambda f: progress("tracking", f)
     )
-    hub.versions["tracker"] = f"ultralytics {yolo_name} + {cfg.track.tracker}"
+    hub.versions["tracker"] = (f"ultralytics {yolo_name} (still image: detection only)" if still
+                               else f"ultralytics {yolo_name} + {cfg.track.tracker}")
     timings["tracking" + sfx] = round(time.perf_counter() - t, 2)
     meta = ClipMeta(
         name=video_path.name, sha256=clip_hash, width=stats.width, height=stats.height, fps=stats.fps,
         frame_count=stats.frame_count, duration_sec=stats.duration_sec,
         median_brightness=stats.median_brightness, low_light=stats.low_light,
+        media="image" if still else "video",
     )
     if not tracks:
-        warnings.append(f"No vehicle tracks of at least {cfg.track.min_track_frames} frames were found in {meta.name}.")
+        warnings.append(f"No vehicle was detected in the photo {meta.name}." if still else
+                        f"No vehicle tracks of at least {cfg.track.min_track_frames} frames were found in {meta.name}.")
 
     t = time.perf_counter()
     detector = hub.plate_detector()

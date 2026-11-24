@@ -25,6 +25,7 @@ import numpy as np
 
 from prism.config import PlateConfig
 from prism.runtime import import_vendor_first
+from prism.stages.track import iter_frames
 
 log = logging.getLogger("prism.plate_detect")
 
@@ -164,7 +165,7 @@ def collect_plate_samples(
     n_vehicle_crops: int,
     progress: Optional[Callable[[float], None]] = None,
 ) -> dict[int, TrackPlates]:
-    """Second pass over the video: crop each tracked vehicle, find its plate, keep the sharpest."""
+    """Second pass over the video (or the photo): crop each tracked vehicle, find its plate, keep the sharpest."""
     wanted: dict[int, list[tuple[int, object]]] = {}
     for tid, tr in tracks.items():
         for ob in _evenly(tr.observations, cfg.max_obs_per_track):
@@ -176,14 +177,9 @@ def collect_plate_samples(
     veh_heaps: dict[int, list] = {tid: [] for tid in tracks}
     counter = itertools.count()
     last = max(wanted)
-    cap = cv2.VideoCapture(str(video_path))
-    idx = -1
+    frames = iter_frames(video_path)  # a still photo is frame 0
     try:
-        while True:
-            ok, frame = cap.read()
-            if not ok:
-                break
-            idx += 1
+        for idx, frame in frames:
             if idx > last:
                 break
             if idx not in wanted:
@@ -236,7 +232,7 @@ def collect_plate_samples(
             if progress:
                 progress(min(1.0, idx / max(1, last)))
     finally:
-        cap.release()
+        frames.close()  # releases the video reader even when we stop before the last frame
     for tid in tracks:
         out[tid].samples = sorted((e[2] for e in plate_heaps[tid]), key=lambda s: s.frame_idx)
         out[tid].vehicle_crops = sorted((e[2] for e in veh_heaps[tid]), key=lambda v: -v.sharpness)

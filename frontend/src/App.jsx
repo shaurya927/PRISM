@@ -250,6 +250,7 @@ export default function App() {
                 {result.crosscam && <span className="text-slate-500 font-normal"> + {result.crosscam.clip_b?.name}</span>}
               </h2>
               <span className="text-xs font-mono text-slate-500">case {result.case_id}</span>
+              {result.clip?.media === "image" && <span className="chip">photo · {result.clip.width}×{result.clip.height}</span>}
               {result.clip?.low_light && <span className="chip bg-indigo-900 text-indigo-800"><Icon name="moon" size={12} />low light · median brightness {fmt2(result.clip.median_brightness)}</span>}
               {result.warnings?.map((w, i) => (
                 <span key={i} className="chip bg-amber-100 text-amber-800 max-w-full" style={{ whiteSpace: "normal", height: "auto", lineHeight: 1.45 }}>{w}</span>
@@ -271,7 +272,7 @@ export default function App() {
             </div>
             <div>
               {tab === "vehicles" && <Vehicles tracks={result.tracks} selected={trackId} primaryId={result.primary_track_id}
-                hidden={(result.hidden_tracks || []).filter((h) => h.clip_role !== "B")}
+                hidden={(result.hidden_tracks || []).filter((h) => h.clip_role !== "B")} still={result.clip?.media === "image"}
                 label={result.crosscam ? "Camera A" : null} onSelect={(id) => { setTrackId(id); setTab("evidence"); }} />}
               {tab === "evidence" && <Evidence track={track} />}
               {tab === "shortlist" && <Shortlist track={track} />}

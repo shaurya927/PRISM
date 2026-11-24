@@ -189,7 +189,10 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 
 ## Investigator app
 
-1. **New case**: one clip, two clips (cross-camera) or hint-only search; plate-hint mask helper; τ slider; CPU/GPU badge.
+1. **New case**: one clip or photo, two clips or photos (cross-camera) or hint-only search; plate-hint mask helper; τ slider; CPU/GPU badge.
+   A still photo (JPG, PNG, WebP, BMP, TIFF) runs through the same stages as a one-frame clip: the detector runs
+   once (class-agnostic NMS), each vehicle is a one-frame track, and its plate is read once plus the CLAHE copy.
+   Nothing is repeated to look like more frames, so a photo needs a clearer plate than a clip to commit a character.
 2. **Live progress** per stage.
 3. **Vehicles found**: track cards; amber `?` unknown, blue investigator-supplied, red conflicts; colour/body chips.
 4. **Evidence**: plate evidence strip (votes per position and read), frame-by-frame table with raw + CLAHE crops,
@@ -259,7 +262,7 @@ runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*
 
 | Method | Path | Purpose |
 |---|---|---|
-| POST | `/api/jobs` | multipart `file`, optional `hint`, `threshold` → `job_id` |
+| POST | `/api/jobs` | multipart `file` (video or photo), optional `hint`, `threshold` → `job_id` |
 | GET | `/api/jobs/{job_id}` | status, per-stage progress, result |
 | POST | `/api/jobs/{job_id}/rescore` | JSON `{threshold, hint}`; query `track_id`, `clear_hint` |
 | POST | `/api/jobs/{job_id}/whatif` | JSON `{track_id, slots: {position: char}, color, body_type, threshold}` → hypothetical shortlist, stability, differentials (read-only) |

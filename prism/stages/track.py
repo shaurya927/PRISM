@@ -5,6 +5,11 @@
 * Drops tracks seen in fewer than 5 processed frames.
 * On CPU every 2nd frame is processed (ByteTrack copes with the gap).
 * Median frame brightness < 60 flags the clip as low light.
+
+A still photo (IMAGE_EXTS) goes through the same stages as a one-frame clip: the detector runs once
+(class-agnostic NMS, so one vehicle is not boxed twice as car and truck), every vehicle it finds is a
+one-frame track (the five-frame minimum is for video), and its time is 0. Nothing is duplicated to
+look like more frames: a photo gives each plate one read plus its CLAHE copy, like any single frame.
 """
 
 from __future__ import annotations
@@ -61,6 +66,40 @@ class VideoStats:
     low_light: bool
 
 
+IMAGE_EXTS = frozenset({".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"})
+VIDEO_EXTS = frozenset({".mp4", ".avi", ".mov", ".mkv", ".m4v", ".webm"})
+
+
+def is_image(path: Path | str) -> bool:
+    return Path(path).suffix.lower() in IMAGE_EXTS
+
+
+def read_image(path: Path | str) -> np.ndarray:
+    """A still photo as a BGR array, turned upright by its EXIF orientation (phone photos)."""
+    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), cv2.IMREAD_COLOR)
+    if img is None:
+        raise ValueError(f"Cannot read image: {Path(path).name} (not a JPEG, PNG, BMP, WebP or TIFF image?)")
+    return img
+
+
+def iter_frames(path: Path | str):
+    """(frame index, BGR frame) for every frame of a video, or the single frame 0 of a still photo."""
+    if is_image(path):
+        yield 0, read_image(path)
+        return
+    cap = cv2.VideoCapture(str(path))
+    try:
+        idx = -1
+        while True:
+            ok, frame = cap.read()
+            if not ok:
+                break
+            idx += 1
+            yield idx, frame
+    finally:
+        cap.release()
+
+
 def probe_video(path: Path) -> tuple[int, int, float, int]:
     cap = cv2.VideoCapture(str(path))
     if not cap.isOpened():
@@ -91,6 +130,48 @@ def load_detector(cfg: TrackConfig, device: str):
     return model, name
 
 
+def detect_still(
+    image_path: Path,
+    track_cfg: TrackConfig,
+    ingest_cfg: IngestConfig,
+    device: str,
+    progress: Optional[Callable[[float], None]] = None,
+) -> tuple[VideoStats, dict[int, Track], str]:
+    """Stage 1 for a photo: one detection pass; each vehicle becomes a one-frame track, largest first."""
+    img = read_image(image_path)
+    H, W = img.shape[:2]
+    model, model_name = load_detector(track_cfg, device)
+    res = model.predict(
+        img,
+        classes=list(track_cfg.classes),
+        conf=track_cfg.det_conf,
+        imgsz=track_cfg.imgsz,
+        agnostic_nms=True,
+        device=0 if device == "cuda" else "cpu",
+        verbose=False,
+    )[0]
+    dets = []
+    boxes = res.boxes
+    if boxes is not None and len(boxes):
+        xyxy = boxes.xyxy.cpu().numpy()
+        confs = boxes.conf.cpu().numpy()
+        cls = boxes.cls.cpu().numpy().astype(int)
+        for (x1, y1, x2, y2), c, k in zip(xyxy, confs, cls):
+            name = track_cfg.classes.get(int(k))
+            if name is not None:
+                dets.append(((x2 - x1) * (y2 - y1), pad_box(x1, y1, x2, y2, track_cfg.crop_pad, W, H), float(c), name))
+    dets.sort(key=lambda d: -d[0])
+    tracks = {i: Track(i, [TrackObs(0, 0.0, box, conf, name)]) for i, (_, box, conf, name) in enumerate(dets, start=1)}
+    log.info("still image: %d vehicle(s) detected", len(tracks))
+    small = cv2.resize(img, (160, 90))
+    med = float(cv2.cvtColor(small, cv2.COLOR_BGR2GRAY).mean())
+    stats = VideoStats(width=W, height=H, fps=0.0, frame_count=1, duration_sec=0.0,
+                       median_brightness=round(med, 2), low_light=med < ingest_cfg.low_light_brightness)
+    if progress:
+        progress(1.0)
+    return stats, tracks, model_name
+
+
 def run_tracking(
     video_path: Path,
     track_cfg: TrackConfig,
@@ -98,6 +179,8 @@ def run_tracking(
     device: str,
     progress: Optional[Callable[[float], None]] = None,
 ) -> tuple[VideoStats, dict[int, Track], str]:
+    if is_image(video_path):
+        return detect_still(Path(video_path), track_cfg, ingest_cfg, device, progress)
     W, H, fps, n_frames = probe_video(video_path)
     model, model_name = load_detector(track_cfg, device)
     stride = track_cfg.frame_stride_gpu if device == "cuda" else track_cfg.frame_stride_cpu
