@@ -18,6 +18,7 @@ import Guardrails from "./site/pages/Guardrails.jsx";
 import About from "./site/pages/About.jsx";
 import NotFound from "./site/pages/NotFound.jsx";
 import { AuthPage, AuthProvider, RequireAuth } from "./auth.jsx";
+import Logo from "./site/Logo.jsx";
 
 // The investigator app is loaded only when /app is opened.
 const InvestigatorApp = lazy(() => import("./App.jsx"));
@@ -28,7 +29,7 @@ function AppLoading() {
     <div className="site app min-h-screen grid place-items-center">
       <div className="w-[min(420px,80vw)]">
         <div className="topbar__logo">
-          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+          <Logo size={27} />
           prism
         </div>
         <div className="label-mono mt-6 mb-3">loading investigator</div>

@@ -16,9 +16,16 @@
   @media screen { body { padding: 32px 24px 64px; } }
   code, .mono { font-family: var(--mono); }
 
-  /* faint diagonal watermark, repeated on every printed page */
-  .wm { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-38deg); z-index: 10; pointer-events: none;
-        font: 700 150px/1 var(--sans); letter-spacing: 48px; color: rgba(16, 39, 63, 0.045); white-space: nowrap; }
+  /* Background watermark on every printed page (position: fixed repeats on each page in Chromium):
+     the PRISM mark large in the centre, and a diagonal line with the case ID so a printed or
+     forwarded page can be traced back to its case. Light enough that text and tables stay readable. */
+  .wm { position: fixed; inset: 0; z-index: 10; pointer-events: none; display: grid; place-items: center; overflow: hidden; }
+  .wm__mark { width: 62%; max-width: 520px; opacity: .065; }
+  .wm__mark svg { display: block; width: 100%; height: auto; }
+  .wm__text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-38deg); white-space: nowrap;
+              font: 700 22px/1 var(--sans); letter-spacing: 6px; text-transform: uppercase; color: rgba(16, 39, 63, 0.08); }
+  .mast__brand { display: flex; align-items: center; gap: 12px; }
+  .mast__brand svg { width: 30px; height: auto; flex: none; }
 
   /* masthead */
   .mast { border-top: 5px solid var(--navy); border-bottom: 3px solid var(--navy); padding: 16px 0 12px; margin-bottom: 26px; }
@@ -113,7 +120,13 @@
 </style>
 </head>
 <body>
-<div class="wm" aria-hidden="true">PRISM</div>
+{%- macro prism_mark() -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="236 52 616 836" fill="none" stroke="#2a2a2a" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><polygon points="436,65 250,290 436,420" fill="#e9e9e5"/><polygon points="447,75 700,180 447,255" fill="#c7c7c7"/><polygon points="512,245 705,190 705,365" fill="#868686"/><polygon points="715,200 828,345 715,420" fill="#ffffff"/><polygon points="838,350 705,588 440,585" fill="#bdbec2"/><polygon points="248,300 436,432 436,585 248,805" fill="#e8e8e8"/><polygon points="436,600 436,755 248,875 248,820" fill="#888888"/></svg>
+{%- endmacro %}
+<div class="wm" aria-hidden="true">
+  <div class="wm__mark">{{ prism_mark() }}</div>
+  <div class="wm__text">PRISM &middot; Case {{ case.case_id }} &middot; Decision support only</div>
+</div>
 
 {% macro plate_html(fp, cls='plate big') -%}
 <span class="{{ cls }}">{% for p in fp.positions %}{% if p.char == '?' %}<span class="{{ 'conf' if p.source == 'conflict' else 'q' }}">?</span>{% elif p.source == 'investigator-supplied' %}<span class="inv">{{ p.char }}</span>{% else %}{{ p.char }}{% endif %}{% endfor %}{% if not fp.positions %}<span class="q">(no plate read)</span>{% endif %}</span>
@@ -215,7 +228,7 @@ make/model {{ c.breakdown.make_model | f2 }}</td>
 {%- endmacro %}
 
 <div class="mast">
-  <div class="kicker">PRISM &middot; Forensic Evidence Dossier</div>
+  <div class="mast__brand">{{ prism_mark() }}<div class="kicker">PRISM &middot; Forensic Evidence Dossier</div></div>
   <h1>PRISM Forensic Report</h1>
   <div class="sub">Plate Recovery &amp; Identification from Surveillance Media</div>
   <div class="meta"><b>Case ID:</b> <code>{{ case.case_id }}</code><span class="sep">&middot;</span><b>Created:</b> <code>{{ case.created_at }}</code><span class="sep">&middot;</span><b>Mode:</b> <code>{{ case.mode }}</code><span class="sep">&middot;</span><b>PRISM Version:</b> <code>{{ case.prism_version }}</code></div>

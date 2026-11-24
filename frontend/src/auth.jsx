@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ClerkProvider, SignIn, SignUp, UserButton, useAuth } from "@clerk/react";
 import { setTokenGetter } from "./api.js";
 import { HighwayFeed, useClock } from "./site/fx.jsx";
+import Logo from "./site/Logo.jsx";
 
 export const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "";
 export const AUTH_ON = Boolean(CLERK_KEY);
@@ -174,7 +175,7 @@ export function AuthPage({ mode = "sign-in" }) {
       </div>
       <header className="auth__top">
         <a href="/" className="topbar__logo" aria-label="PRISM home">
-          <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+          <Logo size={25} />
           prism
         </a>
         <a href="/" className="auth__back label-mono">← back to the site</a>

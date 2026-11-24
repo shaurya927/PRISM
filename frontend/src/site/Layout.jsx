@@ -7,6 +7,7 @@ import { useSpotlight } from "./fx.jsx";
 import { CASES, NAV } from "./data/content.js";
 import { SiteCtx } from "./context.js";
 import Intro from "./Intro.jsx";
+import Logo from "./Logo.jsx";
 
 export { useSite } from "./context.js";
 
@@ -145,7 +146,7 @@ function Topbar({ menuOpen, onMenu, btnRef }) {
       {/* A full page load, not a router link: clearing the session flag makes the site start over from the
           intro (unless reduced motion is on, which always skips it). */}
       <a href="/" className="topbar__logo" aria-label="PRISM home, replays the intro" onClick={replayIntro}>
-        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        <Logo size={25} />
         prism
       </a>
       <MenuButton open={menuOpen} onClick={onMenu} btnRef={btnRef} />

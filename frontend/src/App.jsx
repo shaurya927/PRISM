@@ -14,6 +14,7 @@ import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
 import { Icon, fmt2 } from "./components/common.jsx";
 import { AccountButton } from "./auth.jsx";
+import Logo from "./site/Logo.jsx";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -39,7 +40,7 @@ function Header({ jobId, onNew }) {
     <header className={`app-top ${menu ? "is-menu" : ""}`}>
       {/* The logo goes to the project site's home page, like the logo on the site itself. */}
       <a href="/" className="topbar__logo" aria-label="PRISM home">
-        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
+        <Logo size={25} />
         prism
       </a>
       <span className="app-top__crumb label-mono hidden sm:inline">/ investigator</span>
