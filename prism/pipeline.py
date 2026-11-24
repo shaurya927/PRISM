@@ -357,9 +357,14 @@ def analyze_clip(
         ))
     order = shown
     if hidden:
+        # one short line per case; the per-track list is in hidden_tracks and under the vehicle grid
+        reasons: dict[str, int] = {}
+        for h in hidden:
+            key = "too few plate characters read" if h.reason.startswith("only ") else h.reason
+            reasons[key] = reasons.get(key, 0) + 1
         warnings.append(
-            f"{len(hidden)} tracked vehicle{'s' if len(hidden) != 1 else ''}{sfx} left off the dashboard: "
-            + "; ".join(f"track {h.track_id} ({h.reason})" for h in hidden) + "."
+            f"{len(hidden)} tracked vehicle{'s' if len(hidden) != 1 else ''}{sfx} left off the dashboard ("
+            + ", ".join(f"{n} {r}" for r, n in sorted(reasons.items(), key=lambda kv: -kv[1])) + ")."
         )
     progress("ocr", 1.0)
     timings["ocr" + sfx] = round(time.perf_counter() - t, 2)

@@ -248,7 +248,9 @@ export default function App() {
               </h2>
               <span className="text-xs font-mono text-slate-500">case {result.case_id}</span>
               {result.clip?.low_light && <span className="chip bg-indigo-900 text-indigo-800"><Icon name="moon" size={12} />low light · median brightness {fmt2(result.clip.median_brightness)}</span>}
-              {result.warnings?.map((w, i) => <span key={i} className="chip bg-amber-100 text-amber-800">{w}</span>)}
+              {result.warnings?.map((w, i) => (
+                <span key={i} className="chip bg-amber-100 text-amber-800 max-w-full" style={{ whiteSpace: "normal", height: "auto", lineHeight: 1.45 }}>{w}</span>
+              ))}
             </div>
             <ResultControls result={result} onRescore={rescore} busy={busy} />
             <div className="flex items-center border-b border-slate-300 px-1 overflow-x-auto">
