@@ -142,9 +142,10 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
   `W ≥ 0.9` **and** it holds `≥ 60%` of the evidence. A third, stricter check (`vote_min_consistency`, 40%)
   requires the winner to be read confidently in a reasonable share of one camera's reads that saw the position;
   it was added after a night test where a half-hidden `2` was read as `8` at 0.85 in 4 of 24 reads. Reads that
-  are not plate readings at all (PARSeq returning scene words such as `WATER` off a heavily blurred plate:
-  a length no Indian layout has, i.e. outside 7–11 characters, or more than a third of the confident characters
-  breaking every Indian layout) cast no votes. Both checks only remove evidence, so they can only add `?`.
+  are not plate readings at all (PARSeq returning scene words such as `WATER` off a heavily blurred plate, or a
+  painted phone number: not plate-shaped, a length no Indian layout has, i.e. outside 7–11 characters, on an
+  Indian plate, or more than a third of the confident characters breaking every Indian layout) cast no votes.
+  Both checks only remove evidence, so they can only add `?`.
 * **OCR cross-check.** Before fusion, fast-plate-ocr (a plate-trained model) reads the same raw/CLAHE crop
   through the same source gate. Its read is aligned to PARSeq's, and a committed character stays only if
   fast-plate-ocr read the same character there, or PARSeq's own confidence is at least 0.95; otherwise it
@@ -152,6 +153,11 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
   benchmark it cut committed-character error from 4.4% to 1.2% (hard plates 41% to 23%) for 3.8 points of
   recovery (ablation table below). `OCRConfig.cross_check_mode = "veto"` masks only confident contradictions
   instead (almost no effect in tuning); `cross_check = False` turns it off.
+* **Foreign plates.** Vehicles do not have to be Indian. A read that mixes letters and digits (or is a short
+  run of digits) but fits no Indian layout, such as `AB12CDE` or `7ABC123`, is treated as a foreign plate:
+  it is confidence-masked and cross-checked as usual, but the Indian format check and layout-constrained
+  decoding are not applied, and reads of 4–6 characters may vote. It is fused and listed like any other.
+  Foreign plates are not in the registry, so they end as `NO CONFIDENT MATCH` with that reason.
 * **Plate similarity.** Best of shifts −1/0/+1 (−0.05 per shift), 0.35 credit for `0/O 1/I 8/B 5/S 2/Z 6/G 4/A`,
   times coverage `min(1, |K|/6)`. Specificity = registry plates that fit the known characters exactly.
 * **Score.** `0.65·plate + 0.20·colour + 0.15·body + 0.05·make/model`; low light → `0.75 / 0.10`.
@@ -402,10 +408,16 @@ the records you are authorised to use into the same JSON fields (`registry_id`, 
 `body_type`, `make`, `model`, `owner_region`) and start the server with `PRISM_REGISTRY_PATH=path\to\file.json`.
 
 **One vehicle, one track.** ByteTrack sometimes gives one vehicle several IDs (a second box on the same car,
-or a new ID after an occlusion). `prism/track_merge.py` folds them into one track when their plates agree on
-at least 6 known characters with no conflict, both are plate-length (8+ characters), they are the same class
-group (two-wheelers never merge with cars), and their boxes never appear apart in the same frame. The card
-then shows "merged tracker IDs …". Plate frames are ranked by plate width × `min(1, sharpness / 1000)`, so
+or a new ID after an occlusion). `prism/track_merge.py` folds them into one track on any of three kinds of
+evidence: their plates (Indian or foreign, 6+ characters, not a word) agree on at least 6 known characters; a
+second box sits on the same vehicle (one box covers 85% of the other, bottoms level) in 80% of the frames they
+share; or one ID ends and the other begins within 0.8 s where the vehicle was heading. They are never merged
+across class groups (two-wheelers never merge with cars), when their plates conflict, or when their boxes
+appear apart in the same frame. The card then shows "merged tracker IDs …" and why.
+
+**Clean dashboard.** A tracked vehicle is listed only if at least 4 plate characters were read, the text is
+plate-shaped (any country), and the vehicle is at least 48 px on its short side. The others are kept in the
+case as `hidden_tracks` with their reason, counted under the vehicle grid and listed in the case warnings. Plate frames are ranked by plate width × `min(1, sharpness / 1000)`, so
 clear close-ups are kept over small far crops whose Laplacian variance is inflated by noise.
 
 **Make/model outside the registry.** OpenCLIP also scores 27 common makes that are not in the synthetic

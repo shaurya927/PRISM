@@ -268,6 +268,7 @@ export default function App() {
             </div>
             <div>
               {tab === "vehicles" && <Vehicles tracks={result.tracks} selected={trackId} primaryId={result.primary_track_id}
+                hidden={(result.hidden_tracks || []).filter((h) => h.clip_role !== "B")}
                 label={result.crosscam ? "Camera A" : null} onSelect={(id) => { setTrackId(id); setTab("evidence"); }} />}
               {tab === "evidence" && <Evidence track={track} />}
               {tab === "shortlist" && <Shortlist track={track} />}

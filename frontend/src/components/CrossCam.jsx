@@ -50,7 +50,8 @@ export default function CrossCam({ caseResult }) {
       })}
       <details className="card p-4">
         <summary className="cursor-pointer font-medium">All camera B tracks ({cc.tracks_b.length})</summary>
-        <div className="mt-3"><Vehicles tracks={cc.tracks_b} selected={null} onSelect={() => {}} /></div>
+        <div className="mt-3"><Vehicles tracks={cc.tracks_b} selected={null} onSelect={() => {}}
+          hidden={(caseResult.hidden_tracks || []).filter((h) => h.clip_role === "B")} /></div>
       </details>
     </div>
   );

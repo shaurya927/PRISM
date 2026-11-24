@@ -21,7 +21,7 @@ from dataclasses import dataclass
 from typing import Iterable, Optional, Sequence
 
 from prism.config import FusionConfig
-from prism.plate_grammar import ALNUM, UNKNOWN, format_mask
+from prism.plate_grammar import ALNUM, UNKNOWN, format_mask, is_indian_like, plate_shaped, uses_indian_rules
 from prism.schemas import FrameRead, FusedPlate, FusedPosition, VoteCell
 
 
@@ -63,14 +63,21 @@ class ReadObservation:
         """False if the format check had to mask too many confident characters: the OCR read
         something that is not a plate (a word, a logo). Such reads cast no votes."""
         n = len(self.chars)
-        # Every supported layout is 8-11 characters; one character lost at the plate edge gives 7.
-        # Any other length cannot be this plate (PARSeq reading signboard text off a blurred plate,
-        # e.g. "COLLEYWORDIA"): on the hard synthetic third such reads caused most committed errors.
-        if n not in PLAUSIBLE_READ_LENGTHS:
+        # Every supported Indian layout is 8-11 characters; one character lost at the plate edge gives
+        # 7. Longer reads cannot be a plate (PARSeq reading signboard text off a blurred plate, e.g.
+        # "COLLEYWORDIA"): on the hard synthetic third such reads caused most committed errors.
+        # Shorter reads (4-6) can be a foreign plate; fuse_reads drops them when the vehicle's plate
+        # is Indian, so Indian plates keep the 7-11 rule.
+        if n < MIN_PLATE_LEN or n > max(PLAUSIBLE_READ_LENGTHS):
             return False
         kept = sum(1 for c in self.chars if c != UNKNOWN)
         confident = kept + self.format_masked
-        return confident == 0 or self.format_masked / confident <= MAX_FORMAT_MASKED_SHARE
+        if confident == 0:
+            return True
+        if self.format_masked / confident > MAX_FORMAT_MASKED_SHARE:
+            return False
+        # an Indian plate, or a plate from anywhere else; a word or phone number casts no vote
+        return is_indian_like(self.chars) or plate_shaped(self.chars)
 
     @property
     def known_conf_sum(self) -> float:
@@ -119,6 +126,8 @@ def align(read: Sequence[str], ref: Sequence[str]) -> list[Optional[int]]:
 
 PLAUSIBLE_LENGTHS = range(8, 12)  # every supported Indian layout is 8-11 characters
 PLAUSIBLE_READ_LENGTHS = range(7, 12)  # ... or one character short (lost at the plate edge)
+FOREIGN_LENGTHS = range(4, 12)    # plates elsewhere run from about 4 (short European) to 10 characters
+MIN_PLATE_LEN = 4
 MAX_LENGTH_DIFF = 2
 MAX_FORMAT_MASKED_SHARE = 1 / 3
 
@@ -131,7 +140,11 @@ def _camera(read_id: str) -> str:
 def _pick_reference(reads: Sequence[ReadObservation]) -> tuple[int, Optional[ReadObservation]]:
     # Truncated reads (e.g. OCR stopping after "CG" on a dark frame) still vote after alignment,
     # but they must not set the plate length when plate-length reads exist.
-    plausible = [r for r in reads if len(r.chars) in PLAUSIBLE_LENGTHS]
+    # Indian plates are 8-11 characters. If no read of that length looks Indian, the vehicle is from
+    # elsewhere and any plate length from 4 up can set the reference.
+    indian = any(len(r.chars) in PLAUSIBLE_LENGTHS and is_indian_like(r.chars) for r in reads)
+    lengths_ok = PLAUSIBLE_LENGTHS if indian else FOREIGN_LENGTHS
+    plausible = [r for r in reads if len(r.chars) in lengths_ok]
     lengths = Counter(len(r.chars) for r in (plausible or reads) if r.chars)
     if not lengths:
         return 0, None
@@ -158,6 +171,10 @@ def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format
     # are listed but cast no votes. Removing evidence can only produce more '?'.
     excluded = [r.read_id for r in reads if apply_format and not r.plausible]
     reads = [r for r in reads if not apply_format or r.plausible]
+    # An Indian plate keeps the strict 7-11 read lengths; only a foreign plate admits 4-6.
+    if apply_format and any(len(r.chars) in PLAUSIBLE_LENGTHS and is_indian_like(r.chars) for r in reads):
+        excluded += [r.read_id for r in reads if len(r.chars) not in PLAUSIBLE_READ_LENGTHS]
+        reads = [r for r in reads if len(r.chars) in PLAUSIBLE_READ_LENGTHS]
     L, ref = _pick_reference(reads)
     if ref is None:
         return FusedPlate(text="", video_text="", length=0, n_reads=0, positions=[],
@@ -258,7 +275,9 @@ def fuse_reads(reads: Sequence[ReadObservation], cfg: FusionConfig, apply_format
         )
 
     chars = [p.char for p in positions]
-    fmt = format_mask(chars if apply_format else [])
+    fmt = format_mask(chars if apply_format and uses_indian_rules(chars) else [])
+    if apply_format and not uses_indian_rules(chars):
+        fmt.chars = chars  # a foreign plate: no Indian format check after fusion either
     if not apply_format:
         fmt.chars = chars
     for i in fmt.masked_positions:

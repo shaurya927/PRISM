@@ -147,9 +147,16 @@ VEHICLE_MODELS: tuple[tuple[str, str, str, str], ...] = (
 )
 
 
+# Makes/models outside VEHICLE_MODELS that the registry does hold, for the real vehicles from the
+# team's footage (data/generate_registry.py FIELD_VEHICLES). They can earn the make/model bonus.
+REGISTRY_FIELD_MODELS: tuple[tuple[str, str], ...] = (
+    ("Volvo", "XC60"),
+    ("BMW", "3 Series"),
+)
+
 # Makes/models common on Indian roads that are NOT in the synthetic registry. They are only in the
 # OpenCLIP prompt bank, so a Volvo is not forced onto the closest registry model. They can never
-# earn the make/model bonus, because no registry record has them.
+# earn the make/model bonus unless a registry record has them (REGISTRY_FIELD_MODELS).
 EXTRA_CLIP_MODELS: tuple[tuple[str, str, str, str], ...] = (
     ("Volvo", "XC60", "SUV", "SUV"),
     ("Volvo", "XC90", "SUV", "SUV"),
@@ -206,8 +213,21 @@ class TrackConfig:
     # an occlusion). Tracks of the same clip are merged when their fused plates agree on at least
     # this many known characters with no conflict (prism.track_merge). 0 disables merging.
     merge_min_plate_agree: int = 6
-    merge_min_plate_len: int = 8            # both plates must look like full plates, not a sign or sticker
+    merge_min_plate_len: int = 6            # full plates (foreign ones can be 6-7); signs are rejected by shape
     merge_min_box_overlap: float = 0.5      # in shared frames, intersection / smaller box must reach this
+    # Plate-free evidence (prism.track_merge): a duplicate box on the same vehicle ...
+    merge_min_shared_frames: int = 3        # on screen together at least this many frames
+    merge_dup_box_overlap: float = 0.85     # one box (nearly) contains the other; vehicles parked in a row overlap less
+    merge_dup_bottom_tol: float = 0.2       # bottom edges within this share of the taller box (same wheels)
+    merge_dup_frac: float = 0.8             # in at least this share of the shared frames
+    # ... or a new tracker ID after the vehicle was lost for a moment
+    merge_max_gap_sec: float = 0.8
+    merge_handoff_max_dist: float = 0.75    # box widths from where the vehicle was, or was heading
+    merge_handoff_max_scale: float = 2.0    # box area may change by at most this factor across the gap
+    merge_conflict_min_known: int = 4       # plates with this many known characters can conflict
+    # Dashboard: tracks below either bar are hidden (listed with their reason, never deleted).
+    display_min_known_chars: int = 4        # plate characters read with confidence
+    display_min_vehicle_px: int = 48        # largest box short side over the track
 
 
 @dataclass(frozen=True)

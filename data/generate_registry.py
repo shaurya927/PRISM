@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from prism.config import REGISTRY_PATH, SEED, VEHICLE_MODELS  # noqa: E402
+from prism.config import REGISTRY_FIELD_MODELS, REGISTRY_PATH, SEED, VEHICLE_MODELS  # noqa: E402
 from prism.plate_grammar import is_valid_plate  # noqa: E402
 
 # Demo vehicles: their plates are rendered into the synthetic demo clips
@@ -117,6 +117,19 @@ FORMAT_EXAMPLES: list[dict] = [
      "make": "Mahindra", "model": "Scorpio", "body_style": "SUV", "owner_region": "New Delhi, DL"},
     {"registry_id": "REG-0031", "plate": "22BH1234AA", "color": "white", "body_type": "SUV",
      "make": "Kia", "model": "Seltos", "body_style": "SUV", "owner_region": "Bharat series (Raipur, CG)"},
+]
+
+# Real vehicles from the team's own street footage (Bengaluru West, KA02). Their plates were read in
+# full from the clip's plate crops. They are added after the synthetic records, so regenerating keeps
+# every other record unchanged. Colour, body and make/model are what the footage shows; the BMW model
+# is PRISM's own make/model read and may need correcting.
+FIELD_VEHICLES: list[dict] = [
+    {"registry_id": "REG-0070", "plate": "KA02MN1826", "color": "brown", "body_type": "SUV",
+     "make": "Volvo", "model": "XC60", "body_style": "SUV", "owner_region": "Bengaluru West, KA"},
+    {"registry_id": "REG-0071", "plate": "KA02MM9091", "color": "blue", "body_type": "car",
+     "make": "BMW", "model": "3 Series", "body_style": "sedan", "owner_region": "Bengaluru West, KA"},
+    {"registry_id": "REG-0072", "plate": "KA02MH7256", "color": "blue", "body_type": "car",
+     "make": "Honda", "model": "Amaze", "body_style": "sedan", "owner_region": "Bengaluru West, KA"},
 ]
 
 RTO = {
@@ -293,6 +306,12 @@ def generate(n: int = 500, seed: int = SEED) -> list[dict]:
             {"registry_id": rid, "plate": plate, "color": color, "body_type": body_type, "make": make,
              "model": model, "body_style": style, "owner_region": region}
         )
+    # Added after the random draw so they never change the synthetic records.
+    known = {(m[0], m[1]) for m in VEHICLE_MODELS} | set(REGISTRY_FIELD_MODELS)
+    for d in FIELD_VEHICLES:
+        assert (d["make"], d["model"]) in known, f"add {d['make']} {d['model']} to REGISTRY_FIELD_MODELS"
+        assert d["registry_id"] not in used_ids and d["plate"] not in used_plates, d
+        records.append(dict(d))
     records.sort(key=lambda r: r["registry_id"])
     return records
 

@@ -6,9 +6,14 @@ Supported layouts (separators removed):
   * Delhi (old):   DL D{1,2} C L{0,2} DDDD   e.g. DL1CAB1234 (a sub-case of Standard)
   * Bharat series: YY BH DDDD L{1,2}        e.g. 22BH1234AA
 
-`format_mask` is the only function used by the pipeline. It can turn a character
-into '?' but it never adds, removes or changes a character. If the reading length
-fits no layout, nothing is masked (we cannot tell which position is wrong).
+`format_mask` can turn a character into '?' but it never adds, removes or changes a
+character. If the reading length fits no layout, nothing is masked (we cannot tell
+which position is wrong).
+
+Vehicles do not have to be Indian. `uses_indian_rules` decides per read: the format check
+applies to reads that look Indian (or cannot be a plate at all, such as a shop sign); a
+plate-shaped read that fits no Indian layout (AB12CDE, 7ABC123) is a foreign plate and is
+only confidence-masked.
 """
 
 from __future__ import annotations
@@ -135,6 +140,47 @@ def format_mask(chars: Sequence[str]) -> FormatCheck:
         )
         out[i] = UNKNOWN
     return FormatCheck(out, sorted(to_mask), conflicts, layout)
+
+
+def layout_fit(chars: Sequence[str]) -> int | None:
+    """Fewest characters that break an Indian layout of this length (edge-cut layouts included),
+    or None if no Indian layout has this length."""
+    chars = list(chars)
+    layouts = templates_for_length(len(chars)) + _cut_templates(len(chars))
+    if not layouts:
+        return None
+    return min(len(template_violations(chars, t)) for t in layouts)
+
+
+def is_indian_like(chars: Sequence[str]) -> bool:
+    """True if the read fits an Indian layout with at most one wrong character per four known."""
+    fit = layout_fit(chars)
+    known = sum(1 for c in chars if c != UNKNOWN)
+    return fit is not None and fit <= max(1, known // 4)
+
+
+def plate_shaped(chars: Sequence[str]) -> bool:
+    """True if the read could be a number plate from any country: 4-12 characters that mix letters
+    and digits, or a short run of digits (up to 7). Words (MARKET, POLICE) and long digit strings
+    such as phone numbers fail. Reads with fewer than 4 known characters cannot be judged and pass."""
+    chars = list(chars)
+    if not 4 <= len(chars) <= 12:
+        return False
+    known = [c for c in chars if c != UNKNOWN]
+    if len(known) < 4:
+        return True
+    letters = any(c in LETTERS for c in known)
+    digits = any(c in DIGITS for c in known)
+    if letters and digits:
+        return True
+    return digits and len(chars) <= 7
+
+
+def uses_indian_rules(chars: Sequence[str]) -> bool:
+    """The Indian format check applies to reads that look Indian, and to reads that cannot be a plate
+    from anywhere (so a word still gets masked and excluded as before). A plate-shaped read that fits
+    no Indian layout is treated as a foreign plate and left as read."""
+    return is_indian_like(chars) or not plate_shaped(chars)
 
 
 _FULL_RE = re.compile(

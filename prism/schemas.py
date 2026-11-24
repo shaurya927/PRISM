@@ -222,6 +222,18 @@ class TrackResult(BaseModel):
     merge_note: Optional[str] = None
 
 
+class HiddenTrack(BaseModel):
+    """A tracked vehicle left off the dashboard (prism.track_merge.visibility_reason). Kept for the record."""
+    track_id: int
+    clip_role: Literal["A", "B"] = "A"
+    yolo_class: str
+    first_seen_sec: float
+    last_seen_sec: float
+    n_detections: int
+    plate_text: str = ""
+    reason: str
+
+
 class ClipMeta(BaseModel):
     name: str
     sha256: str
@@ -264,6 +276,8 @@ class CaseResult(BaseModel):
     device: str
     ocr_backend: str
     tracks: list[TrackResult] = Field(default_factory=list)
+    # tracks with no readable plate or too small to see, left off the dashboard (both clips)
+    hidden_tracks: list[HiddenTrack] = Field(default_factory=list)
     narrative: Optional[Narrative] = None
     custody: Optional[Custody] = None
     warnings: list[str] = Field(default_factory=list)

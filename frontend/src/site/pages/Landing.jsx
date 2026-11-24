@@ -130,7 +130,7 @@ function TileArt({ art }) {
     );
   }
   if (art === "shortlist") {
-    return <img src="/media/app_shortlist.jpg" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top opacity-90" />;
+    return <img src="/media/app_shortlist.jpg?v=20261124" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top opacity-90" />;
   }
   if (art === "crosscam" && cross) {
     return (
@@ -196,7 +196,7 @@ function SeeItWork() {
       render: () => (
         <div className="grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 card-media border rule">
-            <img src="/media/app_shortlist.jpg" alt="The investigator app showing a ranked registry shortlist" loading="lazy" className="w-full block" />
+            <img src="/media/app_shortlist.jpg?v=20261124" alt="The investigator app showing a ranked registry shortlist" loading="lazy" className="w-full block" />
           </div>
           <div className="lg:col-span-5">
             <p className="text-[18px] leading-relaxed">Every registry record gets 0.65 × plate + 0.20 × colour + 0.15 × body, and each part of the score is listed.</p>

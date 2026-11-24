@@ -43,7 +43,7 @@ from prism.registry import load_registry
 from prism.reid import implied_speed_kmh, link_tracks, make_encoder
 from prism.runtime import gpu_name, resolve_device
 from prism.stages.plate_detect import plate_quality
-from prism.track_merge import find_merge_groups
+from prism.track_merge import explain_merge_groups, merge_note, visibility_reason
 from prism.schemas import (
     AttributeValue,
     Attributes,
@@ -53,6 +53,7 @@ from prism.schemas import (
     CrossCamResult,
     FrameRead,
     FusedPlate,
+    HiddenTrack,
     MatchStatus,
     RegistryRecord,
     TrackResult,
@@ -176,6 +177,7 @@ class ClipAnalysis:
     embeddings: dict[int, np.ndarray] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
     timings: dict[str, float] = field(default_factory=dict)
+    hidden: list[HiddenTrack] = field(default_factory=list)
 
 
 def _write(path: Path, img: np.ndarray, custody: CustodyLog, kind: str) -> str:
@@ -184,7 +186,7 @@ def _write(path: Path, img: np.ndarray, custody: CustodyLog, kind: str) -> str:
     return custody.record(path, kind)
 
 
-def _merge_tracks(keep: int, others: list[int], agree: int, tracks: dict, plates: dict,
+def _merge_tracks(keep: int, others: list[int], note: str, tracks: dict, plates: dict,
                   results: dict[int, TrackResult], cfg: PrismConfig) -> None:
     """Fold `others` into track `keep`: union of detections, plate samples, vehicle crops and reads,
     then fuse again. A frame seen by two of the tracks is counted once (the sharper read)."""
@@ -227,8 +229,7 @@ def _merge_tracks(keep: int, others: list[int], agree: int, tracks: dict, plates
         "frames": frames,
         "fused": fuse_frame_reads(frames, cfg.fusion),
         "merged_track_ids": sorted(others),
-        "merge_note": (f"Tracker IDs {', '.join(map(str, sorted(others)))} were the same vehicle: their plates agree on "
-                       f"{agree} known characters with no conflict, and their boxes never appear apart in the same frame."),
+        "merge_note": note,
     })
     for tid in others:
         results.pop(tid, None)
@@ -329,17 +330,37 @@ def analyze_clip(
         progress("ocr", (n + 1) / max(1, len(order)))
 
     # ---------------------------------------------------------------- one vehicle, one track
-    groups = find_merge_groups(
+    groups = explain_merge_groups(
         plates={tid: results[tid].fused.text for tid in order},
         classes={tid: tracks[tid].cls for tid in order},
         boxes={tid: {o.frame_idx: o.bbox for o in tracks[tid].observations} for tid in order},
         sizes={tid: len(tracks[tid].observations) for tid in order},
-        tcfg=cfg.track, mcfg=cfg.match,
+        tcfg=cfg.track, mcfg=cfg.match, fps=meta.fps or 25.0,
     )
-    for keep, others, agree in groups:
-        _merge_tracks(keep, others, agree, tracks, plates, results, cfg)
-    merged_away = {t for _, others, _ in groups for t in others}
+    for g in groups:
+        _merge_tracks(g.keep, g.others, merge_note(g), tracks, plates, results, cfg)
+    merged_away = {t for g in groups for t in g.others}
     order = [tid for tid in order if tid not in merged_away]
+
+    # ---------------------------------------------------------------- dashboard: readable vehicles only
+    hidden: list[HiddenTrack] = []
+    shown = []
+    for tid in order:
+        r = results[tid]
+        why = visibility_reason(r.fused.text, [o.bbox for o in tracks[tid].observations], cfg.track)
+        if why is None:
+            shown.append(tid)
+            continue
+        hidden.append(HiddenTrack(
+            track_id=tid, clip_role=r.clip_role, yolo_class=r.yolo_class, first_seen_sec=r.first_seen_sec,
+            last_seen_sec=r.last_seen_sec, n_detections=r.n_detections, plate_text=r.fused.text, reason=why,
+        ))
+    order = shown
+    if hidden:
+        warnings.append(
+            f"{len(hidden)} tracked vehicle{'s' if len(hidden) != 1 else ''}{sfx} left off the dashboard: "
+            + "; ".join(f"track {h.track_id} ({h.reason})" for h in hidden) + "."
+        )
     progress("ocr", 1.0)
     timings["ocr" + sfx] = round(time.perf_counter() - t, 2)
 
@@ -379,7 +400,7 @@ def analyze_clip(
         progress("attributes", (n + 1) / max(1, len(order)))
     progress("attributes", 1.0)
     timings["attributes" + sfx] = round(time.perf_counter() - t, 2)
-    return ClipAnalysis(meta, [results[t] for t in order], embeddings, warnings, timings)
+    return ClipAnalysis(meta, [results[t] for t in order], embeddings, warnings, timings, hidden)
 
 
 # --------------------------------------------------------------------------- Stage 5
@@ -530,7 +551,7 @@ def run_pipeline(
         case_id=case_id, created_at=_now(), prism_version=PRISM_VERSION, mode="clip", clip=an.meta,
         hint=normalize_hint(hint), threshold=cfg.match.tau if threshold is None else float(threshold),
         device=hub.device, ocr_backend=hub.ocr()[0].name, tracks=an.tracks, warnings=an.warnings,
-        stage_timings=an.timings,
+        stage_timings=an.timings, hidden_tracks=an.hidden,
     )
     t = time.perf_counter()
     progress("matching", 0.2)
@@ -605,6 +626,7 @@ def run_crosscam(
         hint=normalize_hint(hint), threshold=cfg.match.tau if threshold is None else float(threshold),
         device=hub.device, ocr_backend=hub.ocr()[0].name, tracks=an_a.tracks,
         warnings=an_a.warnings + an_b.warnings, stage_timings={**an_a.timings, **an_b.timings},
+        hidden_tracks=an_a.hidden + an_b.hidden,
         crosscam=CrossCamResult(encoder=enc.name, threshold=thr, clip_a=an_a.meta, clip_b=an_b.meta,
                                 tracks_b=an_b.tracks, pairs=pairs),
     )

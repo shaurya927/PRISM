@@ -11,6 +11,9 @@ Neither OCR backend applies a threshold itself. Every raw read goes through
      out. It can fill such a '?' only with a character the model itself offered there, and labels
      it; a character that fits the layout is never changed.
 
+Steps 4 and 5 use the Indian layouts, so they are skipped for a plate-shaped read that fits no
+Indian layout (a foreign plate such as AB12CDE): it is only confidence-masked.
+
 `cross_check` then compares the result with an independent second OCR model reading the same
 crop. A committed character that the second model reads differently (with confidence) becomes
 '?'. Like every other step it can only remove characters, never add or change one.
@@ -23,7 +26,9 @@ from typing import Optional, Sequence
 
 from prism.config import OCRConfig
 from prism.layout_decode import layout_decode
-from prism.plate_grammar import ALNUM, UNKNOWN, format_mask
+from prism.plate_grammar import ALNUM, UNKNOWN, FormatCheck, format_mask, uses_indian_rules
+
+FOREIGN_LAYOUT = "non-Indian layout: format check not applied"
 
 
 @dataclass
@@ -137,7 +142,9 @@ def mask_read(raw_text: str, confs: Sequence[float], cfg: OCRConfig,
         raw_dists.append(d)
 
     chars, reasons = confidence_mask(raw_chars, raw_confs, cfg.char_conf)
-    fmt = format_mask(chars)
+    # Indian layouts are only enforced on reads that look Indian; a foreign plate keeps its characters.
+    indian = uses_indian_rules(chars)
+    fmt = format_mask(chars) if indian else FormatCheck(list(chars), [], [], FOREIGN_LAYOUT)
     for i in fmt.masked_positions:
         reasons[i] = "format"
     n = len(raw_chars)
@@ -146,7 +153,7 @@ def mask_read(raw_text: str, confs: Sequence[float], cfg: OCRConfig,
     layout_probs: list[Optional[float]] = [None] * n
     out_chars = list(fmt.chars)
     fmt_conflicts = {i: msg for i, msg in zip(fmt.masked_positions, fmt.conflicts)}
-    if any(raw_dists):
+    if indian and any(raw_dists):
         dec = layout_decode(raw_chars, raw_confs, out_chars, raw_dists, cfg)
         for ch in dec.choices:
             if ch.accepted:

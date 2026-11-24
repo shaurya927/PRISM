@@ -23,7 +23,8 @@ from typing import Optional, Sequence
 import cv2
 import numpy as np
 
-from prism.config import BODY_TYPES, COLORS, EXTRA_CLIP_MODELS, VEHICLE_MODELS, WEIGHTS_DIR, AttributeConfig
+from prism.config import (BODY_TYPES, COLORS, EXTRA_CLIP_MODELS, REGISTRY_FIELD_MODELS, VEHICLE_MODELS,
+                          WEIGHTS_DIR, AttributeConfig)
 from prism.schemas import Attributes, AttributeValue
 
 log = logging.getLogger("prism.attributes")
@@ -99,7 +100,8 @@ class AttributeExtractor:
         bank = list(VEHICLE_MODELS) + [m for m in EXTRA_CLIP_MODELS if m not in VEHICLE_MODELS]
         self.mm = [(make_model_label(mk, md), body) for mk, md, body, _ in bank]
         self.mm_labels = [f"{mk} {md}" for mk, md, _, _ in bank]
-        self.mm_in_registry = [i < len(VEHICLE_MODELS) for i in range(len(bank))]
+        self.mm_in_registry = [i < len(VEHICLE_MODELS) or (m[0], m[1]) in REGISTRY_FIELD_MODELS
+                               for i, m in enumerate(bank)]
         self.mm_prompts = [[t.format(lbl) for t in MAKE_MODEL_TEMPLATES] for lbl, _ in self.mm]
 
     # ------------------------------------------------------------------ embeddings
