@@ -36,10 +36,11 @@ export function StatusChip({ status, className = "" }) {
   return <span className={`chip ${tone} ${className}`}><span className="chip__dot" aria-hidden />{statusLabel(status)}</span>;
 }
 
+/** Chevron used on buttons and links; it slides right on hover. */
 export function Arrow({ className = "" }) {
   return (
     <svg className={`arr ${className}`} width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M5 2.75L9.25 7L5 11.25" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -374,7 +375,7 @@ export function NextLink({ to, label, title }) {
       <div className="tag">{label}</div>
       <div className="h-sec mt-3 flex items-center gap-4 transition-colors duration-150 group-hover:text-white">
         {title}
-        <Arrow className="w-[0.5em] h-[0.5em] transition-transform duration-150 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
+        <Arrow className="w-[0.5em] h-[0.5em] transition-transform duration-200 group-hover:translate-x-[6px]" />
       </div>
     </Link>
   );

@@ -6,20 +6,14 @@ import { useReducedMotion } from "framer-motion";
 import { RollText } from "./motion.jsx";
 
 /* ------------------------------------------------------------------ CCTV highway */
-const FEEDS = {
-  night: { base: "/media/highway", tracks: "/media/highway_tracks.json" },
-  day: { base: "/media/highway_day", tracks: "/media/highway_day_tracks.json" },
-};
 /**
- * Real freeway footage with PRISM's detector boxes drawn over it (see feed.js). Credits are in
- * public/media/CREDITS.md.
- * variant: "night" (intro, investigator header) or "day" (landing hero);
+ * Real night-freeway footage (public/media/highway.mp4, credits in public/media/CREDITS.md) with
+ * PRISM's detector boxes drawn over it (see feed.js).
  * hud: draw the tracking overlay; zone: [x0, y0, x1, y1] area the overlay may use;
  * avoid: CSS selector of elements the boxes must not cover;
  * labels: draw track and plate tags; onCount(n): number of vehicles currently tracked.
  */
-export function HighwayFeed({ className = "", variant = "night", hud = true, zone, avoid, labels = true, onCount }) {
-  const feed = FEEDS[variant] || FEEDS.night;
+export function HighwayFeed({ className = "", hud = true, zone, avoid, labels = true, onCount }) {
   const vid = useRef(null);
   const cv = useRef(null);
   const reduce = useReducedMotion();
@@ -33,15 +27,15 @@ export function HighwayFeed({ className = "", variant = "night", hud = true, zon
     else v.play().catch(() => {});
     const h = createFeedHud(cv.current, v, {
       hud, labels, avoid, still: !!reduce, zone: zoneKey ? zoneKey.split(",").map(Number) : null,
-      tracks: feed.tracks, onCount: (n) => countRef.current?.(n),
+      onCount: (n) => countRef.current?.(n),
     });
     return () => h.destroy();
-  }, [hud, labels, avoid, zoneKey, reduce, feed.tracks]);
+  }, [hud, labels, avoid, zoneKey, reduce]);
   return (
-    <div className={`hwy hwy--${variant} ${className}`}>
-      <video ref={vid} className="hwy__vid" poster={`${feed.base}.jpg`} muted loop playsInline autoPlay={!reduce} preload="auto" aria-hidden>
-        <source src={`${feed.base}.webm`} type="video/webm" />
-        <source src={`${feed.base}.mp4`} type="video/mp4" />
+    <div className={`hwy ${className}`}>
+      <video ref={vid} className="hwy__vid" poster="/media/highway.jpg" muted loop playsInline autoPlay={!reduce} preload="auto" aria-hidden>
+        <source src="/media/highway.webm" type="video/webm" />
+        <source src="/media/highway.mp4" type="video/mp4" />
       </video>
       <canvas ref={cv} aria-hidden />
       <div className="hwy__fx" aria-hidden />
@@ -64,6 +58,36 @@ export function RollLink({ to, href, children, className = "" }) {
   );
   if (to) return <Link to={to} className={`roll ${className}`}>{inner}</Link>;
   return <a href={href} className={`roll ${className}`} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{inner}</a>;
+}
+
+/* ------------------------------------------------------------------ card spotlight */
+/**
+ * One pointer listener for the whole site: the card under the pointer gets --mx / --my (pointer
+ * position inside it), which its ::after spotlight in site.css follows. Off on touch screens.
+ */
+export function useSpotlight(selector = ".panel, .tile") {
+  useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) return undefined;
+    let raf = 0;
+    let ev = null;
+    const onMove = (e) => {
+      ev = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ev.target instanceof Element ? ev.target.closest(selector) : null;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${Math.round(ev.clientX - r.left)}px`);
+        el.style.setProperty("--my", `${Math.round(ev.clientY - r.top)}px`);
+      });
+    };
+    document.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      document.removeEventListener("pointermove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, [selector]);
 }
 
 /* ------------------------------------------------------------------ clock + health */

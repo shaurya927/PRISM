@@ -3,10 +3,11 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 
 // One ease-out curve for every transition on the site. Motion answers interaction (hover, press,
 // sliders, tabs, menus, page changes) and scrolling:
-//   - headings rise letter by letter out of a mask, paragraphs word by word
-//   - blocks pop up once as they enter the viewport
+//   - headings blur in letter by letter, paragraphs word by word (fade, small rise, blur clearing)
+//   - blocks blur in once as they enter the viewport
 //   - images drift inside their frames (parallax) and some frames unfold from an inset
 //   - button labels roll letter by letter on hover (CSS, see .rt in site.css)
+// The blur is dropped once an animation ends, so finished text is never left on a filter layer.
 // Under reduced motion everything renders in place.
 export const EASE = [0.22, 1, 0.36, 1];
 export const EASE_REVEAL = EASE;
@@ -20,8 +21,8 @@ const lineVariants = {
   shown: (i) => ({ y: "0%", transition: { duration: 0.7, ease: EASE, delay: i * 0.07 } }),
 };
 const charVariants = {
-  hidden: { y: "115%" },
-  shown: (d) => ({ y: "0%", transition: { duration: 0.75, ease: EASE, delay: d } }),
+  hidden: { opacity: 0, y: "0.28em", filter: "blur(10px)" },
+  shown: (d) => ({ opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.9, ease: EASE, delay: d }, transitionEnd: { filter: "none" } }),
 };
 
 /**
@@ -64,9 +65,9 @@ export function SplitLines({ lines, as: Tag = "h1", className = "" }) {
     <M className={className} initial="hidden" whileInView="shown" viewport={{ once: true, amount: 0.5 }}
       aria-label={allText ? lines.join(" ") : undefined}>
       {lines.map((line, i) => (
-        <span key={i} className="mask-line" aria-hidden={allText || undefined}>
+        <span key={i} className={`mask-line ${typeof line === "string" ? "mask-line--open" : ""}`} aria-hidden={allText || undefined}>
           {typeof line === "string"
-            ? <span className="mask-line__in"><SplitChars text={line} start={i * 0.08} /></span>
+            ? <span className="mask-line__in"><SplitChars text={line} start={i * 0.1} /></span>
             : <motion.span className="mask-line__in" variants={lineVariants} custom={i}>{line}</motion.span>}
         </span>
       ))}
@@ -75,8 +76,8 @@ export function SplitLines({ lines, as: Tag = "h1", className = "" }) {
 }
 
 const wordVariants = {
-  hidden: { opacity: 0, y: "0.6em" },
-  shown: (d) => ({ opacity: 1, y: "0em", transition: { duration: 0.6, ease: EASE, delay: d } }),
+  hidden: { opacity: 0, y: "0.45em", filter: "blur(6px)" },
+  shown: (d) => ({ opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.7, ease: EASE, delay: d }, transitionEnd: { filter: "none" } }),
 };
 
 /** Paragraph whose words fade up in turn the first time it scrolls into view. */
@@ -130,14 +131,15 @@ export function Unfold({ as: Tag = "section", className = "", children }) {
   return <M ref={ref} className={className} style={reduce ? undefined : { clipPath }}>{children}</M>;
 }
 
-/** Block that pops up a little (fade, 18px rise, slight scale) the first time it scrolls into view. */
+/** Block that blurs in (fade, 20px rise, blur clearing) the first time it scrolls into view. */
 export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }) {
   const reduce = useReducedMotion();
   if (reduce) return <Tag className={className}>{children}</Tag>;
   const M = motion[Tag] || motion.div;
   return (
-    <M className={className} initial={{ opacity: 0, y: 18, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={VIEWPORT} transition={{ duration: 0.6, ease: EASE, delay: Math.min(delay, 0.4) }}>
+    <M className={className} initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
+      viewport={VIEWPORT} transition={{ duration: 0.8, ease: EASE, delay: Math.min(delay, 0.4) }}>
       {children}
     </M>
   );

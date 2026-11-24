@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 import Lenis from "lenis";
 import { EASE, RollText } from "./motion.jsx";
 import { Arrow } from "./components.jsx";
-import { useClock, useHealth } from "./fx.jsx";
+import { useClock, useHealth, useSpotlight } from "./fx.jsx";
 import { CASES, NAV, REPO_URL } from "./data/content.js";
 import { SiteCtx } from "./context.js";
 import Intro from "./Intro.jsx";
@@ -23,6 +23,7 @@ export default function SiteLayout() {
   // True once the intro starts lifting (or was never shown): the hero animates in from then.
   const [introReveal, setIntroReveal] = useState(introDone);
   const [menu, setMenu] = useState(false);
+  useSpotlight();
 
   useEffect(() => {
     if (reduce) return;

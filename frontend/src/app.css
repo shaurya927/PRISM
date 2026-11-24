@@ -125,7 +125,7 @@
 
 /* ---------------------------------------------------------------- shell */
 .app .app-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 24px; height: 64px;
-  padding: 0 var(--gutter); background: rgb(11 12 15 / .88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
+  padding: 0 var(--gutter); background: rgb(0 0 0 / .78); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--rule); }
 .app .app-top .topbar__logo { font-size: 24px; }
 .app .app-top__crumb { color: var(--muted); }
 .app .app-top__nav { display: none; gap: 24px; font-size: 15px; }
@@ -137,7 +137,7 @@
 .app .app-hero { position: relative; isolation: isolate; overflow: clip; height: 300px; margin-bottom: -120px;
   -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); }
 .app .app-hero__in { position: absolute; left: var(--gutter); right: var(--gutter); top: 44px; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
-.app .app-hero__h { font-weight: 400; font-size: clamp(2.5rem, 5vw, 4.75rem); line-height: 1; letter-spacing: -0.03em; }
+.app .app-hero__h { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.75rem, 5.6vw, 5.25rem); line-height: 1; letter-spacing: -0.01em; }
 .app .app-main { position: relative; z-index: 3; }
 
 /* thin network/activity bar under the header: only shown while a request is in flight */
@@ -147,7 +147,7 @@
 @keyframes netbar { from { transform: translateX(-100%); } to { transform: translateX(270%); } }
 
 /* ---------------------------------------------------------------- analysis loader */
-.app .aload { position: relative; overflow: clip; border-radius: 20px; border: 1px solid var(--rule); background: rgb(11 12 15 / .88); isolation: isolate; }
+.app .aload { position: relative; overflow: clip; border-radius: 20px; border: 1px solid var(--rule); background: rgb(0 0 0 / .85); isolation: isolate; }
 .app .aload__wave { position: absolute; inset: 0; z-index: -1; opacity: .55;
   -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%); mask-image: linear-gradient(to bottom, #000, transparent 75%); }
 .app .aload__count { font: 400 clamp(64px, 10vw, 148px)/.8 var(--font-mono); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; display: flex; align-items: flex-start; }
