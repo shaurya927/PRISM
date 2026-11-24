@@ -295,7 +295,7 @@ Trying shifts of −1, 0 and +1 handles a lost first or last character. The 0.05
 
 $$\mathrm{Plate} = \mathrm{Sim}_{\text{plate}} \times \min\!\left(1,\ \frac{|\mathcal{K}|}{6}\right)$$
 
-PRISM also reports **specificity**: how many registry entries fit the known characters exactly, e.g. "3 of 500 registry plates fit `CG04?X48?1`".
+PRISM also reports **specificity**: how many registry entries fit the known characters exactly, e.g. "3 of 50,000 registry plates fit `CG04?X48?1`".
 
 ### 6.4 Composite score
 
@@ -341,7 +341,7 @@ The threshold τ defaults to 0.55 and the investigator can change it with a slid
 > - **Colour (0.20 of 0.20):** exact match (white, 0.87).
 > - **Body type (0.15 of 0.15):** exact match (SUV, 0.91).
 > - **Make/model (+0.05):** Hyundai Creta (0.68) matches the registry.
-> - **Specificity:** 3 of 500 registry plates fit the known characters.
+> - **Specificity:** 3 of 50,000 registry plates fit the known characters.
 
 ### 6.6 Next-best-evidence advisor (`advisor.py`)
 When the result is `AMBIGUOUS` or `NO CONFIDENT MATCH`, the advisor looks at the top candidates' characters at each unknown position. It picks the position where the candidates differ most, weighted by their scores.
@@ -464,7 +464,7 @@ PRISM builds the report from a Jinja2 HTML template. PDFs are printed with headl
 ## 11. Data: registry and test clips
 
 ### Synthetic registry (`data/generate_registry.py`)
-- 500 records with a fixed random seed. Schema: `registry_id`, `plate`, `color`, `body_type`, `make`, `model`, `owner_region`. All owner data is synthetic.
+- 50,000 records with a fixed random seed. Schema: `registry_id`, `plate`, `color`, `body_type`, `make`, `model`, `owner_region`. All owner data is synthetic.
 - Realistic plates from Chhattisgarh (CG04 Raipur, CG07 Durg), Maharashtra (MH12, MH01), Delhi (DL01–DL14), Karnataka (KA01, KA05), plus Bharat-series (BH) plates.
 - Make and model fix the body type, and colours follow realistic frequencies (white and silver are the most common).
 - **Near-duplicate decoys:** for each demo vehicle, 3–5 entries that share most plate characters but differ in one confusable position, colour or body type. These show that PRISM ranks on more than the plate string.

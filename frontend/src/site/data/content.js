@@ -51,6 +51,21 @@ const CASE_META = {
     blurb: "The plate is read cleanly but no registry record clears the threshold. The correct answer is NO CONFIDENT MATCH, with a written reason.",
     tags: ["negative case"],
   },
+  day_scooter_twoline: {
+    title: "Scooter from behind",
+    blurb: "A grey Honda Activa with a two-line rear plate. YOLO's motorcycle class and CLIP agree on two-wheeler, and decoys differ by one digit or one letter.",
+    tags: ["two-wheeler", "two-line layout"],
+  },
+  day_auto_rickshaw: {
+    title: "Auto-rickshaw",
+    blurb: "A Bajaj RE with a yellow commercial plate. COCO has no auto-rickshaw class, so the body type comes from the CLIP override.",
+    tags: ["auto-rickshaw", "commercial plate"],
+  },
+  day_white_truck: {
+    title: "Mini truck",
+    blurb: "A white Tata Ace goods carrier with a yellow commercial plate. CLIP misreads the colour as yellow, which costs the colour part of the score; the plate and body type still decide the match.",
+    tags: ["truck", "commercial plate"],
+  },
 };
 
 export const CASE_ORDER = Object.keys(CASE_META).filter((k) => casesJson[k]);

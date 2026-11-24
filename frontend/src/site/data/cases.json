@@ -10,58 +10,55 @@
   ],
   "fused": "CG04MX4821",
   "status": "MATCHED",
-  "explanation": "REG-0001 (CG04MX4821) scored 0.80, above the 0.55 threshold, with 10 known plate characters. Higher-scoring REG-0004 contradict a confidently read plate character and are ranked below it.",
+  "explanation": "REG-0001 (CG04MX4821) scored 1.00, above the 0.55 threshold, with 10 known plate characters.",
   "top": [
    {
     "id": "REG-0001",
     "plate": "CG04MX4821",
-    "score": 0.8,
+    "score": 1.0,
     "color": "white",
     "body": "car",
     "model": "Hyundai Verna",
-    "mismatches": [
-     "Colour mismatch: video grey, registry white"
-    ],
-    "style": "sedan",
-    "region": "Raipur, CG"
-   },
-   {
-    "id": "REG-0004",
-    "plate": "CG04MX4827",
-    "score": 0.835,
-    "color": "silver",
-    "body": "car",
-    "model": "Hyundai Verna",
-    "mismatches": [
-     "Mismatch at position 10: video shows '1', registry has '7'"
-    ],
+    "mismatches": [],
     "style": "sedan",
     "region": "Raipur, CG"
    },
    {
     "id": "REG-0002",
     "plate": "CG04MX4851",
-    "score": 0.735,
+    "score": 0.935,
     "color": "white",
     "body": "car",
     "model": "Hyundai Verna",
     "mismatches": [
-     "Mismatch at position 9: video shows '2', registry has '5'",
-     "Colour mismatch: video grey, registry white"
+     "Mismatch at position 9: video shows '2', registry has '5'"
+    ],
+    "style": "sedan",
+    "region": "Raipur, CG"
+   },
+   {
+    "id": "REG-0003",
+    "plate": "CG04MX4621",
+    "score": 0.935,
+    "color": "white",
+    "body": "car",
+    "model": "Honda City",
+    "mismatches": [
+     "Mismatch at position 8: video shows '8', registry has '6'"
     ],
     "style": "sedan",
     "region": "Raipur, CG"
    }
   ],
   "advisor": null,
-  "color": "grey",
+  "color": "white",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX4821` across 24 plate reads [F5, F5c, F8]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.80 with 10 of 10 known characters matching [REG-0001]. Vehicle track 2 (white SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0005, scored 0.35 [REG-0005].",
+  "summary": "Vehicle track 1 (white car, seen 00:00.0-00:06.0) showed the plate `CG04MX4821` across 24 plate reads [F121, F121c, F124]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 1.00 with 10 of 10 known characters matching [REG-0001]. Vehicle track 2 (white SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-00002, scored 0.35 [REG-00002].",
   "clip_sha256": "e013364c015a154d1f6270f72775ab8ca26db8cb73bab7945002a204b409854d",
   "reports": {
-   "html": "/reports/day_clear_white/PRISM_report_3208b7f6489f.html",
-   "pdf": "/reports/day_clear_white/PRISM_report_3208b7f6489f.pdf"
+   "html": "/reports/day_clear_white/PRISM_report_4d91e02e72aa.html",
+   "pdf": "/reports/day_clear_white/PRISM_report_4d91e02e72aa.pdf"
   },
   "strip": "/media/day_clear_white_strip.png"
  },
@@ -118,163 +115,47 @@
     "region": "Raipur, CG"
    }
   ],
-  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",
+  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 131 read it as `M` at 0.48, below the 0.70 threshold, so it wasn't used. Check frame 131 by eye, or look for footage from another angle. This is a lead, not evidence.",
   "color": "grey",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F8, F8c, F10]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 13 came closest to reading position 9 (`8` at 0.69) and is a lead only [F13, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0077, scored 0.25 [REG-0077].",
+  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F121, F121c, F124]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 131 came closest to reading position 9 (`M` at 0.48) and is a lead only [F131, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-00016, scored 0.25 [REG-00016].",
   "clip_sha256": "b6b818544d7712ecbf20d182855148c0a1d238450d53e1b985b25ee854572085",
   "reports": {
-   "html": "/reports/night_partial_white/PRISM_report_77dfa5837b25.html",
-   "pdf": "/reports/night_partial_white/PRISM_report_77dfa5837b25.pdf"
+   "html": "/reports/night_partial_white/PRISM_report_ded9bd85b825.html",
+   "pdf": "/reports/night_partial_white/PRISM_report_ded9bd85b825.pdf"
   },
   "strip": "/media/night_partial_white_strip.png",
   "evidence": [
    {
-    "id": "F8",
-    "frame": 8,
-    "sharpness": 3609.4,
+    "id": "F121",
+    "frame": 121,
+    "sharpness": 1126.9,
     "source": "raw",
     "chars": [
      [
       "C",
-      0.99,
+      0.994,
       false
      ],
      [
       "G",
-      0.979,
-      false
-     ],
-     [
-      "0",
-      0.981,
-      false
-     ],
-     [
-      "4",
       0.999,
       false
      ],
      [
-      "M",
-      0.944,
-      false
-     ],
-     [
-      "X",
-      0.962,
-      false
-     ],
-     [
-      "4",
-      0.998,
-      false
-     ],
-     [
-      "8",
-      0.924,
-      false
-     ],
-     [
-      "8",
-      0.575,
-      false
-     ],
-     [
-      "1",
-      0.747,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F8c",
-    "frame": 8,
-    "sharpness": 3609.4,
-    "source": "clahe",
-    "chars": [
-     [
-      "C",
-      0.979,
-      false
-     ],
-     [
-      "G",
-      0.882,
-      false
-     ],
-     [
       "0",
-      0.965,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.884,
-      false
-     ],
-     [
-      "X",
-      0.969,
-      false
-     ],
-     [
-      "4",
       0.996,
       false
      ],
      [
-      "3",
-      0.493,
-      false
-     ],
-     [
-      "8",
-      0.813,
-      false
-     ],
-     [
-      "1",
-      0.577,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F10",
-    "frame": 10,
-    "sharpness": 3031.5,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.996,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.987,
-      false
-     ],
-     [
       "4",
       0.999,
       false
      ],
      [
       "M",
-      0.998,
+      1.0,
       false
      ],
      [
@@ -289,40 +170,40 @@
      ],
      [
       "8",
-      0.895,
+      0.998,
       false
      ],
      [
-      "8",
-      0.54,
+      "M",
+      0.299,
       false
      ],
      [
       "1",
-      0.984,
+      0.979,
       false
      ]
     ]
    },
    {
-    "id": "F10c",
-    "frame": 10,
-    "sharpness": 3031.5,
+    "id": "F121c",
+    "frame": 121,
+    "sharpness": 1126.9,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.995,
+      0.994,
       false
      ],
      [
       "G",
-      0.993,
+      0.998,
       false
      ],
      [
       "0",
-      0.987,
+      0.994,
       false
      ],
      [
@@ -332,12 +213,55 @@
      ],
      [
       "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.996,
+      false
+     ],
+     [
+      "8",
+      0.361,
+      false
+     ],
+     [
+      "1",
       0.992,
       false
+     ]
+    ]
+   },
+   {
+    "id": "F124",
+    "frame": 124,
+    "sharpness": 1319.8,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
      ],
      [
-      "X",
-      0.998,
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.992,
       false
      ],
      [
@@ -346,99 +270,56 @@
       false
      ],
      [
-      "3",
-      0.812,
-      false
-     ],
-     [
-      "0",
-      0.487,
-      false
-     ],
-     [
-      "1",
-      0.976,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F13",
-    "frame": 13,
-    "sharpness": 3126.5,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.995,
-      false
-     ],
-     [
-      "G",
-      0.999,
-      false
-     ],
-     [
-      "0",
-      0.971,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
       "M",
-      0.999,
+      1.0,
       false
      ],
      [
       "X",
-      0.998,
+      1.0,
       false
      ],
      [
       "4",
-      0.998,
+      0.999,
       false
      ],
      [
       "8",
-      0.986,
+      0.997,
       false
      ],
      [
       "8",
-      0.7,
+      0.286,
       false
      ],
      [
       "1",
-      0.958,
+      0.992,
       false
      ]
     ]
    },
    {
-    "id": "F13c",
-    "frame": 13,
-    "sharpness": 3126.5,
+    "id": "F124c",
+    "frame": 124,
+    "sharpness": 1319.8,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.99,
+      0.996,
       false
      ],
      [
       "G",
-      0.997,
+      0.998,
       false
      ],
      [
       "0",
-      0.962,
+      0.991,
       false
      ],
      [
@@ -448,40 +329,40 @@
      ],
      [
       "M",
-      0.998,
+      0.999,
       false
      ],
      [
       "X",
-      0.998,
+      0.999,
       false
      ],
      [
       "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
       0.997,
       false
      ],
      [
       "8",
-      0.957,
-      false
-     ],
-     [
-      "8",
-      0.823,
+      0.406,
       false
      ],
      [
       "1",
-      0.918,
+      0.993,
       false
      ]
     ]
    },
    {
-    "id": "F15",
-    "frame": 15,
-    "sharpness": 3364.6,
+    "id": "F126",
+    "frame": 126,
+    "sharpness": 1168.1,
     "source": "raw",
     "chars": [
      [
@@ -496,65 +377,123 @@
      ],
      [
       "0",
-      0.988,
+      0.995,
       false
      ],
      [
       "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
       0.999,
       false
      ],
      [
       "M",
-      0.998,
-      false
-     ],
-     [
-      "X",
-      0.998,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.98,
-      false
-     ],
-     [
-      "8",
-      0.764,
+      0.459,
       false
      ],
      [
       "1",
-      0.963,
+      0.99,
       false
      ]
     ]
    },
    {
-    "id": "F15c",
-    "frame": 15,
-    "sharpness": 3364.6,
+    "id": "F126c",
+    "frame": 126,
+    "sharpness": 1168.1,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.993,
+      0.996,
       false
      ],
      [
       "G",
-      0.995,
+      0.999,
       false
      ],
      [
       "0",
-      0.988,
+      0.995,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.998,
+      false
+     ],
+     [
+      "M",
+      0.405,
+      false
+     ],
+     [
+      "1",
+      0.99,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F129",
+    "frame": 129,
+    "sharpness": 1645.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.995,
       false
      ],
      [
@@ -564,219 +503,156 @@
      ],
      [
       "M",
-      0.999,
+      1.0,
       false
      ],
      [
       "X",
-      0.998,
+      0.999,
       false
      ],
      [
       "4",
-      0.997,
+      0.996,
       false
      ],
      [
       "8",
-      0.842,
-      false
-     ],
-     [
-      "8",
-      0.901,
-      false
-     ],
-     [
-      "1",
       0.932,
       false
-     ]
-    ]
-   },
-   {
-    "id": "F18",
-    "frame": 18,
-    "sharpness": 3543.2,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.997,
-      false
-     ],
-     [
-      "G",
-      0.999,
-      false
-     ],
-     [
-      "0",
-      0.993,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.997,
-      false
-     ],
-     [
-      "8",
-      0.313,
-      false
      ],
      [
       "1",
-      0.979,
+      0.196,
       false
      ]
     ]
    },
    {
-    "id": "F18c",
-    "frame": 18,
-    "sharpness": 3543.2,
+    "id": "F129c",
+    "frame": 129,
+    "sharpness": 1645.5,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.997,
+      0.994,
       false
      ],
      [
       "G",
-      0.997,
+      0.999,
       false
      ],
      [
       "0",
-      0.991,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.995,
-      false
-     ],
-     [
-      "8",
-      0.584,
-      false
-     ],
-     [
-      "1",
-      0.982,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F20",
-    "frame": 20,
-    "sharpness": 4395.5,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.997,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.991,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      1.0,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
       0.996,
       false
      ],
      [
-      "0",
-      0.535,
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      0.347,
       false
      ],
      [
       "1",
-      0.993,
+      0.989,
       false
      ]
     ]
    },
    {
-    "id": "F20c",
-    "frame": 20,
-    "sharpness": 4395.5,
+    "id": "F131",
+    "frame": 131,
+    "sharpness": 1603.4,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.994,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.994,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.997,
+      false
+     ],
+     [
+      "M",
+      0.484,
+      false
+     ],
+     [
+      "1",
+      0.974,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F131c",
+    "frame": 131,
+    "sharpness": 1603.4,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.997,
+      0.995,
       false
      ],
      [
@@ -786,51 +662,109 @@
      ],
      [
       "0",
-      0.992,
+      0.994,
       false
      ],
      [
       "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
       1.0,
       false
      ],
      [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
       "4",
       0.999,
       false
      ],
      [
       "8",
-      0.995,
+      0.998,
       false
      ],
      [
-      "8",
-      0.44,
+      "M",
+      0.458,
       false
      ],
      [
       "1",
-      0.992,
+      0.98,
       false
      ]
     ]
    },
    {
-    "id": "F23",
-    "frame": 23,
-    "sharpness": 3629.1,
+    "id": "F134",
+    "frame": 134,
+    "sharpness": 1189.2,
     "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.394,
+      false
+     ],
+     [
+      "1",
+      0.969,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F134c",
+    "frame": 134,
+    "sharpness": 1189.2,
+    "source": "clahe",
     "chars": [
      [
       "C",
@@ -844,7 +778,7 @@
      ],
      [
       "0",
-      0.99,
+      0.993,
       false
      ],
      [
@@ -854,7 +788,7 @@
      ],
      [
       "M",
-      0.999,
+      1.0,
       false
      ],
      [
@@ -869,12 +803,70 @@
      ],
      [
       "8",
-      0.993,
+      0.997,
       false
      ],
      [
       "8",
-      0.68,
+      0.426,
+      false
+     ],
+     [
+      "1",
+      0.978,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F136",
+    "frame": 136,
+    "sharpness": 1113.9,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.246,
       false
      ],
      [
@@ -885,68 +877,10 @@
     ]
    },
    {
-    "id": "F23c",
-    "frame": 23,
-    "sharpness": 3629.1,
+    "id": "F136c",
+    "frame": 136,
+    "sharpness": 1113.9,
     "source": "clahe",
-    "chars": [
-     [
-      "C",
-      0.995,
-      false
-     ],
-     [
-      "G",
-      0.995,
-      false
-     ],
-     [
-      "0",
-      0.99,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.977,
-      false
-     ],
-     [
-      "8",
-      0.859,
-      false
-     ],
-     [
-      "1",
-      0.969,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F25",
-    "frame": 25,
-    "sharpness": 3017.4,
-    "source": "raw",
     "chars": [
      [
       "C",
@@ -955,12 +889,12 @@
      ],
      [
       "G",
-      0.999,
+      0.998,
       false
      ],
      [
       "0",
-      0.99,
+      0.994,
       false
      ],
      [
@@ -970,7 +904,7 @@
      ],
      [
       "M",
-      0.999,
+      1.0,
       false
      ],
      [
@@ -985,444 +919,101 @@
      ],
      [
       "8",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.231,
+      false
+     ],
+     [
+      "1",
+      0.972,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F139",
+    "frame": 139,
+    "sharpness": 1491.0,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.997,
+      false
+     ],
+     [
+      "0",
       0.989,
       false
      ],
      [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
       "8",
-      0.696,
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.271,
       false
      ],
      [
       "1",
-      0.992,
+      0.961,
       false
      ]
     ]
    },
    {
-    "id": "F25c",
-    "frame": 25,
-    "sharpness": 3017.4,
+    "id": "F139c",
+    "frame": 139,
+    "sharpness": 1491.0,
     "source": "clahe",
     "chars": [
      [
       "C",
-      0.993,
+      0.997,
       false
      ],
      [
       "G",
-      0.998,
+      0.997,
       false
      ],
      [
       "0",
-      0.993,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.998,
-      false
-     ],
-     [
-      "8",
-      0.976,
-      false
-     ],
-     [
-      "8",
-      0.781,
-      false
-     ],
-     [
-      "1",
-      0.992,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F30",
-    "frame": 30,
-    "sharpness": 3252.9,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.995,
-      false
-     ],
-     [
-      "G",
-      0.999,
-      false
-     ],
-     [
-      "0",
-      0.991,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.998,
-      false
-     ],
-     [
-      "8",
-      0.923,
-      false
-     ],
-     [
-      "8",
-      0.559,
-      false
-     ],
-     [
-      "1",
-      0.992,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F30c",
-    "frame": 30,
-    "sharpness": 3252.9,
-    "source": "clahe",
-    "chars": [
-     [
-      "C",
-      0.994,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.993,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      1.0,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "3",
-      0.514,
-      false
-     ],
-     [
-      "8",
-      0.659,
-      false
-     ],
-     [
-      "1",
-      0.315,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F35",
-    "frame": 35,
-    "sharpness": 3688.5,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.996,
-      false
-     ],
-     [
-      "G",
-      0.999,
-      false
-     ],
-     [
-      "0",
-      0.993,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      1.0,
-      false
-     ],
-     [
-      "X",
-      1.0,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.996,
-      false
-     ],
-     [
-      "8",
-      0.353,
-      false
-     ],
-     [
-      "1",
-      0.994,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F35c",
-    "frame": 35,
-    "sharpness": 3688.5,
-    "source": "clahe",
-    "chars": [
-     [
-      "C",
-      0.996,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.994,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      1.0,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
       0.99,
       false
      ],
      [
-      "8",
-      0.473,
-      false
-     ],
-     [
-      "1",
-      0.993,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F45",
-    "frame": 45,
-    "sharpness": 3251.2,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.997,
-      false
-     ],
-     [
-      "G",
-      0.999,
-      false
-     ],
-     [
-      "0",
-      0.991,
-      false
-     ],
-     [
-      "4",
-      1.0,
-      false
-     ],
-     [
-      "M",
-      1.0,
-      false
-     ],
-     [
-      "X",
-      0.999,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.995,
-      false
-     ],
-     [
-      "M",
-      0.303,
-      false
-     ],
-     [
-      "1",
-      0.914,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F45c",
-    "frame": 45,
-    "sharpness": 3251.2,
-    "source": "clahe",
-    "chars": [
-     [
-      "C",
-      0.997,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.993,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "M",
-      0.999,
-      false
-     ],
-     [
-      "X",
-      1.0,
-      false
-     ],
-     [
-      "4",
-      0.999,
-      false
-     ],
-     [
-      "8",
-      0.995,
-      false
-     ],
-     [
-      "8",
-      0.567,
-      false
-     ],
-     [
-      "1",
-      0.99,
-      false
-     ]
-    ]
-   },
-   {
-    "id": "F66",
-    "frame": 66,
-    "sharpness": 2764.1,
-    "source": "raw",
-    "chars": [
-     [
-      "C",
-      0.997,
-      false
-     ],
-     [
-      "G",
-      0.998,
-      false
-     ],
-     [
-      "0",
-      0.992,
-      false
-     ],
-     [
       "4",
       0.999,
       false
@@ -1448,41 +1039,99 @@
       false
      ],
      [
-      "0",
-      0.3,
+      "8",
+      0.323,
       false
      ],
      [
       "1",
-      0.851,
+      0.988,
       false
      ]
     ]
    },
    {
-    "id": "F66c",
-    "frame": 66,
-    "sharpness": 2764.1,
-    "source": "clahe",
+    "id": "F141",
+    "frame": 141,
+    "sharpness": 1292.2,
+    "source": "raw",
     "chars": [
      [
       "C",
-      0.996,
-      false
-     ],
-     [
-      "G",
       0.997,
       false
      ],
      [
+      "G",
+      0.999,
+      false
+     ],
+     [
       "0",
-      0.991,
+      0.996,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
       false
      ],
      [
       "4",
       0.999,
+      false
+     ],
+     [
+      "8",
+      0.998,
+      false
+     ],
+     [
+      "8",
+      0.323,
+      false
+     ],
+     [
+      "1",
+      0.979,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F141c",
+    "frame": 141,
+    "sharpness": 1292.2,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.995,
+      false
+     ],
+     [
+      "4",
+      1.0,
       false
      ],
      [
@@ -1506,8 +1155,177 @@
       false
      ],
      [
+      "8",
+      0.397,
+      false
+     ],
+     [
+      "1",
+      0.981,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F144",
+    "frame": 144,
+    "sharpness": 1493.0,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
       "0",
-      0.4,
+      0.994,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.996,
+      false
+     ],
+     [
+      "8",
+      0.956,
+      false
+     ],
+     [
+      "1",
+      0.175,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F144c",
+    "frame": 144,
+    "sharpness": 1493.0,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.994,
+      false
+     ],
+     [
+      "G",
+      0.996,
+      false
+     ],
+     [
+      "0",
+      0.995,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.998,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.998,
+      false
+     ],
+     [
+      "M",
+      0.285,
+      false
+     ],
+     [
+      "1",
+      0.956,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F146",
+    "frame": 146,
+    "sharpness": 1296.1,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.997,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.995,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.998,
+      false
+     ],
+     [
+      "M",
+      0.261,
       false
      ],
      [
@@ -1516,82 +1334,251 @@
       false
      ]
     ]
+   },
+   {
+    "id": "F146c",
+    "frame": 146,
+    "sharpness": 1296.1,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.998,
+      false
+     ],
+     [
+      "0",
+      0.994,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.995,
+      false
+     ],
+     [
+      "8",
+      0.906,
+      false
+     ],
+     [
+      "1",
+      0.174,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F149",
+    "frame": 149,
+    "sharpness": 2113.5,
+    "source": "raw",
+    "chars": [
+     [
+      "C",
+      0.996,
+      false
+     ],
+     [
+      "G",
+      0.999,
+      false
+     ],
+     [
+      "0",
+      0.993,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      1.0,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.997,
+      false
+     ],
+     [
+      "8",
+      0.241,
+      false
+     ],
+     [
+      "1",
+      0.964,
+      false
+     ]
+    ]
+   },
+   {
+    "id": "F149c",
+    "frame": 149,
+    "sharpness": 2113.5,
+    "source": "clahe",
+    "chars": [
+     [
+      "C",
+      0.995,
+      false
+     ],
+     [
+      "G",
+      0.997,
+      false
+     ],
+     [
+      "0",
+      0.992,
+      false
+     ],
+     [
+      "4",
+      1.0,
+      false
+     ],
+     [
+      "M",
+      0.999,
+      false
+     ],
+     [
+      "X",
+      0.999,
+      false
+     ],
+     [
+      "4",
+      0.999,
+      false
+     ],
+     [
+      "8",
+      0.996,
+      false
+     ],
+     [
+      "8",
+      0.293,
+      false
+     ],
+     [
+      "1",
+      0.992,
+      false
+     ]
+    ]
    }
   ],
   "fusion_sweep": [
    {
     "tau": 0.5,
-    "text": "CG04MX4881",
-    "kept": 229,
-    "total": 239,
+    "text": "CG04MX48?1",
+    "kept": 214,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 43.4338,
-      "share": 0.939,
+      "weight": 47.4704,
+      "total": 47.4704,
+      "share": 1.0,
       "note": null
      },
      {
-      "char": "8",
-      "weight": 21.0022,
-      "total": 22.073,
-      "share": 0.951,
-      "note": null
+      "char": "?",
+      "weight": 0.3392,
+      "total": 0.3392,
+      "share": 1.0,
+      "note": "vote failed: evidence 0.34 < 0.9, '0' read confidently in only 1 of 21 reads (5% < 40%)"
      },
      {
       "char": "1",
-      "weight": 43.2812,
-      "total": 43.2812,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1599,77 +1586,77 @@
    },
    {
     "tau": 0.55,
-    "text": "CG04MX4881",
-    "kept": 226,
-    "total": 239,
+    "text": "CG04MX48?1",
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
-      "char": "8",
-      "weight": 19.9216,
-      "total": 19.9216,
+      "char": "?",
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": null
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 43.2812,
-      "total": 43.2812,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1677,77 +1664,77 @@
    },
    {
     "tau": 0.6,
-    "text": "CG04MX4881",
-    "kept": 221,
-    "total": 239,
+    "text": "CG04MX48?1",
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
-      "char": "8",
-      "weight": 15.3512,
-      "total": 15.3512,
+      "char": "?",
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": null
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 42.1274,
-      "total": 42.1274,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1755,77 +1742,77 @@
    },
    {
     "tau": 0.65,
-    "text": "CG04MX4881",
-    "kept": 221,
-    "total": 239,
+    "text": "CG04MX48?1",
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
-      "char": "8",
-      "weight": 15.3512,
-      "total": 15.3512,
+      "char": "?",
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": null
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 42.1274,
-      "total": 42.1274,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1834,76 +1821,76 @@
    {
     "tau": 0.7,
     "text": "CG04MX48?1",
-    "kept": 217,
-    "total": 239,
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 9.8812,
-      "total": 9.8812,
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": "vote failed: '8' read confidently in only 6 of 24 reads (25% < 40%)"
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 42.1274,
-      "total": 42.1274,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1912,76 +1899,76 @@
    {
     "tau": 0.75,
     "text": "CG04MX48?1",
-    "kept": 216,
-    "total": 239,
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 9.8812,
-      "total": 9.8812,
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": "vote failed: '8' read confidently in only 6 of 24 reads (25% < 40%)"
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 40.6342,
-      "total": 40.6342,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -1990,76 +1977,76 @@
    {
     "tau": 0.8,
     "text": "CG04MX48?1",
-    "kept": 214,
-    "total": 239,
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 40.7826,
-      "total": 42.4064,
-      "share": 0.962,
+      "weight": 41.8822,
+      "total": 41.8822,
+      "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 6.7912,
-      "total": 6.7912,
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": "vote failed: '8' read confidently in only 4 of 24 reads (17% < 40%)"
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 40.6342,
-      "total": 40.6342,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -2068,76 +2055,76 @@
    {
     "tau": 0.85,
     "text": "CG04MX48?1",
-    "kept": 210,
-    "total": 239,
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 47.6216,
-      "total": 47.6216,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 47.6032,
-      "total": 47.6032,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 39.0986,
-      "total": 39.0986,
+      "weight": 41.8822,
+      "total": 41.8822,
       "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 3.519,
-      "total": 3.519,
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": "vote failed: '8' read confidently in only 2 of 24 reads (8% < 40%)"
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 40.6342,
-      "total": 40.6342,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -2146,76 +2133,76 @@
    {
     "tau": 0.9,
     "text": "CG04MX48?1",
-    "kept": 205,
-    "total": 239,
+    "kept": 213,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 45.8566,
-      "total": 45.8566,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 45.8352,
-      "total": 45.8352,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 37.3076,
-      "total": 37.3076,
+      "weight": 41.8822,
+      "total": 41.8822,
       "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 1.8014,
-      "total": 1.8014,
+      "weight": 5.5882,
+      "total": 5.5882,
       "share": 1.0,
-      "note": "vote failed: '8' read confidently in only 1 of 24 reads (4% < 40%)"
+      "note": "vote failed: '8' read confidently in only 3 of 24 reads (12% < 40%)"
      },
      {
       "char": "1",
-      "weight": 38.9332,
-      "total": 38.9332,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -2224,76 +2211,76 @@
    {
     "tau": 0.95,
     "text": "CG04MX48?1",
-    "kept": 198,
-    "total": 239,
+    "kept": 211,
+    "total": 237,
     "positions": [
      {
       "char": "C",
-      "weight": 47.7342,
-      "total": 47.7342,
+      "weight": 47.7858,
+      "total": 47.7858,
       "share": 1.0,
       "note": null
      },
      {
       "char": "G",
-      "weight": 45.8566,
-      "total": 45.8566,
+      "weight": 47.9156,
+      "total": 47.9156,
       "share": 1.0,
       "note": null
      },
      {
       "char": "0",
-      "weight": 47.3972,
-      "total": 47.3972,
+      "weight": 47.6934,
+      "total": 47.6934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 47.9672,
-      "total": 47.9672,
+      "weight": 47.9742,
+      "total": 47.9742,
       "share": 1.0,
       "note": null
      },
      {
       "char": "M",
-      "weight": 43.9476,
-      "total": 43.9476,
+      "weight": 47.9818,
+      "total": 47.9818,
       "share": 1.0,
       "note": null
      },
      {
       "char": "X",
-      "weight": 47.8144,
-      "total": 47.8144,
+      "weight": 47.9564,
+      "total": 47.9564,
       "share": 1.0,
       "note": null
      },
      {
       "char": "4",
-      "weight": 45.9318,
-      "total": 45.9318,
+      "weight": 47.934,
+      "total": 47.934,
       "share": 1.0,
       "note": null
      },
      {
       "char": "8",
-      "weight": 33.6126,
-      "total": 33.6126,
+      "weight": 41.8822,
+      "total": 41.8822,
       "share": 1.0,
       "note": null
      },
      {
       "char": "?",
-      "weight": 0.0,
-      "total": 0.0,
-      "share": 0.0,
-      "note": "no frame read this position with confidence"
+      "weight": 1.9126,
+      "total": 1.9126,
+      "share": 1.0,
+      "note": "vote failed: '8' read confidently in only 1 of 24 reads (4% < 40%)"
      },
      {
       "char": "1",
-      "weight": 33.4058,
-      "total": 33.4058,
+      "weight": 41.1412,
+      "total": 41.1412,
       "share": 1.0,
       "note": null
      }
@@ -2310,14 +2297,14 @@
    "/media/camB_white_plate1.png",
    "/media/camB_white_plate2.png"
   ],
-  "fused": "?G04MX4821",
+  "fused": "G04MX4821",
   "status": "MATCHED",
-  "explanation": "REG-0001 (CG04MX4821) scored 0.90, above the 0.55 threshold, with 9 known plate characters. Higher-scoring REG-0004 contradict a confidently read plate character and are ranked below it.",
+  "explanation": "REG-0001 (CG04MX4821) scored 0.97, above the 0.55 threshold, 0.62 ahead of the next candidate the video does not rule out, with 9 known plate characters.",
   "top": [
    {
     "id": "REG-0001",
     "plate": "CG04MX4821",
-    "score": 0.9,
+    "score": 0.9675,
     "color": "white",
     "body": "car",
     "model": "Hyundai Verna",
@@ -2326,41 +2313,37 @@
     "region": "Raipur, CG"
    },
    {
-    "id": "REG-0004",
-    "plate": "CG04MX4827",
-    "score": 0.9278,
-    "color": "silver",
+    "id": "REG-00765",
+    "plate": "DL11CVZ1861",
+    "score": 0.35,
+    "color": "white",
     "body": "car",
-    "model": "Hyundai Verna",
-    "mismatches": [
-     "Mismatch at position 10: video shows '1', registry has '7'"
-    ],
-    "style": "sedan",
-    "region": "Raipur, CG"
+    "model": "Renault Kwid",
+    "mismatches": [],
+    "style": "hatchback",
+    "region": "Delhi zone 11, DL"
    },
    {
-    "id": "REG-0002",
-    "plate": "CG04MX4851",
-    "score": 0.8278,
+    "id": "REG-02361",
+    "plate": "DL13CKH5414",
+    "score": 0.35,
     "color": "white",
     "body": "car",
     "model": "Hyundai Verna",
-    "mismatches": [
-     "Mismatch at position 9: video shows '2', registry has '5'"
-    ],
+    "mismatches": [],
     "style": "sedan",
-    "region": "Raipur, CG"
+    "region": "Delhi zone 13, DL"
    }
   ],
   "advisor": null,
-  "color": "silver",
+  "color": "white",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (silver car, seen 00:00.0-00:06.0) showed the plate `?G04MX4821` across 24 plate reads [F5, F5c, F8]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.90 with 9 of 9 known characters matching [REG-0001]. Position 1 was never read with confidence [POS-1]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0001, scored 0.20 [REG-0001].",
+  "summary": "Vehicle track 1 (white car, seen 00:00.0-00:06.0) showed the plate `G04MX4821` across 24 plate reads [F121, F121c, F124]. The best registry candidate is REG-0001, `CG04MX4821`, scoring 0.97 with 9 of 9 known characters matching [REG-0001]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-00002, scored 0.20 [REG-00002].",
   "clip_sha256": "3eb607dda3be03bff1bc81c3723189bf8a303ad6e6885e391a90d262523e7223",
   "reports": {
-   "html": "/reports/camB_white/PRISM_report_be1bdce1b035.html",
-   "pdf": "/reports/camB_white/PRISM_report_be1bdce1b035.pdf"
+   "html": "/reports/camB_white/PRISM_report_5c142f658a58.html",
+   "pdf": "/reports/camB_white/PRISM_report_5c142f658a58.pdf"
   },
   "strip": "/media/camB_white_strip.png"
  },
@@ -2422,11 +2405,11 @@
   "color": "black",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (black car, seen 00:00.0-00:06.0) showed the plate `MH12DE5678` across 20 plate reads [F5, F18, F23]. The best registry candidate is REG-0010, `MH12DE5678`, scoring 0.85 with 10 of 10 known characters matching [REG-0010].",
+  "summary": "Vehicle track 1 (black car, seen 00:00.0-00:06.0) showed the plate `MH12DE5678` across 24 plate reads [F121, F121c, F124]. The best registry candidate is REG-0010, `MH12DE5678`, scoring 0.85 with 10 of 10 known characters matching [REG-0010].",
   "clip_sha256": "cb20dbbefa9a983ff9e7cc865e13c7df54895134acbbbaf00becb6af4e570338",
   "reports": {
-   "html": "/reports/day_black_suv/PRISM_report_a86d7cc1357c.html",
-   "pdf": "/reports/day_black_suv/PRISM_report_a86d7cc1357c.pdf"
+   "html": "/reports/day_black_suv/PRISM_report_e40a50c37e2f.html",
+   "pdf": "/reports/day_black_suv/PRISM_report_e40a50c37e2f.pdf"
   },
   "strip": "/media/day_black_suv_strip.png"
  },
@@ -2457,7 +2440,7 @@
    {
     "id": "REG-0021",
     "plate": "KA05MN2028",
-    "score": 0.985,
+    "score": 0.935,
     "color": "blue",
     "body": "car",
     "model": "Maruti Suzuki Alto",
@@ -2485,11 +2468,11 @@
   "color": "blue",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (blue car, seen 00:00.0-00:06.0) showed the plate `KA05MN2023` across 17 plate reads [F3, F8, F10]. The best registry candidate is REG-0020, `KA05MN2023`, scoring 1.00 with 10 of 10 known characters matching [REG-0020].",
+  "summary": "Vehicle track 1 (blue car, seen 00:00.0-00:06.0) showed the plate `KA05MN2023` across 21 plate reads [F121, F121c, F124]. The best registry candidate is REG-0020, `KA05MN2023`, scoring 1.00 with 10 of 10 known characters matching [REG-0020].",
   "clip_sha256": "2659e9178bc4cf1b3b8fe76363c7d82c46a63f0981884df0d88fcfdfbe1224f3",
   "reports": {
-   "html": "/reports/day_blue_twoline/PRISM_report_eabc39421fa1.html",
-   "pdf": "/reports/day_blue_twoline/PRISM_report_eabc39421fa1.pdf"
+   "html": "/reports/day_blue_twoline/PRISM_report_51e3e7e8b1da.html",
+   "pdf": "/reports/day_blue_twoline/PRISM_report_51e3e7e8b1da.pdf"
   },
   "strip": "/media/day_blue_twoline_strip.png"
  },
@@ -2504,70 +2487,65 @@
   ],
   "fused": "MH14XY0042",
   "status": "NO CONFIDENT MATCH",
-  "explanation": "Best candidate REG-0443 scored 0.64, but it contradicts a confidently read plate character (Mismatch at position 4: video shows '4', registry has '2'; Mismatch at position 6: video shows 'Y', registry has 'F'; Mismatch at position 8: video shows '0', registry has '1'; Mismatch at position 10: video shows '2', registry has '6'). PRISM will not call a vehicle a match when the video clearly shows a different character. No shortlisted candidate is free of plate contradictions, so the true vehicle may not be in the registry.",
+  "explanation": "Best candidate REG-12881 scored 0.81, but it contradicts a confidently read plate character (Mismatch at position 6: video shows 'Y', registry has 'V'; Mismatch at position 8: video shows '0', registry has '7'; Mismatch at position 10: video shows '2', registry has '8'). PRISM will not call a vehicle a match when the video clearly shows a different character. No shortlisted candidate is free of plate contradictions, so the true vehicle may not be in the registry.",
   "top": [
    {
-    "id": "REG-0443",
-    "plate": "MH12XF0146",
-    "score": 0.64,
-    "color": "grey",
-    "body": "car",
-    "model": "Hyundai Verna",
-    "mismatches": [
-     "Mismatch at position 4: video shows '4', registry has '2'",
-     "Mismatch at position 6: video shows 'Y', registry has 'F'",
-     "Mismatch at position 8: video shows '0', registry has '1'",
-     "Mismatch at position 10: video shows '2', registry has '6'"
-    ],
-    "style": "sedan",
-    "region": "Pune, MH"
-   },
-   {
-    "id": "REG-0298",
-    "plate": "MH14YS0991",
-    "score": 0.575,
+    "id": "REG-12881",
+    "plate": "MH14XV0748",
+    "score": 0.805,
     "color": "white",
     "body": "car",
-    "model": "Tata Tiago",
+    "model": "Hyundai Aura",
     "mismatches": [
-     "Mismatch at position 5: video shows 'X', registry has 'Y'",
-     "Mismatch at position 6: video shows 'Y', registry has 'S'",
-     "Mismatch at position 8: video shows '0', registry has '9'",
-     "Mismatch at position 9: video shows '4', registry has '9'",
-     "Mismatch at position 10: video shows '2', registry has '1'"
+     "Mismatch at position 6: video shows 'Y', registry has 'V'",
+     "Mismatch at position 8: video shows '0', registry has '7'",
+     "Mismatch at position 10: video shows '2', registry has '8'"
+    ],
+    "style": "sedan",
+    "region": "Pimpri-Chinchwad, MH"
+   },
+   {
+    "id": "REG-05602",
+    "plate": "MH14XN9672",
+    "score": 0.74,
+    "color": "white",
+    "body": "car",
+    "model": "Maruti Suzuki S-Presso",
+    "mismatches": [
+     "Mismatch at position 6: video shows 'Y', registry has 'N'",
+     "Mismatch at position 7: video shows '0', registry has '9'",
+     "Mismatch at position 8: video shows '0', registry has '6'",
+     "Mismatch at position 9: video shows '4', registry has '7'"
     ],
     "style": "hatchback",
     "region": "Pimpri-Chinchwad, MH"
    },
    {
-    "id": "REG-0054",
-    "plate": "MH04H2171",
-    "score": 0.545,
-    "color": "silver",
+    "id": "REG-10260",
+    "plate": "MH14TR0071",
+    "score": 0.74,
+    "color": "white",
     "body": "car",
-    "model": "Maruti Suzuki Dzire",
+    "model": "Maruti Suzuki S-Presso",
     "mismatches": [
-     "Mismatch at position 3: video shows '1', registry has '0'",
-     "Mismatch at position 5: video shows 'X', registry has 'H'",
-     "Mismatch at position 6: video shows 'Y', registry has '2'",
-     "Mismatch at position 7: video shows '0', registry has '1'",
-     "Mismatch at position 8: video shows '0', registry has '7'",
-     "Mismatch at position 9: video shows '4', registry has '1'",
-     "Mismatch at position 10: video shows '2', registry has '(nothing)'"
+     "Mismatch at position 5: video shows 'X', registry has 'T'",
+     "Mismatch at position 6: video shows 'Y', registry has 'R'",
+     "Mismatch at position 9: video shows '4', registry has '7'",
+     "Mismatch at position 10: video shows '2', registry has '1'"
     ],
-    "style": "sedan",
-    "region": "Thane, MH"
+    "style": "hatchback",
+    "region": "Pimpri-Chinchwad, MH"
    }
   ],
-  "advisor": "Every plate position was read, so the candidates are separated by colour, body type or OCR mix-ups rather than by an unknown position. They differ on: Mismatch at position 4: video shows '4', registry has '2'; Mismatch at position 6: video shows 'Y', registry has 'F'; Mismatch at position 8: video shows '0', registry has '1'. Check the attribute chips and the confusable characters by eye.",
-  "color": "silver",
+  "advisor": "Every plate position was read, so the candidates are separated by colour, body type or OCR mix-ups rather than by an unknown position. They differ on: Mismatch at position 6: video shows 'Y', registry has 'V'; Mismatch at position 8: video shows '0', registry has '7'; Mismatch at position 10: video shows '2', registry has '8'. Check the attribute chips and the confusable characters by eye.",
+  "color": "white",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (silver car, seen 00:00.0-00:06.0) showed the plate `MH14XY0042` across 24 plate reads [F10, F13, F13c]. No registry entry cleared the 0.55 threshold; the best, REG-0443, scored 0.64 [REG-0443]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0001, scored 0.20 [REG-0001].",
+  "summary": "Vehicle track 1 (white car, seen 00:00.0-00:06.0) showed the plate `MH14XY0042` across 24 plate reads [F121, F121c, F124]. No registry entry cleared the 0.55 threshold; the best, REG-12881, scored 0.81 [REG-12881]. Vehicle track 2 (white vehicle, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-00002, scored 0.20 [REG-00002].",
   "clip_sha256": "9e3a028e32227c8cb5bca86ade53c27a72e532f309ac167aae98e5a8605e2dc4",
   "reports": {
-   "html": "/reports/unregistered_white/PRISM_report_5eb42550bfc8.html",
-   "pdf": "/reports/unregistered_white/PRISM_report_5eb42550bfc8.pdf"
+   "html": "/reports/unregistered_white/PRISM_report_5cca65c7a6c2.html",
+   "pdf": "/reports/unregistered_white/PRISM_report_5cca65c7a6c2.pdf"
   },
   "strip": "/media/unregistered_white_strip.png"
  },
@@ -2624,25 +2602,219 @@
     "region": "Raipur, CG"
    }
   ],
-  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 13 read it as `8` at 0.69, below the 0.70 threshold, so it wasn't used. Check frame 13 by eye, or look for footage from another angle. This is a lead, not evidence.",
+  "advisor": "Position 9 separates the top two: REG-0001 has `2`, REG-0002 has `5`. Frame 131 read it as `M` at 0.48, below the 0.70 threshold, so it wasn't used. Check frame 131 by eye, or look for footage from another angle. This is a lead, not evidence.",
   "color": "grey",
   "body": "car",
   "reads": 24,
-  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F8, F8c, F10]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 13 came closest to reading position 9 (`8` at 0.69) and is a lead only [F13, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-0077, scored 0.25 [REG-0077]. Track 1 in clip A and track 1 in clip B look like the same vehicle (similarity 0.91); combining both cameras gives `CG04MX4821` and REG-0001 at 0.90 [T1, REG-0001].",
+  "summary": "Vehicle track 1 (grey car, seen 00:00.0-00:06.0) showed the plate `CG04MX48?1` across 24 plate reads [F121, F121c, F124]. REG-0001 and REG-0002 scored 0.90 and 0.90, too close to separate [REG-0001, REG-0002]. Position 9 was never read with confidence [POS-9]. Frame 131 came closest to reading position 9 (`M` at 0.48) and is a lead only [F131, POS-9]. Vehicle track 2 (blue SUV, seen 00:00.0-00:06.0) gave no readable plate [T2]. No registry entry cleared the 0.55 threshold; the best, REG-00016, scored 0.25 [REG-00016]. Track 1 in clip A and track 1 in clip B look like the same vehicle (similarity 0.92); combining both cameras gives `G04MX4821` and REG-0001 at 0.96 [T1, REG-0001].",
   "clip_sha256": "b6b818544d7712ecbf20d182855148c0a1d238450d53e1b985b25ee854572085",
   "reports": {
-   "html": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_f5c3cc3ca772.html",
-   "pdf": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_f5c3cc3ca772.pdf"
+   "html": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_ecbfaa1eea32.html",
+   "pdf": "/reports/crosscam_night_partial_white__camB_white/PRISM_report_ecbfaa1eea32.pdf"
   },
   "strip": "/media/crosscam_night_partial_white__camB_white_strip.png",
   "crosscam": {
-   "similarity": 0.9135,
+   "similarity": 0.9158,
    "a": "CG04MX48?1",
-   "b": "?G04MX4821",
-   "combined": "CG04MX4821",
+   "b": "G04MX4821",
+   "combined": "G04MX4821",
    "before": "AMBIGUOUS",
    "after": "MATCHED",
    "best_b": "/media/crosscam_night_partial_white__camB_white_b_best.jpg"
   }
+ },
+ "day_scooter_twoline": {
+  "clip": "day_scooter_twoline.mp4",
+  "mode": "clip",
+  "best": "/media/day_scooter_twoline_best.jpg",
+  "plates": [
+   "/media/day_scooter_twoline_plate0.png",
+   "/media/day_scooter_twoline_plate1.png",
+   "/media/day_scooter_twoline_plate2.png"
+  ],
+  "fused": "CG07BK3519",
+  "status": "MATCHED",
+  "explanation": "REG-0040 (CG07BK3519) scored 0.95, above the 0.55 threshold, with 10 known plate characters.",
+  "top": [
+   {
+    "id": "REG-0040",
+    "plate": "CG07BK3519",
+    "score": 0.95,
+    "color": "grey",
+    "body": "two-wheeler",
+    "model": "Honda Activa",
+    "mismatches": [],
+    "style": "scooter",
+    "region": "Durg, CG"
+   },
+   {
+    "id": "REG-0041",
+    "plate": "CG07BK3518",
+    "score": 0.885,
+    "color": "grey",
+    "body": "two-wheeler",
+    "model": "Honda Activa",
+    "mismatches": [
+     "Mismatch at position 10: video shows '9', registry has '8'"
+    ],
+    "style": "scooter",
+    "region": "Durg, CG"
+   },
+   {
+    "id": "REG-0042",
+    "plate": "CG07BR3519",
+    "score": 0.835,
+    "color": "grey",
+    "body": "two-wheeler",
+    "model": "TVS Jupiter",
+    "mismatches": [
+     "Mismatch at position 6: video shows 'K', registry has 'R'"
+    ],
+    "style": "scooter",
+    "region": "Durg, CG"
+   }
+  ],
+  "advisor": null,
+  "color": "silver",
+  "body": "two-wheeler",
+  "reads": 24,
+  "summary": "Vehicle track 1 (silver two-wheeler, seen 00:00.0-00:06.0) showed the plate `CG07BK3519` across 4 plate reads [F125, F125c, F149]. The best registry candidate is REG-0040, `CG07BK3519`, scoring 0.95 with 10 of 10 known characters matching [REG-0040]. Vehicle track 12 (black two-wheeler, seen 00:01.1-00:06.0) gave no readable plate [T12]. No registry entry cleared the 0.55 threshold; the best, REG-00015, scored 0.35 [REG-00015]. Vehicle track 42 (black two-wheeler, seen 00:02.7-00:03.1) gave no readable plate [T42]. No registry entry cleared the 0.55 threshold; the best, REG-00015, scored 0.35 [REG-00015].",
+  "clip_sha256": "99a8facc37c02545da89d2b13589604af7f796c6c44937e9e430973756d1d314",
+  "reports": {
+   "html": "/reports/day_scooter_twoline/PRISM_report_cac71479eefc.html",
+   "pdf": "/reports/day_scooter_twoline/PRISM_report_cac71479eefc.pdf"
+  },
+  "strip": "/media/day_scooter_twoline_strip.png"
+ },
+ "day_auto_rickshaw": {
+  "clip": "day_auto_rickshaw.mp4",
+  "mode": "clip",
+  "best": "/media/day_auto_rickshaw_best.jpg",
+  "plates": [
+   "/media/day_auto_rickshaw_plate0.png",
+   "/media/day_auto_rickshaw_plate1.png",
+   "/media/day_auto_rickshaw_plate2.png"
+  ],
+  "fused": "KA01AH7350",
+  "status": "MATCHED",
+  "explanation": "REG-0050 (KA01AH7350) scored 1.00, above the 0.55 threshold, with 10 known plate characters.",
+  "top": [
+   {
+    "id": "REG-0050",
+    "plate": "KA01AH7350",
+    "score": 1.0,
+    "color": "blue",
+    "body": "auto-rickshaw",
+    "model": "Bajaj RE auto-rickshaw",
+    "mismatches": [],
+    "style": "three-wheeler",
+    "region": "Bengaluru Central, KA"
+   },
+   {
+    "id": "REG-0052",
+    "plate": "KA01AN7350",
+    "score": 0.985,
+    "color": "blue",
+    "body": "auto-rickshaw",
+    "model": "Piaggio Ape auto",
+    "mismatches": [
+     "Mismatch at position 6: video shows 'H', registry has 'N'"
+    ],
+    "style": "three-wheeler",
+    "region": "Bengaluru Central, KA"
+   },
+   {
+    "id": "REG-0054",
+    "plate": "KA01AH7380",
+    "score": 0.785,
+    "color": "blue",
+    "body": "two-wheeler",
+    "model": "TVS Ntorq",
+    "mismatches": [
+     "Mismatch at position 9: video shows '5', registry has '8'",
+     "Body type mismatch: video auto-rickshaw, registry two-wheeler"
+    ],
+    "style": "scooter",
+    "region": "Bengaluru Central, KA"
+   }
+  ],
+  "advisor": null,
+  "color": "blue",
+  "body": "auto-rickshaw",
+  "reads": 24,
+  "summary": "Vehicle track 2 (blue auto-rickshaw, seen 00:00.0-00:06.0) showed the plate `KA01AH7350` across 24 plate reads [F38, F38c, F39]. The best registry candidate is REG-0050, `KA01AH7350`, scoring 1.00 with 10 of 10 known characters matching [REG-0050]. Vehicle track 23 (blue auto-rickshaw, seen 00:04.6-00:04.9) gave no readable plate [T23]. No registry entry cleared the 0.55 threshold; the best, REG-0052, scored 0.40 [REG-0052]. Vehicle track 11 (white SUV, seen 00:01.3-00:06.0) gave no readable plate [T11]. No registry entry cleared the 0.55 threshold; the best, REG-00002, scored 0.35 [REG-00002].",
+  "clip_sha256": "d522da2f6a9d2732cef8ed9095ac96d0a6538b64b86cf8c87298fd5563b07825",
+  "reports": {
+   "html": "/reports/day_auto_rickshaw/PRISM_report_07757e9aa31f.html",
+   "pdf": "/reports/day_auto_rickshaw/PRISM_report_07757e9aa31f.pdf"
+  },
+  "strip": "/media/day_auto_rickshaw_strip.png"
+ },
+ "day_white_truck": {
+  "clip": "day_white_truck.mp4",
+  "mode": "clip",
+  "best": "/media/day_white_truck_best.jpg",
+  "plates": [
+   "/media/day_white_truck_plate0.png",
+   "/media/day_white_truck_plate1.png",
+   "/media/day_white_truck_plate2.png"
+  ],
+  "fused": "CG04LQ2290",
+  "status": "MATCHED",
+  "explanation": "REG-0060 (CG04LQ2290) scored 0.80, above the 0.55 threshold, with 10 known plate characters.",
+  "top": [
+   {
+    "id": "REG-0060",
+    "plate": "CG04LQ2290",
+    "score": 0.8,
+    "color": "white",
+    "body": "truck",
+    "model": "Tata Ace",
+    "mismatches": [
+     "Colour mismatch: video yellow, registry white"
+    ],
+    "style": "mini truck",
+    "region": "Raipur, CG"
+   },
+   {
+    "id": "REG-0061",
+    "plate": "CG04LQ2296",
+    "score": 0.735,
+    "color": "white",
+    "body": "truck",
+    "model": "Tata Ace",
+    "mismatches": [
+     "Mismatch at position 10: video shows '0', registry has '6'",
+     "Colour mismatch: video yellow, registry white"
+    ],
+    "style": "mini truck",
+    "region": "Raipur, CG"
+   },
+   {
+    "id": "REG-0062",
+    "plate": "CG04LD2290",
+    "score": 0.735,
+    "color": "white",
+    "body": "truck",
+    "model": "Ashok Leyland Dost",
+    "mismatches": [
+     "Mismatch at position 6: video shows 'Q', registry has 'D'",
+     "Colour mismatch: video yellow, registry white"
+    ],
+    "style": "light truck",
+    "region": "Raipur, CG"
+   }
+  ],
+  "advisor": null,
+  "color": "yellow",
+  "body": "truck",
+  "reads": 24,
+  "summary": "Vehicle track 1 (yellow truck, seen 00:00.0-00:06.0) showed the plate `CG04LQ2290` across 24 plate reads [F121, F121c, F124]. The best registry candidate is REG-0060, `CG04LQ2290`, scoring 0.80 with 10 of 10 known characters matching [REG-0060].",
+  "clip_sha256": "907c707d12746d416bdf344bb759640029f2d9ce19ff8fb18c6bdb5c345d1b10",
+  "reports": {
+   "html": "/reports/day_white_truck/PRISM_report_57d94b01e5ba.html",
+   "pdf": "/reports/day_white_truck/PRISM_report_57d94b01e5ba.pdf"
+  },
+  "strip": "/media/day_white_truck_strip.png"
  }
 }

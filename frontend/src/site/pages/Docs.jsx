@@ -15,7 +15,7 @@ git clone https://github.com/kHarshit/vehicle-reidentification.git vendor/vehicl
 
 const PREP = `.venv\\Scripts\\python.exe scripts\\download_weights.py          # add --with-sr for the 1.97 GB SR checkpoint
 .venv\\Scripts\\python.exe -m playwright install chromium       # PDF export (HTML works without it)
-.venv\\Scripts\\python.exe data\\generate_registry.py            # 500 synthetic records
+.venv\\Scripts\\python.exe data\\generate_registry.py            # 50,000 synthetic records
 .venv\\Scripts\\python.exe scripts\\make_demo_clips.py           # labelled demo clips
 cd frontend && npm install && npm run build && cd ..`;
 

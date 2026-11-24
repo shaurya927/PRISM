@@ -36,7 +36,7 @@ from prism.config import (
 )
 from prism.custody import CustodyLog, build_custody, sha256_file
 from prism.fusion import fuse_frame_reads, fuse_reads, merge_hint, normalize_hint, ReadObservation
-from prism.masking import char_reads, mask_read
+from prism.masking import char_reads, cross_check, mask_read
 from prism.matcher import match
 from prism.narrative import summarize
 from prism.registry import load_registry
@@ -84,6 +84,9 @@ class ModelHub:
         self._plate = None
         self._ocr = None
         self._ocr_warn: list[str] = []
+        self._ocr_check = None
+        self._ocr_check_warn: list[str] = []
+        self._ocr_check_loaded = False
         self._attr = None
         self._sr = None
         self._reid = None
@@ -107,6 +110,21 @@ class ModelHub:
                 self._ocr, self._ocr_warn = make_ocr(self.cfg.ocr, self.device)
                 self.versions["ocr"] = f"{self._ocr.name} ({getattr(self._ocr, 'origin', '')})"
             return self._ocr, list(self._ocr_warn)
+
+    def ocr_check(self):
+        """Second OCR backend for the cross-check, or None (disabled / unavailable)."""
+        primary, _ = self.ocr()
+        with self._lock:
+            if not self._ocr_check_loaded:
+                from prism.stages.ocr import make_check_ocr
+
+                self._ocr_check, self._ocr_check_warn = make_check_ocr(self.cfg.ocr, self.device, primary)
+                self._ocr_check_loaded = True
+                if self._ocr_check is not None:
+                    self.versions["ocr_cross_check"] = (
+                        f"{self._ocr_check.name} ({getattr(self._ocr_check, 'origin', '')}); can only mask characters"
+                    )
+            return self._ocr_check, list(self._ocr_check_warn)
 
     def attributes(self):
         with self._lock:
@@ -269,6 +287,8 @@ def analyze_clip(
     t = time.perf_counter()
     ocr, ocr_warn = hub.ocr()
     warnings += ocr_warn
+    check_ocr, check_warn = hub.ocr_check()
+    warnings += check_warn
     results: dict[int, TrackResult] = {}
     order = sorted(tracks)
     for n, tid in enumerate(order):
@@ -285,11 +305,15 @@ def analyze_clip(
             for crop, read_id in copies:
                 text, confs, dists, split = read_plate_crop_dist(ocr, crop, s.two_line, cfg.plate)
                 m = mask_read(text, confs, cfg.ocr, dists)
+                if check_ocr is not None:
+                    # same tagged crop through the same source gate: SR output can never reach it either
+                    t2, c2, _, _ = read_plate_crop_dist(check_ocr, crop, s.two_line, cfg.plate)
+                    m = cross_check(m, t2, c2, cfg.ocr, check_ocr.name)
                 frames.append(
                     FrameRead(
                         read_id=read_id, frame_idx=s.frame_idx, timestamp_sec=s.timestamp_sec,
                         sharpness=s.sharpness, source=crop.source, ocr_backend=ocr.name, raw_text=text,
-                        masked_text=m.masked_text,
+                        masked_text=m.masked_text, check_backend=m.check_backend, check_text=m.check_text,
                         chars=char_reads(m),
                         format_conflicts=m.conflicts, two_line=split, plate_bbox=s.plate_bbox,
                         plate_crop_url=raw_url, plate_clahe_url=clahe_url, vehicle_crop_url=veh_url,

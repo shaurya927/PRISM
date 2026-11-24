@@ -4,303 +4,535 @@
   "device": "cuda",
   "ocr_benchmark": {
     "parseq": {
-      "committed_char_error": 0.064,
-      "recovery_rate": 0.691,
-      "top1": 0.725,
-      "top5": 0.7917,
-      "matched_correct": 0.6167,
-      "false_match_rate": 0.0083,
+      "committed_char_error": 0.0118,
+      "recovery_rate": 0.6404,
+      "top1": 0.675,
+      "top5": 0.6833,
+      "matched_correct": 0.65,
+      "false_match_rate": 0.0167,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9923,
-          "top1": 0.975,
-          "top5": 0.975,
-          "matched_correct": 0.975,
+          "recovery_rate": 0.9924,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0217,
-          "recovery_rate": 0.9351,
-          "top1": 0.95,
+          "committed_char_error": 0.0087,
+          "recovery_rate": 0.8744,
+          "top1": 0.975,
           "top5": 0.975,
-          "matched_correct": 0.775,
-          "false_match_rate": 0.025,
+          "matched_correct": 0.9,
+          "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.4434,
-          "recovery_rate": 0.1509,
-          "top1": 0.25,
-          "top5": 0.425,
-          "matched_correct": 0.1,
+          "committed_char_error": 0.2308,
+          "recovery_rate": 0.051,
+          "top1": 0.05,
+          "top5": 0.075,
+          "matched_correct": 0.05,
+          "false_match_rate": 0.05,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KL09AZ1072",
+          "fused": "G???A????",
+          "level": "hard",
+          "reads": [
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "GJ05MG4110",
+          "fused": "G?05MGG110",
+          "level": "medium",
+          "reads": [
+            "GJ05MG#110",
+            "GIOSMG",
+            "GOSMG#110",
+            "GLOSMG#110",
+            "GJ05MG#110",
+            "GLOSMG#110",
+            "0SMGWEERS",
+            "QOSMGBRIGERS"
+          ]
+        },
+        {
+          "truth": "UP78WU6932",
+          "fused": "UP78WU6832",
+          "level": "medium",
+          "reads": [
+            "UP78WU6832",
+            "UP75ML",
+            "25",
+            "27",
+            "7",
+            "7400",
+            "707",
+            "7471"
+          ]
+        },
+        {
+          "truth": "TN06DA3109",
+          "fused": "T??SER????",
+          "level": "hard",
+          "reads": [
+            "7656562100",
+            "11111",
+            "TM060663108",
+            "SHMON",
+            "6",
+            "633",
+            "TOYOR",
+            "OTTO"
+          ]
+        },
+        {
+          "truth": "AN01WK2371",
+          "fused": "N???????7?",
+          "level": "hard",
+          "reads": [
+            "###",
+            "OTO",
+            "AM01063871",
+            "COL91",
+            "ANDI-ANC2873",
+            "1111",
+            "1000",
+            "11111"
+          ]
+        },
+        {
+          "truth": "MH43H0456",
+          "fused": "???I?045?",
+          "level": "hard",
+          "reads": [
+            "20142A2418",
+            "11",
+            "BEIIIII",
+            "BUS",
+            "MEISIX",
+            "SATE",
+            "!!!SKM",
+            "and"
+          ]
+        }
+      ],
+      "ms_per_read": 25.65
+    },
+    "fast_plate_ocr": {
+      "committed_char_error": 0.0062,
+      "recovery_rate": 0.4088,
+      "top1": 0.3917,
+      "top5": 0.4167,
+      "matched_correct": 0.3583,
+      "false_match_rate": 0.0167,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0026,
+          "recovery_rate": 0.9673,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.9,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0101,
+          "recovery_rate": 0.2513,
+          "top1": 0.225,
+          "top5": 0.3,
+          "matched_correct": 0.175,
+          "false_match_rate": 0.05,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 1.0,
+          "recovery_rate": 0.0,
+          "top1": 0.0,
+          "top5": 0.0,
+          "matched_correct": 0.0,
           "false_match_rate": 0.0,
           "n": 40
         }
       },
       "error_samples": [
         {
-          "truth": "KA51F1957",
-          "fused": "?6NO????",
-          "level": "hard",
+          "truth": "RJ09SW6246",
+          "fused": "R?09S??6246",
+          "level": "easy",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
-            "###",
-            "COLD",
-            "NON-DRUT-VISITY",
-            "THE"
+            "RJ99SW6246",
+            "RI09SWW6246",
+            "RJ09SWW6246",
+            "RJ09SWV6246",
+            "RJ99SS6246",
+            "RJ09SW6246",
+            "RI99SWW6246",
+            "RJ09SW6246"
           ]
         },
         {
-          "truth": "KA05KY3276",
-          "fused": "??8??Y3276",
-          "level": "hard",
-          "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
-          ]
-        },
-        {
-          "truth": "CG15VG4804",
-          "fused": "11???1????",
-          "level": "hard",
-          "reads": [
-            "181",
-            "8831",
-            "12:30-12:48",
-            "610",
-            "1111",
-            "CITY",
-            "CLUBEVICARM",
-            "CLUB"
-          ]
-        },
-        {
-          "truth": "MH01RS5348",
-          "fused": "????????0",
-          "level": "hard",
-          "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
-            "-------------------------",
-            "2111"
-          ]
-        },
-        {
-          "truth": "CG10DG7934",
-          "fused": "??2U??",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
-            "200",
-            "7042012",
-            "25"
-          ]
-        },
-        {
-          "truth": "KA19GX2689",
-          "fused": "??G?2?0?",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
+          "truth": "GJ05MG4110",
+          "fused": "G??5?????1?",
           "level": "medium",
           "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
+            "GI95MMG4114",
+            "",
+            "5101W444",
+            "G191MFY410",
+            "GV05MGG1118",
+            "GYC1MG",
+            "E161HHGW114",
+            "511NH1"
           ]
         },
         {
-          "truth": "MH31ZN7680",
-          "fused": "?H??2??9??",
+          "truth": "MH06RH5235",
+          "fused": "??I????",
           "level": "hard",
           "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
-          ]
-        },
-        {
-          "truth": "MH02YY1234",
-          "fused": "?E??E?",
-          "level": "hard",
-          "reads": [
-            "WE'RED",
-            "GERRY",
-            "-",
-            "WELCOM",
-            "PARCE",
-            "PERFOR",
-            "-",
-            "WALCO"
-          ]
-        },
-        {
-          "truth": "KA51KY9729",
-          "fused": "KA51KM9729",
-          "level": "medium",
-          "reads": [
-            "KA51KM9729",
-            "KA51KM3729",
-            "KA51KM9729",
-            "9729",
-            "KA51KM9729",
-            "KASERM1577293",
-            "9729",
-            "MUP"
-          ]
-        },
-        {
-          "truth": "KA51SA0321",
-          "fused": "A??????9??",
-          "level": "hard",
-          "reads": [
-            "ANTO-SA-1963",
-            "ONES",
-            "OFFICE",
-            "CARKING",
-            "GASEGAMES",
-            "8833",
-            "NASTSAMES",
-            "MUSHI"
-          ]
-        },
-        {
-          "truth": "CG15TU1490",
-          "fused": "CG18TU1490",
-          "level": "medium",
-          "reads": [
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "0638TU1490",
-            "CG1RTU1490",
-            "CG18TU1490"
-          ]
-        },
-        {
-          "truth": "MH04VN1276",
-          "fused": "?0??6127?",
-          "level": "hard",
-          "reads": [
-            "900-861276",
-            "EURON",
-            "-",
-            "COMISON",
-            "MUSICUS",
-            "CAEID",
-            "133",
-            "CITRON"
-          ]
-        },
-        {
-          "truth": "DL9CZ7913",
-          "fused": "DL?C?7??8",
-          "level": "hard",
-          "reads": [
-            "&THERE",
-            "67399",
-            "194",
-            "81959",
-            "144",
-            "81996",
-            "DL9CB7918",
-            "055087818"
-          ]
-        },
-        {
-          "truth": "MH12MY5071",
-          "fused": "MH12MY8071",
-          "level": "medium",
-          "reads": [
-            "MH12MY8071",
-            "MH12MY",
-            "MH12MY8071",
-            "MH12MY8071",
-            "MH12MY8071",
-            "MH12MY",
-            "MH12MY8071",
-            "MH12MY"
+            "AG1HMH",
+            "",
+            "TMWM011",
+            "TMIM891",
+            "",
+            "",
+            "6711",
+            ""
           ]
         }
       ],
-      "ms_per_read": 56.13
+      "ms_per_read": 17.06
     },
-    "fast_plate_ocr": {
-      "committed_char_error": 0.0297,
-      "recovery_rate": 0.4481,
-      "top1": 0.5167,
-      "top5": 0.625,
-      "matched_correct": 0.3917,
+    "parseq alone (no cross-check)": {
+      "committed_char_error": 0.0442,
+      "recovery_rate": 0.6785,
+      "top1": 0.6833,
+      "top5": 0.6917,
+      "matched_correct": 0.625,
+      "false_match_rate": 0.0083,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0191,
+          "recovery_rate": 0.9205,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.8,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.4054,
+          "recovery_rate": 0.1122,
+          "top1": 0.1,
+          "top5": 0.125,
+          "matched_correct": 0.075,
+          "false_match_rate": 0.025,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KL09AZ1072",
+          "fused": "??OBA??7?",
+          "level": "hard",
+          "reads": [
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "UP78E2077",
+          "fused": "UP78E2078",
+          "level": "medium",
+          "reads": [
+            "UP78E207",
+            "UP78E207",
+            "UP78E207B",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E207M",
+            "UP78E2078"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
+          "level": "medium",
+          "reads": [
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
+          ]
+        },
+        {
+          "truth": "23BH5289X",
+          "fused": "?0???4??",
+          "level": "hard",
+          "reads": [
+            "121",
+            "3",
+            "arm",
+            "ZIPPY",
+            "20101411",
+            "APPS23",
+            "720",
+            "ST"
+          ]
+        },
+        {
+          "truth": "RJ19XP0272",
+          "fused": "N?1?AP0372",
+          "level": "hard",
+          "reads": [
+            "REJOURNOTO",
+            "CHERBARK",
+            "111",
+            "69999",
+            "19AM-6275",
+            "1000",
+            "INSPORTE",
+            "CREED"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "UP14XS5786",
+          "fused": "?P38???78?",
+          "level": "hard",
+          "reads": [
+            "1114",
+            "LATTON",
+            "DP18:0355788",
+            "3P38133798",
+            "###",
+            "CREES",
+            "OFTHERSCING",
+            "CED"
+          ]
+        },
+        {
+          "truth": "HR29KX8466",
+          "fused": "HR29XX8466",
+          "level": "medium",
+          "reads": [
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466"
+          ]
+        },
+        {
+          "truth": "GJ05MG4110",
+          "fused": "GJ05MGG110",
+          "level": "medium",
+          "reads": [
+            "GJ05MG#110",
+            "GIOSMG",
+            "GOSMG#110",
+            "GLOSMG#110",
+            "GJ05MG#110",
+            "GLOSMG#110",
+            "0SMGWEERS",
+            "QOSMGBRIGERS"
+          ]
+        },
+        {
+          "truth": "JH10KN2446",
+          "fused": "??50M???",
+          "level": "hard",
+          "reads": [
+            "DRIGIN",
+            "1111",
+            "144",
+            "144",
+            "-------------------------",
+            "CITY",
+            "www.com",
+            "322"
+          ]
+        },
+        {
+          "truth": "UP78WU6932",
+          "fused": "UP78WU6832",
+          "level": "medium",
+          "reads": [
+            "UP78WU6832",
+            "UP75ML",
+            "25",
+            "27",
+            "7",
+            "7400",
+            "707",
+            "7471"
+          ]
+        },
+        {
+          "truth": "TN06DA3109",
+          "fused": "T??SER????",
+          "level": "hard",
+          "reads": [
+            "7656562100",
+            "11111",
+            "TM060663108",
+            "SHMON",
+            "6",
+            "633",
+            "TOYOR",
+            "OTTO"
+          ]
+        },
+        {
+          "truth": "UP70B1960",
+          "fused": "??0O?19??",
+          "level": "hard",
+          "reads": [
+            "821",
+            "828",
+            "URTO&1989",
+            "###",
+            "100-10-1980",
+            "CHICO",
+            "4978",
+            "9719"
+          ]
+        },
+        {
+          "truth": "AN01WK2371",
+          "fused": "N??????87?",
+          "level": "hard",
+          "reads": [
+            "###",
+            "OTO",
+            "AM01063871",
+            "COL91",
+            "ANDI-ANC2873",
+            "1111",
+            "1000",
+            "11111"
+          ]
+        }
+      ],
+      "ms_per_read": 25.65
+    },
+    "fast_plate_ocr alone (no cross-check)": {
+      "committed_char_error": 0.0195,
+      "recovery_rate": 0.4266,
+      "top1": 0.3917,
+      "top5": 0.425,
+      "matched_correct": 0.3667,
       "false_match_rate": 0.0083,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0026,
-          "recovery_rate": 0.9871,
+          "recovery_rate": 0.9723,
           "top1": 0.95,
           "top5": 0.95,
-          "matched_correct": 0.925,
+          "matched_correct": 0.9,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0507,
-          "recovery_rate": 0.3403,
-          "top1": 0.45,
-          "top5": 0.525,
-          "matched_correct": 0.25,
+          "committed_char_error": 0.0331,
+          "recovery_rate": 0.3,
+          "top1": 0.225,
+          "top5": 0.325,
+          "matched_correct": 0.2,
           "false_match_rate": 0.025,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.5333,
-          "recovery_rate": 0.0179,
-          "top1": 0.15,
-          "top5": 0.4,
+          "committed_char_error": 1.0,
+          "recovery_rate": 0.0,
+          "top1": 0.0,
+          "top5": 0.0,
           "matched_correct": 0.0,
           "false_match_rate": 0.0,
           "n": 40
@@ -308,268 +540,163 @@
       },
       "error_samples": [
         {
-          "truth": "MH01WV1189",
-          "fused": "MH01WWV1189",
+          "truth": "WB02LX5297",
+          "fused": "????4?????",
+          "level": "hard",
+          "reads": [
+            "",
+            "",
+            "",
+            "",
+            "SN6444M145",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "H??5???",
+          "level": "hard",
+          "reads": [
+            "H",
+            "",
+            "",
+            "",
+            "HH154MM",
+            "",
+            "TH146",
+            "7CM11"
+          ]
+        },
+        {
+          "truth": "RJ09SW6246",
+          "fused": "R?09SW?6246",
           "level": "easy",
           "reads": [
-            "MH01VOV1189",
-            "MH01VVY",
-            "MH01WV118",
-            "MH01WV1",
-            "MH01VVX",
-            "MH01VVY",
-            "MH01VOV1189",
-            "MH01WOVH11189"
+            "RJ99SW6246",
+            "RI09SWW6246",
+            "RJ09SWW6246",
+            "RJ09SWV6246",
+            "RJ99SS6246",
+            "RJ09SW6246",
+            "RI99SWW6246",
+            "RJ09SW6246"
           ]
         },
         {
-          "truth": "DL4SC0257",
-          "fused": "DL45?025?",
+          "truth": "GJ05MG4110",
+          "fused": "G??5M????1?",
           "level": "medium",
           "reads": [
-            "45",
+            "GI95MMG4114",
             "",
-            "DL4560251",
-            "DL15L075",
-            "C46C255",
-            "",
-            "DL45G0251",
-            "DLV5550251KP"
+            "5101W444",
+            "G191MFY410",
+            "GV05MGG1118",
+            "GYC1MG",
+            "E161HHGW114",
+            "511NH1"
           ]
         },
         {
-          "truth": "MH01NY3121",
-          "fused": "MH01????1??",
+          "truth": "21BH6648HW",
+          "fused": "?1?H44?",
           "level": "medium",
           "reads": [
-            "MH01NVY1121",
-            "MH01NYYAA114",
-            "MM1141842A",
             "",
-            "MH01NVYA121",
-            "MH03NYFA17M",
-            "M41444",
+            "",
+            "3A4",
+            "",
+            "31MH444",
+            "",
+            "",
             ""
           ]
         },
         {
-          "truth": "DL9CZ7913",
-          "fused": "?AX?71?",
-          "level": "hard",
-          "reads": [
-            "1",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "AAE111",
-            "CAX1718"
-          ]
-        },
-        {
-          "truth": "MH12MY5071",
-          "fused": "MH1?M????7?",
+          "truth": "UP32NU5016",
+          "fused": "?2???????",
           "level": "medium",
           "reads": [
-            "MH12MYYMQ71",
-            "",
-            "MH12MW1071",
-            "MH17MM371",
-            "MH18MWV1071",
-            "MM11M",
-            "MH13MYYM771",
-            ""
+            "32N9904",
+            "3HXV941",
+            "MDMM01",
+            "2MWMM8",
+            "12NMM901",
+            "37NW901",
+            "323DN9444",
+            "31YQ994"
           ]
         },
         {
-          "truth": "CG04CW8321",
-          "fused": "???1??",
-          "level": "hard",
-          "reads": [
-            "HW111",
-            "",
-            "1FF45",
-            "",
-            "",
-            "",
-            "64MTMN",
-            ""
-          ]
-        },
-        {
-          "truth": "DL7CUN8079",
-          "fused": "N?????",
-          "level": "hard",
-          "reads": [
-            "",
-            "",
-            "",
-            "",
-            "H1845",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "truth": "MH02Y3729",
-          "fused": "MH?2??3729",
+          "truth": "GJ27K7564",
+          "fused": "G?2?77??",
           "level": "medium",
           "reads": [
-            "1",
-            "",
-            "MH44YY3729",
-            "MHK2L3729",
-            "MHI22Y37299",
-            "MHI21237729",
-            "MH2Y3729",
-            "NMH21YJ3329"
+            "G127K7564",
+            "G77756",
+            "G177114",
+            "C2XK75",
+            "GI277756",
+            "G17773",
+            "G1271T",
+            "27Y735"
           ]
         },
         {
-          "truth": "MH31PK2348",
-          "fused": "MH?????234?",
-          "level": "medium",
-          "reads": [
-            "MH31RKK2341",
-            "MH31R0234",
-            "MH88PK2348",
-            "MV38PRK344",
-            "MH341PK2348",
-            "MH331PKK2348",
-            "MH311K284W",
-            ""
-          ]
-        },
-        {
-          "truth": "KA19E3204",
-          "fused": "?A11????",
+          "truth": "MH06RH5235",
+          "fused": "??I?8??",
           "level": "hard",
           "reads": [
-            "VA16KB54",
+            "AG1HMH",
             "",
-            "166",
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "truth": "KA05L0858",
-          "fused": "???4???",
-          "level": "hard",
-          "reads": [
-            "46M11",
-            "",
-            "NA",
-            "",
-            "WM16",
-            "",
-            "HH545",
-            ""
-          ]
-        },
-        {
-          "truth": "CG10K0921",
-          "fused": "2???????",
-          "level": "hard",
-          "reads": [
-            "GLK111",
-            "",
-            "1IP449",
-            "",
-            "1456510",
+            "TMWM011",
+            "TMIM891",
             "",
             "",
-            ""
-          ]
-        },
-        {
-          "truth": "CG04ZG7479",
-          "fused": "??44???",
-          "level": "hard",
-          "reads": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "truth": "CG04KH9273",
-          "fused": "?G04???9?7?",
-          "level": "medium",
-          "reads": [
-            "CG84WM92T3",
-            "",
-            "K004KHH9271",
-            "EE0VK9977",
-            "CG04KMHW271",
-            "550NKM121V0",
-            "CG04KHH9273",
-            "CG04KMH49273"
-          ]
-        },
-        {
-          "truth": "MH31D8149",
-          "fused": "M?3??8144",
-          "level": "medium",
-          "reads": [
-            "MM31D8144",
-            "MH31081441",
-            "MH31D814",
-            "MH310814",
-            "MNW10814",
-            "MNW14B",
-            "MNN3A8144",
+            "6711",
             ""
           ]
         }
       ],
-      "ms_per_read": 28.93
+      "ms_per_read": 17.06
     }
   },
   "ocr_winner": "parseq",
   "ablation": {
     "single": {
-      "committed_char_error": 0.1561,
-      "recovery_rate": 0.733,
-      "top1": 0.7083,
-      "top5": 0.7583,
-      "matched_correct": 0.525,
+      "committed_char_error": 0.1725,
+      "recovery_rate": 0.704,
+      "top1": 0.6333,
+      "top5": 0.6417,
+      "matched_correct": 0.5417,
       "false_match_rate": 0.0,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9846,
-          "top1": 0.95,
-          "top5": 0.95,
-          "matched_correct": 0.95,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0423,
-          "recovery_rate": 0.9403,
-          "top1": 0.9,
-          "top5": 0.925,
+          "committed_char_error": 0.0501,
+          "recovery_rate": 0.9231,
+          "top1": 0.825,
+          "top5": 0.825,
           "matched_correct": 0.625,
           "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.5657,
-          "recovery_rate": 0.2788,
-          "top1": 0.275,
-          "top5": 0.4,
+          "committed_char_error": 0.6784,
+          "recovery_rate": 0.1862,
+          "top1": 0.075,
+          "top5": 0.1,
           "matched_correct": 0.0,
           "false_match_rate": 0.0,
           "n": 40
@@ -577,264 +704,264 @@
       },
       "error_samples": [
         {
-          "truth": "MH12DE5878",
-          "fused": "90082085878",
+          "truth": "KL09AZ1072",
+          "fused": "6860",
           "level": "hard",
           "reads": [
-            "1858",
-            "CLEC",
-            "90082085878",
-            "99182263878",
-            "MORAL",
-            "CELEXI",
-            "-",
-            "CITTO"
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
           ]
         },
         {
-          "truth": "KA51F1957",
-          "fused": "WAYSHOP",
+          "truth": "WB02LX5297",
+          "fused": "BSUSDAY",
           "level": "hard",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
-            "###",
-            "COLD",
-            "NON-DRUT-VISITY",
+            "75",
+            "15",
+            "100%-",
+            "E.",
+            "GRULOVER",
+            "RUP",
+            "7200",
+            "737"
+          ]
+        },
+        {
+          "truth": "CH02RK0940",
+          "fused": "CH02866940",
+          "level": "hard",
+          "reads": [
+            "-",
+            "COM",
+            "-------------------------",
+            "400",
+            "-",
+            "BEESS",
+            "11:11",
+            "OVERS"
+          ]
+        },
+        {
+          "truth": "UP78E2077",
+          "fused": "UP78E2078",
+          "level": "medium",
+          "reads": [
+            "UP78E207",
+            "UP78E207",
+            "UP78E207B",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E207M",
+            "UP78E2078"
+          ]
+        },
+        {
+          "truth": "TN14MH2737",
+          "fused": "10?10",
+          "level": "hard",
+          "reads": [
+            "10:10",
+            "3335",
+            "180",
+            "1777",
+            "120",
+            "125",
+            "SAMSUNG",
+            "CYCLE"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "UP32UB2760",
+          "fused": "1841",
+          "level": "hard",
+          "reads": [
+            "1841",
+            "1111",
+            "2448",
+            "4641",
+            "UPADORS",
+            "COFFEE",
+            "10-000",
+            "7115"
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "QGCREASSI",
+          "level": "hard",
+          "reads": [
+            "SIDER",
+            "BUSI",
+            "NEW",
+            "CILLO",
+            "----------------------",
+            "OZED",
+            "SCTEONENSE",
+            "CHECKE"
+          ]
+        },
+        {
+          "truth": "RJ25W5220",
+          "fused": "BIS",
+          "level": "hard",
+          "reads": [
+            ".........................",
+            "CARADO",
+            "0831-8200",
+            "CELLIN",
+            "#######",
+            "CHEVRO",
+            "MOKUM",
+            "HARRY"
+          ]
+        },
+        {
+          "truth": "TN14GE0179",
+          "fused": "MN14GE0179",
+          "level": "hard",
+          "reads": [
+            "MK14GRALTH",
+            "WITHIN",
+            "NN14-28179",
+            "CHILD",
+            "WW14GR0179",
+            "WHOHM",
+            "14GE8179",
+            "1119"
+          ]
+        },
+        {
+          "truth": "WB31X9120",
+          "fused": "III",
+          "level": "hard",
+          "reads": [
+            "NOTTLAND",
+            "CLU",
+            "ANST.COM",
+            "EXIT",
+            "--------------------",
+            "OTO",
+            "None",
             "THE"
           ]
         },
         {
-          "truth": "KA05KY3276",
-          "fused": "MA80AY3276",
-          "level": "hard",
-          "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
-          ]
-        },
-        {
-          "truth": "DL4SC0257",
-          "fused": "DL4SC025B",
+          "truth": "OD06AA6737",
+          "fused": "OD06AM6737",
           "level": "medium",
           "reads": [
-            "DL4SC025B",
-            "DL&SC0258",
-            "DL4SC025B",
-            "DL4SC0258",
-            "DL4SC0258",
-            "8258",
-            "DL4SC025B",
-            "DL4SC0258"
+            "OD06AB6737",
+            "ODDEAR6737",
+            "0006A86737",
+            "0006AR5737",
+            "OD06AB6737",
+            "ODDEAM6737",
+            "OD06AM6737",
+            "OD06AM6737"
           ]
         },
         {
-          "truth": "CG15VG4804",
-          "fused": "181",
+          "truth": "MH43KX4035",
+          "fused": "1000",
           "level": "hard",
           "reads": [
-            "181",
-            "8831",
-            "12:30-12:48",
-            "610",
-            "1111",
-            "CITY",
-            "CLUBEVICARM",
-            "CLUB"
-          ]
-        },
-        {
-          "truth": "DL1CK1170",
-          "fused": "061CK1178",
-          "level": "hard",
-          "reads": [
-            "06:1881176",
-            "81009",
-            "AIRUS",
-            "81925",
-            "AEL-OR1178",
-            "RIODS",
-            "REDORSON",
-            "RIGHT"
-          ]
-        },
-        {
-          "truth": "MH01RS5348",
-          "fused": "1880",
-          "level": "hard",
-          "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
-            "-------------------------",
-            "2111"
-          ]
-        },
-        {
-          "truth": "CG10DG7934",
-          "fused": "77",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
+            "WHALEXICKAVES",
+            "WHOTES",
+            "PEPSION",
             "200",
-            "7042012",
-            "25"
+            "www.krajices",
+            "600",
+            "wesso",
+            "CONNE"
           ]
         },
         {
-          "truth": "KA19GX2689",
-          "fused": "6A80GX2488",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
           "level": "medium",
           "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
           ]
         },
         {
-          "truth": "MH31ZN7680",
-          "fused": "HH812H7940",
+          "truth": "23BH5289X",
+          "fused": "121",
           "level": "hard",
           "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
-          ]
-        },
-        {
-          "truth": "CG04N1321",
-          "fused": "CGO?N1321",
-          "level": "medium",
-          "reads": [
-            "CGOBN1321",
-            "CGOBN1321",
-            "CGO8N1321",
-            "CG08N1321",
-            "CG08N1321",
-            "CG08N1321",
-            "CGOBN1321",
-            "CGO8N1321"
-          ]
-        },
-        {
-          "truth": "MH02YY1234",
-          "fused": "WE?RED",
-          "level": "hard",
-          "reads": [
-            "WE'RED",
-            "GERRY",
-            "-",
-            "WELCOM",
-            "PARCE",
-            "PERFOR",
-            "-",
-            "WALCO"
-          ]
-        },
-        {
-          "truth": "KA51KY9729",
-          "fused": "KA51KM9729",
-          "level": "medium",
-          "reads": [
-            "KA51KM9729",
-            "KA51KM3729",
-            "KA51KM9729",
-            "9729",
-            "KA51KM9729",
-            "KASERM1577293",
-            "9729",
-            "MUP"
-          ]
-        },
-        {
-          "truth": "CG04MX4827",
-          "fused": "CO06MX4827",
-          "level": "hard",
-          "reads": [
-            "SUBWERY",
-            "CLUB",
-            "-",
-            "6444",
-            "CO.06MX4827",
-            "4880",
-            "--------------------",
-            "CITY"
+            "121",
+            "3",
+            "arm",
+            "ZIPPY",
+            "20101411",
+            "APPS23",
+            "720",
+            "ST"
           ]
         }
       ]
     },
     "majority": {
-      "committed_char_error": 0.1385,
-      "recovery_rate": 0.6833,
-      "top1": 0.625,
-      "top5": 0.725,
-      "matched_correct": 0.475,
+      "committed_char_error": 0.1628,
+      "recovery_rate": 0.6718,
+      "top1": 0.6083,
+      "top5": 0.6083,
+      "matched_correct": 0.4917,
       "false_match_rate": 0.0,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9846,
-          "top1": 0.95,
-          "top5": 0.95,
-          "matched_correct": 0.95,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0573,
-          "recovery_rate": 0.9403,
+          "committed_char_error": 0.0577,
+          "recovery_rate": 0.9205,
           "top1": 0.8,
-          "top5": 0.825,
+          "top5": 0.8,
           "matched_correct": 0.475,
           "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.6752,
-          "recovery_rate": 0.1304,
-          "top1": 0.125,
-          "top5": 0.4,
+          "committed_char_error": 0.7857,
+          "recovery_rate": 0.0918,
+          "top1": 0.025,
+          "top5": 0.025,
           "matched_correct": 0.0,
           "false_match_rate": 0.0,
           "n": 40
@@ -842,264 +969,264 @@
       },
       "error_samples": [
         {
-          "truth": "MH12DE5878",
-          "fused": "CO8E8",
-          "level": "hard",
-          "reads": [
-            "1858",
-            "CLEC",
-            "90082085878",
-            "99182263878",
-            "MORAL",
-            "CELEXI",
-            "-",
-            "CITTO"
-          ]
-        },
-        {
-          "truth": "MH04UU7936",
-          "fused": "1113",
-          "level": "hard",
-          "reads": [
-            "--------------------------",
-            "1813",
-            "---------------------",
-            "1133",
-            "1113",
-            "(1113",
-            "-----------------------",
-            "CELL"
-          ]
-        },
-        {
-          "truth": "DL11CK2781",
-          "fused": "DL118K2781",
+          "truth": "DL12PRP6994",
+          "fused": "DR12PRP6994",
           "level": "medium",
           "reads": [
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL118K2781",
-            "BESERTHE"
+            "D#12PRP6994",
+            "D#12PRP6994",
+            "DN12PRP6994",
+            "DN12PAP8994",
+            "D#12PRP6994",
+            "D#12PRP6994",
+            "Di:12PRP6994",
+            "D#12PRP6994"
           ]
         },
         {
-          "truth": "KA51F1957",
-          "fused": "ONE",
+          "truth": "KL09AZ1072",
+          "fused": "636",
           "level": "hard",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
-            "###",
-            "COLD",
-            "NON-DRUT-VISITY",
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "WB02LX5297",
+          "fused": "RU0",
+          "level": "hard",
+          "reads": [
+            "75",
+            "15",
+            "100%-",
+            "E.",
+            "GRULOVER",
+            "RUP",
+            "7200",
+            "737"
+          ]
+        },
+        {
+          "truth": "CH02RK0940",
+          "fused": "BEE1S",
+          "level": "hard",
+          "reads": [
+            "-",
+            "COM",
+            "-------------------------",
+            "400",
+            "-",
+            "BEESS",
+            "11:11",
+            "OVERS"
+          ]
+        },
+        {
+          "truth": "UP78E2077",
+          "fused": "UP78E2078",
+          "level": "medium",
+          "reads": [
+            "UP78E207",
+            "UP78E207",
+            "UP78E207B",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E207M",
+            "UP78E2078"
+          ]
+        },
+        {
+          "truth": "TN14MH2737",
+          "fused": "13310",
+          "level": "hard",
+          "reads": [
+            "10:10",
+            "3335",
+            "180",
+            "1777",
+            "120",
+            "125",
+            "SAMSUNG",
+            "CYCLE"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "UP32UB2760",
+          "fused": "1141",
+          "level": "hard",
+          "reads": [
+            "1841",
+            "1111",
+            "2448",
+            "4641",
+            "UPADORS",
+            "COFFEE",
+            "10-000",
+            "7115"
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "HICEI",
+          "level": "hard",
+          "reads": [
+            "SIDER",
+            "BUSI",
+            "NEW",
+            "CILLO",
+            "----------------------",
+            "OZED",
+            "SCTEONENSE",
+            "CHECKE"
+          ]
+        },
+        {
+          "truth": "RJ25W5220",
+          "fused": "ELRIO",
+          "level": "hard",
+          "reads": [
+            ".........................",
+            "CARADO",
+            "0831-8200",
+            "CELLIN",
+            "#######",
+            "CHEVRO",
+            "MOKUM",
+            "HARRY"
+          ]
+        },
+        {
+          "truth": "TN14GE0179",
+          "fused": "MN14GR0179",
+          "level": "hard",
+          "reads": [
+            "MK14GRALTH",
+            "WITHIN",
+            "NN14-28179",
+            "CHILD",
+            "WW14GR0179",
+            "WHOHM",
+            "14GE8179",
+            "1119"
+          ]
+        },
+        {
+          "truth": "AP11BP0954",
+          "fused": "AP11BP0958",
+          "level": "medium",
+          "reads": [
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP118P0958",
+            "AP11BP0958",
+            "AP118P095",
+            "AP118P0556"
+          ]
+        },
+        {
+          "truth": "WB31X9120",
+          "fused": "TLE",
+          "level": "hard",
+          "reads": [
+            "NOTTLAND",
+            "CLU",
+            "ANST.COM",
+            "EXIT",
+            "--------------------",
+            "OTO",
+            "None",
             "THE"
           ]
         },
         {
-          "truth": "KA05KY3276",
-          "fused": "6880S",
-          "level": "hard",
-          "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
-          ]
-        },
-        {
-          "truth": "DL4SC0257",
-          "fused": "DL4SC0258",
+          "truth": "OD06AA6737",
+          "fused": "OD06A86737",
           "level": "medium",
           "reads": [
-            "DL4SC025B",
-            "DL&SC0258",
-            "DL4SC025B",
-            "DL4SC0258",
-            "DL4SC0258",
-            "8258",
-            "DL4SC025B",
-            "DL4SC0258"
+            "OD06AB6737",
+            "ODDEAR6737",
+            "0006A86737",
+            "0006AR5737",
+            "OD06AB6737",
+            "ODDEAM6737",
+            "OD06AM6737",
+            "OD06AM6737"
           ]
         },
         {
-          "truth": "CG04UD4093",
-          "fused": "1E11",
+          "truth": "MH43KX4035",
+          "fused": "VES",
           "level": "hard",
           "reads": [
-            "sweet",
-            "4444",
-            "###",
-            "(1275)",
-            "10-00-00-800",
-            "1111",
-            "CALORSHENESS",
-            "CLUBBIT"
-          ]
-        },
-        {
-          "truth": "CG15VG4804",
-          "fused": "C831",
-          "level": "hard",
-          "reads": [
-            "181",
-            "8831",
-            "12:30-12:48",
-            "610",
-            "1111",
-            "CITY",
-            "CLUBEVICARM",
-            "CLUB"
-          ]
-        },
-        {
-          "truth": "DL1CK1170",
-          "fused": "8117S",
-          "level": "hard",
-          "reads": [
-            "06:1881176",
-            "81009",
-            "AIRUS",
-            "81925",
-            "AEL-OR1178",
-            "RIODS",
-            "REDORSON",
-            "RIGHT"
-          ]
-        },
-        {
-          "truth": "MH01RS5348",
-          "fused": "1180",
-          "level": "hard",
-          "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
-            "-------------------------",
-            "2111"
-          ]
-        },
-        {
-          "truth": "MH01NY3121",
-          "fused": "MH01NY0121",
-          "level": "medium",
-          "reads": [
-            "MH01NY#121",
-            "MH01NY#121",
-            "MH01NY#121",
-            "MHOINY",
-            "MH01NY0121",
-            "MH01NY161212",
-            "MH01NY#121",
-            "###"
-          ]
-        },
-        {
-          "truth": "CG10DG7934",
-          "fused": "OH7",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
+            "WHALEXICKAVES",
+            "WHOTES",
+            "PEPSION",
             "200",
-            "7042012",
-            "25"
-          ]
-        },
-        {
-          "truth": "KA19GX2689",
-          "fused": "888",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
-          "level": "medium",
-          "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
-          ]
-        },
-        {
-          "truth": "MH31ZN7680",
-          "fused": "721",
-          "level": "hard",
-          "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
+            "www.krajices",
+            "600",
+            "wesso",
+            "CONNE"
           ]
         }
       ]
     },
     "conf_mask": {
-      "committed_char_error": 0.1495,
-      "recovery_rate": 0.6738,
-      "top1": 0.6333,
-      "top5": 0.7333,
-      "matched_correct": 0.4833,
+      "committed_char_error": 0.1712,
+      "recovery_rate": 0.665,
+      "top1": 0.6167,
+      "top5": 0.6167,
+      "matched_correct": 0.5,
       "false_match_rate": 0.0,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9846,
-          "top1": 0.95,
-          "top5": 0.95,
-          "matched_correct": 0.95,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0548,
-          "recovery_rate": 0.9403,
+          "committed_char_error": 0.0551,
+          "recovery_rate": 0.9231,
           "top1": 0.825,
-          "top5": 0.85,
+          "top5": 0.825,
           "matched_correct": 0.5,
           "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.7452,
-          "recovery_rate": 0.1023,
-          "top1": 0.125,
-          "top5": 0.4,
+          "committed_char_error": 0.8393,
+          "recovery_rate": 0.0689,
+          "top1": 0.025,
+          "top5": 0.025,
           "matched_correct": 0.0,
           "false_match_rate": 0.0,
           "n": 40
@@ -1107,758 +1234,1168 @@
       },
       "error_samples": [
         {
-          "truth": "MH12DE5878",
-          "fused": "CC8ED",
-          "level": "hard",
-          "reads": [
-            "1858",
-            "CLEC",
-            "90082085878",
-            "99182263878",
-            "MORAL",
-            "CELEXI",
-            "-",
-            "CITTO"
-          ]
-        },
-        {
-          "truth": "MH04UU7936",
-          "fused": "111L",
-          "level": "hard",
-          "reads": [
-            "--------------------------",
-            "1813",
-            "---------------------",
-            "1133",
-            "1113",
-            "(1113",
-            "-----------------------",
-            "CELL"
-          ]
-        },
-        {
-          "truth": "DL11CK2781",
-          "fused": "DL11SK2781",
+          "truth": "DL12PRP6994",
+          "fused": "DR12PRP6994",
           "level": "medium",
           "reads": [
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL11#K2781",
-            "DL118K2781",
-            "BESERTHE"
+            "D#12PRP6994",
+            "D#12PRP6994",
+            "DN12PRP6994",
+            "DN12PAP8994",
+            "D#12PRP6994",
+            "D#12PRP6994",
+            "Di:12PRP6994",
+            "D#12PRP6994"
           ]
         },
         {
-          "truth": "KA51F1957",
-          "fused": "OEP",
+          "truth": "KL09AZ1072",
+          "fused": "7NG",
           "level": "hard",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
-            "###",
-            "COLD",
-            "NON-DRUT-VISITY",
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "WB02LX5297",
+          "fused": "07R",
+          "level": "hard",
+          "reads": [
+            "75",
+            "15",
+            "100%-",
+            "E.",
+            "GRULOVER",
+            "RUP",
+            "7200",
+            "737"
+          ]
+        },
+        {
+          "truth": "CH02RK0940",
+          "fused": "BECE1",
+          "level": "hard",
+          "reads": [
+            "-",
+            "COM",
+            "-------------------------",
+            "400",
+            "-",
+            "BEESS",
+            "11:11",
+            "OVERS"
+          ]
+        },
+        {
+          "truth": "TN14MH2737",
+          "fused": "CSUCE",
+          "level": "hard",
+          "reads": [
+            "10:10",
+            "3335",
+            "180",
+            "1777",
+            "120",
+            "125",
+            "SAMSUNG",
+            "CYCLE"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "UP32UB2760",
+          "fused": "184E",
+          "level": "hard",
+          "reads": [
+            "1841",
+            "1111",
+            "2448",
+            "4641",
+            "UPADORS",
+            "COFFEE",
+            "10-000",
+            "7115"
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "CICEE",
+          "level": "hard",
+          "reads": [
+            "SIDER",
+            "BUSI",
+            "NEW",
+            "CILLO",
+            "----------------------",
+            "OZED",
+            "SCTEONENSE",
+            "CHECKE"
+          ]
+        },
+        {
+          "truth": "RJ25W5220",
+          "fused": "EORDO",
+          "level": "hard",
+          "reads": [
+            ".........................",
+            "CARADO",
+            "0831-8200",
+            "CELLIN",
+            "#######",
+            "CHEVRO",
+            "MOKUM",
+            "HARRY"
+          ]
+        },
+        {
+          "truth": "TN14GE0179",
+          "fused": "MNW4GEA17O",
+          "level": "hard",
+          "reads": [
+            "MK14GRALTH",
+            "WITHIN",
+            "NN14-28179",
+            "CHILD",
+            "WW14GR0179",
+            "WHOHM",
+            "14GE8179",
+            "1119"
+          ]
+        },
+        {
+          "truth": "AP11BP0954",
+          "fused": "AP11BP0955",
+          "level": "medium",
+          "reads": [
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP11BP095#",
+            "AP118P0958",
+            "AP11BP0958",
+            "AP118P095",
+            "AP118P0556"
+          ]
+        },
+        {
+          "truth": "WB31X9120",
+          "fused": "CLE",
+          "level": "hard",
+          "reads": [
+            "NOTTLAND",
+            "CLU",
+            "ANST.COM",
+            "EXIT",
+            "--------------------",
+            "OTO",
+            "None",
             "THE"
           ]
         },
         {
-          "truth": "KA05KY3276",
-          "fused": "YE2W6",
-          "level": "hard",
-          "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
-          ]
-        },
-        {
-          "truth": "DL4SC0257",
-          "fused": "DL4SC0258",
+          "truth": "OD06AA6737",
+          "fused": "OD06AB6737",
           "level": "medium",
           "reads": [
-            "DL4SC025B",
-            "DL&SC0258",
-            "DL4SC025B",
-            "DL4SC0258",
-            "DL4SC0258",
-            "8258",
-            "DL4SC025B",
-            "DL4SC0258"
+            "OD06AB6737",
+            "ODDEAR6737",
+            "0006A86737",
+            "0006AR5737",
+            "OD06AB6737",
+            "ODDEAM6737",
+            "OD06AM6737",
+            "OD06AM6737"
           ]
         },
         {
-          "truth": "CG04UD4093",
-          "fused": "1E1S",
+          "truth": "MH43KX4035",
+          "fused": "IES",
           "level": "hard",
           "reads": [
-            "sweet",
-            "4444",
-            "###",
-            "(1275)",
-            "10-00-00-800",
-            "1111",
-            "CALORSHENESS",
-            "CLUBBIT"
-          ]
-        },
-        {
-          "truth": "CG15VG4804",
-          "fused": "CA01",
-          "level": "hard",
-          "reads": [
-            "181",
-            "8831",
-            "12:30-12:48",
-            "610",
-            "1111",
-            "CITY",
-            "CLUBEVICARM",
-            "CLUB"
-          ]
-        },
-        {
-          "truth": "DL1CK1170",
-          "fused": "81G7S",
-          "level": "hard",
-          "reads": [
-            "06:1881176",
-            "81009",
-            "AIRUS",
-            "81925",
-            "AEL-OR1178",
-            "RIODS",
-            "REDORSON",
-            "RIGHT"
-          ]
-        },
-        {
-          "truth": "MH01RS5348",
-          "fused": "181Y",
-          "level": "hard",
-          "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
-            "-------------------------",
-            "2111"
-          ]
-        },
-        {
-          "truth": "MH01NY3121",
-          "fused": "MH01NYY121",
-          "level": "medium",
-          "reads": [
-            "MH01NY#121",
-            "MH01NY#121",
-            "MH01NY#121",
-            "MHOINY",
-            "MH01NY0121",
-            "MH01NY161212",
-            "MH01NY#121",
-            "###"
-          ]
-        },
-        {
-          "truth": "CG10DG7934",
-          "fused": "THE",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
+            "WHALEXICKAVES",
+            "WHOTES",
+            "PEPSION",
             "200",
-            "7042012",
-            "25"
+            "www.krajices",
+            "600",
+            "wesso",
+            "CONNE"
           ]
         },
         {
-          "truth": "KA19GX2689",
-          "fused": "OT0",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
           "level": "medium",
           "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
-          ]
-        },
-        {
-          "truth": "MH31ZN7680",
-          "fused": "7HE",
-          "level": "hard",
-          "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
           ]
         }
       ]
     },
     "two_condition": {
-      "committed_char_error": 0.1026,
-      "recovery_rate": 0.691,
+      "committed_char_error": 0.11,
+      "recovery_rate": 0.6658,
+      "top1": 0.6583,
+      "top5": 0.6583,
+      "matched_correct": 0.6083,
+      "false_match_rate": 0.0417,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0245,
+          "recovery_rate": 0.9205,
+          "top1": 0.95,
+          "top5": 0.95,
+          "matched_correct": 0.8,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.7521,
+          "recovery_rate": 0.074,
+          "top1": 0.025,
+          "top5": 0.025,
+          "matched_correct": 0.025,
+          "false_match_rate": 0.125,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KL09AZ1072",
+          "fused": "??O??????",
+          "level": "hard",
+          "reads": [
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "WB02LX5297",
+          "fused": "??U???E?",
+          "level": "hard",
+          "reads": [
+            "75",
+            "15",
+            "100%-",
+            "E.",
+            "GRULOVER",
+            "RUP",
+            "7200",
+            "737"
+          ]
+        },
+        {
+          "truth": "CH02RK0940",
+          "fused": "D????NER94?",
+          "level": "hard",
+          "reads": [
+            "-",
+            "COM",
+            "-------------------------",
+            "400",
+            "-",
+            "BEESS",
+            "11:11",
+            "OVERS"
+          ]
+        },
+        {
+          "truth": "TN14MH2737",
+          "fused": "1??????????",
+          "level": "hard",
+          "reads": [
+            "10:10",
+            "3335",
+            "180",
+            "1777",
+            "120",
+            "125",
+            "SAMSUNG",
+            "CYCLE"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "???E????S?",
+          "level": "hard",
+          "reads": [
+            "SIDER",
+            "BUSI",
+            "NEW",
+            "CILLO",
+            "----------------------",
+            "OZED",
+            "SCTEONENSE",
+            "CHECKE"
+          ]
+        },
+        {
+          "truth": "RJ25W5220",
+          "fused": "?C??????",
+          "level": "hard",
+          "reads": [
+            ".........................",
+            "CARADO",
+            "0831-8200",
+            "CELLIN",
+            "#######",
+            "CHEVRO",
+            "MOKUM",
+            "HARRY"
+          ]
+        },
+        {
+          "truth": "WB31X9120",
+          "fused": "?O??????",
+          "level": "hard",
+          "reads": [
+            "NOTTLAND",
+            "CLU",
+            "ANST.COM",
+            "EXIT",
+            "--------------------",
+            "OTO",
+            "None",
+            "THE"
+          ]
+        },
+        {
+          "truth": "MH43KX4035",
+          "fused": "WW?K??KACES",
+          "level": "hard",
+          "reads": [
+            "WHALEXICKAVES",
+            "WHOTES",
+            "PEPSION",
+            "200",
+            "www.krajices",
+            "600",
+            "wesso",
+            "CONNE"
+          ]
+        },
+        {
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
+          "level": "medium",
+          "reads": [
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
+          ]
+        },
+        {
+          "truth": "23BH5289X",
+          "fused": "20??????",
+          "level": "hard",
+          "reads": [
+            "121",
+            "3",
+            "arm",
+            "ZIPPY",
+            "20101411",
+            "APPS23",
+            "720",
+            "ST"
+          ]
+        },
+        {
+          "truth": "RJ02YC7906",
+          "fused": "RJOBYC7906",
+          "level": "medium",
+          "reads": [
+            "RJODYC7906",
+            "RJODYC7906-",
+            "RJOBYC7906",
+            "RJOBYC7906",
+            "RJOMYC7906",
+            "RJOSYC7906",
+            "RJOBYC7906",
+            "7906"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "UP14XS5786",
+          "fused": "??3????7??",
+          "level": "hard",
+          "reads": [
+            "1114",
+            "LATTON",
+            "DP18:0355788",
+            "3P38133798",
+            "###",
+            "CREES",
+            "OFTHERSCING",
+            "CED"
+          ]
+        },
+        {
+          "truth": "DL10CN5803",
+          "fused": "N?1?CH?????",
+          "level": "hard",
+          "reads": [
+            "---",
+            "###",
+            "6101",
+            "8935",
+            "BL10CN586",
+            "MICH",
+            "None",
+            "NL16CHTHERE"
+          ]
+        }
+      ]
+    },
+    "no_layout": {
+      "committed_char_error": 0.0476,
+      "recovery_rate": 0.6794,
+      "top1": 0.7083,
+      "top5": 0.725,
+      "matched_correct": 0.625,
+      "false_match_rate": 0.0,
+      "n": 120,
+      "by_level": {
+        "easy": {
+          "committed_char_error": 0.0,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "medium": {
+          "committed_char_error": 0.0191,
+          "recovery_rate": 0.9205,
+          "top1": 0.975,
+          "top5": 0.975,
+          "matched_correct": 0.8,
+          "false_match_rate": 0.0,
+          "n": 40
+        },
+        "hard": {
+          "committed_char_error": 0.4231,
+          "recovery_rate": 0.1148,
+          "top1": 0.15,
+          "top5": 0.2,
+          "matched_correct": 0.075,
+          "false_match_rate": 0.0,
+          "n": 40
+        }
+      },
+      "error_samples": [
+        {
+          "truth": "KL09AZ1072",
+          "fused": "??OBA??7?",
+          "level": "hard",
+          "reads": [
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "WB02LX5297",
+          "fused": "?B?US???",
+          "level": "hard",
+          "reads": [
+            "75",
+            "15",
+            "100%-",
+            "E.",
+            "GRULOVER",
+            "RUP",
+            "7200",
+            "737"
+          ]
+        },
+        {
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "DL12CRF8524",
+          "fused": "??5C????3?",
+          "level": "hard",
+          "reads": [
+            "SIDER",
+            "BUSI",
+            "NEW",
+            "CILLO",
+            "----------------------",
+            "OZED",
+            "SCTEONENSE",
+            "CHECKE"
+          ]
+        },
+        {
+          "truth": "TN14GE0179",
+          "fused": "M??4G??17?",
+          "level": "hard",
+          "reads": [
+            "MK14GRALTH",
+            "WITHIN",
+            "NN14-28179",
+            "CHILD",
+            "WW14GR0179",
+            "WHOHM",
+            "14GE8179",
+            "1119"
+          ]
+        },
+        {
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
+          "level": "medium",
+          "reads": [
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
+          ]
+        },
+        {
+          "truth": "23BH5289X",
+          "fused": "20???4??",
+          "level": "hard",
+          "reads": [
+            "121",
+            "3",
+            "arm",
+            "ZIPPY",
+            "20101411",
+            "APPS23",
+            "720",
+            "ST"
+          ]
+        },
+        {
+          "truth": "RJ02YC7906",
+          "fused": "RJ?BYC7906",
+          "level": "medium",
+          "reads": [
+            "RJODYC7906",
+            "RJODYC7906-",
+            "RJOBYC7906",
+            "RJOBYC7906",
+            "RJOMYC7906",
+            "RJOSYC7906",
+            "RJOBYC7906",
+            "7906"
+          ]
+        },
+        {
+          "truth": "RJ19XP0272",
+          "fused": "N?1?AP0372",
+          "level": "hard",
+          "reads": [
+            "REJOURNOTO",
+            "CHERBARK",
+            "111",
+            "69999",
+            "19AM-6275",
+            "1000",
+            "INSPORTE",
+            "CREED"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "UP14XS5786",
+          "fused": "?P38???78?",
+          "level": "hard",
+          "reads": [
+            "1114",
+            "LATTON",
+            "DP18:0355788",
+            "3P38133798",
+            "###",
+            "CREES",
+            "OFTHERSCING",
+            "CED"
+          ]
+        },
+        {
+          "truth": "HR29KX8466",
+          "fused": "HR29XX8466",
+          "level": "medium",
+          "reads": [
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466"
+          ]
+        },
+        {
+          "truth": "GJ05MG4110",
+          "fused": "GJ05MGG110",
+          "level": "medium",
+          "reads": [
+            "GJ05MG#110",
+            "GIOSMG",
+            "GOSMG#110",
+            "GLOSMG#110",
+            "GJ05MG#110",
+            "GLOSMG#110",
+            "0SMGWEERS",
+            "QOSMGBRIGERS"
+          ]
+        },
+        {
+          "truth": "JH10KN2446",
+          "fused": "??50M???",
+          "level": "hard",
+          "reads": [
+            "DRIGIN",
+            "1111",
+            "144",
+            "144",
+            "-------------------------",
+            "CITY",
+            "www.com",
+            "322"
+          ]
+        },
+        {
+          "truth": "UP78WU6932",
+          "fused": "UP78WU6832",
+          "level": "medium",
+          "reads": [
+            "UP78WU6832",
+            "UP75ML",
+            "25",
+            "27",
+            "7",
+            "7400",
+            "707",
+            "7471"
+          ]
+        }
+      ]
+    },
+    "no_cross_check": {
+      "committed_char_error": 0.0442,
+      "recovery_rate": 0.6785,
       "top1": 0.6833,
-      "top5": 0.7667,
-      "matched_correct": 0.5917,
+      "top5": 0.6917,
+      "matched_correct": 0.625,
       "false_match_rate": 0.0083,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9923,
-          "top1": 0.975,
-          "top5": 0.975,
-          "matched_correct": 0.975,
+          "recovery_rate": 1.0,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0269,
-          "recovery_rate": 0.9403,
-          "top1": 0.925,
+          "committed_char_error": 0.0191,
+          "recovery_rate": 0.9205,
+          "top1": 0.95,
           "top5": 0.95,
-          "matched_correct": 0.775,
+          "matched_correct": 0.8,
           "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.5899,
-          "recovery_rate": 0.1458,
-          "top1": 0.15,
-          "top5": 0.375,
-          "matched_correct": 0.025,
+          "committed_char_error": 0.4054,
+          "recovery_rate": 0.1122,
+          "top1": 0.1,
+          "top5": 0.125,
+          "matched_correct": 0.075,
           "false_match_rate": 0.025,
           "n": 40
         }
       },
       "error_samples": [
         {
-          "truth": "MH12DE5878",
-          "fused": "9??820??87?",
+          "truth": "KL09AZ1072",
+          "fused": "??OBA??7?",
           "level": "hard",
           "reads": [
-            "1858",
-            "CLEC",
-            "90082085878",
-            "99182263878",
-            "MORAL",
-            "CELEXI",
-            "-",
-            "CITTO"
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
           ]
         },
         {
-          "truth": "MH04UU7936",
-          "fused": "1???",
-          "level": "hard",
+          "truth": "UP78E2077",
+          "fused": "UP78E2078",
+          "level": "medium",
           "reads": [
-            "--------------------------",
-            "1813",
-            "---------------------",
-            "1133",
-            "1113",
-            "(1113",
-            "-----------------------",
-            "CELL"
+            "UP78E207",
+            "UP78E207",
+            "UP78E207B",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E2078",
+            "UP78E207M",
+            "UP78E2078"
           ]
         },
         {
-          "truth": "KA51F1957",
-          "fused": "CO???????",
+          "truth": "RJ19WV2521",
+          "fused": "RJ19WV2528",
+          "level": "medium",
+          "reads": [
+            "R|19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WV2528",
+            "RJ19WY2528"
+          ]
+        },
+        {
+          "truth": "HR02CZ7829",
+          "fused": "HR02CZ7828",
+          "level": "medium",
+          "reads": [
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HR02CZ7828",
+            "HK02CZ7828"
+          ]
+        },
+        {
+          "truth": "23BH5289X",
+          "fused": "?0???4??",
           "level": "hard",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
+            "121",
+            "3",
+            "arm",
+            "ZIPPY",
+            "20101411",
+            "APPS23",
+            "720",
+            "ST"
+          ]
+        },
+        {
+          "truth": "RJ19XP0272",
+          "fused": "N?1?AP0372",
+          "level": "hard",
+          "reads": [
+            "REJOURNOTO",
+            "CHERBARK",
+            "111",
+            "69999",
+            "19AM-6275",
+            "1000",
+            "INSPORTE",
+            "CREED"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "UP14XS5786",
+          "fused": "?P38???78?",
+          "level": "hard",
+          "reads": [
+            "1114",
+            "LATTON",
+            "DP18:0355788",
+            "3P38133798",
             "###",
-            "COLD",
-            "NON-DRUT-VISITY",
-            "THE"
+            "CREES",
+            "OFTHERSCING",
+            "CED"
           ]
         },
         {
-          "truth": "KA05KY3276",
-          "fused": "??8?KY3276",
-          "level": "hard",
+          "truth": "HR29KX8466",
+          "fused": "HR29XX8466",
+          "level": "medium",
           "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29XX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466",
+            "HR29KX8466"
           ]
         },
         {
-          "truth": "CG04UD4093",
-          "fused": "CO0???????",
+          "truth": "GJ05MG4110",
+          "fused": "GJ05MGG110",
+          "level": "medium",
+          "reads": [
+            "GJ05MG#110",
+            "GIOSMG",
+            "GOSMG#110",
+            "GLOSMG#110",
+            "GJ05MG#110",
+            "GLOSMG#110",
+            "0SMGWEERS",
+            "QOSMGBRIGERS"
+          ]
+        },
+        {
+          "truth": "JH10KN2446",
+          "fused": "??50M???",
           "level": "hard",
           "reads": [
-            "sweet",
-            "4444",
-            "###",
-            "(1275)",
-            "10-00-00-800",
+            "DRIGIN",
             "1111",
-            "CALORSHENESS",
-            "CLUBBIT"
-          ]
-        },
-        {
-          "truth": "MH01RS5348",
-          "fused": "M?R???????Y",
-          "level": "hard",
-          "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
+            "144",
+            "144",
             "-------------------------",
-            "2111"
+            "CITY",
+            "www.com",
+            "322"
           ]
         },
         {
-          "truth": "CG10DG7934",
-          "fused": "2???4?MFOOD",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
-            "200",
-            "7042012",
-            "25"
-          ]
-        },
-        {
-          "truth": "KA19GX2689",
-          "fused": "P???2???",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
+          "truth": "UP78WU6932",
+          "fused": "UP78WU6832",
           "level": "medium",
           "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
+            "UP78WU6832",
+            "UP75ML",
+            "25",
+            "27",
+            "7",
+            "7400",
+            "707",
+            "7471"
           ]
         },
         {
-          "truth": "MH31ZN7680",
-          "fused": "?H?POL?CE",
+          "truth": "TN06DA3109",
+          "fused": "T??SER????",
           "level": "hard",
           "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
+            "7656562100",
+            "11111",
+            "TM060663108",
+            "SHMON",
+            "6",
+            "633",
+            "TOYOR",
+            "OTTO"
           ]
         },
         {
-          "truth": "CG04N1321",
-          "fused": "CGO?N1321",
-          "level": "medium",
-          "reads": [
-            "CGOBN1321",
-            "CGOBN1321",
-            "CGO8N1321",
-            "CG08N1321",
-            "CG08N1321",
-            "CG08N1321",
-            "CGOBN1321",
-            "CGO8N1321"
-          ]
-        },
-        {
-          "truth": "KA51KY9729",
-          "fused": "KA51KM9729",
-          "level": "medium",
-          "reads": [
-            "KA51KM9729",
-            "KA51KM3729",
-            "KA51KM9729",
-            "9729",
-            "KA51KM9729",
-            "KASERM1577293",
-            "9729",
-            "MUP"
-          ]
-        },
-        {
-          "truth": "CG04MX4827",
-          "fused": "CO???X4?27",
+          "truth": "UP70B1960",
+          "fused": "??0O?19??",
           "level": "hard",
           "reads": [
-            "SUBWERY",
-            "CLUB",
-            "-",
-            "6444",
-            "CO.06MX4827",
-            "4880",
-            "--------------------",
-            "CITY"
+            "821",
+            "828",
+            "URTO&1989",
+            "###",
+            "100-10-1980",
+            "CHICO",
+            "4978",
+            "9719"
           ]
         },
         {
-          "truth": "KA51SA0321",
-          "fused": "??S???AM??",
+          "truth": "AN01WK2371",
+          "fused": "N??????87?",
           "level": "hard",
           "reads": [
-            "ANTO-SA-1963",
-            "ONES",
-            "OFFICE",
-            "CARKING",
-            "GASEGAMES",
-            "8833",
-            "NASTSAMES",
-            "MUSHI"
-          ]
-        },
-        {
-          "truth": "CG15TU1490",
-          "fused": "CG18TU1490",
-          "level": "medium",
-          "reads": [
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "0638TU1490",
-            "CG1RTU1490",
-            "CG18TU1490"
+            "###",
+            "OTO",
+            "AM01063871",
+            "COL91",
+            "ANDI-ANC2873",
+            "1111",
+            "1000",
+            "11111"
           ]
         }
       ]
     },
     "full": {
-      "committed_char_error": 0.064,
-      "recovery_rate": 0.691,
-      "top1": 0.725,
-      "top5": 0.7917,
-      "matched_correct": 0.6167,
-      "false_match_rate": 0.0083,
+      "committed_char_error": 0.0118,
+      "recovery_rate": 0.6404,
+      "top1": 0.675,
+      "top5": 0.6833,
+      "matched_correct": 0.65,
+      "false_match_rate": 0.0167,
       "n": 120,
       "by_level": {
         "easy": {
           "committed_char_error": 0.0,
-          "recovery_rate": 0.9923,
-          "top1": 0.975,
-          "top5": 0.975,
-          "matched_correct": 0.975,
+          "recovery_rate": 0.9924,
+          "top1": 1.0,
+          "top5": 1.0,
+          "matched_correct": 1.0,
           "false_match_rate": 0.0,
           "n": 40
         },
         "medium": {
-          "committed_char_error": 0.0217,
-          "recovery_rate": 0.9351,
-          "top1": 0.95,
+          "committed_char_error": 0.0087,
+          "recovery_rate": 0.8744,
+          "top1": 0.975,
           "top5": 0.975,
-          "matched_correct": 0.775,
-          "false_match_rate": 0.025,
+          "matched_correct": 0.9,
+          "false_match_rate": 0.0,
           "n": 40
         },
         "hard": {
-          "committed_char_error": 0.4434,
-          "recovery_rate": 0.1509,
-          "top1": 0.25,
-          "top5": 0.425,
-          "matched_correct": 0.1,
-          "false_match_rate": 0.0,
+          "committed_char_error": 0.2308,
+          "recovery_rate": 0.051,
+          "top1": 0.05,
+          "top5": 0.075,
+          "matched_correct": 0.05,
+          "false_match_rate": 0.05,
           "n": 40
         }
       },
       "error_samples": [
         {
-          "truth": "KA51F1957",
-          "fused": "?6NO????",
+          "truth": "KL09AZ1072",
+          "fused": "G???A????",
           "level": "hard",
           "reads": [
-            "WAYSHOP",
-            "WATER",
-            "---",
-            "ONE",
+            "9636ATKING",
+            "CHATE",
+            "25",
+            "LI",
+            "6860",
+            "GLOBAT###",
+            "6003",
+            "33"
+          ]
+        },
+        {
+          "truth": "HR26CC9556",
+          "fused": "HR26CC9856",
+          "level": "medium",
+          "reads": [
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856",
+            "HR26CC9856"
+          ]
+        },
+        {
+          "truth": "GJ05MG4110",
+          "fused": "G?05MGG110",
+          "level": "medium",
+          "reads": [
+            "GJ05MG#110",
+            "GIOSMG",
+            "GOSMG#110",
+            "GLOSMG#110",
+            "GJ05MG#110",
+            "GLOSMG#110",
+            "0SMGWEERS",
+            "QOSMGBRIGERS"
+          ]
+        },
+        {
+          "truth": "UP78WU6932",
+          "fused": "UP78WU6832",
+          "level": "medium",
+          "reads": [
+            "UP78WU6832",
+            "UP75ML",
+            "25",
+            "27",
+            "7",
+            "7400",
+            "707",
+            "7471"
+          ]
+        },
+        {
+          "truth": "TN06DA3109",
+          "fused": "T??SER????",
+          "level": "hard",
+          "reads": [
+            "7656562100",
+            "11111",
+            "TM060663108",
+            "SHMON",
+            "6",
+            "633",
+            "TOYOR",
+            "OTTO"
+          ]
+        },
+        {
+          "truth": "AN01WK2371",
+          "fused": "N???????7?",
+          "level": "hard",
+          "reads": [
             "###",
-            "COLD",
-            "NON-DRUT-VISITY",
-            "THE"
-          ]
-        },
-        {
-          "truth": "KA05KY3276",
-          "fused": "??8??Y3276",
-          "level": "hard",
-          "reads": [
-            "WA",
-            "###",
-            "WA",
-            "CLIS",
-            "68801",
-            "41895",
-            "MA80AY3276",
-            "8885KY3276"
-          ]
-        },
-        {
-          "truth": "CG15VG4804",
-          "fused": "11???1????",
-          "level": "hard",
-          "reads": [
-            "181",
-            "8831",
-            "12:30-12:48",
-            "610",
+            "OTO",
+            "AM01063871",
+            "COL91",
+            "ANDI-ANC2873",
             "1111",
-            "CITY",
-            "CLUBEVICARM",
-            "CLUB"
+            "1000",
+            "11111"
           ]
         },
         {
-          "truth": "MH01RS5348",
-          "fused": "????????0",
+          "truth": "MH43H0456",
+          "fused": "???I?045?",
           "level": "hard",
           "reads": [
-            "1880",
-            "1111",
-            "------------------",
-            "--",
-            "-",
-            "THE",
-            "-------------------------",
-            "2111"
-          ]
-        },
-        {
-          "truth": "CG10DG7934",
-          "fused": "??2U??",
-          "level": "hard",
-          "reads": [
-            "...8",
-            "26:34PMFood",
-            "77",
-            "THE",
-            "2",
-            "200",
-            "7042012",
-            "25"
-          ]
-        },
-        {
-          "truth": "KA19GX2689",
-          "fused": "??G?2?0?",
-          "level": "hard",
-          "reads": [
-            "$6.88-2009",
-            "OTE",
-            "6800",
-            "681",
-            "----------------------",
-            "11110",
-            "04038",
-            "88888"
-          ]
-        },
-        {
-          "truth": "CG10BM7273",
-          "fused": "CG18BM7273",
-          "level": "medium",
-          "reads": [
-            "CG38BM7273",
-            "4105",
-            "CG18BM7273",
-            "CG18BH7273",
-            "CG18BM7273",
-            "CG18BM7273",
-            "G18BM7273",
-            "G18BM7273"
-          ]
-        },
-        {
-          "truth": "MH31ZN7680",
-          "fused": "?H??2??9??",
-          "level": "hard",
-          "reads": [
-            "727",
-            "7421",
-            "969THE",
-            "graphy",
-            "HH812H7940",
-            "TOP",
-            "...1",
-            "BY"
-          ]
-        },
-        {
-          "truth": "MH02YY1234",
-          "fused": "?E??E?",
-          "level": "hard",
-          "reads": [
-            "WE'RED",
-            "GERRY",
-            "-",
-            "WELCOM",
-            "PARCE",
-            "PERFOR",
-            "-",
-            "WALCO"
-          ]
-        },
-        {
-          "truth": "KA51KY9729",
-          "fused": "KA51KM9729",
-          "level": "medium",
-          "reads": [
-            "KA51KM9729",
-            "KA51KM3729",
-            "KA51KM9729",
-            "9729",
-            "KA51KM9729",
-            "KASERM1577293",
-            "9729",
-            "MUP"
-          ]
-        },
-        {
-          "truth": "KA51SA0321",
-          "fused": "A??????9??",
-          "level": "hard",
-          "reads": [
-            "ANTO-SA-1963",
-            "ONES",
-            "OFFICE",
-            "CARKING",
-            "GASEGAMES",
-            "8833",
-            "NASTSAMES",
-            "MUSHI"
-          ]
-        },
-        {
-          "truth": "CG15TU1490",
-          "fused": "CG18TU1490",
-          "level": "medium",
-          "reads": [
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "CG18TU1490",
-            "0638TU1490",
-            "CG1RTU1490",
-            "CG18TU1490"
-          ]
-        },
-        {
-          "truth": "MH04VN1276",
-          "fused": "?0??6127?",
-          "level": "hard",
-          "reads": [
-            "900-861276",
-            "EURON",
-            "-",
-            "COMISON",
-            "MUSICUS",
-            "CAEID",
-            "133",
-            "CITRON"
-          ]
-        },
-        {
-          "truth": "DL9CZ7913",
-          "fused": "DL?C?7??8",
-          "level": "hard",
-          "reads": [
-            "&THERE",
-            "67399",
-            "194",
-            "81959",
-            "144",
-            "81996",
-            "DL9CB7918",
-            "055087818"
-          ]
-        },
-        {
-          "truth": "MH12MY5071",
-          "fused": "MH12MY8071",
-          "level": "medium",
-          "reads": [
-            "MH12MY8071",
-            "MH12MY",
-            "MH12MY8071",
-            "MH12MY8071",
-            "MH12MY8071",
-            "MH12MY",
-            "MH12MY8071",
-            "MH12MY"
+            "20142A2418",
+            "11",
+            "BEIIIII",
+            "BUS",
+            "MEISIX",
+            "SATE",
+            "!!!SKM",
+            "and"
           ]
         }
       ]
@@ -1867,99 +2404,100 @@
   "tau_sweep": [
     {
       "tau": 0.3,
-      "top1_matched": 0.625,
-      "false_match_rate": 0.0333
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.35,
-      "top1_matched": 0.625,
-      "false_match_rate": 0.0333
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.4,
-      "top1_matched": 0.625,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.45,
-      "top1_matched": 0.6167,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.5,
-      "top1_matched": 0.6167,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.55,
-      "top1_matched": 0.6167,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0167
     },
     {
       "tau": 0.6,
-      "top1_matched": 0.6167,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0
     },
     {
       "tau": 0.65,
-      "top1_matched": 0.6167,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.65,
+      "false_match_rate": 0.0
     },
     {
       "tau": 0.7,
-      "top1_matched": 0.5833,
-      "false_match_rate": 0.0083
+      "top1_matched": 0.6083,
+      "false_match_rate": 0.0
     },
     {
       "tau": 0.75,
-      "top1_matched": 0.5833,
+      "top1_matched": 0.6083,
       "false_match_rate": 0.0
     },
     {
       "tau": 0.8,
-      "top1_matched": 0.575,
+      "top1_matched": 0.6,
       "false_match_rate": 0.0
     },
     {
       "tau": 0.85,
-      "top1_matched": 0.45,
+      "top1_matched": 0.4833,
       "false_match_rate": 0.0
     },
     {
       "tau": 0.9,
-      "top1_matched": 0.3667,
+      "top1_matched": 0.375,
       "false_match_rate": 0.0
     },
     {
       "tau": 0.95,
-      "top1_matched": 0.3583,
+      "top1_matched": 0.375,
       "false_match_rate": 0.0
     }
   ],
   "tau_choice": {
     "tau": 0.3,
-    "top1_matched": 0.625,
-    "false_match_rate": 0.0333
+    "top1_matched": 0.65,
+    "false_match_rate": 0.0167
   },
   "clips": [
     {
       "clip": "day_clear_white.mp4",
       "degradation": "none",
       "expected": "MATCHED",
-      "seconds": 27.5,
+      "seconds": 14.4,
       "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
-      "top_score": 0.8,
+      "top_score": 1.0,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
       "n_chars": 10,
       "top1": true,
       "top5": true,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -1968,8 +2506,9 @@
       "clip": "night_partial_white.mp4",
       "degradation": "none",
       "expected": "AMBIGUOUS",
-      "seconds": 11.0,
+      "seconds": 10.5,
       "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX48?1",
       "truth": "CG04MX4821",
       "status": "AMBIGUOUS",
@@ -1990,20 +2529,21 @@
       "clip": "camB_white.mp4",
       "degradation": "none",
       "expected": "MATCHED",
-      "seconds": 11.8,
+      "seconds": 9.8,
       "tracks": 2,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "G04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
-      "top_score": 0.9,
+      "top_score": 0.9675,
       "committed": 9,
       "wrong": 0,
       "correct": 9,
       "n_chars": 10,
       "top1": true,
       "top5": true,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -2012,8 +2552,9 @@
       "clip": "day_black_suv.mp4",
       "degradation": "none",
       "expected": "MATCHED",
-      "seconds": 10.1,
+      "seconds": 7.8,
       "tracks": 1,
+      "body_type": "SUV",
       "plate": "MH12DE5678",
       "truth": "MH12DE5678",
       "status": "MATCHED",
@@ -2034,8 +2575,9 @@
       "clip": "day_blue_twoline.mp4",
       "degradation": "none",
       "expected": "MATCHED",
-      "seconds": 9.9,
+      "seconds": 8.3,
       "tracks": 1,
+      "body_type": "car",
       "plate": "KA05MN2023",
       "truth": "KA05MN2023",
       "status": "MATCHED",
@@ -2056,19 +2598,89 @@
       "clip": "unregistered_white.mp4",
       "degradation": "none",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 11.1,
+      "seconds": 9.8,
       "tracks": 2,
+      "body_type": "car",
       "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0443",
-      "top_score": 0.64,
+      "top_candidate": "REG-12881",
+      "top_score": 0.805,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
       "n_chars": 10,
       "top1": false,
       "top5": false,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_scooter_twoline.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 14.0,
+      "tracks": 5,
+      "body_type": "two-wheeler",
+      "plate": "CG07BK3519",
+      "truth": "CG07BK3519",
+      "status": "MATCHED",
+      "top_candidate": "REG-0040",
+      "top_score": 0.95,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_auto_rickshaw.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 13.1,
+      "tracks": 4,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
+      "status": "MATCHED",
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck.mp4",
+      "degradation": "none",
+      "expected": "MATCHED",
+      "seconds": 7.4,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
+      "status": "MATCHED",
+      "top_candidate": "REG-0060",
+      "top_score": 0.8,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
       "color_ok": false,
       "body_ok": true,
       "night": false,
@@ -2078,16 +2690,17 @@
       "clip": "camB_white__gauss.mp4",
       "degradation": "gauss",
       "expected": "MATCHED",
-      "seconds": 11.1,
+      "seconds": 9.3,
       "tracks": 2,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "??04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
       "top_score": 0.9,
-      "committed": 9,
+      "committed": 8,
       "wrong": 0,
-      "correct": 9,
+      "correct": 8,
       "n_chars": 10,
       "top1": true,
       "top5": true,
@@ -2100,18 +2713,19 @@
       "clip": "camB_white__motion.mp4",
       "degradation": "motion",
       "expected": "MATCHED",
-      "seconds": 11.3,
+      "seconds": 9.3,
       "tracks": 2,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "??0??X4?2?",
       "truth": "CG04MX4821",
-      "status": "MATCHED",
-      "top_candidate": "REG-0001",
-      "top_score": 0.9,
-      "committed": 9,
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0004",
+      "top_score": 0.7833,
+      "committed": 4,
       "wrong": 0,
-      "correct": 9,
+      "correct": 4,
       "n_chars": 10,
-      "top1": true,
+      "top1": false,
       "top5": true,
       "color_ok": false,
       "body_ok": true,
@@ -2122,20 +2736,21 @@
       "clip": "camB_white__down2x.mp4",
       "degradation": "down2x",
       "expected": "MATCHED",
-      "seconds": 10.0,
+      "seconds": 8.8,
       "tracks": 2,
+      "body_type": "car",
       "plate": "G04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
-      "top_score": 0.8675,
+      "top_score": 0.9675,
       "committed": 9,
       "wrong": 0,
       "correct": 9,
       "n_chars": 10,
       "top1": true,
       "top5": true,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -2144,42 +2759,44 @@
       "clip": "camB_white__down4x.mp4",
       "degradation": "down4x",
       "expected": "MATCHED",
-      "seconds": 10.2,
+      "seconds": 8.6,
       "tracks": 2,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "??0?MX4?21",
       "truth": "CG04MX4821",
-      "status": "MATCHED",
+      "status": "AMBIGUOUS",
       "top_candidate": "REG-0001",
       "top_score": 0.9,
-      "committed": 9,
+      "committed": 6,
       "wrong": 0,
-      "correct": 9,
+      "correct": 6,
       "n_chars": 10,
       "top1": true,
       "top5": true,
       "color_ok": false,
       "body_ok": true,
       "night": false,
-      "false_match": false
+      "false_match": true
     },
     {
       "clip": "camB_white__jpeg20.mp4",
       "degradation": "jpeg20",
       "expected": "MATCHED",
-      "seconds": 11.8,
+      "seconds": 10.7,
       "tracks": 3,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "G04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
-      "top_score": 0.9,
+      "top_score": 0.9675,
       "committed": 9,
       "wrong": 0,
       "correct": 9,
       "n_chars": 10,
       "top1": true,
       "top5": true,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -2188,13 +2805,14 @@
       "clip": "camB_white__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "MATCHED",
-      "seconds": 11.2,
+      "seconds": 9.7,
       "tracks": 2,
-      "plate": "?G04MX4821",
+      "body_type": "car",
+      "plate": "G04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
       "top_candidate": "REG-0001",
-      "top_score": 0.95,
+      "top_score": 0.9125,
       "committed": 9,
       "wrong": 0,
       "correct": 9,
@@ -2207,16 +2825,17 @@
       "false_match": false
     },
     {
-      "clip": "day_black_suv__gauss.mp4",
+      "clip": "day_auto_rickshaw__gauss.mp4",
       "degradation": "gauss",
       "expected": "MATCHED",
-      "seconds": 9.2,
-      "tracks": 1,
-      "plate": "MH12DE5678",
-      "truth": "MH12DE5678",
+      "seconds": 14.4,
+      "tracks": 2,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
       "status": "MATCHED",
-      "top_candidate": "REG-0010",
-      "top_score": 0.85,
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
@@ -2224,21 +2843,22 @@
       "top1": true,
       "top5": true,
       "color_ok": true,
-      "body_ok": false,
+      "body_ok": true,
       "night": false,
       "false_match": false
     },
     {
-      "clip": "day_black_suv__motion.mp4",
+      "clip": "day_auto_rickshaw__motion.mp4",
       "degradation": "motion",
       "expected": "MATCHED",
-      "seconds": 9.2,
-      "tracks": 2,
+      "seconds": 15.0,
+      "tracks": 7,
+      "body_type": "auto-rickshaw",
       "plate": "",
-      "truth": "MH12DE5678",
+      "truth": "KA01AH7350",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0010",
-      "top_score": 0.35,
+      "top_candidate": "REG-0050",
+      "top_score": 0.4,
       "committed": 0,
       "wrong": 0,
       "correct": 0,
@@ -2251,11 +2871,150 @@
       "false_match": false
     },
     {
+      "clip": "day_auto_rickshaw__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 12.3,
+      "tracks": 2,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
+      "status": "MATCHED",
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_auto_rickshaw__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 12.3,
+      "tracks": 6,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
+      "status": "MATCHED",
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_auto_rickshaw__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 11.3,
+      "tracks": 3,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
+      "status": "MATCHED",
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_auto_rickshaw__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 10.5,
+      "tracks": 3,
+      "body_type": "auto-rickshaw",
+      "plate": "KA01AH7350",
+      "truth": "KA01AH7350",
+      "status": "MATCHED",
+      "top_candidate": "REG-0050",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 7.7,
+      "tracks": 1,
+      "body_type": "SUV",
+      "plate": "M?12DE5678",
+      "truth": "MH12DE5678",
+      "status": "MATCHED",
+      "top_candidate": "REG-0010",
+      "top_score": 0.85,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": false,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_black_suv__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 8.5,
+      "tracks": 2,
+      "body_type": "SUV",
+      "plate": "???2?E?67?",
+      "truth": "MH12DE5678",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0010",
+      "top_score": 0.7833,
+      "committed": 4,
+      "wrong": 0,
+      "correct": 4,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": true
+    },
+    {
       "clip": "day_black_suv__down2x.mp4",
       "degradation": "down2x",
       "expected": "MATCHED",
-      "seconds": 9.4,
+      "seconds": 7.1,
       "tracks": 1,
+      "body_type": "SUV",
       "plate": "MH12DE5678",
       "truth": "MH12DE5678",
       "status": "MATCHED",
@@ -2276,16 +3035,17 @@
       "clip": "day_black_suv__down4x.mp4",
       "degradation": "down4x",
       "expected": "MATCHED",
-      "seconds": 9.1,
+      "seconds": 6.7,
       "tracks": 1,
-      "plate": "MH12DE5678",
+      "body_type": "SUV",
+      "plate": "?H?2DE5?7?",
       "truth": "MH12DE5678",
-      "status": "MATCHED",
+      "status": "AMBIGUOUS",
       "top_candidate": "REG-0010",
       "top_score": 1.0,
-      "committed": 10,
+      "committed": 6,
       "wrong": 0,
-      "correct": 10,
+      "correct": 6,
       "n_chars": 10,
       "top1": true,
       "top5": true,
@@ -2298,8 +3058,9 @@
       "clip": "day_black_suv__jpeg20.mp4",
       "degradation": "jpeg20",
       "expected": "MATCHED",
-      "seconds": 10.0,
+      "seconds": 7.8,
       "tracks": 1,
+      "body_type": "SUV",
       "plate": "MH12DE5678",
       "truth": "MH12DE5678",
       "status": "MATCHED",
@@ -2320,8 +3081,9 @@
       "clip": "day_black_suv__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "MATCHED",
-      "seconds": 9.2,
+      "seconds": 7.6,
       "tracks": 1,
+      "body_type": "SUV",
       "plate": "MH12DE5678",
       "truth": "MH12DE5678",
       "status": "MATCHED",
@@ -2342,16 +3104,17 @@
       "clip": "day_blue_twoline__gauss.mp4",
       "degradation": "gauss",
       "expected": "MATCHED",
-      "seconds": 8.8,
+      "seconds": 7.7,
       "tracks": 1,
-      "plate": "??????",
+      "body_type": "car",
+      "plate": "KA05MN2023",
       "truth": "KA05MN2023",
-      "status": "NO CONFIDENT MATCH",
+      "status": "MATCHED",
       "top_candidate": "REG-0020",
-      "top_score": 0.4,
-      "committed": 0,
+      "top_score": 1.0,
+      "committed": 10,
       "wrong": 0,
-      "correct": 0,
+      "correct": 10,
       "n_chars": 10,
       "top1": true,
       "top5": true,
@@ -2364,19 +3127,20 @@
       "clip": "day_blue_twoline__motion.mp4",
       "degradation": "motion",
       "expected": "MATCHED",
-      "seconds": 9.5,
+      "seconds": 6.9,
       "tracks": 1,
-      "plate": "???P00?3",
+      "body_type": "car",
+      "plate": "",
       "truth": "KA05MN2023",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0221",
-      "top_score": 0.4,
-      "committed": 4,
-      "wrong": 2,
-      "correct": 2,
+      "top_candidate": "REG-00003",
+      "top_score": 0.35,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
       "n_chars": 10,
       "top1": false,
-      "top5": true,
+      "top5": false,
       "color_ok": true,
       "body_ok": true,
       "night": false,
@@ -2386,8 +3150,9 @@
       "clip": "day_blue_twoline__down2x.mp4",
       "degradation": "down2x",
       "expected": "MATCHED",
-      "seconds": 9.3,
+      "seconds": 7.3,
       "tracks": 1,
+      "body_type": "car",
       "plate": "KA05MN2023",
       "truth": "KA05MN2023",
       "status": "MATCHED",
@@ -2408,8 +3173,9 @@
       "clip": "day_blue_twoline__down4x.mp4",
       "degradation": "down4x",
       "expected": "MATCHED",
-      "seconds": 9.9,
+      "seconds": 7.0,
       "tracks": 1,
+      "body_type": "car",
       "plate": "KA05MN2023",
       "truth": "KA05MN2023",
       "status": "MATCHED",
@@ -2430,8 +3196,9 @@
       "clip": "day_blue_twoline__jpeg20.mp4",
       "degradation": "jpeg20",
       "expected": "MATCHED",
-      "seconds": 10.6,
+      "seconds": 8.5,
       "tracks": 1,
+      "body_type": "car",
       "plate": "KA05MN2023",
       "truth": "KA05MN2023",
       "status": "MATCHED",
@@ -2452,19 +3219,20 @@
       "clip": "day_blue_twoline__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "MATCHED",
-      "seconds": 9.4,
+      "seconds": 7.0,
       "tracks": 1,
-      "plate": "KA05MN",
+      "body_type": "car",
+      "plate": "",
       "truth": "KA05MN2023",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0020",
-      "top_score": 0.3,
-      "committed": 6,
+      "top_candidate": "REG-00003",
+      "top_score": 0.25,
+      "committed": 0,
       "wrong": 0,
-      "correct": 6,
+      "correct": 0,
       "n_chars": 10,
-      "top1": true,
-      "top5": true,
+      "top1": false,
+      "top5": false,
       "color_ok": true,
       "body_ok": true,
       "night": false,
@@ -2474,8 +3242,124 @@
       "clip": "day_clear_white__gauss.mp4",
       "degradation": "gauss",
       "expected": "MATCHED",
-      "seconds": 11.0,
+      "seconds": 8.8,
       "tracks": 2,
+      "body_type": "car",
+      "plate": "C??4MX4???",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.6917,
+      "committed": 5,
+      "wrong": 0,
+      "correct": 5,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 9.2,
+      "tracks": 2,
+      "body_type": "car",
+      "plate": "C?04?X4?21",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 7,
+      "wrong": 0,
+      "correct": 7,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 9.0,
+      "tracks": 2,
+      "body_type": "car",
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 8.5,
+      "tracks": 2,
+      "body_type": "car",
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 9.7,
+      "tracks": 2,
+      "body_type": "car",
+      "plate": "CG04MX4821",
+      "truth": "CG04MX4821",
+      "status": "MATCHED",
+      "top_candidate": "REG-0001",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_clear_white__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 9.6,
+      "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX4821",
       "truth": "CG04MX4821",
       "status": "MATCHED",
@@ -2493,21 +3377,22 @@
       "false_match": false
     },
     {
-      "clip": "day_clear_white__motion.mp4",
-      "degradation": "motion",
+      "clip": "day_scooter_twoline__gauss.mp4",
+      "degradation": "gauss",
       "expected": "MATCHED",
-      "seconds": 10.5,
-      "tracks": 2,
-      "plate": "??????4?2?",
-      "truth": "CG04MX4821",
-      "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0004",
-      "top_score": 0.5667,
-      "committed": 2,
+      "seconds": 11.7,
+      "tracks": 3,
+      "body_type": "two-wheeler",
+      "plate": "CG07BK3519",
+      "truth": "CG07BK3519",
+      "status": "MATCHED",
+      "top_candidate": "REG-0040",
+      "top_score": 0.9,
+      "committed": 10,
       "wrong": 0,
-      "correct": 2,
+      "correct": 10,
       "n_chars": 10,
-      "top1": false,
+      "top1": true,
       "top5": true,
       "color_ok": false,
       "body_ok": true,
@@ -2515,15 +3400,62 @@
       "false_match": false
     },
     {
-      "clip": "day_clear_white__down2x.mp4",
+      "clip": "day_scooter_twoline__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 10.2,
+      "tracks": 3,
+      "body_type": "two-wheeler",
+      "plate": "CG07BK351?",
+      "truth": "CG07BK3519",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0040",
+      "top_score": 0.9,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": true
+    },
+    {
+      "clip": "day_scooter_twoline__down2x.mp4",
       "degradation": "down2x",
       "expected": "MATCHED",
-      "seconds": 10.1,
-      "tracks": 2,
-      "plate": "CG04MX4821",
-      "truth": "CG04MX4821",
+      "seconds": 15.1,
+      "tracks": 7,
+      "body_type": "two-wheeler",
+      "plate": "CG07BK3519",
+      "truth": "CG07BK3519",
       "status": "MATCHED",
-      "top_candidate": "REG-0001",
+      "top_candidate": "REG-0040",
+      "top_score": 0.9,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_scooter_twoline__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 10.8,
+      "tracks": 4,
+      "body_type": "two-wheeler",
+      "plate": "CG07BK3519",
+      "truth": "CG07BK3519",
+      "status": "MATCHED",
+      "top_candidate": "REG-0040",
       "top_score": 0.8,
       "committed": 10,
       "wrong": 0,
@@ -2537,38 +3469,63 @@
       "false_match": false
     },
     {
-      "clip": "day_clear_white__down4x.mp4",
-      "degradation": "down4x",
-      "expected": "MATCHED",
-      "seconds": 9.6,
-      "tracks": 2,
-      "plate": "CG04MX4821",
-      "truth": "CG04MX4821",
-      "status": "MATCHED",
-      "top_candidate": "REG-0001",
-      "top_score": 0.9,
-      "committed": 10,
-      "wrong": 0,
-      "correct": 10,
-      "n_chars": 10,
-      "top1": true,
-      "top5": true,
-      "color_ok": false,
-      "body_ok": true,
-      "night": false,
-      "false_match": false
-    },
-    {
-      "clip": "day_clear_white__jpeg20.mp4",
+      "clip": "day_scooter_twoline__jpeg20.mp4",
       "degradation": "jpeg20",
       "expected": "MATCHED",
-      "seconds": 10.7,
-      "tracks": 2,
-      "plate": "CG04MX4821",
-      "truth": "CG04MX4821",
+      "seconds": 15.0,
+      "tracks": 7,
+      "body_type": "two-wheeler",
+      "plate": "",
+      "truth": "CG07BK3519",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-00161",
+      "top_score": 0.35,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_scooter_twoline__noise_dark.mp4",
+      "degradation": "noise_dark",
+      "expected": "MATCHED",
+      "seconds": 9.2,
+      "tracks": 3,
+      "body_type": "two-wheeler",
+      "plate": "",
+      "truth": "CG07BK3519",
+      "status": "NO CONFIDENT MATCH",
+      "top_candidate": "REG-00015",
+      "top_score": 0.25,
+      "committed": 0,
+      "wrong": 0,
+      "correct": 0,
+      "n_chars": 10,
+      "top1": false,
+      "top5": false,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck__gauss.mp4",
+      "degradation": "gauss",
+      "expected": "MATCHED",
+      "seconds": 7.7,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
       "status": "MATCHED",
-      "top_candidate": "REG-0001",
-      "top_score": 0.9,
+      "top_candidate": "REG-0060",
+      "top_score": 0.8,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
@@ -2581,15 +3538,108 @@
       "false_match": false
     },
     {
-      "clip": "day_clear_white__noise_dark.mp4",
+      "clip": "day_white_truck__motion.mp4",
+      "degradation": "motion",
+      "expected": "MATCHED",
+      "seconds": 7.9,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "C?04LQ2290",
+      "truth": "CG04LQ2290",
+      "status": "MATCHED",
+      "top_candidate": "REG-0060",
+      "top_score": 1.0,
+      "committed": 9,
+      "wrong": 0,
+      "correct": 9,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck__down2x.mp4",
+      "degradation": "down2x",
+      "expected": "MATCHED",
+      "seconds": 6.8,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
+      "status": "MATCHED",
+      "top_candidate": "REG-0060",
+      "top_score": 0.8,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck__down4x.mp4",
+      "degradation": "down4x",
+      "expected": "MATCHED",
+      "seconds": 7.0,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
+      "status": "MATCHED",
+      "top_candidate": "REG-0060",
+      "top_score": 1.0,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": true,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "MATCHED",
+      "seconds": 7.7,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
+      "status": "MATCHED",
+      "top_candidate": "REG-0060",
+      "top_score": 0.8,
+      "committed": 10,
+      "wrong": 0,
+      "correct": 10,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": false,
+      "false_match": false
+    },
+    {
+      "clip": "day_white_truck__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "MATCHED",
-      "seconds": 11.0,
-      "tracks": 2,
-      "plate": "CG04MX4821",
-      "truth": "CG04MX4821",
+      "seconds": 7.6,
+      "tracks": 1,
+      "body_type": "truck",
+      "plate": "CG04LQ2290",
+      "truth": "CG04LQ2290",
       "status": "MATCHED",
-      "top_candidate": "REG-0001",
+      "top_candidate": "REG-0060",
       "top_score": 0.9,
       "committed": 10,
       "wrong": 0,
@@ -2606,18 +3656,19 @@
       "clip": "night_partial_white__gauss.mp4",
       "degradation": "gauss",
       "expected": "AMBIGUOUS",
-      "seconds": 11.3,
+      "seconds": 9.6,
       "tracks": 2,
-      "plate": "CG04MX4???",
+      "body_type": "car",
+      "plate": "C?04MX4??1",
       "truth": "CG04MX4821",
       "status": "AMBIGUOUS",
-      "top_candidate": "REG-0004",
-      "top_score": 0.95,
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
       "committed": 7,
       "wrong": 0,
       "correct": 7,
       "n_chars": 10,
-      "top1": false,
+      "top1": true,
       "top5": true,
       "color_ok": false,
       "body_ok": true,
@@ -2628,19 +3679,20 @@
       "clip": "night_partial_white__motion.mp4",
       "degradation": "motion",
       "expected": "AMBIGUOUS",
-      "seconds": 10.6,
+      "seconds": 9.1,
       "tracks": 2,
-      "plate": "",
+      "body_type": "car",
+      "plate": "??04?X4???",
       "truth": "CG04MX4821",
-      "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0311",
-      "top_score": 0.3,
-      "committed": 0,
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0004",
+      "top_score": 0.75,
+      "committed": 4,
       "wrong": 0,
-      "correct": 0,
+      "correct": 4,
       "n_chars": 10,
       "top1": false,
-      "top5": false,
+      "top5": true,
       "color_ok": false,
       "body_ok": true,
       "night": true,
@@ -2650,8 +3702,9 @@
       "clip": "night_partial_white__down2x.mp4",
       "degradation": "down2x",
       "expected": "AMBIGUOUS",
-      "seconds": 9.5,
+      "seconds": 8.5,
       "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX48?1",
       "truth": "CG04MX4821",
       "status": "AMBIGUOUS",
@@ -2672,8 +3725,32 @@
       "clip": "night_partial_white__down4x.mp4",
       "degradation": "down4x",
       "expected": "AMBIGUOUS",
-      "seconds": 9.5,
+      "seconds": 8.5,
       "tracks": 2,
+      "body_type": "car",
+      "plate": "CG04MX4??1",
+      "truth": "CG04MX4821",
+      "status": "AMBIGUOUS",
+      "top_candidate": "REG-0001",
+      "top_score": 0.9,
+      "committed": 8,
+      "wrong": 0,
+      "correct": 8,
+      "n_chars": 10,
+      "top1": true,
+      "top5": true,
+      "color_ok": false,
+      "body_ok": true,
+      "night": true,
+      "false_match": false
+    },
+    {
+      "clip": "night_partial_white__jpeg20.mp4",
+      "degradation": "jpeg20",
+      "expected": "AMBIGUOUS",
+      "seconds": 9.2,
+      "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX48?1",
       "truth": "CG04MX4821",
       "status": "AMBIGUOUS",
@@ -2691,33 +3768,12 @@
       "false_match": true
     },
     {
-      "clip": "night_partial_white__jpeg20.mp4",
-      "degradation": "jpeg20",
-      "expected": "AMBIGUOUS",
-      "seconds": 10.6,
-      "tracks": 2,
-      "plate": "CG04MX4881",
-      "truth": "CG04MX4821",
-      "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0001",
-      "top_score": 0.825,
-      "committed": 10,
-      "wrong": 1,
-      "correct": 9,
-      "n_chars": 10,
-      "top1": true,
-      "top5": true,
-      "color_ok": false,
-      "body_ok": true,
-      "night": true,
-      "false_match": false
-    },
-    {
       "clip": "night_partial_white__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "AMBIGUOUS",
-      "seconds": 9.8,
+      "seconds": 9.1,
       "tracks": 2,
+      "body_type": "car",
       "plate": "CG04MX48?1",
       "truth": "CG04MX4821",
       "status": "AMBIGUOUS",
@@ -2738,16 +3794,17 @@
       "clip": "unregistered_white__gauss.mp4",
       "degradation": "gauss",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 9.8,
+      "seconds": 9.6,
       "tracks": 2,
-      "plate": "M??4XY0042",
+      "body_type": "car",
+      "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0171",
-      "top_score": 0.575,
-      "committed": 8,
+      "top_candidate": "REG-17716",
+      "top_score": 0.805,
+      "committed": 10,
       "wrong": 0,
-      "correct": 8,
+      "correct": 10,
       "n_chars": 10,
       "top1": false,
       "top5": false,
@@ -2760,13 +3817,14 @@
       "clip": "unregistered_white__motion.mp4",
       "degradation": "motion",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 9.2,
+      "seconds": 9.4,
       "tracks": 2,
+      "body_type": "car",
       "plate": "?H?4XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0171",
-      "top_score": 0.575,
+      "top_candidate": "REG-17716",
+      "top_score": 0.7562,
       "committed": 8,
       "wrong": 0,
       "correct": 8,
@@ -2782,20 +3840,21 @@
       "clip": "unregistered_white__down2x.mp4",
       "degradation": "down2x",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 9.2,
+      "seconds": 9.0,
       "tracks": 2,
+      "body_type": "car",
       "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0443",
-      "top_score": 0.64,
+      "top_candidate": "REG-12881",
+      "top_score": 0.805,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
       "n_chars": 10,
       "top1": false,
       "top5": false,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -2804,13 +3863,14 @@
       "clip": "unregistered_white__down4x.mp4",
       "degradation": "down4x",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 9.9,
+      "seconds": 9.0,
       "tracks": 2,
+      "body_type": "car",
       "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0443",
-      "top_score": 0.64,
+      "top_candidate": "REG-17716",
+      "top_score": 0.805,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
@@ -2826,20 +3886,21 @@
       "clip": "unregistered_white__jpeg20.mp4",
       "degradation": "jpeg20",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 11.4,
+      "seconds": 10.3,
       "tracks": 2,
+      "body_type": "car",
       "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0443",
-      "top_score": 0.64,
+      "top_candidate": "REG-12881",
+      "top_score": 0.805,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
       "n_chars": 10,
       "top1": false,
       "top5": false,
-      "color_ok": false,
+      "color_ok": true,
       "body_ok": true,
       "night": false,
       "false_match": false
@@ -2848,13 +3909,14 @@
       "clip": "unregistered_white__noise_dark.mp4",
       "degradation": "noise_dark",
       "expected": "NO CONFIDENT MATCH",
-      "seconds": 11.2,
+      "seconds": 9.8,
       "tracks": 2,
+      "body_type": "car",
       "plate": "MH14XY0042",
       "truth": "MH14XY0042",
       "status": "NO CONFIDENT MATCH",
-      "top_candidate": "REG-0443",
-      "top_score": 0.65,
+      "top_candidate": "REG-17716",
+      "top_score": 0.775,
       "committed": 10,
       "wrong": 0,
       "correct": 10,
@@ -2868,15 +3930,42 @@
     }
   ],
   "clip_summary": {
-    "committed_char_error": 0.00847457627118644,
-    "recovery_rate": 0.8357142857142857,
-    "top1": 0.8857142857142857,
-    "top5": 0.9714285714285714,
-    "false_match_rate": 0.09523809523809523,
+    "committed_char_error": 0.0,
+    "recovery_rate": 0.834920634920635,
+    "top1": 0.8928571428571429,
+    "top5": 0.9285714285714286,
+    "false_match_rate": 0.1111111111111111,
     "wrong_matched": 0,
-    "status_as_designed": 0.8333333333333334,
-    "color_acc": 0.3333333333333333,
-    "body_acc": 0.9047619047619048,
-    "mean_seconds": 10.607142857142856
+    "status_as_designed": 0.8095238095238095,
+    "color_acc": 0.5238095238095238,
+    "body_acc": 0.9365079365079365,
+    "body_by_type": {
+      "SUV": {
+        "n": 7,
+        "acc": 0.42857142857142855,
+        "top1": 1.0
+      },
+      "auto-rickshaw": {
+        "n": 7,
+        "acc": 1.0,
+        "top1": 1.0
+      },
+      "car": {
+        "n": 35,
+        "acc": 1.0,
+        "top1": 0.8571428571428571
+      },
+      "truck": {
+        "n": 7,
+        "acc": 1.0,
+        "top1": 1.0
+      },
+      "two-wheeler": {
+        "n": 7,
+        "acc": 1.0,
+        "top1": 0.7142857142857143
+      }
+    },
+    "mean_seconds": 9.519047619047617
   }
 }

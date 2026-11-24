@@ -28,7 +28,10 @@ from prism.config import PlateConfig, TEST_CLIPS_DIR  # noqa: E402
 from prism.registry import load_registry  # noqa: E402
 
 REF = ROOT / "vendor" / "vehicle-reidentification" / "reference_vehicles"
+PHOTOS = ROOT / "data" / "vehicle_photos"   # two-wheeler / auto-rickshaw / truck photos (see CREDITS.md)
 W, H, FPS = 1280, 720, 25
+WHITE_PLATE = (242, 242, 236)               # private vehicles (RGB)
+YELLOW_PLATE = (250, 204, 40)               # commercial vehicles: autos, goods carriers (RGB)
 
 
 @dataclass
@@ -50,6 +53,11 @@ class ClipSpec:
     mirror: bool = False
     seed: int = 0
     note: str = ""
+    crop: tuple[int, int, int, int] | None = None   # vehicle box in the photo (x1, y1, x2, y2); None = whole image
+    plate_scale: float = 1.0                         # enlarge the detected plate box around its centre
+    plate_aspect: float | None = None                # widen the plate box to this width/height ratio
+    plate_bg: tuple[int, int, int] = WHITE_PLATE
+    target_h: int = 560                              # vehicle height in pixels when closest to the camera
 
 
 SPECS = [
@@ -68,6 +76,19 @@ SPECS = [
     ClipSpec("unregistered_white.mp4", "vid_front2_white_car.jpg", "MH14XY0042", ["MH 14 XY 0042"], None,
              "white", "car", "NO CONFIDENT MATCH", seed=6, mirror=True,
              note="Plate not in the registry: PRISM must not force a match."),
+    # Body types beyond car/SUV. Photos: data/vehicle_photos (Wikimedia Commons, see CREDITS.md).
+    ClipSpec("day_scooter_twoline.mp4", "scooter_rear_grey_activa.jpg", "CG07BK3519", ["CG 07 BK", "3519"],
+             "REG-0040", "grey", "two-wheeler", "MATCHED", seed=7, blur=3, crop=(150, 0, 820, 1190),
+             target_h=600, note="Grey Honda Activa scooter from behind, two-line rear plate."),
+    ClipSpec("day_auto_rickshaw.mp4", "auto_front_blue_bajaj_re.jpg", "KA01AH7350", ["KA 01 AH", "7350"],
+             "REG-0050", "blue", "auto-rickshaw", "MATCHED", seed=8, blur=3, crop=(60, 50, 935, 790),
+             plate_scale=1.9, plate_bg=YELLOW_PLATE, target_h=620,
+             note="Blue Bajaj RE auto-rickshaw, front view, yellow commercial two-line plate. "
+                  "COCO has no auto-rickshaw class, so the body type must come from the CLIP override."),
+    ClipSpec("day_white_truck.mp4", "truck_front_white_tata_ace.jpg", "CG04LQ2290", ["CG 04 LQ 2290"],
+             "REG-0060", "white", "truck", "MATCHED", seed=9, crop=(160, 55, 800, 620),
+             plate_aspect=4.2, plate_bg=YELLOW_PLATE,
+             note="White Tata Ace mini truck, front view, yellow commercial plate."),
 ]
 
 
@@ -78,11 +99,13 @@ def font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.truetype(str(path), size)
 
 
-def render_plate(lines: list[str], occlude_chars: list[int], rng: np.random.Generator) -> np.ndarray:
-    """High-res white Indian plate (BGR). Characters at `occlude_chars` (plate index) get mud."""
+def render_plate(lines: list[str], occlude_chars: list[int], rng: np.random.Generator,
+                 bg: tuple[int, int, int] = WHITE_PLATE) -> np.ndarray:
+    """High-res Indian plate (BGR), white by default (`bg` is RGB; yellow for commercial vehicles).
+    Characters at `occlude_chars` (plate index) get mud."""
     two = len(lines) == 2
     pw, ph = (560, 300) if two else (900, 190)
-    img = Image.new("RGB", (pw, ph), (242, 242, 236))
+    img = Image.new("RGB", (pw, ph), bg)
     d = ImageDraw.Draw(img)
     d.rectangle([4, 4, pw - 5, ph - 5], outline=(20, 20, 20), width=8)
     line_h = ph / len(lines)
@@ -121,7 +144,7 @@ def render_plate(lines: list[str], occlude_chars: list[int], rng: np.random.Gene
     return arr
 
 
-def find_plate_box(car: np.ndarray) -> tuple[int, int, int, int]:
+def find_plate_box(car: np.ndarray, scale: float = 1.0, aspect: float | None = None) -> tuple[int, int, int, int]:
     from prism.stages.plate_detect import PlateDetector
 
     det = PlateDetector(PlateConfig(det_conf=0.2))
@@ -129,21 +152,38 @@ def find_plate_box(car: np.ndarray) -> tuple[int, int, int, int]:
     if not found:
         raise RuntimeError("no plate found on reference image")
     x1, y1, x2, y2 = found[0][0]
-    w, h = x2 - x1, y2 - y1
-    return max(0, int(x1 - 0.08 * w)), max(0, int(y1 - 0.12 * h)), int(x2 + 0.08 * w), int(y2 + 0.12 * h)
+    if scale == 1.0 and not aspect:  # original car clips: keep their exact plate boxes
+        w, h = x2 - x1, y2 - y1
+        return max(0, int(x1 - 0.08 * w)), max(0, int(y1 - 0.12 * h)), int(x2 + 0.08 * w), int(y2 + 0.12 * h)
+    w, h = (x2 - x1) * 1.16 * scale, (y2 - y1) * 1.24 * scale
+    if aspect and w / h < aspect:
+        w = h * aspect
+    cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
+    H_, W_ = car.shape[:2]
+    return (max(0, int(cx - w / 2)), max(0, int(cy - h / 2)), min(W_, int(cx + w / 2)), min(H_, int(cy + h / 2)))
+
+
+def load_photo(spec: ClipSpec) -> np.ndarray:
+    path = PHOTOS / spec.image if (PHOTOS / spec.image).exists() else REF / spec.image
+    img = cv2.imread(str(path))
+    if img is None:
+        raise FileNotFoundError(path)
+    if spec.crop:
+        x1, y1, x2, y2 = spec.crop
+        img = img[y1:y2, x1:x2]
+    return img
 
 
 def compose_vehicle(spec: ClipSpec, rng: np.random.Generator) -> np.ndarray:
-    car = cv2.imread(str(REF / spec.image))
+    car = load_photo(spec)
     if spec.mirror:
         car = cv2.flip(car, 1)  # flip the car only; the new plate is drawn un-mirrored
-    x1, y1, x2, y2 = find_plate_box(car)
-    plate = render_plate(spec.lines, spec.occlude, rng)
+    x1, y1, x2, y2 = find_plate_box(car, spec.plate_scale, spec.plate_aspect)
+    plate = render_plate(spec.lines, spec.occlude, rng, spec.plate_bg)
     car[y1:y2, x1:x2] = cv2.resize(plate, (x2 - x1, y2 - y1), interpolation=cv2.INTER_AREA)
     # Upscale the (small) reference photo so the plate is CCTV-legible near the camera.
-    target_h = 560
-    s = target_h / car.shape[0]
-    return cv2.resize(car, (int(car.shape[1] * s), target_h), interpolation=cv2.INTER_CUBIC)
+    s = spec.target_h / car.shape[0]
+    return cv2.resize(car, (int(car.shape[1] * s), spec.target_h), interpolation=cv2.INTER_CUBIC)
 
 
 def road_background(rng: np.random.Generator) -> np.ndarray:
@@ -204,6 +244,7 @@ def make_clip(spec: ClipSpec, out: Path) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=TEST_CLIPS_DIR)
+    ap.add_argument("--only", nargs="*", help="clip names to (re)build; labels.json always lists every clip")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     reg_plates = {r.plate for r in load_registry()}
@@ -214,13 +255,14 @@ def main() -> None:
         else:
             assert spec.plate in reg_plates, f"{spec.plate} missing from the registry"
         out = args.out / spec.name
-        make_clip(spec, out)
+        if not args.only or spec.name in args.only:
+            make_clip(spec, out)
+            print(f"wrote {out}")
         labels.append({
             "clip": spec.name, "plate": spec.plate, "registry_id": spec.registry_id, "color": spec.color,
             "body_type": spec.body_type, "expected_status": spec.expected, "night": spec.night,
             "occluded_positions": [k + 1 for k in spec.occlude], "note": spec.note,
         })
-        print(f"wrote {out}")
     pairs = [{"clip_a": "night_partial_white.mp4", "clip_b": "camB_white.mp4", "registry_id": "REG-0001"}]
     (args.out / "labels.json").write_text(json.dumps({"clips": labels, "crosscam_pairs": pairs}, indent=2))
     print(f"wrote {args.out / 'labels.json'}")

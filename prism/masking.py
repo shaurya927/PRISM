@@ -10,6 +10,10 @@ Neither OCR backend applies a threshold itself. Every raw read goes through
      decoding (prism.layout_decode) on the positions whose top character the plate layouts rule
      out. It can fill such a '?' only with a character the model itself offered there, and labels
      it; a character that fits the layout is never changed.
+
+`cross_check` then compares the result with an independent second OCR model reading the same
+crop. A committed character that the second model reads differently (with confidence) becomes
+'?'. Like every other step it can only remove characters, never add or change one.
 """
 
 from __future__ import annotations
@@ -36,6 +40,11 @@ class MaskedRead:
     model_probs: list[Optional[float]] = field(default_factory=list)  # model probability of the written char
     layout_probs: list[Optional[float]] = field(default_factory=list) # its probability given the layouts
     alts: list[dict[str, float]] = field(default_factory=list)        # model's top alternatives (for audit)
+    # OCR cross-check (cross_check): the second model's aligned character and confidence per position
+    check_backend: Optional[str] = None
+    check_text: Optional[str] = None
+    check_chars: list[Optional[str]] = field(default_factory=list)
+    check_confs: list[Optional[float]] = field(default_factory=list)
 
     @property
     def masked_text(self) -> str:
@@ -65,9 +74,12 @@ def char_reads(m: "MaskedRead") -> list:
     mp = m.model_probs or [None] * n
     lp = m.layout_probs or [None] * n
     al = m.alts or [{}] * n
+    cc = m.check_chars or [None] * n
+    cp = m.check_confs or [None] * n
     return [
-        CharRead(char=c, raw_char=r, conf=round(p, 4), reason=why, layout_from=f, model_prob=pm, layout_prob=pl, alts=a)
-        for c, r, p, why, f, pm, pl, a in zip(m.chars, m.raw_chars, m.raw_confs, m.reasons, lf, mp, lp, al)
+        CharRead(char=c, raw_char=r, conf=round(p, 4), reason=why, layout_from=f, model_prob=pm, layout_prob=pl, alts=a,
+                 check_char=k, check_conf=None if kp is None else round(kp, 4))
+        for c, r, p, why, f, pm, pl, a, k, kp in zip(m.chars, m.raw_chars, m.raw_confs, m.reasons, lf, mp, lp, al, cc, cp)
     ]
 
 
@@ -172,3 +184,69 @@ def mask_read(raw_text: str, confs: Sequence[float], cfg: OCRConfig,
         layout_probs=layout_probs,
         alts=[_alts(d) for d in raw_dists],
     )
+
+
+def cross_check(m: MaskedRead, check_text: str, check_confs: Sequence[float], cfg: OCRConfig,
+                check_backend: str = "second OCR") -> MaskedRead:
+    """Second opinion from an independent OCR model that read the same crop. Only adds '?'.
+
+    The second read is cleaned the same way (separators dropped, upper-cased) and aligned to the
+    primary read. For every committed character of the primary read:
+
+    * the second model read the same character: kept;
+    * it read a different letter or digit with confidence >= cross_check_veto_conf: masked to '?'
+      (reason "ocr_disagreement"), because two models that disagree are not "high certainty";
+    * otherwise (no aligned character, or a low-confidence one): kept in "veto" mode; in "agree" mode
+      kept only if the primary confidence is at least cross_check_keep_conf.
+
+    A second read whose length differs from the primary by more than cross_check_max_len_diff
+    cannot be aligned reliably: it vetoes nothing, and in "agree" mode it confirms nothing."""
+    from prism.fusion import align
+
+    n = len(m.chars)
+    confs = (list(map(float, check_confs)) + [0.0] * len(check_text))[: len(check_text)]
+    chars2: list[str] = []
+    confs2: list[float] = []
+    for c, p in zip(check_text, confs):
+        if c in cfg.separators:
+            continue
+        chars2.append(c.upper())
+        confs2.append(p)
+    m.check_backend = check_backend
+    m.check_text = check_text
+    m.check_chars = [None] * n
+    m.check_confs = [None] * n
+    if abs(len(chars2) - len(m.raw_chars)) > cfg.cross_check_max_len_diff:
+        m.conflicts.append(
+            f"cross-check: {check_backend} read '{check_text}' ({len(chars2)} characters against {len(m.raw_chars)}); "
+            "too different in length to compare" + ("; no character is confirmed" if cfg.cross_check_mode == "agree" else "")
+        )
+        chars2, confs2 = [], []  # nothing aligned: "veto" keeps every character, "agree" confirms none
+    mapping = align(chars2, m.raw_chars) if chars2 else [None] * n
+    for k, idx in enumerate(mapping):
+        if idx is not None:
+            m.check_chars[k] = chars2[idx]
+            m.check_confs[k] = confs2[idx]
+    for k in range(n):
+        c = m.chars[k]
+        if c == UNKNOWN:
+            continue
+        c2, p2 = m.check_chars[k], m.check_confs[k]
+        if c2 == c:
+            continue
+        if c2 is not None and c2 in ALNUM and p2 is not None and p2 >= cfg.cross_check_veto_conf:
+            why = f"{check_backend} read '{c2}' at {p2:.2f}"
+        elif cfg.cross_check_mode == "agree" and m.raw_confs[k] < cfg.cross_check_keep_conf:
+            why = f"{check_backend} did not confirm it" + (f" (read '{c2}' at {p2:.2f})" if c2 is not None else "")
+        else:
+            continue
+        m.chars[k] = UNKNOWN
+        m.reasons[k] = "ocr_disagreement"
+        if m.layout_from:
+            m.layout_from[k] = None
+        if m.model_probs:
+            m.model_probs[k] = None
+        if m.layout_probs:
+            m.layout_probs[k] = None
+        m.conflicts.append(f"position {k + 1}: '{c}' masked to '?': {why}")
+    return m

@@ -98,7 +98,7 @@
     <td>{{ f.source }}{% if f.two_line %} (2-line){% endif %}</td>
     <td>{% if row.veh %}<img class="veh" src="{{ row.veh }}">{% endif %}</td>
     <td>{% if row.plate %}<img class="crop" src="{{ row.plate }}">{% endif %}</td>
-    <td class="mono">{{ f.raw_text or '(empty)' }}</td><td class="mono">{{ f.masked_text }}</td>
+    <td class="mono">{{ f.raw_text or '(empty)' }}{% if f.check_backend %}<div class="mute" style="font-size:10px" title="cross-check by {{ f.check_backend }}; it can only mask characters">check: {{ f.check_text or '(empty)' }}</div>{% endif %}</td><td class="mono">{{ f.masked_text }}</td>
     <td>{% for c in f.chars %}<span class="pill {{ 'ok' if c.char != '?' else ('fmt' if c.reason == 'format' else 'low') }}" title="{{ c.reason or 'accepted' }}">{{ c.raw_char }} {{ '%.2f' % c.conf }}</span>{% endfor %}
       {% for c in f.format_conflicts %}<div class="mute" style="font-size:10px">{{ c }}</div>{% endfor %}</td>
   </tr>

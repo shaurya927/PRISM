@@ -63,7 +63,10 @@ class ReadObservation:
         """False if the format check had to mask too many confident characters: the OCR read
         something that is not a plate (a word, a logo). Such reads cast no votes."""
         n = len(self.chars)
-        if n < min(PLAUSIBLE_LENGTHS) - MAX_LENGTH_DIFF or n > max(PLAUSIBLE_LENGTHS) + MAX_LENGTH_DIFF:
+        # Every supported layout is 8-11 characters; one character lost at the plate edge gives 7.
+        # Any other length cannot be this plate (PARSeq reading signboard text off a blurred plate,
+        # e.g. "COLLEYWORDIA"): on the hard synthetic third such reads caused most committed errors.
+        if n not in PLAUSIBLE_READ_LENGTHS:
             return False
         kept = sum(1 for c in self.chars if c != UNKNOWN)
         confident = kept + self.format_masked
@@ -115,6 +118,7 @@ def align(read: Sequence[str], ref: Sequence[str]) -> list[Optional[int]]:
 
 
 PLAUSIBLE_LENGTHS = range(8, 12)  # every supported Indian layout is 8-11 characters
+PLAUSIBLE_READ_LENGTHS = range(7, 12)  # ... or one character short (lost at the plate edge)
 MAX_LENGTH_DIFF = 2
 MAX_FORMAT_MASKED_SHARE = 1 / 3
 

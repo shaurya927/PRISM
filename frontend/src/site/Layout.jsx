@@ -262,7 +262,7 @@ function Footer() {
               <span>{health ? "API online" : health === false ? "API offline" : "Checking API…"}</span>
             </div>
             <div className="mt-1 text-[var(--muted-2)]">{health ? `OCR ${health.ocr_backend} on ${health.gpu || health.device}` : "PARSeq OCR"}</div>
-            <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 500 records"}</div>
+            <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 50,000 records"}</div>
           </div>
         </div>
       </div>

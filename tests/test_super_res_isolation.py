@@ -67,6 +67,8 @@ class FakeHub:
     def __init__(self, events):
         self.versions = {}
         self.spy = SpyOCR(events)
+        self.check_events: list[str] = []
+        self.check_spy = SpyOCR(self.check_events)  # the cross-check backend goes through the same gate
         self.sr = FakeSR(events)
 
     def plate_detector(self):
@@ -74,6 +76,9 @@ class FakeHub:
 
     def ocr(self):
         return self.spy, []
+
+    def ocr_check(self):
+        return self.check_spy, []
 
     def super_res(self):
         return self.sr
@@ -134,8 +139,10 @@ def test_pipeline_never_feeds_sr_to_ocr(tmp_path, monkeypatch):
     # OCR ran on 3 frames x (raw + CLAHE); SR made 3 previews, all strictly after OCR finished.
     assert events.count("ocr") == 6 and events.count("sr") == 3
     assert max(i for i, e in enumerate(events) if e == "ocr") < min(i for i, e in enumerate(events) if e == "sr")
-    # No SR output array ever reached BasePlateOCR.read.
+    # No SR output array ever reached BasePlateOCR.read, of either OCR backend.
     assert not set(hub.spy.seen) & set(hub.sr.outputs)
+    assert hub.check_events.count("ocr") == 6 and hub.check_spy.seen == hub.spy.seen
+    assert not set(hub.check_spy.seen) & set(hub.sr.outputs)
     # SR files exist with the *_sr.png name and are only referenced as sr_url.
     t = an.tracks[0]
     for f in t.frames:

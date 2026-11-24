@@ -1,7 +1,8 @@
 """Stage 4: vehicle colour, body type and make/model with OpenCLIP (ViT-B-32, laion2b_s34b_b79k).
 
 * Input: the 3 sharpest vehicle crops of a track; per-crop probabilities are averaged so one
-  frame's glare or shadow has less effect.
+  frame's glare or shadow has less effect. Colour is read from a bilateral-filtered copy of each
+  crop (sensor noise and JPEG blocks made CLIP call white cars grey or silver).
 * Each label is a prompt ensemble (several phrasings, embeddings averaged); text embeddings
   are computed once and cached in memory and on disk.
 * Body type combines the YOLO class with CLIP. CLIP may override YOLO for auto-rickshaws,
@@ -58,6 +59,12 @@ YOLO_TO_BODY: dict[str, tuple[str, ...]] = {
     "truck": ("truck",),
 }
 CLIP_WEIGHT, YOLO_WEIGHT = 0.6, 0.4
+
+
+def denoise_for_color(crop: np.ndarray, cfg: AttributeConfig) -> np.ndarray:
+    """Edge-preserving bilateral filter for the colour step. It smooths sensor noise and JPEG blocks
+    inside flat paint areas; it adds no colour that was not in the crop."""
+    return cv2.bilateralFilter(crop, cfg.color_denoise_d, cfg.color_denoise_sigma_color, cfg.color_denoise_sigma_space)
 
 
 def make_model_label(make: str, model: str) -> str:
@@ -148,7 +155,11 @@ class AttributeExtractor:
             unk = AttributeValue(value="uncertain", confidence=0.0, uncertain=True, top2=[])
             return Attributes(color=unk, body_type=unk.model_copy(), make_model=None, yolo_class=yolo_class)
         feats = self.encode_images(crops)
-        color = self._value(self.colors, self._probs(feats, self._text_bank("color", self.color_prompts)), "clip")
+        color_feats, color_src = feats, "clip"
+        if self.cfg.color_denoise_d > 0:
+            color_feats = self.encode_images([denoise_for_color(c, self.cfg) for c in crops])
+            color_src = "clip (denoised crop)"
+        color = self._value(self.colors, self._probs(color_feats, self._text_bank("color", self.color_prompts)), color_src)
 
         sub = self._probs(feats, self._text_bank("body", self.body_prompts))
         clip_body = np.zeros(len(BODY_TYPES))

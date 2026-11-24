@@ -10,7 +10,8 @@ const ABLATION = [
   ["majority", "Plain majority vote"],
   ["conf_mask", "+ confidence mask"],
   ["two_condition", "+ two-condition vote"],
-  ["full", "Full PRISM (+ format check, consistency)"],
+  ["no_cross_check", "+ format check, layout decoding"],
+  ["full", "Full PRISM (+ OCR cross-check)"],
 ];
 
 function Overview() {
@@ -26,9 +27,9 @@ function Overview() {
     [s.mean_seconds, 1, " s", "Mean seconds per clip"],
   ];
   const limits = [
-    [pct(s.color_acc), "Colour accuracy on the clips. White cars under CCTV light are often read as grey or silver, which is why similar shades can only produce AMBIGUOUS, never decide a match."],
+    [pct(s.color_acc), "Colour accuracy on the clips, with crops denoised before CLIP reads them. The white truck is often read as yellow and the white car at night as grey, which is why similar shades can only produce AMBIGUOUS, never decide a match."],
     [pct(E.by_level.hard.recovery_rate), "Characters recovered on the hard benchmark third. PRISM leaves them as ? rather than guess, but a hard plate rarely yields a match."],
-    [pct(s.false_match_rate), `Clips where another vehicle still cleared τ once the true vehicle was removed from the registry (${E.clips.filter((c) => c.false_match).length} of ${E.clips.length}). All are night-clip versions, where the decoy differs from the true car only at the digit no frame could read.`],
+    [pct(s.false_match_rate), `Clips where another vehicle still cleared τ once the true vehicle was removed from the registry (${E.clips.filter((c) => c.false_match).length} of ${E.clips.length}). In every one, the characters PRISM could read fit the decoy exactly, as with the night clip whose decoy differs only at the digit no frame could read.`],
   ];
   return (
     <>
@@ -79,7 +80,7 @@ function Ocr() {
           </Reveal>
         ))}
       </div>
-      <p className="text-muted text-[15px] mt-6">fast_plate_ocr commits fewer wrong characters, but it also recovers far fewer, so it finds the right vehicle less often. PARSeq's extra errors are what the fusion guardrails exist to catch.</p>
+      <p className="text-muted text-[15px] mt-6">fast_plate_ocr commits fewer wrong characters, but it also recovers far fewer, so it finds the right vehicle less often. PARSeq's extra errors are what the guardrails exist to catch: in full PRISM each backend's characters must be confirmed by the other, and the panels marked “alone” show each backend without that cross-check.</p>
     </>
   );
 }

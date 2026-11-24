@@ -41,7 +41,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from prism.config import REPORTS_DIR, SEED, TEST_CLIPS_DIR, PrismConfig, set_seeds, with_overrides  # noqa: E402
 from prism.fusion import ReadObservation, align, fuse_reads  # noqa: E402
-from prism.masking import confidence_mask, mask_read, observation  # noqa: E402
+from prism.masking import confidence_mask, cross_check, mask_read, observation  # noqa: E402
 from prism.matcher import match  # noqa: E402
 from prism.plate_grammar import ALNUM, UNKNOWN, pretty  # noqa: E402
 from prism.registry import load_registry  # noqa: E402
@@ -189,7 +189,10 @@ def _modal_align(seqs: list[list[str]]) -> tuple[int, list[list[Optional[str]]]]
     return L, cols
 
 
-def variant_plate(variant: str, reads: list[Read], cfg: PrismConfig) -> str:
+def variant_plate(variant: str, reads: list[Read], cfg: PrismConfig, check_reads: Optional[list[Read]] = None,
+                  check_name: str = "second OCR") -> str:
+    """Fused plate for one ablation variant. `check_reads` are the other backend's reads of the same
+    crops in the same order; the "full" variant cross-checks against them when cfg.ocr.cross_check."""
     if not reads:
         return ""
     if variant == "single":
@@ -220,10 +223,14 @@ def variant_plate(variant: str, reads: list[Read], cfg: PrismConfig) -> str:
             ch, cs = _clean(r.text, r.confs, cfg)
             masked = confidence_mask(ch, cs, cfg.ocr.char_conf)[0]
             obs.append(ReadObservation(f"R{i}", masked, ch, cs, r.sharpness))
-        else:  # full (with layout-constrained decoding when the backend exposes distributions) / no_layout
-            m = mask_read(r.text, r.confs, cfg.ocr, r.dists if variant == "full" else None)
+        else:  # full / no_cross_check (layout-constrained decoding when the backend exposes distributions) / no_layout
+            m = mask_read(r.text, r.confs, cfg.ocr, r.dists if variant != "no_layout" else None)
+            if variant == "full" and cfg.ocr.cross_check and check_reads and i < len(check_reads):
+                c = check_reads[i]
+                assert (c.frame, c.source) == (r.frame, r.source), "cross-check reads must pair crop by crop"
+                m = cross_check(m, c.text, c.confs, cfg.ocr, check_name)
             obs.append(observation(f"R{i}", m, r.sharpness))
-    return fuse_reads(obs, cfg.fusion, apply_format=(variant in ("full", "no_layout"))).text
+    return fuse_reads(obs, cfg.fusion, apply_format=variant in FULL_VARIANTS).text
 
 
 def char_scores(fused: str, truth: str) -> tuple[int, int, int]:
@@ -245,18 +252,22 @@ VARIANTS = [
     ("conf_mask", "+ confidence masking"),
     ("two_condition", "+ two-condition vote"),
     ("no_layout", "+ format check + coverage factor, format violations masked only"),
-    ("full", "+ layout-constrained decoding (full PRISM)"),
+    ("no_cross_check", "+ layout-constrained decoding"),
+    ("full", "+ OCR cross-check (full PRISM)"),
 ]
+FULL_VARIANTS = ("full", "no_cross_check", "no_layout")  # variants with the format check + coverage factor
 
 
 def evaluate_variant(vehicles: list[Vehicle], backend: str, variant: str, registry: list[RegistryRecord],
                      cfg: PrismConfig, tau: float) -> dict:
-    mcfg = cfg.match if variant in ("full", "no_layout") else with_overrides(cfg, match={"coverage_full": 1}).match
+    mcfg = cfg.match if variant in FULL_VARIANTS else with_overrides(cfg, match={"coverage_full": 1}).match
     tot = dict(committed=0, wrong=0, correct=0, chars=0, top1=0, top5=0, matched_correct=0, fm=0, n=0)
     per_level: dict[str, dict] = {}
     errors: list[dict] = []
+    other = next((b for b in (vehicles[0].reads if vehicles else {}) if b != backend), None)
     for v in vehicles:
-        plate = variant_plate(variant, v.reads.get(backend, []), cfg)
+        plate = variant_plate(variant, v.reads.get(backend, []), cfg, v.reads.get(other) if other else None,
+                              other or "second OCR")
         c, w, ok = char_scores(plate, v.rec.plate)
         if w:
             errors.append({"truth": v.rec.plate, "fused": plate, "level": v.level,
@@ -348,7 +359,7 @@ def evaluate_clips(label_files: list[Path], cfg: PrismConfig) -> list[dict]:
                 cache.write_text(case.model_dump_json(), encoding="utf-8")
             tr = next((x for x in case.tracks if x.track_id == case.primary_track_id), None)
             row = {"clip": lab["clip"], "degradation": lab.get("degradation", "none"), "expected": lab["expected_status"],
-                   "seconds": round(secs, 1), "tracks": len(case.tracks)}
+                   "seconds": round(secs, 1), "tracks": len(case.tracks), "body_type": lab["body_type"]}
             if tr is None:
                 row.update(status="NO TRACK", plate="", top1=False, top5=False)
                 rows.append(row)
@@ -386,7 +397,8 @@ def write_outputs(res: dict) -> str:
     (REPORTS_DIR / "evaluation.json").write_text(json.dumps(res, indent=2))
     md = [f"Synthetic plate-sequence benchmark: {res['n_vehicles']} registry vehicles x {FRAMES_PER_VEHICLE} degraded "
           f"frames (raw + CLAHE reads), easy/medium/hard thirds, tau = {res['tau']:.2f}. Device: {res['device']}.", ""]
-    md += ["**OCR benchmark** (full PRISM fusion + matching)", "",
+    md += ["**OCR benchmark** (full PRISM fusion + matching; each backend is cross-checked by the other, "
+           "ms/read is the backend's own time)", "",
            "| OCR backend | Committed-char error | Recovery | Top-1 | Top-5 | False-match | ms/read |",
            "|---|---|---|---|---|---|---|"]
     for name, m in res["ocr_benchmark"].items():
@@ -422,6 +434,10 @@ def write_outputs(res: dict) -> str:
                    f"top-1 {pct(cs['top1'])}, top-5 {pct(cs['top5'])}, MATCHED to the wrong vehicle "
                    f"{cs.get('wrong_matched', 0)}, false-match with true vehicle removed {pct(cs['false_match_rate'])}, "
                    f"colour {pct(cs['color_acc'])}, body {pct(cs['body_acc'])}, mean {cs['mean_seconds']:.1f} s/clip."]
+        if cs.get("body_by_type"):
+            md += ["", "By body type (clips incl. degraded versions): " + "; ".join(
+                f"{b} {d['n']} clips, body type {pct(d['acc'])}, top-1 {pct(d['top1'])}"
+                for b, d in cs["body_by_type"].items()) + "."]
     text = "\n".join(md)
     (REPORTS_DIR / "evaluation.md").write_text(text + "\n", encoding="utf-8")
     readme = ROOT / "README.md"
@@ -480,6 +496,12 @@ def main() -> None:
     # the 5% budget; ties broken by lower committed-character error.
     safe = [k for k in bench if bench[k]["false_match_rate"] <= 0.05] or list(bench)
     winner = max(safe, key=lambda k: (bench[k]["top1"], -bench[k]["committed_char_error"]))
+    if cfg.ocr.cross_check and len(ocrs) > 1:
+        # the same backends without the cross-check, for comparison (not candidates for the winner)
+        for name in list(ocrs):
+            m = evaluate_variant(vehicles, name, "no_cross_check", registry, cfg, tau)
+            m["ms_per_read"] = bench[name]["ms_per_read"]
+            bench[f"{name} alone (no cross-check)"] = m
     ablation = {key: evaluate_variant(vehicles, winner, key, registry, cfg, tau) for key, _ in VARIANTS}
     sweep = tau_sweep(vehicles, winner, registry, cfg)
     ok = [r for r in sweep if r["false_match_rate"] <= 0.05]
@@ -511,6 +533,11 @@ def clip_summary(rows: list[dict]) -> dict:
         "status_as_designed": sum(1 for r in rows if r.get("status") == r["expected"]) / n,
         "color_acc": sum(bool(r.get("color_ok")) for r in rows) / n,
         "body_acc": sum(bool(r.get("body_ok")) for r in rows) / n,
+        "body_by_type": {b: {"n": len(g), "acc": sum(bool(r.get("body_ok")) for r in g) / len(g),
+                             "top1": sum(bool(r.get("top1")) for r in g if r["expected"] != "NO CONFIDENT MATCH")
+                             / max(1, sum(1 for r in g if r["expected"] != "NO CONFIDENT MATCH"))}
+                         for b in sorted({r.get("body_type", "?") for r in rows})
+                         for g in [[r for r in rows if r.get("body_type", "?") == b]]},
         "mean_seconds": float(np.mean([r["seconds"] for r in rows])) if rows else 0.0,
     }
 

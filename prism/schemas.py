@@ -31,13 +31,18 @@ class CharRead(BaseModel):
     char: str                     # masked character ('?' if unknown)
     raw_char: str                 # character the OCR produced (before masking)
     conf: float                   # OCR confidence for raw_char
-    # why it was masked: low_confidence | non_alphanumeric | format; "layout" = layout-constrained read
+    # why it was masked: low_confidence | non_alphanumeric | format | ocr_disagreement;
+    # "layout" = layout-constrained read
     reason: Optional[str] = None
     # Layout-constrained decoding (prism.layout_decode): set only when it wrote `char`.
     layout_from: Optional[str] = None   # the OCR's top character, ruled out by the plate layouts
     model_prob: Optional[float] = None  # the OCR model's own probability of `char` (its fusion weight)
     layout_prob: Optional[float] = None # probability of `char` given the layouts
     alts: dict[str, float] = Field(default_factory=dict)  # OCR model's top candidate characters here
+    # OCR cross-check: the second model's character at this position and its confidence (None if it
+    # read nothing here or the cross-check did not run). reason "ocr_disagreement" = masked by it.
+    check_char: Optional[str] = None
+    check_conf: Optional[float] = None
 
 
 class FrameRead(BaseModel):
@@ -52,6 +57,8 @@ class FrameRead(BaseModel):
     raw_text: str
     masked_text: str
     chars: list[CharRead]
+    check_backend: Optional[str] = None   # second OCR model used by the cross-check
+    check_text: Optional[str] = None      # its raw read of the same crop
     format_conflicts: list[str] = Field(default_factory=list)
     two_line: bool = False
     plate_bbox: list[int] = Field(default_factory=list)  # frame coordinates x1,y1,x2,y2

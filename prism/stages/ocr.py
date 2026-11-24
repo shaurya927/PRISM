@@ -189,6 +189,21 @@ def make_ocr(cfg: OCRConfig, device: str) -> tuple[BasePlateOCR, list[str]]:
     raise OCRUnavailable(f"No OCR backend could be loaded: {last}")
 
 
+def make_check_ocr(cfg: OCRConfig, device: str, primary: BasePlateOCR) -> tuple[Optional[BasePlateOCR], list[str]]:
+    """The second, independent backend for the OCR cross-check (prism.masking.cross_check).
+
+    Returns (None, [warning]) if it is disabled, unavailable, or the same model as the primary."""
+    if not cfg.cross_check:
+        return None, []
+    other = "fast_plate_ocr" if primary.name.startswith("parseq") else "parseq"
+    try:
+        ocr = ParseqOCR(cfg.parseq_variant, device) if other == "parseq" else FastPlateOCR(cfg.fast_plate_ocr_model, device)
+    except Exception as exc:
+        log.warning("cross-check OCR %s unavailable: %s", other, exc)
+        return None, [f"OCR cross-check off: second backend '{other}' unavailable ({exc}); single-model reads only"]
+    return ocr, []
+
+
 def _check_source(crop: PlateCrop) -> None:
     if not isinstance(crop, PlateCrop):
         raise SuperResolutionLeakError(

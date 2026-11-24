@@ -116,14 +116,27 @@ export function ConfPill({ c, tau = 0.7 }) {
     );
   }
   const ok = c.char !== "?";
+  const disagree = c.reason === "ocr_disagreement";
   const cls = ok
     ? "bg-green-100 text-green-800"
     : c.reason === "format"
     ? "bg-red-100 text-red-700"
+    : disagree
+    ? "bg-orange-50 text-orange-800 border border-dashed border-orange-400"
     : "bg-amber-100 text-amber-800";
+  const check = c.check_char ? ` · second OCR read '${c.check_char}' ${Number(c.check_conf).toFixed(2)}` : "";
+  const why = ok
+    ? "accepted"
+    : c.reason === "format"
+    ? "masked: breaks Indian plate format"
+    : c.reason === "non_alphanumeric"
+    ? "masked: not A-Z/0-9"
+    : disagree
+    ? "masked: the second OCR model did not confirm it"
+    : `masked: confidence below ${tau}`;
   return (
     <span className={`inline-flex flex-col items-center rounded px-1 py-0.5 mx-[1px] text-[10px] font-mono ${cls}`}
-      title={(ok ? "accepted" : c.reason === "format" ? "masked: breaks Indian plate format" : c.reason === "non_alphanumeric" ? "masked: not A-Z/0-9" : `masked: confidence below ${tau}`) + alts}>
+      title={why + check + alts}>
       <span className="text-xs font-semibold">{c.raw_char || "·"}</span>
       <span>{Number(c.conf).toFixed(2)}</span>
     </span>

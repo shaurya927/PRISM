@@ -28,7 +28,8 @@ DATA = ROOT / "frontend" / "src" / "site" / "data"
 # registry records by id, for the extra vehicle details the site shows (body style, region)
 REGISTRY = {r["registry_id"]: r for r in json.loads((ROOT / "data" / "registry.json").read_text(encoding="utf-8"))}
 CASES = ["day_clear_white", "night_partial_white", "camB_white", "day_black_suv", "day_blue_twoline",
-         "unregistered_white", "crosscam_night_partial_white__camB_white"]
+         "unregistered_white", "crosscam_night_partial_white__camB_white",
+         "day_scooter_twoline", "day_auto_rickshaw", "day_white_truck"]
 
 
 def copy(url: str | None, dst: Path) -> str | None:

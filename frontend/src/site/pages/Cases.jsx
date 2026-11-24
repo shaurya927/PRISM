@@ -13,7 +13,7 @@ export default function Cases() {
   const shown = CASES.filter((c) => f === "All" || c.status === f);
   return (
     <>
-      <PageHero index={2} label="Cases" lines={["Seven clips", "Seven reports"]}
+      <PageHero index={2} label="Cases" lines={["Nine clips", "Ten reports"]}
         lead="Each case is a real PRISM run on a demo clip, produced by scripts/batch_report.py. Open one to see the plate crops, the fusion strip, the shortlist, the written summary and the PDF." />
       <section className="gutter pb-16 md:pb-20">
         <div className="flex flex-wrap items-center justify-between gap-4 border-t rule pt-6">

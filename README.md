@@ -31,7 +31,7 @@ git clone https://github.com/kHarshit/vehicle-reidentification.git vendor/vehicl
 # 3. Models, PDF engine, registry, demo clips, UI
 .venv\Scripts\python.exe scripts\download_weights.py            # add --with-sr for the optional 1.97 GB SR checkpoint
 .venv\Scripts\python.exe -m playwright install chromium         # PDF export (HTML works without it)
-.venv\Scripts\python.exe data\generate_registry.py              # 500 synthetic records -> data/registry.json
+.venv\Scripts\python.exe data\generate_registry.py              # 50,000 synthetic records -> data/registry.json
 .venv\Scripts\python.exe scripts\make_demo_clips.py             # labelled demo clips -> data/test_clips/
 cd frontend; npm install; npm run build; cd ..
 
@@ -102,9 +102,10 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
      ─► Stage 2 fast-alpr YOLOv9-t plate detector INSIDE each vehicle crop, Laplacian sharpness >= 45,
                width >= 30 px, 12 sharpest frames, two-line split, raw + CLAHE copies
      ─► Stage 3 OCR (PARSeq default, fast-plate-ocr benchmarked) -> confidence mask (< 0.70 -> ?)
-               -> Indian format mask (can only add ?) -> multi-frame fusion (two-condition vote)
+               -> Indian format mask (can only add ?) -> OCR cross-check: fast-plate-ocr reads the same
+               crop and must confirm each character (can only add ?) -> multi-frame fusion (two-condition vote)
      ·· visual aid: lpsr-lacd super-resolution saved as *_sr.png AFTER Stage 3, never read back
-     ─► Stage 4 OpenCLIP ViT-B-32 colour / body type / make-model on the 3 sharpest crops
+     ─► Stage 4 OpenCLIP ViT-B-32 colour (on a denoised copy) / body type / make-model on the 3 sharpest crops
      ─► Stage 5 hint merge -> coverage-aware matcher -> MATCHED / AMBIGUOUS / NO CONFIDENT MATCH
                -> next-best-evidence advisor -> evidence-checked summary -> chain of custody
 ```
@@ -115,11 +116,11 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 | `prism/schemas.py` | Pydantic v2 models for results, API and report |
 | `prism/stages/track.py` | Stage 0 + 1: ingest stats, YOLO11 + ByteTrack |
 | `prism/stages/plate_detect.py` | Stage 2: wraps `vendor/fast-alpr` detector (pip fallback), sharpness, two-line split, CLAHE |
-| `prism/stages/ocr.py` | Stage 3: `BasePlateOCR`, `ParseqOCR` (`vendor/parseq`, torch.hub fallback), `FastPlateOCR`; source gate |
+| `prism/stages/ocr.py` | Stage 3: `BasePlateOCR`, `ParseqOCR` (`vendor/parseq`, torch.hub fallback), `FastPlateOCR`; cross-check backend; source gate |
 | `prism/stages/super_res.py` | Visual aid only: `cgnetV2_deformable` from `vendor/lpsr-lacd`; disables itself without weights |
-| `prism/stages/attributes.py` | Stage 4: OpenCLIP prompt ensembles, YOLO + CLIP body type, constrained make/model |
+| `prism/stages/attributes.py` | Stage 4: OpenCLIP prompt ensembles, colour on a bilateral-filtered crop, YOLO + CLIP body type, constrained make/model |
 | `prism/plate_grammar.py` | Indian layouts (standard, old Delhi, Bharat series); masks, never adds or changes |
-| `prism/masking.py` | Confidence + format masking with reasons |
+| `prism/masking.py` | Confidence + format masking with reasons; OCR cross-check (`cross_check`) |
 | `prism/fusion.py` | Alignment, quality-weighted evidence, two-condition vote, evidence strip data, hint merge |
 | `prism/matcher.py` | Shift-tolerant plate similarity, confusable credit, coverage, composite score, guardrails, statuses |
 | `prism/advisor.py` | Names the unknown position that best separates candidates and the closest sub-threshold frame |
@@ -131,7 +132,7 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 | `prism/whatif.py` | Counterfactual what-if: hypothetical re-ranking, Hypothesis Stability Score, sensitivity matrix, differential justification |
 | `backend/app/main.py` | FastAPI: jobs, rescore, search, crosscam, report, artifacts, health, static UI |
 | `frontend/` | React + Vite + Tailwind investigator app (`/app`) and project website (`/`, `src/site/`) |
-| `data/generate_registry.py` | 500 synthetic records with decoys |
+| `data/generate_registry.py` | 50,000 synthetic records with decoys |
 | `scripts/` | Demo clips, degradation, evaluation, batch reports, weight download |
 
 ### The matching algorithm (team-designed)
@@ -142,8 +143,15 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
   requires the winner to be read confidently in a reasonable share of one camera's reads that saw the position;
   it was added after a night test where a half-hidden `2` was read as `8` at 0.85 in 4 of 24 reads. Reads that
   are not plate readings at all (PARSeq returning scene words such as `WATER` off a heavily blurred plate:
-  wrong length, or more than a third of the confident characters breaking every Indian layout) cast no votes.
-  Both checks only remove evidence, so they can only add `?`.
+  a length no Indian layout has, i.e. outside 7–11 characters, or more than a third of the confident characters
+  breaking every Indian layout) cast no votes. Both checks only remove evidence, so they can only add `?`.
+* **OCR cross-check.** Before fusion, fast-plate-ocr (a plate-trained model) reads the same raw/CLAHE crop
+  through the same source gate. Its read is aligned to PARSeq's, and a committed character stays only if
+  fast-plate-ocr read the same character there, or PARSeq's own confidence is at least 0.95; otherwise it
+  becomes `?` (reason `ocr_disagreement`, both reads shown in the evidence table and report). On the synthetic
+  benchmark it cut committed-character error from 4.4% to 1.2% (hard plates 41% to 23%) for 3.8 points of
+  recovery (ablation table below). `OCRConfig.cross_check_mode = "veto"` masks only confident contradictions
+  instead (almost no effect in tuning); `cross_check = False` turns it off.
 * **Plate similarity.** Best of shifts −1/0/+1 (−0.05 per shift), 0.35 credit for `0/O 1/I 8/B 5/S 2/Z 6/G 4/A`,
   times coverage `min(1, |K|/6)`. Specificity = registry plates that fit the known characters exactly.
 * **Score.** `0.65·plate + 0.20·colour + 0.15·body + 0.05·make/model`; low light → `0.75 / 0.10`.
@@ -164,8 +172,9 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 |---|---|---|
 | Never invent characters | Only masked (`≥ 0.70`, alphanumeric, format-valid) characters carry weight; two-condition vote | `test_every_fused_char_was_read_confidently_in_a_real_frame` (Hypothesis) |
 | Format check only removes | `format_mask` returns the input or `?` per position | `test_format_check_never_invents_or_changes` (Hypothesis) |
+| OCR cross-check only removes | `cross_check` returns the input or `?` per position | `test_cross_check_never_invents_or_changes` (Hypothesis) |
 | Disagreement stays unknown | `8` vs `B` with similar weight fails the share test | `test_disagreement_8_vs_B_stays_unknown` |
-| Super-resolution isolation | SR runs after Stage 3; outputs are `SRImage`, not `PlateCrop`; OCR gate refuses other sources and `*_sr.png` paths | `test_pipeline_never_feeds_sr_to_ocr`, `test_gate_rejects_sr_image_and_sr_paths` |
+| Super-resolution isolation | SR runs after Stage 3; outputs are `SRImage`, not `PlateCrop`; the OCR gate (used by both OCR backends) refuses other sources and `*_sr.png` paths | `test_pipeline_never_feeds_sr_to_ocr`, `test_gate_rejects_sr_image_and_sr_paths` |
 | Matcher guardrails | see above | `tests/test_matcher.py` incl. a Hypothesis bound test and a "true vehicle removed" test |
 | Appearance alone never links cameras | Linking needs similarity ≥ threshold, no plate conflict, ≥ 3 agreeing characters, matching body | `test_link_requires_appearance_and_plate_and_body` |
 | Graceful degradation | Missing SR weights, vendor Re-ID, Ollama, Chromium or one OCR backend → warning + fallback | `test_super_res_disables_cleanly_without_weights`, `test_ollama_unavailable_falls_back`, `test_pdf_export_or_clean_fallback` |
@@ -178,7 +187,8 @@ clip ─► Stage 0 ingest (SHA-256, metadata, low-light flag)
 2. **Live progress** per stage.
 3. **Vehicles found**: track cards; amber `?` unknown, blue investigator-supplied, red conflicts; colour/body chips.
 4. **Evidence**: plate evidence strip (votes per position and read), frame-by-frame table with raw + CLAHE crops,
-   sharpness, raw/masked OCR and confidence pills; super-resolution toggle labelled
+   sharpness, raw/masked OCR, the cross-check read, and confidence pills (dashed orange = masked because the
+   second OCR model did not confirm it); super-resolution toggle labelled
    *"Visual aid only. Not used for identification."* (or "not installed").
 5. **Shortlist**: top-5 cards with stacked score bars, match/mismatch badges, specificity, status banner, advisor.
    **What-if**: edit any plate slot (fill a `?`, flip a look-alike such as 8/B, mark a character unreadable), assume the
@@ -249,11 +259,15 @@ runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*
 
 ## Data
 
-* `data/registry.json`: 500 synthetic records (CG, MH, KA, DL incl. old Delhi `DL3CAB1234`, BH series),
+* `data/registry.json`: 50,000 synthetic records from 38 states and UTs (incl. old Delhi `DL3CAB1234` and BH series),
   make/model fixes body type, realistic colour frequencies. Demo vehicles have 3–5 near-duplicate decoys.
-* `data/test_clips/`: synthetic CCTV clips built from the real vehicle photos in
-  `vendor/vehicle-reidentification/reference_vehicles`, with the original plates covered by rendered Indian
-  plates, motion blur, sensor noise, JPEG and night darkening; `labels.json` holds ground truth.
+* `data/test_clips/`: 9 synthetic CCTV clips built from real vehicle photos, with the original plates covered
+  by rendered Indian plates, motion blur, sensor noise, JPEG and night darkening; `labels.json` holds ground truth.
+  The 6 car/SUV clips use `vendor/vehicle-reidentification/reference_vehicles`. The two-wheeler
+  (`day_scooter_twoline`, two-line rear plate), auto-rickshaw (`day_auto_rickshaw`, yellow commercial plate; COCO
+  has no auto-rickshaw class, so CLIP must override YOLO) and truck (`day_white_truck`) clips use the Wikimedia
+  Commons photos in `data/vehicle_photos/` (licences and authors in `data/vehicle_photos/CREDITS.md`; the
+  auto-rickshaw clip is CC BY-SA 4.0). `scripts/make_degraded.py` makes 6 harder versions of each clip.
   Replace or extend them with team-recorded footage (add the plates to the registry and to `labels.json`).
 
 ## Evaluation
@@ -261,12 +275,14 @@ runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*
 <!-- EVAL:START -->
 Synthetic plate-sequence benchmark: 120 registry vehicles x 8 degraded frames (raw + CLAHE reads), easy/medium/hard thirds, tau = 0.55. Device: cuda.
 
-**OCR benchmark** (full PRISM fusion + matching)
+**OCR benchmark** (full PRISM fusion + matching; each backend is cross-checked by the other, ms/read is the backend's own time)
 
 | OCR backend | Committed-char error | Recovery | Top-1 | Top-5 | False-match | ms/read |
 |---|---|---|---|---|---|---|
-| parseq | 6.4% | 69.1% | 72.5% | 79.2% | 0.8% | 56.1 |
-| fast_plate_ocr | 3.0% | 44.8% | 51.7% | 62.5% | 0.8% | 28.9 |
+| parseq | 1.2% | 64.0% | 67.5% | 68.3% | 1.7% | 25.6 |
+| fast_plate_ocr | 0.6% | 40.9% | 39.2% | 41.7% | 1.7% | 17.1 |
+| parseq alone (no cross-check) | 4.4% | 67.8% | 68.3% | 69.2% | 0.8% | 25.6 |
+| fast_plate_ocr alone (no cross-check) | 1.9% | 42.7% | 39.2% | 42.5% | 0.8% | 17.1 |
 
 Winner: **parseq** (highest top-1 with false-match <= 5%, then lowest committed error).
 
@@ -274,70 +290,95 @@ Winner: **parseq** (highest top-1 with false-match <= 5%, then lowest committed 
 
 | Variant | Committed error | Recovery | Top-5 | False-match |
 |---|---|---|---|---|
-| Best single frame, no fusion | 15.6% | 73.3% | 75.8% | 0.0% |
-| Majority vote, no confidence masking | 13.9% | 68.3% | 72.5% | 0.0% |
-| + confidence masking | 14.9% | 67.4% | 73.3% | 0.0% |
-| + two-condition vote | 10.3% | 69.1% | 76.7% | 0.8% |
-| + format check + coverage factor (full PRISM) | 6.4% | 69.1% | 79.2% | 0.8% |
+| Best single frame, no fusion | 17.2% | 70.4% | 64.2% | 0.0% |
+| Majority vote, no confidence masking | 16.3% | 67.2% | 60.8% | 0.0% |
+| + confidence masking | 17.1% | 66.5% | 61.7% | 0.0% |
+| + two-condition vote | 11.0% | 66.6% | 65.8% | 4.2% |
+| + format check + coverage factor, format violations masked only | 4.8% | 67.9% | 72.5% | 0.0% |
+| + layout-constrained decoding | 4.4% | 67.8% | 69.2% | 0.8% |
+| + OCR cross-check (full PRISM) | 1.2% | 64.0% | 68.3% | 1.7% |
 
 **Full PRISM by difficulty**
 
 | Level | Committed error | Recovery | Top-1 | Top-5 | False-match |
 |---|---|---|---|---|---|
-| easy | 0.0% | 99.2% | 97.5% | 97.5% | 0.0% |
-| medium | 2.2% | 93.5% | 95.0% | 97.5% | 2.5% |
-| hard | 44.3% | 15.1% | 25.0% | 42.5% | 0.0% |
+| easy | 0.0% | 99.2% | 100.0% | 100.0% | 0.0% |
+| medium | 0.9% | 87.4% | 97.5% | 97.5% | 0.0% |
+| hard | 23.1% | 5.1% | 5.0% | 7.5% | 5.0% |
 
-**Threshold sweep**: lowest tau with false-match rate <= 5% is **0.30** (false-match 3.3%, correct MATCHED 62.5%). Plot: `reports/tau_sweep.png`.
+**Threshold sweep**: lowest tau with false-match rate <= 5% is **0.30** (false-match 1.7%, correct MATCHED 65.0%). Plot: `reports/tau_sweep.png`.
 
 **End-to-end clips** (full pipeline: YOLO11 + ByteTrack + fast-alpr + OCR + OpenCLIP)
 
 | Clip | Degradation | Fused plate | Status (expected) | Top-1 | Committed wrong | Colour/body | False-match | s |
 |---|---|---|---|---|---|---|---|---|
-| day_clear_white.mp4 | none | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 27.5 |
-| night_partial_white.mp4 | none | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 11.0 |
-| camB_white.mp4 | none | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.8 |
-| day_black_suv.mp4 | none | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 10.1 |
-| day_blue_twoline.mp4 | none | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.9 |
-| unregistered_white.mp4 | none | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.1 |
-| camB_white__gauss.mp4 | gauss | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.1 |
-| camB_white__motion.mp4 | motion | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.3 |
-| camB_white__down2x.mp4 | down2x | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 10.0 |
-| camB_white__down4x.mp4 | down4x | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 10.2 |
-| camB_white__jpeg20.mp4 | jpeg20 | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.8 |
-| camB_white__noise_dark.mp4 | noise_dark | `?G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 11.2 |
-| day_black_suv__gauss.mp4 | gauss | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 9.2 |
-| day_black_suv__motion.mp4 | motion | `` | NO CONFIDENT MATCH (MATCHED) | yes | 0/0 | ok/ok | no | 9.2 |
-| day_black_suv__down2x.mp4 | down2x | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.4 |
-| day_black_suv__down4x.mp4 | down4x | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.1 |
-| day_black_suv__jpeg20.mp4 | jpeg20 | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 10.0 |
-| day_black_suv__noise_dark.mp4 | noise_dark | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 9.2 |
-| day_blue_twoline__gauss.mp4 | gauss | `??????` | NO CONFIDENT MATCH (MATCHED) | yes | 0/0 | ok/ok | no | 8.8 |
-| day_blue_twoline__motion.mp4 | motion | `???P00?3` | NO CONFIDENT MATCH (MATCHED) | no | 2/4 | ok/ok | no | 9.5 |
-| day_blue_twoline__down2x.mp4 | down2x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.3 |
-| day_blue_twoline__down4x.mp4 | down4x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.9 |
-| day_blue_twoline__jpeg20.mp4 | jpeg20 | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 10.6 |
-| day_blue_twoline__noise_dark.mp4 | noise_dark | `KA05MN` | NO CONFIDENT MATCH (MATCHED) | yes | 0/6 | ok/ok | no | 9.4 |
-| day_clear_white__gauss.mp4 | gauss | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 11.0 |
-| day_clear_white__motion.mp4 | motion | `??????4?2?` | NO CONFIDENT MATCH (MATCHED) | no | 0/2 | x/ok | no | 10.5 |
-| day_clear_white__down2x.mp4 | down2x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 10.1 |
-| day_clear_white__down4x.mp4 | down4x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 9.6 |
-| day_clear_white__jpeg20.mp4 | jpeg20 | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 10.7 |
-| day_clear_white__noise_dark.mp4 | noise_dark | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 11.0 |
-| night_partial_white__gauss.mp4 | gauss | `CG04MX4???` | AMBIGUOUS (AMBIGUOUS) | no | 0/7 | x/ok | no | 11.3 |
-| night_partial_white__motion.mp4 | motion | `` | NO CONFIDENT MATCH (AMBIGUOUS) | no | 0/0 | x/ok | no | 10.6 |
-| night_partial_white__down2x.mp4 | down2x | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.5 |
-| night_partial_white__down4x.mp4 | down4x | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.5 |
-| night_partial_white__jpeg20.mp4 | jpeg20 | `CG04MX4881` | NO CONFIDENT MATCH (AMBIGUOUS) | yes | 1/10 | x/ok | no | 10.6 |
-| night_partial_white__noise_dark.mp4 | noise_dark | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.8 |
-| unregistered_white__gauss.mp4 | gauss | `M??4XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/8 | x/ok | no | 9.8 |
-| unregistered_white__motion.mp4 | motion | `?H?4XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/8 | x/ok | no | 9.2 |
-| unregistered_white__down2x.mp4 | down2x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.2 |
-| unregistered_white__down4x.mp4 | down4x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.9 |
-| unregistered_white__jpeg20.mp4 | jpeg20 | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.4 |
-| unregistered_white__noise_dark.mp4 | noise_dark | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 11.2 |
+| day_clear_white.mp4 | none | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 14.4 |
+| night_partial_white.mp4 | none | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 10.5 |
+| camB_white.mp4 | none | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | ok/ok | no | 9.8 |
+| day_black_suv.mp4 | none | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 7.8 |
+| day_blue_twoline.mp4 | none | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 8.3 |
+| unregistered_white.mp4 | none | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | ok/ok | no | 9.8 |
+| day_scooter_twoline.mp4 | none | `CG07BK3519` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 14.0 |
+| day_auto_rickshaw.mp4 | none | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 13.1 |
+| day_white_truck.mp4 | none | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 7.4 |
+| camB_white__gauss.mp4 | gauss | `??04MX4821` | MATCHED (MATCHED) | yes | 0/8 | x/ok | no | 9.3 |
+| camB_white__motion.mp4 | motion | `??0??X4?2?` | AMBIGUOUS (MATCHED) | no | 0/4 | x/ok | no | 9.3 |
+| camB_white__down2x.mp4 | down2x | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | ok/ok | no | 8.8 |
+| camB_white__down4x.mp4 | down4x | `??0?MX4?21` | AMBIGUOUS (MATCHED) | yes | 0/6 | x/ok | YES | 8.6 |
+| camB_white__jpeg20.mp4 | jpeg20 | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | ok/ok | no | 10.7 |
+| camB_white__noise_dark.mp4 | noise_dark | `G04MX4821` | MATCHED (MATCHED) | yes | 0/9 | x/ok | no | 9.7 |
+| day_auto_rickshaw__gauss.mp4 | gauss | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 14.4 |
+| day_auto_rickshaw__motion.mp4 | motion | `` | NO CONFIDENT MATCH (MATCHED) | yes | 0/0 | ok/ok | no | 15.0 |
+| day_auto_rickshaw__down2x.mp4 | down2x | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 12.3 |
+| day_auto_rickshaw__down4x.mp4 | down4x | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 12.3 |
+| day_auto_rickshaw__jpeg20.mp4 | jpeg20 | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 11.3 |
+| day_auto_rickshaw__noise_dark.mp4 | noise_dark | `KA01AH7350` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 10.5 |
+| day_black_suv__gauss.mp4 | gauss | `M?12DE5678` | MATCHED (MATCHED) | yes | 0/9 | ok/x | no | 7.7 |
+| day_black_suv__motion.mp4 | motion | `???2?E?67?` | AMBIGUOUS (MATCHED) | yes | 0/4 | ok/ok | YES | 8.5 |
+| day_black_suv__down2x.mp4 | down2x | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 7.1 |
+| day_black_suv__down4x.mp4 | down4x | `?H?2DE5?7?` | AMBIGUOUS (MATCHED) | yes | 0/6 | ok/ok | no | 6.7 |
+| day_black_suv__jpeg20.mp4 | jpeg20 | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 7.8 |
+| day_black_suv__noise_dark.mp4 | noise_dark | `MH12DE5678` | MATCHED (MATCHED) | yes | 0/10 | ok/x | no | 7.6 |
+| day_blue_twoline__gauss.mp4 | gauss | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 7.7 |
+| day_blue_twoline__motion.mp4 | motion | `` | NO CONFIDENT MATCH (MATCHED) | no | 0/0 | ok/ok | no | 6.9 |
+| day_blue_twoline__down2x.mp4 | down2x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 7.3 |
+| day_blue_twoline__down4x.mp4 | down4x | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 7.0 |
+| day_blue_twoline__jpeg20.mp4 | jpeg20 | `KA05MN2023` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 8.5 |
+| day_blue_twoline__noise_dark.mp4 | noise_dark | `` | NO CONFIDENT MATCH (MATCHED) | no | 0/0 | ok/ok | no | 7.0 |
+| day_clear_white__gauss.mp4 | gauss | `C??4MX4???` | AMBIGUOUS (MATCHED) | yes | 0/5 | x/ok | no | 8.8 |
+| day_clear_white__motion.mp4 | motion | `C?04?X4?21` | AMBIGUOUS (MATCHED) | yes | 0/7 | x/ok | no | 9.2 |
+| day_clear_white__down2x.mp4 | down2x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.0 |
+| day_clear_white__down4x.mp4 | down4x | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 8.5 |
+| day_clear_white__jpeg20.mp4 | jpeg20 | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 9.7 |
+| day_clear_white__noise_dark.mp4 | noise_dark | `CG04MX4821` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 9.6 |
+| day_scooter_twoline__gauss.mp4 | gauss | `CG07BK3519` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 11.7 |
+| day_scooter_twoline__motion.mp4 | motion | `CG07BK351?` | AMBIGUOUS (MATCHED) | yes | 0/9 | x/ok | YES | 10.2 |
+| day_scooter_twoline__down2x.mp4 | down2x | `CG07BK3519` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 15.1 |
+| day_scooter_twoline__down4x.mp4 | down4x | `CG07BK3519` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 10.8 |
+| day_scooter_twoline__jpeg20.mp4 | jpeg20 | `` | NO CONFIDENT MATCH (MATCHED) | no | 0/0 | x/ok | no | 15.0 |
+| day_scooter_twoline__noise_dark.mp4 | noise_dark | `` | NO CONFIDENT MATCH (MATCHED) | no | 0/0 | x/ok | no | 9.2 |
+| day_white_truck__gauss.mp4 | gauss | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 7.7 |
+| day_white_truck__motion.mp4 | motion | `C?04LQ2290` | MATCHED (MATCHED) | yes | 0/9 | ok/ok | no | 7.9 |
+| day_white_truck__down2x.mp4 | down2x | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 6.8 |
+| day_white_truck__down4x.mp4 | down4x | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | ok/ok | no | 7.0 |
+| day_white_truck__jpeg20.mp4 | jpeg20 | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 7.7 |
+| day_white_truck__noise_dark.mp4 | noise_dark | `CG04LQ2290` | MATCHED (MATCHED) | yes | 0/10 | x/ok | no | 7.6 |
+| night_partial_white__gauss.mp4 | gauss | `C?04MX4??1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/7 | x/ok | no | 9.6 |
+| night_partial_white__motion.mp4 | motion | `??04?X4???` | AMBIGUOUS (AMBIGUOUS) | no | 0/4 | x/ok | no | 9.1 |
+| night_partial_white__down2x.mp4 | down2x | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 8.5 |
+| night_partial_white__down4x.mp4 | down4x | `CG04MX4??1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/8 | x/ok | no | 8.5 |
+| night_partial_white__jpeg20.mp4 | jpeg20 | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.2 |
+| night_partial_white__noise_dark.mp4 | noise_dark | `CG04MX48?1` | AMBIGUOUS (AMBIGUOUS) | yes | 0/9 | x/ok | YES | 9.1 |
+| unregistered_white__gauss.mp4 | gauss | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.6 |
+| unregistered_white__motion.mp4 | motion | `?H?4XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/8 | x/ok | no | 9.4 |
+| unregistered_white__down2x.mp4 | down2x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | ok/ok | no | 9.0 |
+| unregistered_white__down4x.mp4 | down4x | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.0 |
+| unregistered_white__jpeg20.mp4 | jpeg20 | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | ok/ok | no | 10.3 |
+| unregistered_white__noise_dark.mp4 | noise_dark | `MH14XY0042` | NO CONFIDENT MATCH (NO CONFIDENT MATCH) | no | 0/10 | x/ok | no | 9.8 |
 
-Clips (42): status as designed 83.3%, committed-char error 0.8%, recovery 83.6%, top-1 88.6%, top-5 97.1%, MATCHED to the wrong vehicle 0, false-match with true vehicle removed 9.5%, colour 33.3%, body 90.5%, mean 10.6 s/clip.
+Clips (63): status as designed 81.0%, committed-char error 0.0%, recovery 83.5%, top-1 89.3%, top-5 92.9%, MATCHED to the wrong vehicle 0, false-match with true vehicle removed 11.1%, colour 52.4%, body 93.7%, mean 9.5 s/clip.
+
+By body type (clips incl. degraded versions): SUV 7 clips, body type 42.9%, top-1 100.0%; auto-rickshaw 7 clips, body type 100.0%, top-1 100.0%; car 35 clips, body type 100.0%, top-1 85.7%; truck 7 clips, body type 100.0%, top-1 100.0%; two-wheeler 7 clips, body type 100.0%, top-1 71.4%.
 <!-- EVAL:END -->
 
 ## Configuration and degradation
@@ -346,7 +387,7 @@ Everything is in `prism/config.py`. Environment overrides: `PRISM_DEVICE=cpu|cud
 `PRISM_OCR_BACKEND=parseq|fast_plate_ocr`, `PRISM_NARRATIVE=template|ollama`,
 `PRISM_REID_ENCODER=clip|osnet|resnet`, `PRISM_RUNS_DIR`, `PRISM_WEIGHTS_DIR`, `PRISM_REGISTRY_PATH`.
 
-**Using a real registry.** The bundled `data/registry.json` is 500 synthetic records, so a real plate such as
+**Using a real registry.** The bundled `data/registry.json` is 50,000 synthetic records, so a real plate such as
 `KA02MN1826` gets `NO CONFIDENT MATCH` with "this vehicle is not in the loaded registry". PRISM has no access to
 VAHAN or any government database; that needs authorisation from MoRTH / NIC. To match real vehicles, export
 the records you are authorised to use into the same JSON fields (`registry_id`, `plate`, `color`,
@@ -383,19 +424,29 @@ cases can be deleted from the UI (`DELETE /api/jobs/{id}`); every run is hashed 
 ## Known limitations (from the evaluation above)
 
 * **Hard plates.** On the hardest synthetic third (70–100 px wide, heavy blur, 1–2 smeared characters) PARSeq,
-  a general scene-text model, often returns confident wrong characters, and committed-character error is
-  about 44% there (0% easy, 2% medium). Those reads mostly end in `NO CONFIDENT MATCH` rather than a false
-  match (false-match 0% on the hard third), but the committed characters themselves are not trustworthy.
-  A plate-specific OCR fine-tuned on Indian plates is the main improvement still open.
-* **Consistent OCR errors.** In the JPEG-20 night clip a half-hidden `2` was read as `8` consistently enough to
-  pass every vote check. PRISM then reported `NO CONFIDENT MATCH` (the true plate contradicts the `8`), which
-  is safe but not useful.
-* **"True vehicle removed" on the night clips.** When REG-0001 is removed, its decoy REG-0002 (`CG04MX4851`)
-  fits every character the night clip shows, so PRISM reports it as `MATCHED`. No system could separate them
-  from that evidence; this accounts for all 4 such cases (9.5%) in the clip benchmark. Across the 42 clips,
-  no vehicle was `MATCHED` to the wrong registry entry while the true one was present.
-* **Colour.** OpenCLIP read the white demo car as grey or silver in most clips (colour accuracy 33%). Similar-
-  shade credit, the uncertain rule and the similar-shade guardrail keep this from deciding matches.
+  a general scene-text model, often returns confident wrong characters. The read-length rule and the OCR
+  cross-check bring committed-character error there down to 23% (0% easy, 0.9% medium; 54% before these changes,
+  measured on a slightly different vehicle sample because the registry was regenerated). PRISM now recovers only
+  about 5% of the characters on those plates, and 23% wrong is still too many to trust. A plate-specific OCR
+  fine-tuned on Indian plates is the main improvement still open.
+* **The cross-check trades recovery for safety.** On the original 42 clips (6 clips and their degraded versions,
+  compared with the previous code on the same 50,000-record registry), committed wrong characters went from 2 to
+  0: the two night clips that read a half-hidden `2` as `8` now leave it as `?` and return `AMBIGUOUS` as designed.
+  In exchange, recovery fell from 90.7% to 82.9%, and 5 blurred or downscaled clips that were `MATCHED` are now
+  `AMBIGUOUS` (the true vehicle is still #1 in 4 of them). If recovery matters more than safety for a deployment,
+  `cross_check_mode = "veto"` only masks confident contradictions; on the synthetic benchmark it behaved almost
+  like no cross-check.
+* **"True vehicle removed".** When the true record is removed from the registry, 7 of the 63 clips (11.1%) report
+  a decoy as `MATCHED`. In each, the characters PRISM could read fit that decoy exactly (for the night clips,
+  REG-0002 `CG04MX4851` differs from REG-0001 only at the smeared position), so no system could separate them from
+  that evidence. Across the 63 clips no vehicle was `MATCHED` to the wrong registry entry while the true one was present.
+* **Colour.** Reading colour from a denoised crop raised colour accuracy from 33% to 57% on the original 42 clips
+  (52% across all 63). The white Tata Ace is still read as yellow in 4 of its 7 versions, the grey scooter as
+  silver (half credit) in most, and the white car at night as grey or silver. Similar-shade credit, the uncertain rule and the
+  similar-shade guardrail keep colour from deciding matches.
+* **Two-line plates under heavy degradation.** The scooter's two-line plate is lost completely in the JPEG-20 and
+  noise + dark versions (two-wheeler top-1 71%, against 100% for the auto-rickshaw and truck clips). The black
+  Innova (registry body type SUV/MPV) is read as a car in 4 of its 7 versions.
 * **Synthetic data.** The demo clips are composites built from real vehicle photos; real CCTV is harder.
   Add team-recorded clips to `data/test_clips/labels.json` and rerun `scripts/evaluate.py --clips`.
 

@@ -7,7 +7,7 @@
 * Each demo vehicle gets 3-5 near-duplicate decoys that differ in one plate
   position (sometimes a confusable one), the colour, or the body type.
 
-Usage:  python data/generate_registry.py [--n 500] [--seed 42] [--out data/registry.json]
+Usage:  python data/generate_registry.py [--n 50000] [--seed 42] [--out data/registry.json]
 """
 
 from __future__ import annotations
@@ -38,6 +38,16 @@ DEMO_VEHICLES: list[dict] = [
     {"registry_id": "REG-0020", "plate": "KA05MN2023", "color": "blue", "body_type": "car",
      "make": "Maruti Suzuki", "model": "Alto", "body_style": "hatchback", "owner_region": "Bengaluru South, KA",
      "image": "vid_back_blue_car.jpg"},
+    # Two-wheeler, auto-rickshaw and truck demos (photos in data/vehicle_photos, see CREDITS.md).
+    {"registry_id": "REG-0040", "plate": "CG07BK3519", "color": "grey", "body_type": "two-wheeler",
+     "make": "Honda", "model": "Activa", "body_style": "scooter", "owner_region": "Durg, CG",
+     "image": "scooter_rear_grey_activa.jpg"},
+    {"registry_id": "REG-0050", "plate": "KA01AH7350", "color": "blue", "body_type": "auto-rickshaw",
+     "make": "Bajaj", "model": "RE auto-rickshaw", "body_style": "three-wheeler", "owner_region": "Bengaluru Central, KA",
+     "image": "auto_front_blue_bajaj_re.jpg"},
+    {"registry_id": "REG-0060", "plate": "CG04LQ2290", "color": "white", "body_type": "truck",
+     "make": "Tata", "model": "Ace", "body_style": "mini truck", "owner_region": "Raipur, CG",
+     "image": "truck_front_white_tata_ace.jpg"},
 ]
 
 # Near-duplicate decoys (3-5 per demo vehicle).
@@ -72,6 +82,33 @@ DECOYS: list[dict] = [
      "make": "Maruti Suzuki", "model": "Alto", "body_style": "hatchback", "owner_region": "Bengaluru East, KA"},
     {"registry_id": "REG-0024", "plate": "KA05MN2073", "color": "blue", "body_type": "car",
      "make": "Tata", "model": "Tiago", "body_style": "hatchback", "owner_region": "Bengaluru South, KA"},
+    # CG07BK3519 (grey scooter): last digit, series letter, colour + digit, body type + letter
+    {"registry_id": "REG-0041", "plate": "CG07BK3518", "color": "grey", "body_type": "two-wheeler",
+     "make": "Honda", "model": "Activa", "body_style": "scooter", "owner_region": "Durg, CG"},
+    {"registry_id": "REG-0042", "plate": "CG07BR3519", "color": "grey", "body_type": "two-wheeler",
+     "make": "TVS", "model": "Jupiter", "body_style": "scooter", "owner_region": "Durg, CG"},
+    {"registry_id": "REG-0043", "plate": "CG07BK3549", "color": "black", "body_type": "two-wheeler",
+     "make": "Honda", "model": "Activa", "body_style": "scooter", "owner_region": "Durg, CG"},
+    {"registry_id": "REG-0044", "plate": "CG07EK3519", "color": "grey", "body_type": "car",
+     "make": "Maruti Suzuki", "model": "Swift", "body_style": "hatchback", "owner_region": "Durg, CG"},
+    # KA01AH7350 (blue auto-rickshaw)
+    {"registry_id": "REG-0051", "plate": "KA01AH7356", "color": "green", "body_type": "auto-rickshaw",
+     "make": "Bajaj", "model": "RE auto-rickshaw", "body_style": "three-wheeler", "owner_region": "Bengaluru Central, KA"},
+    {"registry_id": "REG-0052", "plate": "KA01AN7350", "color": "blue", "body_type": "auto-rickshaw",
+     "make": "Piaggio", "model": "Ape auto", "body_style": "three-wheeler", "owner_region": "Bengaluru Central, KA"},
+    {"registry_id": "REG-0053", "plate": "KA01AH7850", "color": "yellow", "body_type": "auto-rickshaw",
+     "make": "Bajaj", "model": "RE auto-rickshaw", "body_style": "three-wheeler", "owner_region": "Bengaluru Central, KA"},
+    {"registry_id": "REG-0054", "plate": "KA01AH7380", "color": "blue", "body_type": "two-wheeler",
+     "make": "TVS", "model": "Ntorq", "body_style": "scooter", "owner_region": "Bengaluru Central, KA"},
+    # CG04LQ2290 (white Tata Ace mini truck)
+    {"registry_id": "REG-0061", "plate": "CG04LQ2296", "color": "white", "body_type": "truck",
+     "make": "Tata", "model": "Ace", "body_style": "mini truck", "owner_region": "Raipur, CG"},
+    {"registry_id": "REG-0062", "plate": "CG04LD2290", "color": "white", "body_type": "truck",
+     "make": "Ashok Leyland", "model": "Dost", "body_style": "light truck", "owner_region": "Raipur, CG"},
+    {"registry_id": "REG-0063", "plate": "CG04LQ2690", "color": "silver", "body_type": "truck",
+     "make": "Tata", "model": "Ace", "body_style": "mini truck", "owner_region": "Raipur, CG"},
+    {"registry_id": "REG-0064", "plate": "CG04LQ2280", "color": "white", "body_type": "SUV",
+     "make": "Mahindra", "model": "Bolero", "body_style": "SUV", "owner_region": "Raipur, CG"},
 ]
 
 # Extra format examples (Delhi old-style and Bharat series).

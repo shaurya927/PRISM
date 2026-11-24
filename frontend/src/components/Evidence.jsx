@@ -105,7 +105,13 @@ function FramesTable({ frames, showSR, srAvailable }) {
                   </td>
                 )}
                 <td className="p-2 text-right font-mono text-xs">{f.sharpness.toFixed(1)}</td>
-                <td className="p-2 font-mono text-xs">{f.raw_text || <span className="text-slate-400">(empty)</span>}</td>
+                <td className="p-2 font-mono text-xs">{f.raw_text || <span className="text-slate-400">(empty)</span>}
+                  {f.check_backend && (
+                    <div className="text-[10px] text-slate-500" title={`cross-check by ${f.check_backend}; it can only mask characters`}>
+                      check: {f.check_text || "(empty)"}
+                    </div>
+                  )}
+                </td>
                 <td className="p-2 font-mono text-sm font-semibold">{f.masked_text.split("").map((ch, i) => <span key={i} className={ch === "?" ? "text-amber-500" : ""}>{ch}</span>)}</td>
                 <td className="p-2 whitespace-nowrap">
                   {f.chars.map((c, i) => <ConfPill key={i} c={c} />)}

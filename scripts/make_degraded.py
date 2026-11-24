@@ -3,7 +3,7 @@
 Versions: gaussian blur, motion blur, 2x downscale, 4x downscale, JPEG quality 20, sensor noise + darkening.
 Output: data/test_clips/degraded/<clip>__<kind>.mp4 plus degraded/labels.json (ground truth copied).
 
-Usage:  python scripts/make_degraded.py [--src data/test_clips] [--only gauss,jpeg20]
+Usage:  python scripts/make_degraded.py [--src data/test_clips] [--only gauss,jpeg20] [--skip-existing]
 """
 
 from __future__ import annotations
@@ -56,6 +56,9 @@ def noise_dark(f: np.ndarray, rng) -> np.ndarray:
 KINDS: dict[str, Callable] = {
     "gauss": gauss, "motion": motion, "down2x": down(2), "down4x": down(4), "jpeg20": jpeg20, "noise_dark": noise_dark,
 }
+# The original six clips, in the sorted order that set their noise seeds.
+LEGACY_ORDER = ["camB_white.mp4", "day_black_suv.mp4", "day_blue_twoline.mp4", "day_clear_white.mp4",
+                "night_partial_white.mp4", "unregistered_white.mp4"]
 
 
 def degrade_clip(src: Path, dst: Path, fn: Callable, seed: int) -> None:
@@ -79,6 +82,7 @@ def degrade_clip(src: Path, dst: Path, fn: Callable, seed: int) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", type=Path, default=TEST_CLIPS_DIR)
+    ap.add_argument("--skip-existing", action="store_true", help="keep degraded clips that already exist")
     ap.add_argument("--only", default=",".join(KINDS))
     args = ap.parse_args()
     out_dir = args.src / "degraded"
@@ -88,15 +92,21 @@ def main() -> None:
     by_clip = {l["clip"]: l for l in labels}
     new_labels = []
     kinds = [k for k in args.only.split(",") if k in KINDS]
-    for i, clip in enumerate(sorted(args.src.glob("*.mp4"))):
+    clips = sorted(args.src.glob("*.mp4"))
+    # Seed index per clip: the first six clips keep the indices they had (sorted order at the time), so
+    # adding clips never changes the degraded versions of existing ones.
+    order = LEGACY_ORDER + sorted(c.name for c in clips if c.name not in LEGACY_ORDER)
+    for clip in clips:
+        i = order.index(clip.name)
         for j, kind in enumerate(kinds):
             dst = out_dir / f"{clip.stem}__{kind}.mp4"
-            degrade_clip(clip, dst, KINDS[kind], SEED + 100 * i + j)
+            if not (args.skip_existing and dst.exists()):
+                degrade_clip(clip, dst, KINDS[kind], SEED + 100 * i + j)
+                print(f"wrote {dst}")
             if clip.name in by_clip:
                 lab = dict(by_clip[clip.name])
                 lab.update(clip=dst.name, source_clip=clip.name, degradation=kind)
                 new_labels.append(lab)
-            print(f"wrote {dst}")
     (out_dir / "labels.json").write_text(json.dumps({"clips": new_labels, "crosscam_pairs": []}, indent=2))
 
 

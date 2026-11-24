@@ -69,6 +69,39 @@
       "night": false,
       "occluded_positions": [],
       "note": "Plate not in the registry: PRISM must not force a match."
+    },
+    {
+      "clip": "day_scooter_twoline.mp4",
+      "plate": "CG07BK3519",
+      "registry_id": "REG-0040",
+      "color": "grey",
+      "body_type": "two-wheeler",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Grey Honda Activa scooter from behind, two-line rear plate."
+    },
+    {
+      "clip": "day_auto_rickshaw.mp4",
+      "plate": "KA01AH7350",
+      "registry_id": "REG-0050",
+      "color": "blue",
+      "body_type": "auto-rickshaw",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "Blue Bajaj RE auto-rickshaw, front view, yellow commercial two-line plate. COCO has no auto-rickshaw class, so the body type must come from the CLIP override."
+    },
+    {
+      "clip": "day_white_truck.mp4",
+      "plate": "CG04LQ2290",
+      "registry_id": "REG-0060",
+      "color": "white",
+      "body_type": "truck",
+      "expected_status": "MATCHED",
+      "night": false,
+      "occluded_positions": [],
+      "note": "White Tata Ace mini truck, front view, yellow commercial plate."
     }
   ],
   "crosscam_pairs": [

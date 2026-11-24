@@ -21,7 +21,7 @@ SEED = 42
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR_DIR = ROOT / "vendor"
 DATA_DIR = ROOT / "data"
-# The bundled registry is 500 synthetic records. Point PRISM_REGISTRY_PATH at an authorised
+# The bundled registry is 50,000 synthetic records. Point PRISM_REGISTRY_PATH at an authorised
 # registry export (same JSON fields as data/registry.json) to match against real vehicles.
 REGISTRY_PATH = Path(os.environ.get("PRISM_REGISTRY_PATH", DATA_DIR / "registry.json"))
 TEST_CLIPS_DIR = DATA_DIR / "test_clips"
@@ -248,6 +248,18 @@ class OCRConfig:
     layout_min_agreement: float = 0.90
     layout_cut_prior: float = 0.05          # prior weight of a layout that lost its first/last character
     layout_max_ruled_out: int = 1           # a read breaking the layout in more places is only masked
+    # OCR cross-check (prism.masking.cross_check): the other backend reads the same crop; a committed
+    # character it reads differently with confidence >= cross_check_veto_conf becomes '?'. Only adds '?'.
+    # "veto": an unconfirmed character is kept unless contradicted. "agree": it must be confirmed,
+    # unless its own confidence reaches cross_check_keep_conf.
+    # Chosen on the synthetic benchmark (120 vehicles, PARSeq checked by fast-plate-ocr): "agree" with
+    # keep 0.95 cut committed-character error 4.9% -> 1.2% and false-match 3.3% -> 0.8%, top-1 67.5% -> 69.2%,
+    # for recovery 69.1% -> 65.2%. "veto" alone changed almost nothing (4.7%).
+    cross_check: bool = True
+    cross_check_mode: str = "agree"         # agree | veto
+    cross_check_veto_conf: float = 0.50
+    cross_check_keep_conf: float = 0.95
+    cross_check_max_len_diff: int = 2
 
 
 @dataclass(frozen=True)
@@ -303,6 +315,13 @@ class AttributeConfig:
     n_crops: int = 3
     uncertain_below: float = 0.40
     logit_scale: float = 100.0
+    # Colour only: CLIP reads an edge-preserving denoised copy of each crop (bilateral filter). Sensor noise
+    # and JPEG blocks pushed CLIP to "grey"/"silver" on white cars. On the 9 demo-clip vehicles colour went
+    # from 3/9 to 7/9 correct, and on a 66-crop dev set (clean / CCTV / night) it was never worse.
+    # Body type and make/model still use the unfiltered crop. 0 disables.
+    color_denoise_d: int = 9
+    color_denoise_sigma_color: float = 60.0
+    color_denoise_sigma_space: float = 9.0
 
 
 @dataclass(frozen=True)
