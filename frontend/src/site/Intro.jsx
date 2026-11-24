@@ -1,286 +1,162 @@
-// First-visit intro. A live night-freeway feed runs with PRISM's real detector boxes on it
-// (feed.js). Then the camera grabs the vehicle: a Hyundai Verna turns through a full circle and stops
-// facing the camera, with the car and plate boxes following it frame by frame (verna_spin.json), the
-// plate is read character by character (each starts as ?), and the registry record appears.
+// First-visit intro (about 2.8 s; styles: .dec in site.css). The night clip's plate is decoded the way
+// PRISM reads it: on a black screen with faint CCTV interference, every position flickers through what
+// the clip's 24 frames actually read there (plus OCR look-alikes such as 8/B and 0/O) and locks in from
+// left to right. The position the frames never agreed on turns into the red ? cell.
 //
-// The plate, read count, plate crops, scores and registry record are PRISM's real output for
-// day_clear_white.mp4 (data/cases.json). The turning car is studio footage of a Verna (credits in
-// public/media/CREDITS.md); its plates were blanked in the source, and the plate drawn on them is the
-// one PRISM read from the clip.
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { HighwayFeed, useClock } from "./fx.jsx";
+// Hand-over, strictly in turn: the finished plate holds for a moment, then its characters glitch back into
+// look-alikes and blur away one by one on the black, the red ? last, and the static fades with them. Only
+// once the plate is gone (T.reveal) does the black lift and the page, waiting a little smaller behind it,
+// fade and grow to full size (onReveal; Layout.jsx animates it). The hero copy is composed behind the black
+// from the first frame (onLeave), so the page that opens is already finished.
+//
+// The plate and every flickering character come from PRISM's real result for night_partial_white.mp4
+// (data/cases.json). Layout.jsx shows the intro once per session and skips it under reduced motion.
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { caseById } from "./data/content.js";
-import { statusLabel } from "./components.jsx";
 
-const EASE_SHEET = [0.76, 0, 0.24, 1];
-const EASE_OUT = [0.18, 0.66, 0.18, 1];
-const RATE = 1.2; // spin playback speed
-const SPIN = 70 / 30 / RATE; // seconds the turn takes on screen
-const T0 = { flash: 2.45, cap: 2.5 };
-// The plate box waits for the car to stop: during the turn the plate moves too fast for an HTML overlay
-// to stay on it frame-accurately, and the stopped, face-on frame is the best plate frame anyway.
-const T = { ...T0, box: T0.cap + 0.2, pbox: T0.cap + SPIN, spun: T0.cap + SPIN, read: T0.cap + SPIN + 0.15,
-  details: T0.cap + SPIN + 0.9, end: T0.cap + SPIN + 2.3 };
-const ASPECT = 1912 / 1046;
-const MAX_WAIT = 5; // seconds the intro holds for the spin video before using its still frame
+// seconds from the start
+const T = { inEnd: 0.25, lock0: 0.4, step: 0.065, q: 1.12,
+  dissolve: 1.5, spread: 0.25, charOut: 0.38, qOut: 1.8, qDur: 0.4, // plate gone by 2.2 s
+  reveal: 2.2, black: 0.6, open: 2.3, end: 2.85 };
+const TICK = 0.06; // a scrambling character changes this often
+// OCR look-alikes, so the scramble looks like a reader torn between candidates
+const LOOK = {
+  0: "OQD8", O: "0QD", Q: "0O", D: "0O", 1: "Il7", I: "1l", 2: "Z7", Z: "2", 3: "8B", 4: "AH", A: "4", 5: "S6", S: "5",
+  6: "Gb5", G: "6C", 7: "1T", 8: "B30", B: "8", C: "G(O", M: "NHW", N: "MH", H: "MN", X: "KY", K: "X", Y: "X",
+};
+const JUNK = "8B0OQDS5Z2bq{[(_;:j";
 
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-const pct = (r) => (r ? { left: `${r[0] / 10}%`, top: `${r[1] / 10}%`, width: `${r[2] / 10}%`, height: `${r[3] / 10}%` } : null);
+const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2);
+// stable pseudo-random number in [0, 1) for a position and a tick
+const rnd = (i, f = 0) => {
+  let h = Math.imul(i + 1, 73856093) ^ Math.imul(f + 7, 19349663);
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+};
 
-function useViewport() {
-  const [v, setV] = useState(() => ({ W: window.innerWidth, H: window.innerHeight }));
-  useEffect(() => {
-    const on = () => setV({ W: window.innerWidth, H: window.innerHeight });
-    window.addEventListener("resize", on);
-    return () => window.removeEventListener("resize", on);
-  }, []);
-  return v;
+/** For each position: the characters the frames read there, their look-alikes, and a little junk. */
+function buildPools(c, plate) {
+  return plate.split("").map((ch, k) => {
+    const read = (c?.evidence || []).map((e) => e.chars?.[k]?.[0]).filter(Boolean);
+    const base = ch === "?" ? read.join("") : ch;
+    const look = Array.from(new Set(base.split(""))).map((x) => LOOK[x] || "").join("");
+    return Array.from(new Set((read.join("") + look + JUNK.slice(k % 7, (k % 7) + 6)).split(""))).filter((x) => x !== ch || ch === "?");
+  });
 }
 
-/** Where the capture frame and the two panels go for this viewport. */
-function useLayout({ W, H }) {
-  return useMemo(() => {
-    const narrow = W < 900;
-    if (narrow) {
-      const g = 20;
-      const w = W - g * 2;
-      const h = w / ASPECT;
-      const top = Math.max(64, Math.min(H * 0.1, 90));
-      return { narrow, cap: { left: g, top, width: w, height: h }, plate: { left: g, top: top + h + 12, width: w }, det: { left: g, top: top + h + 176, width: w } };
-    }
-    const col = 380, gap = 28, side = 56;
-    const short = H < 640;
-    const w = Math.min(W - side * 2 - col - gap, (H - (short ? 140 : 210)) * ASPECT, 960);
-    const h = w / ASPECT;
-    const left = (W - (w + gap + col)) / 2;
-    const top = Math.max(64, (H - h) / 2 - (short ? 4 : 14));
-    return { narrow, short, cap: { left, top, width: w, height: h }, plate: { left: left + w + gap, top: short ? 56 : top - 40, width: col },
-      det: { left: left + w + gap, top: (short ? 56 : top - 40) + (short ? 122 : 160), width: col } };
-  }, [W, H]);
-}
-
-function Brackets({ className = "" }) {
-  return (
-    <span className={`ibx ${className}`}>
-      <i /><i /><i /><i />
-    </span>
-  );
-}
-
-let spinPromise = null;
-const loadSpin = () => (spinPromise = spinPromise || fetch("/media/verna_spin.json").then((r) => (r.ok ? r.json() : null)).catch(() => null));
-
-export default function Intro({ onLeave, onDone }) {
-  const vp = useViewport();
-  const L = useLayout(vp);
-  const reduce = useReducedMotion();
-  const c = caseById("day_clear_white");
-  const top = c?.top?.[0];
-  const plate = c?.fused || "CG04MX4821";
+export default function Intro({ onLeave, onReveal, onDone }) {
+  const c = caseById("night_partial_white");
+  const plate = c?.fused || "CG04MX48?1";
+  const reads = c?.evidence?.length || c?.reads || 24;
+  const unknown = plate.split("").filter((ch) => ch === "?").length;
+  const pools = useMemo(() => buildPools(c, plate), [c, plate]);
+  const lockAt = useMemo(() => plate.split("").map((ch, i) => (ch === "?" ? T.q : T.lock0 + i * T.step + rnd(i, 99) * 0.05)), [plate]);
   const [t, setT] = useState(0);
-  const [count, setCount] = useState(0);
-  const [leaving, setLeaving] = useState(false);
-  const [spin, setSpin] = useState(null);
-  const vid = useRef(null);
-  const ready = useRef(false); // spin video can play through
-  const still = useRef(!!reduce); // show the last frame instead of playing
-  const started = useRef(false);
-  const skipped = useRef(false);
-  const clock = useClock();
+  const revealed = useRef(false);
+  const done = useRef(false);
+  const noise = useRef(null);
+  const cb = useRef({ onLeave, onReveal, onDone });
+  cb.current = { onLeave, onReveal, onDone };
 
-  const shown = useRef(-1); // index of the spin frame actually on screen (-1 = use currentTime)
-  useEffect(() => { loadSpin().then(setSpin); }, []);
-  useEffect(() => {
-    const v = vid.current;
-    if (!v) return undefined;
-    v.muted = true;
-    v.playbackRate = RATE;
-    const ok = () => { ready.current = true; };
-    if (v.readyState >= 3) ok();
-    v.addEventListener("canplaythrough", ok);
-    v.addEventListener("error", () => { still.current = true; });
-    // currentTime runs ahead of the presented frame; the frame callback reports the one on screen,
-    // so the boxes stay on the car and plate while it turns
-    let id = 0;
-    const onFrame = (_, meta) => { shown.current = Math.round(meta.mediaTime * 30); id = v.requestVideoFrameCallback(onFrame); };
-    if (v.requestVideoFrameCallback) id = v.requestVideoFrameCallback(onFrame);
-    return () => {
-      v.removeEventListener("canplaythrough", ok);
-      if (id) v.cancelVideoFrameCallback?.(id);
-    };
-  }, []);
+  const reveal = useCallback(() => { if (!revealed.current) { revealed.current = true; cb.current.onReveal?.(); } }, []);
+  const finish = useCallback(() => { reveal(); if (!done.current) { done.current = true; cb.current.onDone?.(); } }, [reveal]);
 
+  // the hero copy builds itself behind the black straight away
+  useEffect(() => { cb.current.onLeave?.(); }, []);
+
+  // one clock drives the whole timeline
   useEffect(() => {
-    let raf;
-    let last = performance.now();
-    let clockT = 0;
-    let waited = 0;
+    let raf = 0;
+    const start = performance.now();
     const tick = (now) => {
-      const dt = Math.max(0, Math.min(0.1, (now - last) / 1000));
-      last = now;
-      // hold just before the grab while the spin video is still loading
-      if (!ready.current && !still.current && clockT + dt >= T.cap - 0.06) {
-        waited += dt;
-        if (waited > MAX_WAIT) still.current = true;
-      } else {
-        clockT += dt;
-      }
-      const v = skipped.current ? T.end : clockT;
-      const el = vid.current;
-      if (el && v >= T.cap && !started.current) {
-        started.current = true;
-        if (still.current) { el.currentTime = el.duration || 99; }
-        else { el.playbackRate = RATE; el.play().catch(() => { el.currentTime = el.duration || 99; }); }
-      }
+      const v = (now - start) / 1000;
       setT(v);
-      if (v >= T.end) { setLeaving(true); return; }
+      if (v >= T.reveal) reveal();
+      if (v >= T.end) { finish(); return; }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    const key = (e) => { if (e.key === "Escape") skipped.current = true; };
+    const key = (e) => { if (e.key === "Escape") finish(); };
     window.addEventListener("keydown", key);
     return () => { cancelAnimationFrame(raf); window.removeEventListener("keydown", key); };
+  }, [reveal, finish]);
+
+  // CCTV interference: faint horizontal streaks and dim blocks, redrawn a dozen times a second
+  useEffect(() => {
+    const cv = noise.current;
+    if (!cv) return undefined;
+    const ctx = cv.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let raf = 0;
+    let last = 0;
+    const fit = () => { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    fit();
+    const draw = (now) => {
+      raf = requestAnimationFrame(draw);
+      if (now - last < 80) return;
+      last = now;
+      const W = innerWidth, H = innerHeight;
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < 7; i++) {
+        ctx.fillStyle = `rgba(255,255,255,${0.012 + Math.random() * 0.02})`;
+        ctx.fillRect(Math.random() * W, Math.random() * H, 40 + Math.random() * 150, 8 + Math.random() * 26);
+      }
+      for (let i = 0; i < 46; i++) {
+        ctx.fillStyle = `rgba(255,255,255,${0.025 + Math.random() * 0.07})`;
+        ctx.fillRect(Math.random() * W, Math.random() * H, 6 + Math.random() * 54, Math.random() < 0.8 ? 1 : 2);
+      }
+    };
+    raf = requestAnimationFrame(draw);
+    window.addEventListener("resize", fit);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", fit); };
   }, []);
-  useEffect(() => { if (leaving) onLeave?.(); }, [leaving, onLeave]);
 
-  const show = (k) => t >= k;
-  const flash = t > T.flash ? Math.max(0, 0.5 - (t - T.flash) * 1.8) : 0;
-  const prog = Math.round(clamp(t / T.end) * 100);
-  const holding = !ready.current && !still.current && t >= T.cap - 0.1;
-  const stages = [
-    [0, "Watching CAM 04 · live"],
-    [0.7, `Tracking ${count || "…"} vehicles · YOLO11 + ByteTrack`],
-    [T.cap, "Vehicle locked · tracking as it turns"],
-    [T.pbox, "Best plate frame · plate detected"],
-    [T.read, "Reading plate · PARSeq"],
-    [T.details, "Registry match"],
-  ];
-  const label = prog >= 100 ? "Ready" : holding ? "Loading footage…" : ([...stages].reverse().find(([s]) => t >= s) || stages[0])[1];
-  const readDone = T.read + 0.12 + plate.length * 0.075;
-  const { narrow, short } = L;
-  const capOn = show(T.cap) && !holding;
-
-  // boxes for the frame on screen
-  let carBox = null, plateBox = null;
-  if (spin && capOn) {
-    const el = vid.current;
-    const n = spin.frames.length;
-    const live = el && !el.ended && el.currentTime < (el.duration || 1e9) - 0.02;
-    const k = !live ? n - 1 : shown.current >= 0 ? shown.current : Math.floor(el.currentTime * spin.fps);
-    [carBox, plateBox] = spin.frames[clamp(k, 0, n - 1)].map(pct);
-  }
-  // the panel title is the make and model, and the plate panel above shows the plate
-  const rows = top ? [
-    !(narrow || short) && ["Registered plate", top.plate],
-    ["Make", top.model?.split(" ")[0]],
-    ["Body", [top.style, top.body].filter(Boolean).join(" · ")],
-    ["Registered colour", top.color],
-    ["Registered in", top.region],
-  ].filter((r) => r && r[1]) : [];
+  const f = Math.floor(t / TICK);
+  const bg = 1 - ease(clamp((t - T.reveal) / T.black)); // the black lifts only after the plate has gone
+  const fx = 1 - ease(clamp((t - T.dissolve) / (T.reveal + 0.2 - T.dissolve))); // the static fades with the plate
+  const enter = ease(clamp(t / T.inEnd));
+  // the plate drifts toward the viewer as it lets go
+  const lift = ease(clamp((t - T.dissolve) / (T.reveal - T.dissolve)));
+  const allRead = t >= T.q + 0.1;
+  const capOut = clamp((t - T.dissolve) / 0.25);
+  const caption = t < T.lock0 + plate.length * T.step ? `reading ${reads} frames · CAM 04`
+    : allRead ? `${plate.length - unknown} of ${plate.length} read · ${unknown} stays ?` : "fusing the reads";
 
   return (
-    <div className="ld" aria-label="Loading PRISM">
-      <motion.div className="ld__sheet" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.9, ease: EASE_SHEET, delay: 0.12 }}
-        onAnimationComplete={() => leaving && onDone()} />
-      <motion.div className="ld__panel intro" animate={leaving ? { y: "-100%" } : { y: 0 }} transition={{ duration: 0.85, ease: EASE_SHEET }}>
-        <motion.div className="absolute inset-0" initial={{ opacity: 0 }} transition={{ duration: 0.6 }}
-          animate={{ opacity: capOn ? 0.3 : 1, filter: capOn ? "blur(3px)" : "blur(0px)" }}>
-          <HighwayFeed onCount={setCount} labels={!capOn} />
-        </motion.div>
-
-        {/* always mounted so the spin video loads while the feed plays */}
-        <motion.div className="cap" style={{ ...L.cap, pointerEvents: "none" }} initial={false}
-          animate={capOn ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
-          <div className="cap__media">
-            <video ref={vid} className="cap__vid" poster="/media/verna_spin.jpg" muted playsInline preload="auto" aria-hidden>
-              <source src="/media/verna_spin.webm" type="video/webm" />
-              <source src="/media/verna_spin.mp4" type="video/mp4" />
-            </video>
-            {show(T.box) && carBox && (
-              <div className="intro__box" style={carBox}>
-                <motion.div className="absolute inset-0" initial={{ opacity: 0, scale: 1.08 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, ease: EASE_OUT }}>
-                  <Brackets />
-                  <span className="intro__tag intro__tag--in">TRACK 1 · {(top?.model || "car").toUpperCase()}</span>
-                </motion.div>
-              </div>
-            )}
-            {show(T.pbox) && plateBox && (
-              <div className="intro__box intro__box--plate" style={plateBox}>
-                <motion.div className="absolute inset-0" initial={{ opacity: 0, scale: 1.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3, ease: EASE_OUT }}>
-                  <Brackets className="ibx--red" />
-                </motion.div>
-              </div>
-            )}
-          </div>
-          <div className="cap__fx" aria-hidden />
-          <div className="cap__hud">
-            <span><span className="rec" />CAM 04</span>
-            <span className="hidden sm:inline">{show(T.spun) ? "Best plate frame" : "Tracking"} · {clock}</span>
-          </div>
-          <div className="cap__credit">studio footage · Hyundai Verna</div>
-        </motion.div>
-        <span className="intro__flash" style={{ opacity: flash }} />
-
-        {show(T.read - 0.15) && (
-          <motion.div className="intro__panel" style={L.plate} initial={{ opacity: 0, x: narrow ? 0 : 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.45, ease: EASE_OUT }}>
-            <div className="intro__lbl">Plate · fused from {c?.reads ?? 24} reads</div>
-            {!short && c?.plates?.length > 0 && (
-              <div className="intro__crops">
-                {c.plates.map((u, i) => (
-                  <motion.img key={u} src={u} alt="" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 * i, duration: 0.3 }} />
-                ))}
-              </div>
-            )}
-            <div className="intro__cells">
-              {plate.split("").map((ch, i) => {
-                const known = t >= T.read + 0.12 + i * 0.075;
-                return <span key={i} className={`intro__cell ${known ? "" : "is-q"}`}>{known ? ch : "?"}</span>;
-              })}
-            </div>
-            <div className="intro__sub">
-              {t >= readDone ? `${plate.length} of ${plate.length} characters read clearly` : "unread characters stay ?"}
-            </div>
-          </motion.div>
-        )}
-
-        {show(T.details) && top && (
-          <motion.div className="intro__panel intro__panel--det" style={L.det} initial={{ opacity: 0, x: narrow ? 0 : 16 }}
-            animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
-            <div className="flex items-center justify-between gap-4">
-              <span className="intro__lbl">Registry match · {top.id}</span>
-              <span className="chip chip--ok"><span className="chip__dot" aria-hidden />{statusLabel(c.status)}</span>
-            </div>
-            <motion.div className="intro__rid" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }}>
-              {top.model}
-            </motion.div>
-            <dl className="intro__dl">
-              {rows.map(([k, v], i) => (
-                <motion.div key={k} className="intro__dr" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 + i * 0.07, duration: 0.35 }}>
-                  <dt>{k}</dt><dd>{v}</dd>
-                </motion.div>
-              ))}
-            </dl>
-            <motion.div className="intro__row intro__mono" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.4 }}>
-              score {top.score.toFixed(2)} · τ 0.55{!narrow && !short ? ` · colour seen as ${c.color}, not used to decide` : ""}
-            </motion.div>
-          </motion.div>
-        )}
-
-        <div className="intro__hud">
-          <span><span className="rec" />REC</span>
-          <span>CAM 04 · {count ? `${count} tracked` : "live"}</span>
-          <span className="hidden sm:inline">{clock}</span>
+    <div className={`ld dec ${t >= T.open ? "is-open" : ""}`} style={{ "--bg": bg.toFixed(3) }} role="status" aria-label="Loading PRISM">
+      <canvas ref={noise} className="dec__noise" style={{ opacity: fx }} aria-hidden />
+      <div className="dec__fx" style={{ opacity: fx }} aria-hidden />
+      <div className="dec__stage" aria-hidden style={{ opacity: enter, transform: `scale(${(1.04 - 0.04 * enter + 0.06 * lift).toFixed(4)})` }}>
+        <div className="dec__plate">
+          {plate.split("").map((ch, i) => {
+            const isQ = ch === "?";
+            const locked = t >= lockAt[i];
+            const pool = pools[i];
+            const glyph = (seed) => pool[Math.floor(rnd(i, seed) * pool.length)] || ch;
+            if (!locked) {
+              const jit = { opacity: 0.5 + rnd(i, f + 3) * 0.45, transform: `translateY(${((rnd(i, f + 5) - 0.5) * 0.07).toFixed(3)}em)`,
+                filter: rnd(i, f + 9) > 0.72 ? "blur(1.2px)" : undefined };
+              return <span key={i} className="dec__c is-scr" style={jit}>{glyph(f)}</span>;
+            }
+            const fresh = t - lockAt[i] < 0.14;
+            if (isQ) {
+              const out = clamp((t - T.qOut) / T.qDur);
+              const qs = out > 0 ? { opacity: 1 - ease(out), filter: `blur(${(out * 8).toFixed(1)}px)`, transform: `scale(${(1 - out * 0.3).toFixed(3)})` } : undefined;
+              return <span key={i} className={`dec__c is-q ${fresh ? "is-pop" : ""}`} style={qs}>?</span>;
+            }
+            // letting go: the character glitches back into look-alikes as it blurs and fades
+            const out = clamp((t - (T.dissolve + rnd(i, 7) * T.spread)) / T.charOut);
+            if (out <= 0) return <span key={i} className={`dec__c ${fresh ? "is-lock" : ""}`}>{ch}</span>;
+            const shown = out < 0.62 && rnd(i, f + 11) > 0.35 ? glyph(f + 17) : ch;
+            const os = { opacity: (1 - ease(out)) * (0.75 + rnd(i, f + 13) * 0.25), filter: `blur(${(out * 9).toFixed(1)}px)`,
+              transform: `translateY(${(-out * 0.12).toFixed(3)}em)` };
+            return <span key={i} className="dec__c is-scr" style={os}>{shown}</span>;
+          })}
         </div>
-        <button type="button" className="intro__skip f-u" onClick={() => { skipped.current = true; }}>skip intro →</button>
-        <div className="ld__labels" style={{ opacity: short && show(T.read - 0.15) ? 0 : 1, transition: "opacity .3s" }}>
-          <motion.span key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>{label}</motion.span>
-        </div>
-        <div className="ld__count intro__count" style={{ opacity: (narrow || short) && show(T.details) ? 0 : undefined, transition: "opacity .3s" }}>
-          {prog}<span className="ld__pct">%</span>
-        </div>
-        <div className="ld__bar" style={{ transform: `scaleX(${prog / 100})` }} />
-      </motion.div>
+        <div className="dec__cap" style={{ opacity: t < 0.2 ? 0 : 1 - capOut }}>{caption}</div>
+      </div>
+      <button type="button" className="dec__skip f-u" onClick={finish}>skip intro</button>
     </div>
   );
 }

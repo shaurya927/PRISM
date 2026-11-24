@@ -1,17 +1,24 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation, useOutlet } from "react-router-dom";
+import React, { Suspense, lazy, useCallback, useEffect, useRef, useState } from "react";
+import { NavLink, useLocation, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
 import Lenis from "lenis";
-import { EASE, RollText } from "./motion.jsx";
-import { Arrow } from "./components.jsx";
-import { useClock, useHealth, useSpotlight } from "./fx.jsx";
-import { CASES, NAV, REPO_URL } from "./data/content.js";
+import { EASE } from "./motion.jsx";
+import { useSpotlight } from "./fx.jsx";
+import { CASES, NAV } from "./data/content.js";
 import { SiteCtx } from "./context.js";
 import Intro from "./Intro.jsx";
 
 export { useSite } from "./context.js";
 
 let firstPage = true; // the first page is revealed by the loader, not by a page fade
+const INTRO_KEY = "prism-intro"; // set in sessionStorage once the intro has played in this tab
+/** Logo click: forget that the intro played, then let the browser load "/" from scratch. */
+const replayIntro = () => { try { sessionStorage.removeItem(INTRO_KEY); } catch { /* storage blocked: the page still reloads */ } };
+// The page behind the intro: a little smaller and invisible. Once the intro's plate has gone it fades in
+// and grows to full size in one smooth move.
+const STAGE_HIDDEN = { opacity: 0, scale: 0.92 };
+const STAGE_SHOWN = { opacity: 1, scale: 1,
+  transition: { opacity: { duration: 0.9, ease: [0.33, 1, 0.68, 1] }, scale: { duration: 1.4, ease: [0.16, 1, 0.3, 1] } } };
 
 export default function SiteLayout() {
   const location = useLocation();
@@ -19,9 +26,12 @@ export default function SiteLayout() {
   const reduce = useReducedMotion();
   const lenisRef = useRef(null);
   const menuBtn = useRef(null);
-  const [introDone, setIntroDone] = useState(() => reduce || sessionStorage.getItem("prism-intro") === "1");
-  // True once the intro starts lifting (or was never shown): the hero animates in from then.
+  const [introDone, setIntroDone] = useState(() => reduce || sessionStorage.getItem(INTRO_KEY) === "1");
+  // True once the intro has started (or was never shown): the hero copy mounts and animates from then.
+  // During the intro that happens out of sight, so the page is already composed when it appears.
   const [introReveal, setIntroReveal] = useState(introDone);
+  // True once the intro starts lifting: the page zooms and fades up behind the decoded plate.
+  const [stageIn, setStageIn] = useState(introDone);
   const [menu, setMenu] = useState(false);
   useSpotlight();
 
@@ -65,6 +75,7 @@ export default function SiteLayout() {
   }, [titleFor]);
 
   const revealNow = useCallback(() => setIntroReveal(true), []);
+  const stageNow = useCallback(() => setStageIn(true), []);
 
   const toTop = () => {
     if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true, force: true });
@@ -75,17 +86,23 @@ export default function SiteLayout() {
     <SiteCtx.Provider value={{ introDone, introReveal, lenis: lenisRef }}>
       <div className="site">
         {!introDone && (
-          <Intro onLeave={revealNow} onDone={() => { sessionStorage.setItem("prism-intro", "1"); setIntroDone(true); }} />
+          <Intro onLeave={revealNow} onReveal={stageNow}
+            onDone={() => { sessionStorage.setItem(INTRO_KEY, "1"); setIntroDone(true); }} />
         )}
-        <Topbar menuOpen={menu} onMenu={() => setMenu((m) => !m)} onClose={() => setMenu(false)} btnRef={menuBtn} />
+        {/* Behind the intro the page (top bar included) waits smaller and dark, then zooms and fades up as the
+            intro lifts. Once it has settled the wrapper carries no transform, so the fixed top bar works as normal. */}
+        <motion.div className="site__stage" style={{ transformOrigin: "50% 50vh" }}
+          initial={stageIn ? false : STAGE_HIDDEN} animate={stageIn ? STAGE_SHOWN : STAGE_HIDDEN}>
+          <Topbar menuOpen={menu} onMenu={() => setMenu((m) => !m)} btnRef={menuBtn} />
+          {/* While the menu is open the page behind it is inert: no focus, no clicks, hidden from screen readers. */}
+          <div inert={menu ? "" : undefined}>
+            {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
+            <AnimatePresence mode="wait" onExitComplete={toTop}>
+              <Page key={location.pathname}>{outlet}</Page>
+            </AnimatePresence>
+          </div>
+        </motion.div>
         <AnimatePresence>{menu && <SiteMenu onClose={() => setMenu(false)} />}</AnimatePresence>
-        {/* While the menu is open the page behind it is inert: no focus, no clicks, hidden from screen readers. */}
-        <div inert={menu ? "" : undefined}>
-          {/* Keyed on the path only, so changing ?tab= inside a page never re-runs the page fade. */}
-          <AnimatePresence mode="wait" onExitComplete={toTop}>
-            <Page key={location.pathname}>{outlet}</Page>
-          </AnimatePresence>
-        </div>
       </div>
     </SiteCtx.Provider>
   );
@@ -96,7 +113,7 @@ function Page({ children }) {
   const skip = firstPage;
   useEffect(() => { firstPage = false; }, []);
   const reduce = useReducedMotion();
-  if (reduce) return <div><main>{children}</main><Footer /></div>;
+  if (reduce) return <div><main>{children}</main></div>;
   return (
     <motion.div
       initial={skip ? false : { opacity: 0 }}
@@ -104,12 +121,11 @@ function Page({ children }) {
       exit={{ opacity: 0, transition: { duration: 0.15, ease: EASE } }}
     >
       <main>{children}</main>
-      <Footer />
     </motion.div>
   );
 }
 
-function Topbar({ menuOpen, onMenu, onClose, btnRef }) {
+function Topbar({ menuOpen, onMenu, btnRef }) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
@@ -126,10 +142,12 @@ function Topbar({ menuOpen, onMenu, onClose, btnRef }) {
   return (
     <motion.header className={`topbar ${solid ? "is-solid" : ""} ${menuOpen ? "is-menu" : ""}`}
       animate={{ y: hidden && !menuOpen ? -120 : 0 }} transition={{ duration: 0.4, ease: EASE }}>
-      <Link to="/" className="topbar__logo" aria-label="PRISM home" onClick={menuOpen ? onClose : undefined}>
+      {/* A full page load, not a router link: clearing the session flag makes the site start over from the
+          intro (unless reduced motion is on, which always skips it). */}
+      <a href="/" className="topbar__logo" aria-label="PRISM home, replays the intro" onClick={replayIntro}>
         <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
         prism
-      </Link>
+      </a>
       <MenuButton open={menuOpen} onClick={onMenu} btnRef={btnRef} />
     </motion.header>
   );
@@ -138,7 +156,8 @@ function Topbar({ menuOpen, onMenu, onClose, btnRef }) {
 /** Menu toggle: the label rolls from "menu" to "close" and the two lines cross into an X. */
 function MenuButton({ open, onClick, btnRef }) {
   return (
-    <button ref={btnRef} type="button" onClick={onClick} className={`menu-btn ${open ? "is-open" : ""}`}
+    <button ref={btnRef} type="button" onClick={onClick} onPointerEnter={prefetchCubeArt} onFocus={prefetchCubeArt}
+      className={`menu-btn ${open ? "is-open" : ""}`}
       aria-expanded={open} aria-controls="site-menu" aria-label={open ? "Close menu" : "Open menu"}>
       <span className="menu-btn__labels" aria-hidden>
         <span className="menu-btn__label">menu</span>
@@ -150,9 +169,28 @@ function MenuButton({ open, onClick, btnRef }) {
 }
 
 const MENU_ITEMS = [["Home", "/"], ...NAV];
+// The menu's cube (three.js, WebGL) is desktop only and is fetched with the menu, never with the page.
+// Pointing at or focusing the menu button fetches it early, so it is usually ready when the menu opens.
+// If the chunk cannot load, the menu simply has no art.
+const WIDE = "(min-width: 1024px)";
+const loadCubeArt = () => import("./CubeArt.jsx");
+const CubeArt = lazy(() => loadCubeArt().catch(() => ({ default: () => null })));
+const prefetchCubeArt = () => { if (window.matchMedia(WIDE).matches) loadCubeArt().catch(() => {}); };
+
+function useMedia(query) {
+  const [match, setMatch] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setMatch(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, [query]);
+  return match;
+}
 
 // Menu motion: the curtain wipes down from the top bar, the page names rise out of their masks one
-// after another, then the side copy and the status line fade up. Closing plays it back, faster.
+// after another, then the tagline fades up. Closing plays it back, faster.
 const MENU_MOTION = {
   sheet: {
     open: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE, delayChildren: 0.16 } },
@@ -166,29 +204,28 @@ const MENU_MOTION = {
     open: { y: "0%", transition: { duration: 0.8, ease: EASE } },
     closed: { y: "140%", transition: { duration: 0.3, ease: EASE } },
   },
-  side: {
-    open: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay: 0.42 } },
-    closed: { opacity: 0, y: 16, transition: { duration: 0.2, ease: EASE } },
-  },
   foot: {
     open: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay: 0.55 } },
     closed: { opacity: 0, y: 8, transition: { duration: 0.2, ease: EASE } },
+  },
+  art: {
+    open: { opacity: 1, y: 0, scale: 1, transition: { duration: 1, ease: EASE, delay: 0.2 } },
+    closed: { opacity: 0, y: 24, scale: 0.97, transition: { duration: 0.25, ease: EASE } },
   },
 };
 // Reduced motion: a short cross-fade and nothing moves.
 const MENU_FADE = {
   sheet: { open: { opacity: 1, transition: { duration: 0.15 } }, closed: { opacity: 0, transition: { duration: 0.15 } } },
-  list: {}, item: {}, side: {}, foot: {},
+  list: {}, item: {}, foot: {}, art: {},
 };
 
 /**
- * Full-screen site menu, on every screen size. Hovering or focusing a page name locks a red tracking
- * box onto it, like the tracked car in the hero feed, and dims the other names. The current page keeps
- * a grey box, like an untracked detection.
+ * Full-screen site menu, on every screen size. Hovering or focusing a page name keeps it white and
+ * dims the others.
  */
 function SiteMenu({ onClose }) {
   const reduce = useReducedMotion();
-  const health = useHealth();
+  const wide = useMedia(WIDE);
   const m = reduce ? MENU_FADE : MENU_MOTION;
   const counts = { "/cases": CASES.length };
   return (
@@ -203,7 +240,6 @@ function SiteMenu({ onClose }) {
                     <span className="menu__label">
                       {label}
                       {counts[to] ? <sup className="menu__count">({counts[to]})</sup> : null}
-                      <span className="menu__box" aria-hidden />
                     </span>
                   </NavLink>
                 </motion.span>
@@ -211,68 +247,14 @@ function SiteMenu({ onClose }) {
             ))}
           </motion.ul>
         </nav>
-        <motion.div className="menu__side" variants={m.side}>
-          <div className="tag">Plate Recovery &amp; Identification from Surveillance Media</div>
-          <p>Upload a clip and get a ranked, explained registry shortlist. Characters PRISM cannot read stay <b>?</b>, and it never guesses them.</p>
-          <a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a>
+        <motion.div className="menu__art" variants={m.art}>
+          {wide && <Suspense fallback={null}><CubeArt /></Suspense>}
         </motion.div>
       </div>
       <motion.div className="menu__foot gutter" variants={m.foot}>
         <span>Every frame read. Nothing guessed.</span>
-        <span className="menu__status">
-          <span className={`dot ${health ? "dot--live" : ""}`} />
-          {health ? "API online" : health === false ? "API offline" : "Checking API…"}
-        </span>
       </motion.div>
     </motion.div>
   );
 }
 
-function Footer() {
-  const year = new Date().getFullYear();
-  const clock = useClock();
-  const health = useHealth();
-  return (
-    <footer className="foot">
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10">
-        <div className="col-span-2 md:col-span-4">
-          <div className="tag mb-4">Get started</div>
-          <p className="text-muted text-[15px] max-w-[30ch]">Upload a clip and get a ranked, explained registry shortlist.</p>
-          <div className="mt-6"><a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a></div>
-        </div>
-        <div className="md:col-span-2 md:col-start-6">
-          <div className="tag mb-4">Pages</div>
-          <ul className="space-y-2 text-[15px]">
-            <li><Link to="/" className="f-u">Home</Link></li>
-            {NAV.map(([l, to]) => <li key={to}><Link to={to} className="f-u">{l}</Link></li>)}
-          </ul>
-        </div>
-        <div className="md:col-span-2">
-          <div className="tag mb-4">Project</div>
-          <ul className="space-y-2 text-[15px]">
-            <li><a className="f-u" href={REPO_URL} target="_blank" rel="noreferrer">GitHub</a></li>
-            <li><a className="f-u" href="/reports/index.html" target="_blank" rel="noreferrer">Sample reports</a></li>
-            <li><a className="f-u" href="/api/docs" target="_blank" rel="noreferrer">API docs</a></li>
-          </ul>
-        </div>
-        <div className="col-span-2 md:col-span-3">
-          <div className="tag mb-4">Now running</div>
-          <div className="text-[15px] leading-snug">
-            <div className="flex items-center">
-              <span className={`dot ${health ? "dot--live" : ""}`} />
-              <span>{health ? "API online" : health === false ? "API offline" : "Checking API…"}</span>
-            </div>
-            <div className="mt-1 text-[var(--muted-2)]">{health ? `OCR ${health.ocr_backend} on ${health.gpu || health.device}` : "PARSeq OCR"}</div>
-            <div className="text-muted">{health ? `registry ${health.registry_size} records · v${health.prism_version}` : "registry · 50,000 records"}</div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-wrap justify-between gap-4 label-mono mt-12 pt-6 border-t rule">
-        <span>Hackasol 5.0 · AIML-01</span>
-        <span>{clock} · local time</span>
-        <span>Decision support only. It does not identify a vehicle on its own.</span>
-        <span>© {year} PRISM</span>
-      </div>
-    </footer>
-  );
-}

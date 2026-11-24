@@ -37,7 +37,7 @@ export default function CaseDetail() {
     <>
       <section className="gutter pt-32 md:pt-36 pb-10">
         <Reveal><Label index={c.index}>Case</Label></Reveal>
-        <SplitLines lines={[c.title]} className="display-2 mt-4 max-w-[18ch]" />
+        <SplitLines lines={[c.title]} className="display-2 mt-4" />
         <Reveal className="mt-6 max-w-2xl"><p className="lead">{c.blurb}</p></Reveal>
         <Reveal className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-10 border-t rule pt-6">
           {meta.map(([k, v]) => (

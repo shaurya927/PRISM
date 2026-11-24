@@ -85,13 +85,16 @@ export function createFeedHud(canvas, video, opts = {}) {
 
   loadTracks().then((d) => { if (alive) data = d; });
 
+  // Layout size, not the on-screen box: an ancestor may be scaled (the page zooms in behind the intro),
+  // and the backing store must match the canvas's own CSS size to stay sharp once the scale settles.
   const fit = () => {
-    const r = canvas.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = r.width; H = r.height;
+    W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
   };
+  // maps a point measured on screen into canvas px, whatever scale an ancestor has
+  const local = (c, x, y) => [((x - c.left) * W) / (c.width || 1), ((y - c.top) * H) / (c.height || 1)];
   const ro = new ResizeObserver(fit);
   ro.observe(canvas);
   fit();
@@ -111,14 +114,15 @@ export function createFeedHud(canvas, video, opts = {}) {
     const c = canvas.getBoundingClientRect();
     avoid = Array.from(document.querySelectorAll(opts.avoid), (el) => {
       const r = el.getBoundingClientRect();
-      return [r.left - c.left - 12, r.top - c.top - 22, r.right - c.left + 12, r.bottom - c.top + 12];
+      const [x0, y0] = local(c, r.left, r.top);
+      const [x1, y1] = local(c, r.right, r.bottom);
+      return [x0 - 12, y0 - 22, x1 + 12, y1 + 12];
     }).filter((r) => r[2] > r[0] && r[3] > r[1]);
   };
 
   const move = (e) => {
-    const r = canvas.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    pointer = x >= 0 && y >= 0 && x <= r.width && y <= r.height ? { x, y } : null;
+    const [x, y] = local(canvas.getBoundingClientRect(), e.clientX, e.clientY);
+    pointer = x >= 0 && y >= 0 && x <= W && y <= H ? { x, y } : null;
   };
   window.addEventListener("pointermove", move, { passive: true });
 

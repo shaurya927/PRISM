@@ -206,16 +206,22 @@ The threshold slider and the hint box call `POST /api/jobs/{id}/rescore`, which 
 ## Project website
 
 The same build serves a project website at `/` (the investigator app lives at `/app`):
-landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails, Docs and About.
-It uses React Router, framer-motion and Lenis smooth scrolling, with Geist and Instrument Serif fonts.
+landing page, How it works, Cases (one page per batch-report case), Evaluation, Guardrails and About.
+It uses React Router, framer-motion and Lenis smooth scrolling, with Geist and Instrument Serif fonts, plus
+three.js for the cube in the menu (loaded only when the menu opens on a screen at least 1024 px wide).
 The theme takes its look from resend.com: a pure black page, display-serif headlines that fade from white to
 grey, glass buttons with hairline rings, cards lit along their top edge and by the pointer, and text that blurs
 in as it scrolls into view. The earlier layout followed melon.studio. Both are recreated in our own code with
 open fonts, and no code, images, fonts or text were taken from resend.com or melon.studio.
 
-Effects: a first-visit intro (live freeway feed, then a Hyundai Verna turns a full circle with the tracking
-boxes following it, its plate is read character by character and the full registry record is shown, using
-PRISM's real `day_clear_white` result); a red-and-black sheet page transition; a hero of real night-freeway footage with PRISM's own
+Effects: a first-visit intro (about 3 s) in which PRISM's real plate for the night clip decodes on black: each
+position flickers through what the clip's 24 frames read there, locks in from left to right, and the position
+the frames never agreed on turns into the red `?`; then the page fades up behind the plate and it dissolves;
+a full-screen menu whose right side holds a black 3×3×3 puzzle cube (WebGL, after the cube on resend.com, in
+our own code) with mixed satin, gloss, perforated and grained faces: it opens scrambled and turns itself back
+until its front face reads the night plate's first nine characters, `CG0 4MX 48?`, with the unresolved `?` as
+its one red face, then scrambles and solves again (still and solved under reduced motion);
+a hero of real night-freeway footage with PRISM's own
 YOLO11 + ByteTrack boxes drawn over it, where the car nearest the pointer is tracked; a full-width split wordmark whose letters rise toward the pointer and
 drift apart on scroll; centred 16:9 feature cards that scale in, tilt toward the pointer, skew with scroll speed
 and keep their caption pinned beside them; a trailing cursor ring that grows over links and shows "View"/"Open"
@@ -235,7 +241,8 @@ from `reports/` by `GET /reports/{path}` (`.html`, `.pdf`, `.png` only).
 ### Third-party media
 
 The highway footage is [Cars driving at night](https://commons.wikimedia.org/wiki/File:Cars_driving_at_night.webm)
-by Editor (YouTube), Wikimedia Commons, CC BY 3.0. The turning Verna in the intro is cut from a team screen
+by Editor (YouTube), Wikimedia Commons, CC BY 3.0. The turning Verna (`verna_spin.*`, used by the earlier intro and
+no longer shown on the site) is cut from a team screen
 recording of a 360° studio view (`video_assets/`, git-ignored); its rights are **not verified**, so replace
 `verna_spin.*` before any public or commercial use unless you hold them. Its plates were blanked in the source,
 and the plate drawn on them is the one PRISM read from day_clear_white. Details are in
@@ -256,7 +263,7 @@ runs the detector on it to write `highway_tracks.json`, and builds `verna_spin.*
 | GET | `/artifacts/{path}` | saved crops (path-traversal safe) |
 | GET | `/reports/{path}` | pre-built batch reports for the website (`.html`/`.pdf`/`.png`, path-traversal safe) |
 | GET | `/health` | device, GPU, models, registry size, config hash, vendor commits |
-| GET | `/api/docs` | interactive OpenAPI docs (moved from `/docs`, which is the website's Docs page) |
+| GET | `/api/docs` | interactive OpenAPI docs |
 
 ## Data
 

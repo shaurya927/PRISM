@@ -104,7 +104,7 @@ export default function Guardrails() {
       <section className="gutter pb-16 md:pb-20">
         <Tabs id="guard" label="Guardrails sections" tabs={TABS} />
       </section>
-      <NextLink to="/docs" label="Next" title="Run it yourself" />
+      <NextLink to="/about" label="Next" title="About the project" />
     </>
   );
 }

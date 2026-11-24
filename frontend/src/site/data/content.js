@@ -11,7 +11,6 @@ export const NAV = [
   ["Cases", "/cases"],
   ["Evaluation", "/evaluation"],
   ["Guardrails", "/guardrails"],
-  ["Docs", "/docs"],
   ["About", "/about"],
 ];
 

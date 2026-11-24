@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "@fontsource/instrument-serif";
+import "@fontsource/instrument-serif/400-italic.css";
 import "./index.css";
 import "./site/site.css";
 import "./app.css";
@@ -14,7 +15,6 @@ import Cases from "./site/pages/Cases.jsx";
 import CaseDetail from "./site/pages/CaseDetail.jsx";
 import Evaluation from "./site/pages/Evaluation.jsx";
 import Guardrails from "./site/pages/Guardrails.jsx";
-import Docs from "./site/pages/Docs.jsx";
 import About from "./site/pages/About.jsx";
 import NotFound from "./site/pages/NotFound.jsx";
 
@@ -56,7 +56,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="cases/:id" element={<CaseDetail />} />
           <Route path="evaluation" element={<Evaluation />} />
           <Route path="guardrails" element={<Guardrails />} />
-          <Route path="docs" element={<Docs />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Route>

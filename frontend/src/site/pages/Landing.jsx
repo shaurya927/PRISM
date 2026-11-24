@@ -26,11 +26,11 @@ export default function Landing() {
 function Head({ label, title, aside, link }) {
   return (
     <div className="grid md:grid-cols-12 gap-6 items-end">
-      <div className="md:col-span-7">
+      <div className="md:col-span-8">
         <Label>{label}</Label>
         <SplitLines as="h2" lines={[title]} className="h-sec mt-3" />
       </div>
-      <div className="md:col-span-5 md:text-right">
+      <div className="md:col-span-4 md:text-right">
         {aside && <p className="text-muted text-[15px] leading-relaxed md:ml-auto">{aside}</p>}
         {link && <div className={aside ? "mt-3" : ""}>{link}</div>}
       </div>
@@ -253,7 +253,6 @@ function CtaBand() {
           </div>
           <Reveal className="md:col-span-5 flex flex-wrap md:justify-end gap-3" delay={0.2}>
             <a href="/app" className="btn-pill btn-pill--red"><RollText>Open the investigator</RollText> <Arrow /></a>
-            <Link to="/docs" className="btn-pill btn-pill--ghost"><RollText>Run it yourself</RollText> <Arrow /></Link>
           </Reveal>
         </div>
       </div>

@@ -55,12 +55,13 @@ export function Pill({ to, children, ghost = false, external = false, className 
   return <Link to={to} className={cls}>{inner}</Link>;
 }
 
-/** Top of every subpage: label, headline, lead. */
+/** Top of every subpage: label, headline, lead. The headline's parts are set as one line that only
+ *  wraps (balanced) when the screen is too narrow for it. */
 export function PageHero({ index, label, lines, lead, children }) {
   return (
     <section className="gutter pt-32 md:pt-36 pb-10">
       <Reveal><Label index={index}>{label}</Label></Reveal>
-      <SplitLines lines={lines} className="display mt-4" />
+      <SplitLines lines={[[].concat(lines).join(" ")]} className="display mt-4" />
       {lead && (
         <div className="mt-6 max-w-2xl">
           <Words className="lead" text={lead} start={0.25} />
@@ -74,11 +75,11 @@ export function PageHero({ index, label, lines, lead, children }) {
 export function SectionHead({ index, label, title, aside, className = "" }) {
   return (
     <div className={`grid md:grid-cols-12 gap-6 items-end ${className}`}>
-      <div className="md:col-span-7">
+      <div className="md:col-span-8">
         {label && <Reveal><Label index={index}>{label}</Label></Reveal>}
         <SplitLines as="h2" lines={Array.isArray(title) ? title : [title]} className={`h-sec ${label ? "mt-3" : ""}`} />
       </div>
-      {aside && <Reveal className="md:col-span-5 md:text-right"><p className="text-muted text-[15px] leading-relaxed md:ml-auto">{aside}</p></Reveal>}
+      {aside && <Reveal className="md:col-span-4 md:text-right"><p className="text-muted text-[15px] leading-relaxed md:ml-auto">{aside}</p></Reveal>}
     </div>
   );
 }

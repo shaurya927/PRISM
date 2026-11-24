@@ -4,10 +4,55 @@ import { NextLink, PageHero, SectionHead, Tabs } from "../components.jsx";
 import { CrossCamCompare, FusionDemo, StatusTriplet } from "../demos.jsx";
 import { STAGES } from "../data/content.js";
 
+/* Typeset math for the fusion rules (styles: .math in site.css): italic serif variables, upright
+   numbers and operators, real subscripts and stacked fractions. A Seg never breaks inside, so a
+   formula only wraps between whole terms. */
+const V = ({ children, sub }) => <span className="math__v"><i>{children}</i>{sub && <sub><i>{sub}</i></sub>}</span>;
+const Star = () => <sup>∗</sup>;
+const Op = ({ children }) => <span className="math__op">{children}</span>;
+const Sum = ({ sub }) => <span className="math__sum">Σ<sub><i>{sub}</i></sub></span>;
+const Frac = ({ top, bottom }) => <span className="math__frac"><span>{top}</span><span>{bottom}</span></span>;
+const Seg = ({ children }) => <span className="math__seg">{children}</span>;
+const Word = ({ children }) => <span className="math__word">{children}</span>;
+const Wk = ({ star }) => <><V sub="k">W</V>(<i>a</i>{star && <Star />})</>;
+
 const VOTE = [
-  ["Evidence per character", "W_k(a) = Σ_t I(c_tk = a) · p_tk · min(S_t / 100, 2)", "Each frame's vote for character a at position k is its OCR confidence times a sharpness weight, capped at 2."],
-  ["Two conditions", "W_k(a*) ≥ 0.9   and   W_k(a*) / Σ_a W_k(a) ≥ 0.60", "The winner needs enough absolute evidence and a clear majority. Split votes such as 8 vs B leave a ?."],
-  ["Consistency", "confident reads of a* / reads covering k ≥ 0.40", "Added after a night test where a half-hidden 2 was read as 8 at 0.85 in 4 of 24 reads."],
+  {
+    t: "Evidence per character",
+    label: "W sub k of a equals the sum over frames t of I of c sub t k equals a, times p sub t k, times the minimum of S sub t over 100 and 2",
+    f: (
+      <>
+        <Seg><Wk /><Op>=</Op></Seg>{" "}
+        <Seg><Sum sub="t" /><span className="math__fn">I</span>(<V sub="tk">c</V><Op>=</Op><i>a</i>)</Seg>{" "}
+        <Seg><Op>·</Op><V sub="tk">p</V></Seg>{" "}
+        <Seg><Op>·</Op><span className="math__fn">min</span><span className="math__paren">(</span><Frac top={<V sub="t">S</V>} bottom="100" />, 2<span className="math__paren">)</span></Seg>
+      </>
+    ),
+    d: "Each frame's vote for character a at position k is its OCR confidence times a sharpness weight, capped at 2.",
+  },
+  {
+    t: "Two conditions",
+    label: "W sub k of a star is at least 0.9, and W sub k of a star divided by the sum over a of W sub k of a is at least 0.60",
+    f: (
+      <>
+        <Seg><Wk star /><Op>≥</Op>0.9</Seg>{" "}
+        <Word>and</Word>{" "}
+        <Seg><Frac top={<Wk star />} bottom={<><Sum sub="a" /><Wk /></>} /><Op>≥</Op>0.60</Seg>
+      </>
+    ),
+    d: "The winner needs enough absolute evidence and a clear majority. Split votes such as 8 vs B leave a ?.",
+  },
+  {
+    t: "Consistency",
+    label: "confident reads of a star divided by reads covering k is at least 0.40",
+    f: (
+      <Seg>
+        <Frac top={<Word>confident reads of <i>a</i><Star /></Word>} bottom={<Word>reads covering <i>k</i></Word>} />
+        <Op>≥</Op>0.40
+      </Seg>
+    ),
+    d: "Added after a night test where a half-hidden 2 was read as 8 at 0.85 in 4 of 24 reads.",
+  },
 ];
 
 const WEIGHTS = [
@@ -59,11 +104,11 @@ function Fusion() {
     <>
       <SectionHead label="The vote" title="Evidence, weighted by sharpness" />
       <div className="grid md:grid-cols-3 gap-4 mt-8">
-        {VOTE.map(([t, f, d], i) => (
-          <Reveal key={t} className="panel p-5" delay={i * 0.07}>
+        {VOTE.map(({ t, label, f, d }, i) => (
+          <Reveal key={t} className="panel p-5 flex flex-col" delay={i * 0.07}>
             <div className="tag">{t}</div>
-            <div className="mono text-[14px] mt-3 leading-relaxed">{f}</div>
-            <p className="text-muted text-[15px] mt-3 leading-relaxed">{d}</p>
+            <div className="math mt-4" role="img" aria-label={label}><div className="math__flow">{f}</div></div>
+            <p className="text-muted text-[15px] mt-4 leading-relaxed">{d}</p>
           </Reveal>
         ))}
       </div>

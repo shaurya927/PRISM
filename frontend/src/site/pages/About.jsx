@@ -37,8 +37,8 @@ const FAQ = [
 export default function About() {
   return (
     <>
-      <PageHero index={6} label="About" lines={["A plate reader", "that admits doubt"]}
-        lead="PRISM was built for Hackasol 5.0, Track 2 (AIML), problem AIML-01: vehicle identification and traceability from CCTV footage." />
+      <PageHero index={5} label="About" lines={["A plate reader", "that admits doubt"]}
+        lead="Vehicle identification and traceability from CCTV footage." />
 
       <section className="gutter pb-16 md:pb-20 grid md:grid-cols-12 gap-8">
         <div className="md:col-span-4"><Label index={1}>The brief</Label></div>
