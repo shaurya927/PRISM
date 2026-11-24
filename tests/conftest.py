@@ -1,7 +1,12 @@
 import sys
 from pathlib import Path
 
+import os
+
 import pytest
+
+# A local .env may hold Clerk keys; the API tests run without sign-in. test_auth.py turns it back on.
+os.environ["PRISM_AUTH"] = "off"
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:

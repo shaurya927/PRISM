@@ -13,6 +13,7 @@ import WhatIf from "./components/WhatIf.jsx";
 import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
 import { Icon, fmt2 } from "./components/common.jsx";
+import { AccountButton } from "./auth.jsx";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -51,6 +52,7 @@ function Header({ jobId, onNew }) {
             </motion.button>
           )}
         </AnimatePresence>
+        <AccountButton />
         <MenuButton open={menu} onClick={() => setMenu((m) => !m)} btnRef={menuBtn} />
       </div>
     </header>

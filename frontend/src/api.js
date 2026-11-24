@@ -1,5 +1,22 @@
 import { tracked } from "./net.js";
 
+// Clerk session token for the API (set by the auth gate in auth.jsx). Without Clerk it stays null and
+// requests go out without an Authorization header, as before.
+let getToken = null;
+export function setTokenGetter(fn) {
+  getToken = fn;
+}
+
+async function authHeaders(extra = {}) {
+  const token = getToken ? await getToken() : null;
+  return token ? { ...extra, Authorization: `Bearer ${token}` } : extra;
+}
+
+/** fetch with the Clerk session token attached. */
+async function authFetch(url, opts = {}) {
+  return fetch(url, { ...opts, headers: await authHeaders(opts.headers || {}) });
+}
+
 function errorMessage(status, statusText, body) {
   if (body && typeof body.detail === "string") return body.detail;
   if (body && (body.detail || body)) return JSON.stringify(body.detail || body);
@@ -22,9 +39,11 @@ async function handle(res) {
 /** multipart POST with upload progress (fetch cannot report it). onProgress(loadedBytes, totalBytes). */
 function upload(url, form, onProgress) {
   return tracked(
-    new Promise((resolve, reject) => {
+    new Promise(async (resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", url);
+      const headers = await authHeaders();
+      for (const [k, v] of Object.entries(headers)) xhr.setRequestHeader(k, v);
       xhr.upload.onprogress = (e) => {
         if (e.lengthComputable) onProgress?.(e.loaded, e.total);
       };
@@ -46,10 +65,10 @@ function upload(url, form, onProgress) {
 
 export const api = {
   health: () => fetch("/health").then(handle),
-  config: () => fetch("/api/config").then(handle),
-  jobs: () => fetch("/api/jobs").then(handle),
-  job: (id) => fetch(`/api/jobs/${id}`).then(handle),
-  deleteJob: (id) => tracked(fetch(`/api/jobs/${id}`, { method: "DELETE" }).then(handle)),
+  config: () => authFetch("/api/config").then(handle),
+  jobs: () => authFetch("/api/jobs").then(handle),
+  job: (id) => authFetch(`/api/jobs/${id}`).then(handle),
+  deleteJob: (id) => tracked(authFetch(`/api/jobs/${id}`, { method: "DELETE" }).then(handle)),
   createJob: ({ file, hint, threshold, onProgress }) => {
     const fd = new FormData();
     fd.append("file", file);
@@ -72,7 +91,7 @@ export const api = {
     if (trackId != null) q.set("track_id", String(trackId));
     if (clearHint) q.set("clear_hint", "true");
     return tracked(
-      fetch(`/api/jobs/${id}/rescore?${q}`, {
+      authFetch(`/api/jobs/${id}/rescore?${q}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ threshold, hint: hint || null }),
@@ -81,7 +100,7 @@ export const api = {
   },
   /** Hypothetical re-ranking and stability analysis. Read-only: nothing is saved to the case. */
   whatif: (id, { trackId, slots, color, bodyType, threshold }, signal) =>
-    fetch(`/api/jobs/${id}/whatif`, {
+    authFetch(`/api/jobs/${id}/whatif`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ track_id: trackId ?? null, slots: slots || {}, color: color || null, body_type: bodyType || null, threshold: threshold ?? null }),
@@ -89,7 +108,7 @@ export const api = {
     }).then(handle),
   search: (body) =>
     tracked(
-      fetch("/api/search", {
+      authFetch("/api/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

@@ -34,6 +34,13 @@ dist/
 # Raw source recordings for the site media (scripts/build_scene_media.py)
 video_assets/
 
+# Secrets (Clerk keys). .env.example is the committed template.
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+
 # Other tools' local caches
 .opencode/
 

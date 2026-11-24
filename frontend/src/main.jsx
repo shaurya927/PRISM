@@ -17,6 +17,7 @@ import Evaluation from "./site/pages/Evaluation.jsx";
 import Guardrails from "./site/pages/Guardrails.jsx";
 import About from "./site/pages/About.jsx";
 import NotFound from "./site/pages/NotFound.jsx";
+import { AuthPage, AuthProvider, RequireAuth } from "./auth.jsx";
 
 // The investigator app is loaded only when /app is opened.
 const InvestigatorApp = lazy(() => import("./App.jsx"));
@@ -40,15 +41,20 @@ function AppLoading() {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
+      <AuthProvider>
       <Routes>
         <Route
           path="/app/*"
           element={
-            <Suspense fallback={<AppLoading />}>
-              <InvestigatorApp />
-            </Suspense>
+            <RequireAuth fallback={<AppLoading />}>
+              <Suspense fallback={<AppLoading />}>
+                <InvestigatorApp />
+              </Suspense>
+            </RequireAuth>
           }
         />
+        <Route path="/sign-in/*" element={<AuthPage mode="sign-in" />} />
+        <Route path="/sign-up/*" element={<AuthPage mode="sign-up" />} />
         <Route element={<SiteLayout />}>
           <Route index element={<Landing />} />
           <Route path="how-it-works" element={<HowItWorks />} />
@@ -60,6 +66,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

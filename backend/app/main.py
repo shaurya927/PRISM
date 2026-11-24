@@ -35,8 +35,11 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile  # noqa: E402
+from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile  # noqa: E402
+from fastapi.concurrency import run_in_threadpool  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
+
+from backend.app import auth  # noqa: E402  (loads .env before the config is read)
 from fastapi.responses import FileResponse, JSONResponse  # noqa: E402
 from fastapi.staticfiles import StaticFiles  # noqa: E402
 
@@ -72,6 +75,18 @@ MAX_UPLOAD_BYTES = 1024 * 1024 * 1024  # 1 GB
 # OpenAPI docs live under /api so the website can use /docs.
 app = FastAPI(title="PRISM", version=PRISM_VERSION, description="Plate Recovery & Identification from Surveillance Media",
               docs_url="/api/docs", redoc_url=None, openapi_url="/api/openapi.json")
+@app.middleware("http")
+async def clerk_auth(request: Request, call_next):
+    """Uploaded footage and its results need a signed-in Clerk user (backend/app/auth.py)."""
+    if request.method != "OPTIONS" and auth.enabled() and auth.needs_auth(request.url.path):
+        token = auth.token_from(request.headers, request.cookies)
+        claims = await run_in_threadpool(auth.verify, token) if token else None
+        if claims is None:
+            return JSONResponse({"detail": "Sign in to use the investigator."}, status_code=401)
+        request.state.user_id = claims.get("sub")
+    return await call_next(request)
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -204,6 +219,7 @@ def health() -> dict:
         "vendor_commits": vendor_commits(),
         "packages": package_versions(("torch", "ultralytics", "open_clip_torch", "fast-alpr", "fastapi")),
         "stages": list(STAGES),
+        "auth": "clerk" if auth.enabled() else "off",
     }
 
 

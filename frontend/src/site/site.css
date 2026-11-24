@@ -489,3 +489,36 @@ body:has(.site) { background: #000; }
 @media (prefers-reduced-motion: reduce) {
   .site .dot--live { animation: none; }
 }
+
+/* ---------------------------------------------------------------- sign-in / sign-up (auth.jsx) */
+/* The live highway feed fills the page; the headline sits on its darker left, Clerk's card on the right. */
+.site.auth { position: relative; min-height: 100svh; display: flex; flex-direction: column; isolation: isolate; }
+.site .auth__bg { position: fixed; inset: 0; z-index: -1; overflow: clip; background: var(--black); }
+.site .auth__scrim { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgb(0 0 0 / .92) 0%, rgb(0 0 0 / .72) 45%, rgb(0 0 0 / .55) 100%),
+    linear-gradient(to top, rgb(0 0 0 / .85), transparent 40%); }
+.site .auth__top { display: flex; align-items: center; justify-content: space-between; padding: 24px var(--pad-x); }
+.site .auth__top .topbar__logo { font-size: 22px; }
+.site .auth__back { color: var(--muted-2); transition: color .16s var(--ease); }
+.site .auth__back:hover { color: var(--ink); }
+.site .auth__grid { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 64px; align-items: center;
+  padding: 24px var(--pad-x) 48px; }
+.site .auth__kicker { display: flex; align-items: center; color: var(--muted-2); margin-bottom: 24px; }
+.site .auth__h { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 5.6vw, 84px); line-height: .98; letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #ffffff 30%, #a1a4a5 120%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.site .auth__h em { font-style: italic; }
+.site .auth__sub { margin-top: 24px; max-width: 34em; font-size: clamp(16px, 1.1vw, 18px); line-height: 1.6; color: var(--muted-2); }
+.site .auth__facts { margin-top: 32px; display: grid; gap: 12px; font-size: 15px; color: var(--muted-2); }
+.site .auth__facts li { display: flex; align-items: center; gap: 12px; }
+.site .auth__cell { display: inline-grid; place-items: center; width: 26px; height: 32px; border-radius: 6px; flex: none;
+  font: 500 15px/1 var(--font-mono); color: #fff; background: var(--red); }
+.site .auth__cell--ok { color: var(--ink); background: rgb(255 255 255 / .07); box-shadow: inset 0 0 0 1px var(--ring); }
+.site .auth__card { width: 100%; min-height: 420px; }
+.site .auth__foot { padding: 0 var(--pad-x) 28px; color: var(--muted); }
+/* Clerk renders inside .site: keep its own fonts and links readable */
+.site .auth__card a { color: inherit; }
+@media (max-width: 959.98px) {
+  .site .auth__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 8px; }
+  .site .auth__facts { display: none; }
+  .site .auth__card { max-width: 440px; }
+}
