@@ -48,9 +48,9 @@ def test_prism_commit_falls_back_to_env_without_git(monkeypatch, tmp_path):
 def test_report_html_contains_required_sections(small_registry, tmp_path):
     case = make_case(small_registry, night_frames())
     html = render_html(case, tmp_path)
-    for needle in ["Chain of custody", "Frames used", "Scoring breakdown", "Advisor", "Limitations",
-                   "Evidence-checked summary", case.custody.config_hash, "REG-0001", "REG-0002",
-                   "does not identify a vehicle on its own", "Plate evidence strip", "AMBIGUOUS",
+    for needle in ["Chain of Custody", "Frames Used", "Scoring Breakdown", "Advisor", "Limitations",
+                   "Evidence-Checked Summary", case.custody.config_hash, "REG-0001", "REG-0002",
+                   "does not identify a vehicle on its own", "Plate Evidence Strip", "AMBIGUOUS",
                    '<span class="q">?</span>', "F57", "0.62"]:
         assert needle in html, needle
     path, fmt = write_report(case, "html", tmp_path / "out", runs_dir=tmp_path)
@@ -161,7 +161,7 @@ def test_search_rescore_and_report(client):
     assert all(p["source"] == "investigator-supplied" for p in t["fused"]["positions"])
     job = case["case_id"]
     r = client.get(f"/api/report/{job}?format=html")
-    assert r.status_code == 200 and "Chain of custody" in r.text
+    assert r.status_code == 200 and "Chain of Custody" in r.text
     assert client.get(f"/api/jobs/{job}").json()["status"] == "done"
     assert client.delete(f"/api/jobs/{job}").status_code == 200
 

@@ -127,6 +127,12 @@
 .app .app-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 24px; height: 64px;
   padding: 0 var(--gutter); background: rgb(0 0 0 / .78); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--rule); }
 .app .app-top .topbar__logo { font-size: 24px; }
+.app .app-top .topbar__logo:hover { opacity: .7; }
+/* With the site menu open, the bar sits on the menu's curtain (like the site's top bar), so the close
+   button stays where the menu button was. */
+.app .app-top.is-menu { z-index: 70; background: transparent; border-bottom-color: transparent;
+  -webkit-backdrop-filter: none; backdrop-filter: none; }
+.app .app-top .menu-btn { margin: 0 -10px 0 0; }
 .app .app-top__crumb { color: var(--muted); }
 .app .app-top__nav { display: none; gap: 24px; font-size: 15px; }
 .app .app-top__nav .f-u { --u-y: -4px; display: inline-flex; align-items: center; gap: 6px; }

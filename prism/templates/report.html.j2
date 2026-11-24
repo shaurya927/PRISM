@@ -2,199 +2,321 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>PRISM forensic report {{ case.case_id }}</title>
+<title>PRISM Forensic Report · Case {{ case.case_id }}</title>
 <style>
-  :root { --ink:#1f2937; --mute:#6b7280; --line:#e5e7eb; --amber:#d97706; --blue:#2563eb; --green:#15803d; --red:#b91c1c; }
+  :root {
+    --navy: #10273f; --steel: #2f5d8a; --ink: #1d2733; --mute: #5f6e7e; --line: #c9d3de; --zebra: #f4f7fa;
+    --amber: #b5651d; --amber-bg: #fdf3dc; --blue-bg: #dfe7ef; --red: #c62828; --red-bg: #fde4e4; --green: #2e7d32;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; --mono: "Courier New", Courier, monospace;
+  }
+  @page { size: A4; }
   * { box-sizing: border-box; }
-  body { font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); margin: 24px; font-size: 12.5px; line-height: 1.45; }
-  h1 { font-size: 22px; margin: 0 0 2px; } h2 { font-size: 16px; border-bottom: 2px solid var(--ink); padding-bottom: 3px; margin-top: 26px; }
-  h3 { font-size: 14px; margin: 18px 0 6px; } .mute { color: var(--mute); }
-  table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; } th, td { border: 1px solid var(--line); padding: 4px 6px; text-align: left; vertical-align: top; }
-  th { background: #f9fafb; font-weight: 600; } td.mono, .mono { font-family: Consolas, "Courier New", monospace; }
-  .hash { font-family: Consolas, monospace; font-size: 10px; word-break: break-all; }
-  .plate { font-family: Consolas, monospace; font-size: 20px; letter-spacing: 3px; font-weight: 700; }
-  .q { color: var(--amber); } .inv { color: var(--blue); } .conf { color: var(--red); }
-  .pill { display: inline-block; min-width: 22px; text-align: center; padding: 1px 3px; margin: 1px; border-radius: 4px; font-family: Consolas, monospace; font-size: 11px; }
-  .ok { background: #dcfce7; } .low { background: #fef3c7; color: #92400e; } .fmt { background: #fee2e2; color: #991b1b; }
-  .banner { padding: 10px 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin: 8px 0; }
-  .MATCHED { background: #dcfce7; color: var(--green); border: 1px solid #86efac; }
-  .AMBIGUOUS { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-  .NCM { background: #fee2e2; color: var(--red); border: 1px solid #fca5a5; }
-  .bar { display: flex; height: 12px; width: 260px; background: #f3f4f6; border-radius: 3px; overflow: hidden; }
-  .bar span { display: block; height: 100%; } .bp { background: #2563eb; } .bc { background: #f59e0b; } .bb { background: #10b981; } .bm { background: #8b5cf6; }
-  img.crop { max-height: 70px; image-rendering: pixelated; border: 1px solid var(--line); }
-  img.veh { max-height: 70px; } img.best { max-height: 150px; border: 1px solid var(--line); }
-  img.strip { max-width: 100%; border: 1px solid var(--line); }
-  .grid { display: grid; grid-template-columns: 170px 1fr; gap: 12px; }
-  .note { background: #eff6ff; border-left: 4px solid var(--blue); padding: 8px 10px; margin: 8px 0; }
-  .warn { background: #fffbeb; border-left: 4px solid var(--amber); padding: 8px 10px; margin: 8px 0; }
-  .limit { border: 2px solid var(--ink); padding: 10px; font-weight: 600; margin-top: 20px; }
-  .track { page-break-inside: auto; } tr { page-break-inside: avoid; }
-  ul { margin: 4px 0 4px 18px; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: var(--sans); color: var(--ink); font-size: 10.5pt; line-height: 1.45; margin: 0 auto; max-width: 880px; padding: 0 4px; }
+  @media screen { body { padding: 32px 24px 64px; } }
+  code, .mono { font-family: var(--mono); }
+
+  /* faint diagonal watermark, repeated on every printed page */
+  .wm { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-38deg); z-index: 10; pointer-events: none;
+        font: 700 150px/1 var(--sans); letter-spacing: 48px; color: rgba(16, 39, 63, 0.045); white-space: nowrap; }
+
+  /* masthead */
+  .mast { border-top: 5px solid var(--navy); border-bottom: 3px solid var(--navy); padding: 16px 0 12px; margin-bottom: 26px; }
+  .kicker { font-size: 9.5pt; font-weight: 700; letter-spacing: .22em; color: var(--steel); text-transform: uppercase; }
+  .mast h1 { font-size: 23pt; line-height: 1.15; margin: 6px 0 6px; color: var(--navy); }
+  .mast .sub { color: var(--mute); font-size: 11.5pt; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .mast .meta { padding-top: 10px; font-size: 9.4pt; white-space: nowrap; }
+  .mast .meta code { font-size: 9.4pt; }
+  .mast .meta .sep { color: var(--mute); margin: 0 4px; }
+
+  h2 { font-size: 15.5pt; color: var(--navy); margin: 28px 0 12px; padding-bottom: 4px; border-bottom: 1.5px solid var(--navy); page-break-after: avoid; }
+  h3 { font-size: 12.5pt; color: var(--steel); margin: 20px 0 10px; page-break-after: avoid; }
+  h4 { font-size: 11pt; color: var(--navy); margin: 18px 0 8px; page-break-after: avoid; }
+  p { margin: 6px 0; }
+  .mute { color: var(--mute); }
+  .small { font-size: 9pt; }
+
+  /* tables */
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 14px; font-size: 9.6pt; }
+  th, td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+  thead { display: table-header-group; }
+  tr { page-break-inside: avoid; }
+  /* key-value tables: outlined header, bold keys */
+  table.kv thead th { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); }
+  table.kv tbody th { font-weight: 700; color: var(--navy); background: var(--zebra); width: 50%; }
+  table.kv tbody td { background: #fff; }
+  table.kv tbody tr:nth-child(even) th { background: #edf2f7; }
+  /* long hashes wrap anywhere; spaced values (timings, package lists) wrap at spaces */
+  table.kv td.mono, table.kv td .mono { font-size: 9.6pt; overflow-wrap: anywhere; }
+  /* data tables: filled navy header, zebra rows */
+  table.data thead th { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 700; }
+  table.data tbody tr:nth-child(even) td { background: var(--zebra); }
+  table.data td.mono { font-size: 9.2pt; overflow-wrap: anywhere; }
+  .hash { font-family: var(--mono); overflow-wrap: anywhere; }
+  b.total { font-family: var(--mono); }
+
+  /* plates and characters */
+  .plate { font-family: var(--mono); font-weight: 700; letter-spacing: 2px; color: var(--navy); }
+  .plate.big { font-size: 15pt; }
+  .q { color: #d98b1a; } .inv { color: #1f5fbf; } .conf { color: var(--red); }
+
+  /* callouts */
+  .callout { border-left: 4px solid var(--navy); background: var(--zebra); padding: 12px 16px; margin: 10px 0 16px; page-break-inside: avoid; }
+  .callout p { margin: 0 0 10px; } .callout p:last-child { margin-bottom: 0; }
+  .callout .gen { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 8px; color: var(--mute); font-size: 9pt; }
+  .callout.status { background: #fff; }
+  .callout.MATCHED { border-left-color: var(--green); }
+  .callout.AMBIGUOUS { border-left-color: #c8771e; }
+  .callout.NCM { border-left-color: #5b6b7d; }
+  .callout.warn { border-left-color: #c8771e; background: #fff8ec; }
+  .callout.advisor { background: #fff; }
+  .legend { font-size: 9pt; color: var(--mute); margin: 2px 0 10px; }
+  .legend .a { color: #d98b1a; font-weight: 700; } .legend .b { color: #1f5fbf; font-weight: 700; } .legend .r { color: var(--red); font-weight: 700; }
+
+  /* per-position confidence */
+  table.pos { table-layout: fixed; }
+  table.pos th, table.pos td { text-align: center; padding: 6px 2px; }
+  table.pos td.ch { font-family: var(--mono); font-weight: 700; font-size: 12pt; color: var(--navy); }
+  table.pos td.ch.unk { background: var(--amber-bg); color: #d98b1a; }
+  table.pos td.cf { font-family: var(--mono); font-size: 9.4pt; }
+  table.pos td.src { font-size: 9pt; }
+
+  /* evidence strip */
+  table.strip { table-layout: fixed; font-family: var(--mono); }
+  table.strip th, table.strip td { text-align: center; padding: 5px 2px; font-size: 9.4pt; }
+  table.strip th:first-child, table.strip td:first-child { width: 13%; text-align: left; padding-left: 8px; font-weight: 700; }
+  table.strip tr.fused td { background: #eef1f5; font-weight: 700; border-bottom: 2px solid var(--navy); }
+  table.strip td.vote { background: var(--blue-bg); color: var(--navy); font-weight: 700; }
+  table.strip td.masked { background: var(--amber-bg); color: var(--amber); }
+  table.strip td.dis { background: var(--red-bg); color: var(--red); font-weight: 700; }
+  table.strip td.gap { color: #a3adb8; }
+  table.strip td.lay { outline: 1px dashed #8c4696; outline-offset: -3px; }
+  table.data.strip tbody tr:nth-child(even) td:not(.vote):not(.masked):not(.dis) { background: #fff; }
+  table.data.strip tbody tr td:first-child { background: #fff; }
+
+  /* frames used */
+  table.frames td { font-size: 9.2pt; }
+  table.frames .rid { font-weight: 700; color: var(--navy); }
+  table.frames .confs { font-family: var(--mono); font-size: 9.2pt; }
+  table.frames .audit { border-top: 1px dashed var(--line); margin-top: 6px; padding-top: 6px; font-family: var(--sans); color: #3d4b5a; }
+  table.frames .lbl { font-weight: 700; font-family: var(--mono); }
+
+  /* shortlist */
+  table.short .reg b { color: var(--navy); }
+  table.short .reg .plate { display: block; font-size: 12pt; margin: 3px 0; }
+  table.short .score { font-family: var(--mono); font-weight: 700; font-size: 11pt; }
+  table.short .bd { font-family: var(--mono); font-size: 9.2pt; white-space: pre-line; }
+  table.short ul { margin: 0; padding-left: 16px; } table.short li { margin: 0 0 3px; }
+  .mm { color: var(--red); font-weight: 700; }
+
+  ul.limits { padding-left: 18px; } ul.limits li { margin: 0 0 6px; }
 </style>
 </head>
 <body>
-{% macro plate_html(fp) -%}
-<span class="plate">{% for p in fp.positions %}{% if p.char == '?' %}<span class="{{ 'conf' if p.source == 'conflict' else 'q' }}">?</span>{% elif p.source == 'investigator-supplied' %}<span class="inv">{{ p.char }}</span>{% else %}{{ p.char }}{% endif %}{% endfor %}{% if not fp.positions %}<span class="q">(no plate read)</span>{% endif %}</span>
+<div class="wm" aria-hidden="true">PRISM</div>
+
+{% macro plate_html(fp, cls='plate big') -%}
+<span class="{{ cls }}">{% for p in fp.positions %}{% if p.char == '?' %}<span class="{{ 'conf' if p.source == 'conflict' else 'q' }}">?</span>{% elif p.source == 'investigator-supplied' %}<span class="inv">{{ p.char }}</span>{% else %}{{ p.char }}{% endif %}{% endfor %}{% if not fp.positions %}<span class="q">(no plate read)</span>{% endif %}</span>
 {%- endmacro %}
-{% macro status_banner(m) -%}
-<div class="banner {{ 'NCM' if m.status.value == 'NO CONFIDENT MATCH' else m.status.value }}">{{ m.status.value }} &middot; threshold {{ m.threshold_used | f2 }}</div>
-<div>{{ m.explanation }}</div>
-<div class="mute">{{ m.specificity_text }}.{% if m.low_light %} Low-light clip: colour weight reduced.{% endif %}</div>
+
+{% macro status_callout(m) -%}
+{% set sc = 'NCM' if m.status.value == 'NO CONFIDENT MATCH' else m.status.value %}
+<div class="callout status {{ sc }}">
+  <b>Status: {{ m.status.value }}</b> (threshold {{ m.threshold_used | f2 }}). {{ m.explanation }} {{ m.specificity_text | specificity }}.{% if m.low_light %} Low-light clip: colour weight reduced.{% endif %}
+</div>
 {%- endmacro %}
+
 {% macro shortlist(m) -%}
-<table>
-  <tr><th>#</th><th>Registry entry</th><th>Score</th><th>Breakdown</th><th>Reasons</th></tr>
+<table class="data short">
+  <thead><tr><th style="width:4%">#</th><th style="width:21%">Registry Entry</th><th style="width:8%">Score</th><th style="width:22%">Breakdown</th><th>Reasons</th></tr></thead>
+  <tbody>
   {% for c in m.top_candidates %}
   <tr>
     <td>{{ c.rank }}</td>
-    <td><b>{{ c.registry_id }}</b><br><span class="mono">{{ c.plate | pretty }}</span><br>{{ c.color }} {{ c.body_type }}<br>{{ c.make }} {{ c.model }}<br><span class="mute">{{ c.owner_region }}</span></td>
-    <td><b>{{ c.score | f2 }}</b>{% if c.breakdown.capped %}<br><span class="mute">capped</span>{% endif %}</td>
-    <td>
-      <div class="bar">
-        <span class="bp" style="width: {{ 100 * c.breakdown.plate }}%"></span><span class="bc" style="width: {{ 100 * c.breakdown.color }}%"></span><span class="bb" style="width: {{ 100 * c.breakdown.body }}%"></span><span class="bm" style="width: {{ 100 * c.breakdown.make_model }}%"></span>
-      </div>
-      plate {{ c.breakdown.plate | f2 }} (sim {{ c.breakdown.plate_sim | f2 }} &times; coverage {{ c.breakdown.coverage | f2 }}{% if c.breakdown.shift %}, shift {{ c.breakdown.shift }}{% endif %})<br>
-      colour {{ c.breakdown.color | f2 }} &middot; body {{ c.breakdown.body | f2 }} &middot; make/model {{ c.breakdown.make_model | f2 }}
-    </td>
-    <td><ul>{% for r in c.reasons %}<li>{{ r }}</li>{% endfor %}</ul>
-      {% if c.mismatches %}<b>Mismatches:</b><ul>{% for r in c.mismatches %}<li class="conf">{{ r }}</li>{% endfor %}</ul>{% endif %}</td>
+    <td class="reg"><b>{{ c.registry_id }}</b><span class="plate">{{ c.plate | pretty }}</span>{{ c.color }} {{ c.body_type }} &middot; {{ c.make }} {{ c.model }}<br>{{ c.owner_region }}</td>
+    <td class="score">{{ c.score | f2 }}{% if c.breakdown.capped %}<br><span class="mute small">capped</span>{% endif %}</td>
+    <td class="bd">plate {{ c.breakdown.plate | f2 }} (sim {{ c.breakdown.plate_sim | f2 }} &times; coverage {{ c.breakdown.coverage | f2 }}{% if c.breakdown.shift %}, shift {{ c.breakdown.shift }}{% endif %})
+colour {{ c.breakdown.color | f2 }}
+body {{ c.breakdown.body | f2 }}
+make/model {{ c.breakdown.make_model | f2 }}</td>
+    <td><ul>{% for r in c.reasons %}<li>{{ r }}</li>{% endfor %}{% for r in c.mismatches %}<li>{{ r | mismatch }}</li>{% endfor %}</ul></td>
   </tr>
   {% endfor %}
+  </tbody>
 </table>
 {%- endmacro %}
+
 {% macro track_section(v, label) -%}
 {% set t = v.t %}
-<div class="track">
-<h3>{{ label }} track {{ t.track_id }}{% if case.primary_track_id == t.track_id and label == 'Clip A' %} (primary){% endif %}</h3>
-<div class="grid">
-  <div>{% if v.best %}<img class="best" src="{{ v.best }}" alt="best crop">{% else %}<span class="mute">no crop</span>{% endif %}</div>
-  <div>
-    <div>Combined plate: {{ plate_html(t.fused) }}
-      {% if t.fused.hint %}<span class="mute"> (video only: <span class="mono">{{ t.fused.video_text or '(none)' }}</span>; hint <span class="mono">{{ t.fused.hint }}</span>)</span>{% endif %}</div>
-    <div class="mute">Amber <span class="q">?</span> = unknown, blue = investigator-supplied, red <span class="conf">?</span> = video/hint conflict.</div>
-    <table style="width:auto">
-      <tr><th>Seen</th><td>{{ t.first_seen_sec | ts }} &ndash; {{ t.last_seen_sec | ts }} ({{ t.n_detections }} detections, YOLO class {{ t.yolo_class }})</td></tr>
-      <tr><th>Colour</th><td>{{ t.attributes.color.value }} ({{ t.attributes.color.confidence | f2 }}){% if t.attributes.color.uncertain %} &middot; top 2: {% for l, p in t.attributes.color.top2 %}{{ l }} {{ p | f2 }} {% endfor %}{% endif %}</td></tr>
-      <tr><th>Body type</th><td>{{ t.attributes.body_type.value }} ({{ t.attributes.body_type.confidence | f2 }}) <span class="mute">{{ t.attributes.body_type.source or '' }}</span></td></tr>
-      {% if t.attributes.make_model %}<tr><th>Make/model</th><td>{{ t.attributes.make_model.value }} ({{ t.attributes.make_model.confidence | f2 }}){% if t.attributes.make_model.uncertain %} <span class="mute">uncertain, not used</span>{% endif %}</td></tr>{% endif %}
-    </table>
-  </div>
-</div>
+<h3>{{ label }} {{ t.track_id }}{% if case.mode == 'crosscam' and case.primary_track_id == t.track_id and t.clip_role == 'A' %} (primary){% endif %}</h3>
+<p><b>Combined plate:</b> {{ plate_html(t.fused) }}{% if t.fused.hint %} <span class="mute small">(video only: <code>{{ t.fused.video_text or '(none)' }}</code>; investigator hint <code>{{ t.fused.hint }}</code>)</span>{% endif %}</p>
+<div class="legend">Legend: <span class="a">Amber ?</span> = unknown, <span class="b">blue</span> = investigator-supplied, <span class="r">red ?</span> = video/hint conflict.</div>
+<table class="kv">
+  <thead><tr><th>Track Attribute</th><th>Observed Output</th></tr></thead>
+  <tbody>
+  <tr><th>Seen</th><td>{{ t.first_seen_sec | ts }} &ndash; {{ t.last_seen_sec | ts }} ({{ t.n_detections }} detections, YOLO class <code>{{ t.yolo_class }}</code>){% if t.merged_track_ids %}<br><span class="mute small">{{ t.merge_note }}</span>{% endif %}</td></tr>
+  <tr><th>Colour</th><td>{{ t.attributes.color.value }} ({{ t.attributes.color.confidence | f2 }}){% if t.attributes.color.uncertain and t.attributes.color.top2 %} &mdash; top 2: {% for l, p in t.attributes.color.top2 %}{{ l }} {{ p | f2 }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</td></tr>
+  <tr><th>Body type</th><td>{{ t.attributes.body_type.value }} ({{ t.attributes.body_type.confidence | f2 }}){% if t.attributes.body_type.source %} &mdash; <code>{{ t.attributes.body_type.source }}</code>{% endif %}</td></tr>
+  {% if t.attributes.make_model %}<tr><th>Make/model</th><td>{{ t.attributes.make_model.value }} ({{ t.attributes.make_model.confidence | f2 }}){% if t.attributes.make_model.uncertain %} &mdash; uncertain, not used{% endif %}</td></tr>{% endif %}
+  </tbody>
+</table>
+{% if t.fused.hint_conflicts %}<div class="callout warn">{% for c in t.fused.hint_conflicts %}<p>{{ c }}</p>{% endfor %}</div>{% endif %}
+
 {% if t.fused.positions %}
-<b>Combined plate, confidence per position</b>
-<table><tr>{% for p in t.fused.positions %}<th style="text-align:center">{{ p.index + 1 }}</th>{% endfor %}</tr>
-<tr>{% for p in t.fused.positions %}<td style="text-align:center" class="mono">{{ p.char }}<br><span class="mute">{{ p.confidence | f2 }}</span><br><span class="mute" style="font-size:9px">{{ p.source }}</span></td>{% endfor %}</tr></table>
-{% if t.fused.hint_conflicts %}<div class="warn">{% for c in t.fused.hint_conflicts %}{{ c }}<br>{% endfor %}</div>{% endif %}
+<h4>Combined Plate &mdash; Confidence per Position</h4>
+<table class="data pos">
+  <thead><tr>{% for p in t.fused.positions %}<th>{{ p.index + 1 }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  <tr>{% for p in t.fused.positions %}<td class="ch {{ 'unk' if p.char == '?' else '' }}">{% if p.char == '?' %}<span class="{{ 'conf' if p.source == 'conflict' else '' }}">?</span>{% elif p.source == 'investigator-supplied' %}<span class="inv">{{ p.char }}</span>{% else %}{{ p.char }}{% endif %}</td>{% endfor %}</tr>
+  <tr>{% for p in t.fused.positions %}<td class="cf">{{ p.confidence | f2 }}</td>{% endfor %}</tr>
+  <tr>{% for p in t.fused.positions %}<td class="src">{{ p.source }}</td>{% endfor %}</tr>
+  </tbody>
+</table>
 {% endif %}
-{% if v.strip %}<b>Plate evidence strip</b> <span class="mute">(column = plate position, row = read; shade = vote weight; amber cells were read below the confidence threshold and carry no weight; red letters disagree with the fused result)</span><br><img class="strip" src="{{ v.strip }}" alt="evidence strip">{% endif %}
-<b>Frames used</b>
+
+{% if v.strip_rows %}
+<h4>Plate Evidence Strip</h4>
+<p class="small mute">Column = plate position, row = read; blue-tinted cells contributed to the fused vote; amber cells were masked or read below the confidence threshold and carry no weight; red letters disagree with the fused result{% if v.strip_has_layout %}; a dashed frame marks a layout-constrained read{% endif %}.</p>
+<table class="data strip">
+  <thead><tr><th>Read</th>{% for p in t.fused.positions %}<th>{{ p.index + 1 }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  <tr class="fused"><td>fused</td>{% for p in t.fused.positions %}<td>{{ p.char }}</td>{% endfor %}</tr>
+  {% for row in v.strip_rows %}
+  <tr><td>{{ row.read_id }}</td>{% for cell in row.cells %}<td class="{{ cell.cls }}">{{ cell.text }}</td>{% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<h4>Frames Used{% if v.frames %} ({{ v.frames | length }} Reads Across {{ v.n_keyframes }} Keyframes){% endif %}</h4>
 {% if v.frames %}
-<table>
-  <tr><th>Read</th><th>Frame</th><th>Time</th><th>Sharpness</th><th>Copy</th><th>Vehicle</th><th>Plate crop</th><th>Raw OCR</th><th>Masked</th><th>Per-character confidence</th></tr>
+<table class="data frames">
+  <thead><tr><th style="width:12%">Read / Frame</th><th style="width:12%">Time / Sharpness</th><th style="width:24%">Raw OCR, Cross-Check &amp; Masked</th><th>Per-Character Confidence &amp; Masking Audit</th></tr></thead>
+  <tbody>
   {% for row in v.frames %}{% set f = row.f %}
   <tr>
-    <td class="mono">{{ f.read_id }}</td><td>{{ f.frame_idx }}</td><td>{{ f.timestamp_sec | ts }}</td><td>{{ '%.1f' % f.sharpness }}</td>
-    <td>{{ f.source }}{% if f.two_line %} (2-line){% endif %}</td>
-    <td>{% if row.veh %}<img class="veh" src="{{ row.veh }}">{% endif %}</td>
-    <td>{% if row.plate %}<img class="crop" src="{{ row.plate }}">{% endif %}</td>
-    <td class="mono">{{ f.raw_text or '(empty)' }}{% if f.check_backend %}<div class="mute" style="font-size:10px" title="cross-check by {{ f.check_backend }}; it can only mask characters">check: {{ f.check_text or '(empty)' }}</div>{% endif %}</td><td class="mono">{{ f.masked_text }}</td>
-    <td>{% for c in f.chars %}<span class="pill {{ 'ok' if c.char != '?' else ('fmt' if c.reason == 'format' else 'low') }}" title="{{ c.reason or 'accepted' }}">{{ c.raw_char }} {{ '%.2f' % c.conf }}</span>{% endfor %}
-      {% for c in f.format_conflicts %}<div class="mute" style="font-size:10px">{{ c }}</div>{% endfor %}</td>
+    <td><span class="rid">{{ f.read_id }}</span><br><span class="mono mute">Frame {{ f.frame_idx }} &middot; {{ f.source }}{% if f.two_line %} &middot; 2-line{% endif %}</span></td>
+    <td class="mono">{{ f.timestamp_sec | ts }}<br>{{ '%.1f' % f.sharpness }}</td>
+    <td class="mono"><span class="lbl">Raw:</span> {{ f.raw_text or '(empty)' }}{% if f.check_backend %}<br><span class="lbl">Check:</span> {{ f.check_text or '(empty)' }}{% endif %}<br><span class="lbl">Masked:</span> {{ f.masked_text | qtext }}</td>
+    <td><div class="confs">{% for c in f.chars %}{{ c.raw_char }} {{ '%.2f' % c.conf }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not f.chars %}(no characters){% endif %}</div>
+      {% if row.audit %}<div class="audit">{{ row.audit | join(' ') }}</div>{% endif %}</td>
   </tr>
   {% endfor %}
+  </tbody>
 </table>
-{% else %}<p class="mute">No plate crop passed the detection, width and sharpness filters for this track.</p>{% endif %}
+{% else %}<p>No plate crop passed the detection, width and sharpness filters for this track.</p>{% endif %}
+
 {% if t.match %}
-<b>Scoring breakdown</b>
-{{ status_banner(t.match) }}
+<h4>Scoring Breakdown &mdash; Track {{ t.track_id }}</h4>
+{{ status_callout(t.match) }}
 {{ shortlist(t.match) }}
 {% endif %}
-{% if t.advisor %}<div class="note"><b>Advisor:</b> {{ t.advisor.text }}</div>{% endif %}
-</div>
+{% if t.advisor %}<div class="callout advisor"><b>Advisor Note (Track {{ t.track_id }}):</b> {{ t.advisor.text | ticks }}</div>{% endif %}
 {%- endmacro %}
 
-<h1>PRISM forensic report</h1>
-<div class="mute">Plate Recovery &amp; Identification from Surveillance Media</div>
+<div class="mast">
+  <div class="kicker">PRISM &middot; Forensic Evidence Dossier</div>
+  <h1>PRISM Forensic Report</h1>
+  <div class="sub">Plate Recovery &amp; Identification from Surveillance Media</div>
+  <div class="meta"><b>Case ID:</b> <code>{{ case.case_id }}</code><span class="sep">&middot;</span><b>Created:</b> <code>{{ case.created_at }}</code><span class="sep">&middot;</span><b>Mode:</b> <code>{{ case.mode }}</code><span class="sep">&middot;</span><b>PRISM Version:</b> <code>{{ case.prism_version }}</code></div>
+</div>
 
-<h2>1. Case header</h2>
-<table style="width:auto">
+<h2>1. Case Header</h2>
+<table class="kv">
+  <thead><tr><th>Case Field</th><th>Recorded Value</th></tr></thead>
+  <tbody>
   <tr><th>Case ID</th><td class="mono">{{ case.case_id }}</td></tr>
-  <tr><th>Created</th><td>{{ case.created_at }}</td></tr>
-  <tr><th>Mode</th><td>{{ case.mode }}</td></tr>
-  <tr><th>Investigator hint</th><td class="mono">{{ case.hint or '(none)' }}{% if case.hint %} <span class="mute">investigator-supplied; never treated as video evidence</span>{% endif %}</td></tr>
-  <tr><th>Match threshold</th><td>{{ case.threshold | f2 }}</td></tr>
-  <tr><th>PRISM version</th><td>{{ case.prism_version }}</td></tr>
-  <tr><th>Device / OCR backend</th><td>{{ case.device }} / {{ case.ocr_backend }}</td></tr>
-  {% if case.stage_timings %}<tr><th>Stage timings (s)</th><td>{% for k, v in case.stage_timings.items() %}{{ k }} {{ v }}{% if not loop.last %} &middot; {% endif %}{% endfor %}</td></tr>{% endif %}
+  <tr><th>Created</th><td class="mono">{{ case.created_at }}</td></tr>
+  <tr><th>Mode</th><td class="mono">{{ case.mode }}</td></tr>
+  <tr><th>Investigator hint</th><td>{% if case.hint %}<code>{{ case.hint }}</code> <span class="mute small">investigator-supplied; never treated as video evidence</span>{% else %}(none){% endif %}</td></tr>
+  <tr><th>Match threshold</th><td class="mono">{{ case.threshold | f2 }}</td></tr>
+  <tr><th>PRISM version</th><td class="mono">{{ case.prism_version }}</td></tr>
+  <tr><th>Device / OCR backend</th><td class="mono">{{ case.device }} / {{ case.ocr_backend }}</td></tr>
+  {% if case.stage_timings %}<tr><th>Stage timings (s)</th><td class="mono">{% for k, v in case.stage_timings.items() %}{% if k == 'total' %}<b>total {{ v }}</b>{% else %}{{ k }} {{ v }}{% endif %}{% if not loop.last %} &middot; {% endif %}{% endfor %}</td></tr>{% endif %}
+  </tbody>
 </table>
-{% for w in case.warnings %}<div class="warn">{{ w }}</div>{% endfor %}
+{% for w in case.warnings %}<div class="callout warn">{{ w }}</div>{% endfor %}
 
-<h2>2. Chain of custody</h2>
+<h2>2. Chain of Custody</h2>
 {% set cu = case.custody %}
 {% if cu %}
-<table>
-  <tr><th>Item</th><th>Value</th></tr>
+<h3>2.1 Source Media, Models &amp; Execution Environment</h3>
+<table class="kv">
+  <thead><tr><th>Item</th><th>Value</th></tr></thead>
+  <tbody>
   {% for c in cu.clips %}
-  <tr><th>Clip {{ loop.index }}: {{ c.name }}</th><td>SHA-256 <span class="hash">{{ c.sha256 }}</span><br>{{ c.width }}&times;{{ c.height }}, {{ c.fps }} fps, {{ c.frame_count }} frames, {{ c.duration_sec }} s, median brightness {{ c.median_brightness }}{% if c.low_light %} (LOW LIGHT){% endif %}</td></tr>
+  <tr><th>Clip {{ loop.index }}: {{ c.name }}</th><td><span class="hash">SHA-256: {{ c.sha256 }}</span><br>{{ c.width }}&times;{{ c.height }}, {{ c.fps }} fps, {{ c.frame_count }} frames, {{ c.duration_sec }} s, median brightness {{ c.median_brightness }}{% if c.low_light %} (LOW LIGHT){% endif %}</td></tr>
   {% endfor %}
-  <tr><th>Config hash</th><td class="hash">{{ cu.config_hash }}</td></tr>
-  {% if cu.registry_sha256 %}<tr><th>Registry SHA-256</th><td class="hash">{{ cu.registry_sha256 }}</td></tr>{% endif %}
-  <tr><th>PRISM commit</th><td class="hash">{{ cu.prism_commit or 'not a git checkout' }}</td></tr>
-  {% for k, v in cu.models.items() %}<tr><th>Model: {{ k }}</th><td>{{ v }}</td></tr>{% endfor %}
-  {% for k, v in cu.vendor_commits.items() %}<tr><th>vendor/{{ k }}</th><td class="hash">{{ v }}</td></tr>{% endfor %}
-  <tr><th>Packages</th><td>{% for k, v in cu.packages.items() %}{{ k }} {{ v }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
+  <tr><th>Config hash</th><td class="mono">{{ cu.config_hash }}</td></tr>
+  {% if cu.registry_sha256 %}<tr><th>Registry SHA-256</th><td class="mono">{{ cu.registry_sha256 }}</td></tr>{% endif %}
+  <tr><th>PRISM commit</th><td class="mono">{{ cu.prism_commit or 'not a git checkout' }}</td></tr>
+  {% for k, v in cu.models.items() %}<tr><th>Model: {{ k }}</th><td class="mono">{{ v }}</td></tr>{% endfor %}
+  {% for k, v in cu.vendor_commits.items() %}<tr><th>vendor/{{ k }}</th><td class="mono">{{ v }}</td></tr>{% endfor %}
+  <tr><th>Packages</th><td class="mono">{% for k, v in cu.packages.items() %}{{ k }} {{ v }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
+  </tbody>
 </table>
-<h3>Thresholds and weights</h3>
-<table style="width:auto">{% for k, v in thresholds %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
-<h3>Saved artifacts ({{ cu.artifacts | length + extra_hashes | length }})</h3>
-<table>
-  <tr><th>Artifact</th><th>Kind</th><th>SHA-256</th></tr>
-  {% for a in cu.artifacts %}<tr><td class="mono" style="font-size:10px">{{ a.path }}</td><td>{{ a.kind }}</td><td class="hash">{{ a.sha256 }}</td></tr>{% endfor %}
-  {% for a in extra_hashes %}<tr><td class="mono" style="font-size:10px">{{ a.path }}</td><td>{{ a.kind }}</td><td class="hash">{{ a.sha256 }}</td></tr>{% endfor %}
+
+<h3>2.2 Thresholds and Weights</h3>
+<table class="kv">
+  <thead><tr><th>Parameter</th><th>Configured Value</th></tr></thead>
+  <tbody>{% for k, v in thresholds %}<tr><th>{{ k }}</th><td class="mono">{{ v }}</td></tr>{% endfor %}</tbody>
 </table>
-<div class="mute">Super-resolution images, if listed, are visual aids for humans only. They were never read by OCR or used in scoring, and are not reproduced in this report.</div>
+
+<h3>2.3 Saved Artifacts ({{ cu.artifacts | length + extra_hashes | length }})</h3>
+<table class="data">
+  <thead><tr><th style="width:38%">Artifact</th><th style="width:20%">Kind</th><th>SHA-256</th></tr></thead>
+  <tbody>
+  {% for a in cu.artifacts %}<tr><td class="mono">{{ a.path }}</td><td class="mono">{{ a.kind }}</td><td class="mono">{{ a.sha256 }}</td></tr>{% endfor %}
+  {% for a in extra_hashes %}<tr><td class="mono">{{ a.path }}</td><td class="mono">{{ a.kind }}</td><td class="mono">{{ a.sha256 }}</td></tr>{% endfor %}
+  </tbody>
+</table>
+<p class="small mute">Super-resolution images, if listed, are visual aids for humans only. They were never read by OCR or used in scoring, and are not reproduced in this report.</p>
 {% else %}<p class="mute">No custody record.</p>{% endif %}
 
-<h2>3. Evidence-checked summary</h2>
+<h2>3. Evidence-Checked Summary</h2>
 {% if case.narrative %}
-<p>{{ case.narrative.text }}</p>
-<div class="mute">Generated by: {{ case.narrative.method }}. {{ case.narrative.checked }} sentence(s) checked against the result data; {{ case.narrative.removed }} removed.</div>
-{% if case.narrative.removed %}<ul>{% for s in case.narrative.sentences if not s.passed %}<li class="mute">Removed: "{{ s.text }}" ({{ s.problems | join('; ') }})</li>{% endfor %}</ul>{% endif %}
-{% endif %}
+<div class="callout">
+  {% for para in case.narrative.text | narrative %}<p>{{ para }}</p>{% endfor %}
+  <div class="gen">Generated by: {{ case.narrative.method }}. {{ case.narrative.checked }} sentence(s) checked against the result data; {{ case.narrative.removed }} removed.</div>
+  {% if case.narrative.removed %}<ul class="small mute">{% for s in case.narrative.sentences if not s.passed %}<li>Removed: "{{ s.text }}" ({{ s.problems | join('; ') }})</li>{% endfor %}</ul>{% endif %}
+</div>
+{% else %}<p class="mute">No summary.</p>{% endif %}
 
-<h2>4&ndash;6. Vehicle tracks, scoring breakdown and advisor notes</h2>
+<h2>4&ndash;6. Vehicle Tracks, Scoring Breakdown and Advisor Notes</h2>
 {% if not tracks %}<p class="mute">No vehicle tracks.</p>{% endif %}
-{% for v in tracks %}{{ track_section(v, 'Clip A' if case.mode == 'crosscam' else 'Vehicle') }}{% endfor %}
+{% for v in tracks %}{{ track_section(v, 'Clip A Track' if case.mode == 'crosscam' else 'Vehicle Track') }}{% endfor %}
 
 {% if case.crosscam %}
-<h2>Cross-camera tracking (bonus)</h2>
-<div class="mute">Encoder: {{ case.crosscam.encoder }}, similarity threshold {{ case.crosscam.threshold | f2 }}. Appearance alone never links tracks: plate compatibility and body type must also hold.</div>
-<table>
-  <tr><th>Clip A track</th><th>Clip B track</th><th>Similarity</th><th>Plate</th><th>Body</th><th>Same vehicle</th><th>Combined plate</th><th>Status</th><th>Reasons</th></tr>
+<h2>Cross-Camera Tracking</h2>
+<p class="small mute">Encoder: {{ case.crosscam.encoder }}, similarity threshold {{ case.crosscam.threshold | f2 }}. Appearance alone never links tracks: plate compatibility and body type must also hold.</p>
+<table class="data">
+  <thead><tr><th>A track</th><th>B track</th><th>Similarity</th><th>Plate</th><th>Body</th><th>Same vehicle</th><th>Combined plate</th><th>Status</th><th>Reasons</th></tr></thead>
+  <tbody>
   {% for p in case.crosscam.pairs %}
-  <tr><td>{{ p.track_a }}</td><td>{{ p.track_b }}</td><td>{{ p.similarity | f2 }}</td><td>{{ 'compatible' if p.plate_compatible else 'conflict' }}</td>
+  <tr><td>{{ p.track_a }}</td><td>{{ p.track_b }}</td><td class="mono">{{ p.similarity | f2 }}</td><td>{{ 'compatible' if p.plate_compatible else 'conflict' }}</td>
     <td>{{ 'match' if p.body_match else 'differs' }}</td><td><b>{{ 'yes' if p.same_vehicle else 'no' }}</b>{% if p.speed_flag %} <span class="conf">speed flag</span>{% endif %}</td>
-    <td>{% if p.combined %}{{ plate_html(p.combined) }}{% else %}-{% endif %}</td>
+    <td>{% if p.combined %}{{ plate_html(p.combined, 'plate') }}{% else %}&ndash;{% endif %}</td>
     <td>{{ p.status_before.value if p.status_before else '' }}{% if p.status_after %} &rarr; {{ p.status_after.value }}{% endif %}{% if p.upgraded %} <b class="inv">(upgraded)</b>{% endif %}</td>
-    <td><ul>{% for r in p.reasons %}<li>{{ r }}</li>{% endfor %}</ul></td></tr>
+    <td><ul style="margin:0;padding-left:14px">{% for r in p.reasons %}<li>{{ r }}</li>{% endfor %}</ul></td></tr>
   {% endfor %}
+  </tbody>
 </table>
 {% for p in case.crosscam.pairs if p.combined_match %}
-<h3>Combined evidence: A{{ p.track_a }} + B{{ p.track_b }}</h3>
-{{ status_banner(p.combined_match) }}
+<h3>Combined Evidence: A{{ p.track_a }} + B{{ p.track_b }}</h3>
+{{ status_callout(p.combined_match) }}
 {{ shortlist(p.combined_match) }}
 {% endfor %}
-{% for v in tracks_b %}{{ track_section(v, 'Clip B') }}{% endfor %}
+{% for v in tracks_b %}{{ track_section(v, 'Clip B Track') }}{% endfor %}
 {% endif %}
 
 <h2>7. Limitations</h2>
-<div class="limit">{{ limitations }}</div>
-<ul class="mute">
-  <li>Characters shown as <span class="q">?</span> could not be read with at least {{ case.custody.config.ocr.char_conf if case.custody else 0.7 }} confidence and a clear multi-frame majority. PRISM never fills them in.</li>
-  <li>Colour and body type come from a zero-shot vision-language model and can be wrong under glare, night lighting or occlusion. Uncertain attributes add nothing to the score.</li>
+<ul class="limits">
+  <li>{{ limitations }}</li>
+  <li>Characters shown as <b class="q">?</b> could not be read with at least {{ case.custody.config.ocr.char_conf if case.custody else 0.7 }} confidence, confirmed by the second OCR model, and backed by a clear multi-frame majority. PRISM never fills them in.</li>
+  <li>Colour and body type come from a zero-shot vision-language model and can be wrong under glare, night lighting or occlusion.</li>
+  <li>Uncertain attributes add nothing to the score.</li>
   <li>The registry is synthetic. Scores rank candidates for review; they are not probabilities of identity.</li>
-  <li>The advisor's leads are frames to check by eye, not evidence.</li>
+  <li>The advisor&rsquo;s leads are frames to check by eye, not evidence.</li>
 </ul>
 </body>
 </html>

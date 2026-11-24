@@ -154,7 +154,7 @@ function Topbar({ menuOpen, onMenu, btnRef }) {
 }
 
 /** Menu toggle: the label rolls from "menu" to "close" and the two lines cross into an X. */
-function MenuButton({ open, onClick, btnRef }) {
+export function MenuButton({ open, onClick, btnRef }) {
   return (
     <button ref={btnRef} type="button" onClick={onClick} onPointerEnter={prefetchCubeArt} onFocus={prefetchCubeArt}
       className={`menu-btn ${open ? "is-open" : ""}`}
@@ -223,7 +223,7 @@ const MENU_FADE = {
  * Full-screen site menu, on every screen size. Hovering or focusing a page name keeps it white and
  * dims the others.
  */
-function SiteMenu({ onClose }) {
+export function SiteMenu({ onClose }) {
   const reduce = useReducedMotion();
   const wide = useMedia(WIDE);
   const m = reduce ? MENU_FADE : MENU_MOTION;

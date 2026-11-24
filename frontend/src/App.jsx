@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "./api.js";
 import { useNetActive } from "./net.js";
 import { HighwayFeed } from "./site/fx.jsx";
+import { MenuButton, SiteMenu } from "./site/Layout.jsx";
 import NewCase, { HintInput } from "./components/NewCase.jsx";
 import Progress from "./components/Progress.jsx";
 import Vehicles from "./components/Vehicles.jsx";
@@ -11,42 +12,37 @@ import Shortlist from "./components/Shortlist.jsx";
 import WhatIf from "./components/WhatIf.jsx";
 import Summary from "./components/Summary.jsx";
 import CrossCam from "./components/CrossCam.jsx";
-import { Icon, StatusChip, fmt2 } from "./components/common.jsx";
+import { Icon, fmt2 } from "./components/common.jsx";
 
 const EASE = [0.22, 1, 0.36, 1];
 
-function DeviceBadge({ health }) {
-  if (health === undefined) return <span className="chip">checking…</span>;
-  if (!health) return <span className="chip chip--bad">API offline</span>;
-  const gpu = health.device === "cuda";
+function Header({ jobId, onNew }) {
+  // The same full-screen menu as the project site (Home + every site page).
+  const [menu, setMenu] = useState(false);
+  const menuBtn = useRef(null);
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setMenu(false);
+      menuBtn.current?.focus();
+    };
+    const html = document.documentElement;
+    const overflow = html.style.overflow;
+    html.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => { window.removeEventListener("keydown", onKey); html.style.overflow = overflow; };
+  }, [menu]);
   return (
-    <span className={`chip ${gpu ? "chip--ok" : "chip--warn"}`} title={health.gpu || "CPU inference"}>
-      {gpu ? `GPU · ${health.gpu || "CUDA"}` : "CPU"}
-    </span>
-  );
-}
-
-function Header({ health, jobId, onNew }) {
-  return (
-    <header className="app-top">
-      <button onClick={onNew} className="topbar__logo" aria-label="New case">
+    <>
+    <header className={`app-top ${menu ? "is-menu" : ""}`}>
+      {/* The logo goes to the project site's home page, like the logo on the site itself. */}
+      <a href="/" className="topbar__logo" aria-label="PRISM home">
         <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden><polygon points="16,3 29,28 3,28" fill="currentColor" /></svg>
         prism
-      </button>
+      </a>
       <span className="app-top__crumb label-mono hidden sm:inline">/ investigator</span>
-      <nav className="app-top__nav ml-6">
-        <a href="/" className="f-u">project site</a>
-        <a href="/how-it-works" className="f-u">how it works</a>
-        <a href="/guardrails" className="f-u">guardrails</a>
-        <a href="/api/docs" target="_blank" rel="noreferrer" className="f-u">api <Icon name="arrow" size={12} /></a>
-      </nav>
       <div className="ml-auto flex items-center gap-4">
-        {health && (
-          <span className="app-top__status label-mono">
-            <span className="dot dot--live" />registry {health.registry_size} · OCR {health.ocr_backend} · v{health.prism_version}
-          </span>
-        )}
-        <DeviceBadge health={health} />
         <AnimatePresence>
           {jobId && (
             <motion.button key="new" className="btn-pill btn-pill--red !h-10 !px-4" onClick={onNew}
@@ -55,8 +51,11 @@ function Header({ health, jobId, onNew }) {
             </motion.button>
           )}
         </AnimatePresence>
+        <MenuButton open={menu} onClick={() => setMenu((m) => !m)} btnRef={menuBtn} />
       </div>
     </header>
+    <AnimatePresence>{menu && <SiteMenu onClose={() => setMenu(false)} />}</AnimatePresence>
+    </>
   );
 }
 
@@ -214,7 +213,7 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Header health={health} jobId={jobId} onNew={goNew} />
+      <Header jobId={jobId} onNew={goNew} />
       {!jobId && <Hero health={health} />}
 
       <main className="app-main max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-5">
@@ -249,7 +248,6 @@ export default function App() {
               </h2>
               <span className="text-xs font-mono text-slate-500">case {result.case_id}</span>
               {result.clip?.low_light && <span className="chip bg-indigo-900 text-indigo-800"><Icon name="moon" size={12} />low light · median brightness {fmt2(result.clip.median_brightness)}</span>}
-              {track?.match && <StatusChip status={track.match.status} />}
               {result.warnings?.map((w, i) => <span key={i} className="chip bg-amber-100 text-amber-800">{w}</span>)}
             </div>
             <ResultControls result={result} onRescore={rescore} busy={busy} />
